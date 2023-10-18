@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
 
     float lastSpawnTime = 0f;
 
-    public GameObject target;
+    public Health target;
     public GameObject prefab;
 
     void Update()
@@ -29,14 +29,13 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPosition = transform.position + new Vector3(randomDirection.x, 0, randomDirection.y) * Random.Range(minRadius, maxRadius);
         Quaternion rotation = Quaternion.LookRotation(transform.position - spawnPosition, Vector3.up);
 
-        var instance = Instantiate(prefab, spawnPosition, rotation);
-        instance.GetComponent<MoveToAttack>().SetTarget(target);
+        Instantiate(prefab, spawnPosition, rotation);
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        
+
         // Draw circles for min and max radius, not spheres
         Draw2dCircle(transform.position, minRadius);
         Draw2dCircle(transform.position, maxRadius);

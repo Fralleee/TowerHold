@@ -378,28 +378,18 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &1596955093 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7943569025180232256, guid: 0727536153e3df341961eed877f0faac,
+--- !u!114 &1596955100 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1214206426133053626, guid: 0727536153e3df341961eed877f0faac,
     type: 3}
   m_PrefabInstance: {fileID: 3565568527421323057}
   m_PrefabAsset: {fileID: 0}
---- !u!208 &1596955098
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596955093}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1, y: 0.5, z: 1}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57ad2cc2bfc7d044b76cbd0ab72b278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1806370631 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 590568292814494773, guid: c195d7bea1ac6b0419de3966a5e16516,
@@ -445,11 +435,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4968335728468462244, guid: 0727536153e3df341961eed877f0faac,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0740d92ea66ad3d4cad529e253307afe, type: 2}
     - target: {fileID: 6968498760919862443, guid: 0727536153e3df341961eed877f0faac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -505,15 +490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7601954856327296220, guid: 0727536153e3df341961eed877f0faac, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7943569025180232256, guid: 0727536153e3df341961eed877f0faac,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1596955098}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0727536153e3df341961eed877f0faac, type: 3}
 --- !u!1001 &7297770782872387194
 PrefabInstance:
@@ -527,6 +507,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 590568292814494773, guid: c195d7bea1ac6b0419de3966a5e16516,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4827460409316118711, guid: c195d7bea1ac6b0419de3966a5e16516,
         type: 3}
@@ -654,11 +639,21 @@ PrefabInstance:
         type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1596955093}
+      objectReference: {fileID: 1596955100}
+    - target: {fileID: 4224064734906076276, guid: 08c6901d66576af489288398f874e9ad,
+        type: 3}
+      propertyPath: spawnRate
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8593750884274173847, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}
       propertyPath: m_Name
       value: Enemy Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593750884274173847, guid: 08c6901d66576af489288398f874e9ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
