@@ -10,6 +10,11 @@ public class Projectile : MonoBehaviour
 
     Vector3 lastPosition = Vector3.zero;
 
+    void Start()
+    {
+        Debug.Log("Projectile Awake with damage: " + damage);
+    }
+
     void Update()
     {
         if (target != null)

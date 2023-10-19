@@ -1,15 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerTargeting : MonoBehaviour, ITargeter
+public static class Targeter
 {
-    public Health GetTarget(float targetingRange)
+    public static Health GetTurretTarget(Transform turret, float range)
     {
         Enemy selectedTarget = null;
         float closestDistance = float.MaxValue;
         foreach (Enemy enemy in Enemy.AllEnemies)
         {
-            /* For the enemy to be a valid target it has to be within the targetingRange
+            /* For the enemy to be a valid target it has to be within the range
                We want to prioritize targets in the following order:
 
                - Are NOT targeted by others (enemy.IsTargeted = false)
@@ -20,8 +19,8 @@ public class TowerTargeting : MonoBehaviour, ITargeter
                 continue;
             }
 
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy <= targetingRange && distanceToEnemy < closestDistance)
+            float distanceToEnemy = Vector3.Distance(turret.position, enemy.transform.position);
+            if (distanceToEnemy <= range && distanceToEnemy < closestDistance)
             {
                 selectedTarget = enemy;
                 closestDistance = distanceToEnemy;

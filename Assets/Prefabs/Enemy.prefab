@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 8542767586507960884}
   - component: {fileID: 1326135206077503641}
   - component: {fileID: 2082302225283696109}
-  - component: {fileID: 5531477339413819140}
+  - component: {fileID: 8977830857369426386}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5377f4cd8ee1d2448817fba54b8f4d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5531477339413819140
+--- !u!114 &8977830857369426386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,13 +324,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7281807481305759408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88a7530d458898d478952bbfb1d31e0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 22b0ab6629bd7a944a743ca5e3a8028d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 5
-  attackRange: 20
-  timeBetweenAttacks: 1
-  timeBetweenFindTarget: 0.25
   projectilePrefab: {fileID: 1249967856914140215, guid: 0a7f8874bc4d59549b26e715e0840822,
     type: 3}
+  baseDamage: 10
+  attackRange: 20
+  timeBetweenAttacks: 1
   target: {fileID: 0}

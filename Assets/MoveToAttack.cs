@@ -4,12 +4,12 @@ using UnityEngine.AI;
 public class MoveToAttack : MonoBehaviour
 {
     NavMeshAgent agent;
-    Shooter shooter;
+    EnemyAttack attack;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        shooter = GetComponent<Shooter>();
+        attack = GetComponent<EnemyAttack>();
     }
 
     void Start()
@@ -19,7 +19,7 @@ public class MoveToAttack : MonoBehaviour
 
     void Update()
     {
-        if (shooter.target != null)
+        if (attack.target != null)
         {
             agent.isStopped = true;
         }
