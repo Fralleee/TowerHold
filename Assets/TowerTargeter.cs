@@ -3,62 +3,36 @@ using UnityEngine;
 
 public class TowerTargeting : MonoBehaviour, ITargeter
 {
-    public float selectValidEnemiesInterval = 1f;
-    float lastValidEnemiesUpdate = 0f;
-
-    float maxRange = 40f;
-
-    void Update()
-    {
-        if (Time.time - lastValidEnemiesUpdate > selectValidEnemiesInterval)
-        {
-            lastValidEnemiesUpdate = Time.time;
-            validEnemies.Clear();
-            SelectValidEnemies();
-        }
-    }
-
-    void SelectValidEnemies()
-    {
-        Enemy[] enemies = Enemy.AllEnemies.ToArray();
-        foreach (Enemy enemy in enemies)
-        {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy <= maxRange)
-            {
-                validEnemies.Add(enemy);
-            }
-        }
-    }
-
-    List<Enemy> validEnemies = new List<Enemy>();
     public Health GetTarget(float targetingRange)
     {
-        if (maxRange < targetingRange)
-        {
-            maxRange = targetingRange;
-            SelectValidEnemies();
-        }
-
         Enemy selectedTarget = null;
-
-        foreach (Enemy enemy in validEnemies)
+        float closestDistance = float.MaxValue;
+        foreach (Enemy enemy in Enemy.AllEnemies)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy <= targetingRange)
+            /* For the enemy to be a valid target it has to be within the targetingRange
+               We want to prioritize targets in the following order:
+
+               - Are NOT targeted by others (enemy.IsTargeted = false)
+               - By distance (closest to the tower)               
+            */
+            if (selectedTarget != null && !selectedTarget.IsTargeted && enemy.IsTargeted)
             {
-                if (distanceToEnemy <= targetingRange)
-                {
-                    selectedTarget = enemy;
-                }
+                continue;
+            }
+
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy <= targetingRange && distanceToEnemy < closestDistance)
+            {
+                selectedTarget = enemy;
+                closestDistance = distanceToEnemy;
             }
         }
 
-        if (selectedTarget == null)
+        if (selectedTarget)
         {
-            return null;
+            selectedTarget.IsTargeted = true;
         }
 
-        return selectedTarget.health;
+        return selectedTarget?.health;
     }
 }

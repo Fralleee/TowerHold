@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 0}
+  IsTargeted: 0
 --- !u!114 &1326135206077503641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda03fdaa8af2b64885ab04cf57600c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkDistanceInterval: 1
 --- !u!114 &2082302225283696109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +330,7 @@ MonoBehaviour:
   baseDamage: 5
   attackRange: 20
   timeBetweenAttacks: 1
-  projectilePrefab: {fileID: 1249967856914140215, guid: 707fb2ce392e3ec408ec04277f049ebb,
+  timeBetweenFindTarget: 0.25
+  projectilePrefab: {fileID: 1249967856914140215, guid: 0a7f8874bc4d59549b26e715e0840822,
     type: 3}
   target: {fileID: 0}

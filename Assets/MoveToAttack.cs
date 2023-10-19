@@ -3,32 +3,25 @@ using UnityEngine.AI;
 
 public class MoveToAttack : MonoBehaviour
 {
-    Health target;
     NavMeshAgent agent;
-    ITargeter targeter;
     Shooter shooter;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        targeter = GetComponent<ITargeter>();
         shooter = GetComponent<Shooter>();
-        target = targeter.GetTarget();
+    }
+
+    void Start()
+    {
+        agent.SetDestination(Tower.asTarget.transform.position);
     }
 
     void Update()
     {
-        if (target != null)
+        if (shooter.target != null)
         {
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            if (distance < shooter.attackRange)
-            {
-                agent.isStopped = true;
-            }
-            else
-            {
-                agent.SetDestination(target.transform.position);
-            }
+            agent.isStopped = true;
         }
     }
 }

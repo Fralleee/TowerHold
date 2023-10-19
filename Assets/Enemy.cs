@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public Health health;
 
+    public bool IsTargeted;
+
     void Awake()
     {
         AllEnemies.Add(this);

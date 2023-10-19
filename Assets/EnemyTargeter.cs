@@ -2,8 +2,33 @@ using UnityEngine;
 
 public class EnemyTargeter : MonoBehaviour, ITargeter
 {
-    public Health GetTarget(float maxTargetingRange = 10)
+    public float checkDistanceInterval = 1f;
+    float lastDistanceCheck = 0f;
+    float maxRange = 0;
+
+    Health target;
+
+    void Update()
     {
-        return Tower.asTarget;
+        if (target == null && Time.time - lastDistanceCheck > checkDistanceInterval)
+        {
+            lastDistanceCheck = Time.time;
+            CheckDistance();
+        }
+    }
+
+    void CheckDistance()
+    {
+        float distanceToTarget = Vector3.Distance(transform.position, Tower.asTarget.transform.position);
+        if (distanceToTarget < maxRange)
+        {
+            target = Tower.asTarget;
+        }
+    }
+
+    public Health GetTarget(float range)
+    {
+        maxRange = range;
+        return target;
     }
 }
