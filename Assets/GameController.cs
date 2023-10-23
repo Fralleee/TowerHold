@@ -1,43 +1,55 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameController : Singleton<GameController>
 {
+    public static Action OnLevelChanged = delegate { };
     public float freezeTime = 5f;
     public float levelTime = 30f;
+    public float timeLeft;
     public int startLevel = 1;
+    public int currentLevel = 1;
     public int maxLevel = 100;
+    public int gold = 100;
 
     EnemySpawner enemySpawner;
-    int currentLevel = 1;
-
-    void Awake()
-    {
-        enemySpawner = GetComponentInChildren<EnemySpawner>();
-    }
 
     void Start()
     {
+        enemySpawner = GetComponentInChildren<EnemySpawner>();
         currentLevel = startLevel;
-        Invoke("StartGame", freezeTime);
+        timeLeft = levelTime; // Initialize time left with level time
+        Invoke(nameof(StartGame), freezeTime);
     }
 
-    IEnumerator LevelController()
+    void Update()
     {
-        while (Tower.instance.health > 0 && currentLevel <= maxLevel)
+        if (Tower.instance.health <= 0 || currentLevel > maxLevel)
         {
-            yield return new WaitForSeconds(levelTime);
-            currentLevel++;
-            enemySpawner.spawnRate = Mathf.Max(0.1f, enemySpawner.spawnRate - 0.1f * currentLevel / 10);
+            EndGame();
+            return;
         }
 
-        EndGame();
+        timeLeft -= Time.deltaTime; // Decrease the time left by the time passed since last frame
+
+        if (timeLeft <= 0)
+        {
+            NextLevel();
+        }
+    }
+
+    void NextLevel()
+    {
+        currentLevel++;
+        enemySpawner.spawnRate = Mathf.Max(0.1f, enemySpawner.spawnRate - 0.1f * currentLevel / 10);
+        timeLeft = levelTime; // Reset the time left for the new level
+        OnLevelChanged();
     }
 
     void StartGame()
     {
         StartSpawning();
-        StartCoroutine(LevelController());
     }
 
     void StartSpawning()

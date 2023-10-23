@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tower/Upgrade")]
-public class Upgrade : ScriptableObject
+public class Upgrade : ShopItem
 {
+    [Header("Upgrade Settings")]
     public DamageType damageType;
     float increaseDamageFactor = 1.1f;
 

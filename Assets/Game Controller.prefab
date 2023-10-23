@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeTime: 0
-  levelTime: 5
+  freezeTime: 5
+  levelTime: 30
   startLevel: 1
+  currentLevel: 1
   maxLevel: 100
+  gold: 5000
 --- !u!1001 &3588583350959537613
 PrefabInstance:
   m_ObjectHideFlags: 0

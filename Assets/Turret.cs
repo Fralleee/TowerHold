@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tower/Turret")]
-public partial class Turret : ScriptableObject
+public partial class Turret : ShopItem
 {
+    [Header("Turret Settings")]
     public Projectile projectilePrefab;
     public DamageType damageType;
     public float baseDamage = 10f;
