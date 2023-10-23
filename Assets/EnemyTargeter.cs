@@ -19,10 +19,10 @@ public class EnemyTargeter : MonoBehaviour, ITargeter
 
     void CheckDistance()
     {
-        float distanceToTarget = Vector3.Distance(transform.position, Tower.asTarget.transform.position);
+        float distanceToTarget = Vector3.Distance(transform.position, Tower.instance.transform.position);
         if (distanceToTarget < maxRange)
         {
-            target = Tower.asTarget;
+            target = Tower.instance;
         }
     }
 

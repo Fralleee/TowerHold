@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Tower : Health
 {
-    public static Health asTarget;
-    public Transform origin;
+    public static Tower instance;
 
     public List<Turret> startTurrets;
     public List<Turret> turrets;
@@ -22,9 +21,7 @@ public class Tower : MonoBehaviour
 
     void Awake()
     {
-        asTarget = GetComponent<Health>();
-
-
+        instance = this;
     }
 
     void Start()
@@ -62,9 +59,6 @@ public class Tower : MonoBehaviour
 
     public float GetDamage(DamageType damageType, float damage)
     {
-        Debug.Log("Getting damage: " + damage + " with type: " + damageType);
-        Debug.Log("Damage multiplier: " + damageMultipliers[damageType]);
-        Debug.Log("Final damage: " + damage * damageMultipliers[damageType]);
         return damage * damageMultipliers[damageType];
     }
 }

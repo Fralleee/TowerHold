@@ -14,7 +14,7 @@ public class MoveToAttack : MonoBehaviour
 
     void Start()
     {
-        agent.SetDestination(Tower.asTarget.transform.position);
+        agent.SetDestination(Tower.instance.transform.position);
     }
 
     void Update()

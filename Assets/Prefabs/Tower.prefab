@@ -146,7 +146,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6968498760919862443}
   - component: {fileID: 3051079823233394647}
-  - component: {fileID: 1214206426133053626}
   - component: {fileID: 4814542400900873202}
   m_Layer: 0
   m_Name: Tower
@@ -188,20 +187,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &1214206426133053626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7943569025180232256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57ad2cc2bfc7d044b76cbd0ab72b278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  center: {fileID: 4051799459260263527}
-  health: 2500
 --- !u!114 &4814542400900873202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40516c7be85c49d4ebc7b1d130c49bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  center: {fileID: 4051799459260263527}
+  health: 100
   origin: {fileID: 4051799459260263527}
   startTurrets:
   - {fileID: 11400000, guid: 54e20b6c07ae56745847fb8d66128af7, type: 2}

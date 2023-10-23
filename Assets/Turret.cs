@@ -28,7 +28,7 @@ public partial class Turret : ScriptableObject
         {
             if (Time.time - lastTargetSearch > timeBetweenFindTarget)
             {
-                target = Targeter.GetTurretTarget(tower.origin, attackRange);
+                target = Targeter.GetTurretTarget(tower.center, attackRange);
                 lastTargetSearch = Time.time;
             }
         }
@@ -42,8 +42,8 @@ public partial class Turret : ScriptableObject
 
     void Shoot()
     {
-        var rotation = Quaternion.LookRotation(target.transform.position - tower.origin.position);
-        var projectile = Instantiate(projectilePrefab, tower.origin.position, rotation);
+        var rotation = Quaternion.LookRotation(target.transform.position - tower.center.position);
+        var projectile = Instantiate(projectilePrefab, tower.center.position, rotation);
         projectile.target = target;
         projectile.damage = tower.GetDamage(damageType, baseDamage);
     }

@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [HideInInspector] public bool IsSpawning;
+    [HideInInspector] public Tower target;
     public int minRadius = 30;
     public int maxRadius = 40;
-
     public float spawnRate = 1f;
-
     float lastSpawnTime = 0f;
-
-    public Health target;
     public GameObject prefab;
 
     void Update()
     {
-        if (Time.time - lastSpawnTime > spawnRate)
+        if (IsSpawning && Time.time - lastSpawnTime > spawnRate)
         {
             Spawn();
             lastSpawnTime = Time.time;
