@@ -41,6 +41,11 @@ public partial class Turret : ShopItem
         }
     }
 
+    public override void OnPurchase()
+    {
+        Tower.instance.AddTurret(this);
+    }
+
     void Shoot()
     {
         var rotation = Quaternion.LookRotation(target.transform.position - tower.center.position);

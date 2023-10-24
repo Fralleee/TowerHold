@@ -9,7 +9,7 @@ public class ShopSlot : MonoBehaviour
     public TextMeshProUGUI costText;
     public Button purchaseButton;
 
-    private ShopItem item;
+    ShopItem item;
 
     public void SetupSlot(ShopItem newItem)
     {
@@ -19,15 +19,29 @@ public class ShopSlot : MonoBehaviour
         costText.text = item.cost.ToString();
         purchaseButton.interactable = true;
         purchaseButton.onClick.AddListener(PurchaseItem);
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
     }
 
-    private void PurchaseItem()
+    void DisableButton()
+    {
+
+        purchaseButton.interactable = false; // Disable the button after purchase
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
+    void PurchaseItem()
     {
         if (GameController.Instance.gold >= item.cost)
         {
             GameController.Instance.gold -= item.cost;
-            purchaseButton.interactable = false; // Disable the button after purchase
-            item.OnPurchase(); // Apply the item            
+            item.OnPurchase(); // Apply the item      
+            DisableButton();
         }
     }
 }

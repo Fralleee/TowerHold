@@ -18,4 +18,9 @@ public class Upgrade : ShopItem
     {
         increaseDamageFactor += 0.1f;
     }
+
+    public override void OnPurchase()
+    {
+        Tower.instance.AddUppgrade(damageType);
+    }
 }

@@ -5,11 +5,7 @@ using UnityEngine;
 public class Tower : Health
 {
     public static Tower instance;
-
-    public List<Turret> startTurrets;
     public List<Turret> turrets;
-
-    public List<Upgrade> startUpgrades;
     public Dictionary<DamageType, float> damageMultipliers = new Dictionary<DamageType, float>() {
         { DamageType.Normal, 1f },
         { DamageType.Piercing, 1f },
@@ -22,19 +18,6 @@ public class Tower : Health
     void Awake()
     {
         instance = this;
-    }
-
-    void Start()
-    {
-        foreach (var turret in startTurrets)
-        {
-            AddTurret(turret);
-        }
-
-        foreach (var upgrade in startUpgrades)
-        {
-            AddUppgrade(upgrade.damageType);
-        }
     }
 
     void Update()
