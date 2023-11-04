@@ -22,10 +22,19 @@ public class Tower : Health
 
     void Update()
     {
+        RegenerateHealth();
         foreach (var turret in turrets)
         {
             turret.Update();
         }
+    }
+    
+    private void RegenerateHealth()
+    {
+        // Increment health, ensuring that it doesn't exceed the maximum
+        health = Mathf.Min(health + healthRegenerationRate * Time.deltaTime, maxHealth);
+
+        // You may want to add a callback or event when the health changes, for UI updates or other game logic.
     }
 
     public void AddTurret(Turret turret)
