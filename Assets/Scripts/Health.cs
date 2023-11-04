@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     public int maxHealth = 100;
     public int health = 100;
 
-    void Awake()
+    protected virtual void Awake()
     {
         if (center == null)
         {
