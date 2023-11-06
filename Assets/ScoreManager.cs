@@ -9,8 +9,6 @@ public class ScoreManager : Singleton<ScoreManager>
     [SerializeField] ScoreUI scoreUI;
 
     [Header("Scores")]
-    public int score = 0;
-
     public float damageDone = 0; // Done
     public float damageTaken = 0; // Done
     public int enemiesKilled = 0; // Done
@@ -24,9 +22,6 @@ public class ScoreManager : Singleton<ScoreManager>
     protected override void Awake()
     {
         base.Awake();
-
-        Enemy.OnDeath += HandleEnemyDeath;
-        GameController.OnGameEnd += HandleGameEnd;
 
         scoreUI.gameObject.SetActive(false);
     }
@@ -52,5 +47,19 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         scoreUI.gameObject.SetActive(true);
         scoreUI.SetScores(GetScoresAsText());
+    }
+
+    void OnEnable()
+    {
+        Enemy.OnDeath += HandleEnemyDeath;
+        GameController.OnGameEnd += HandleGameEnd;
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+
+        Enemy.OnDeath -= HandleEnemyDeath;
+        GameController.OnGameEnd -= HandleGameEnd;
     }
 }

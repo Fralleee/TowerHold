@@ -21,10 +21,9 @@ public class Enemy : Health
         AllEnemies.Remove(this);
     }
 
-
     public static void ResetGameState()
     {
-        AllEnemies = new List<Enemy>();
+        AllEnemies.Clear();
         OnDeath = delegate { };
     }
 }

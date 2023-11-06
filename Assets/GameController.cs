@@ -76,7 +76,6 @@ public class GameController : Singleton<GameController>
 
     public void ReplayGame()
     {
-        ResetGameState();
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 
@@ -85,16 +84,17 @@ public class GameController : Singleton<GameController>
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    void ResetGameState()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
+
         OnLevelChanged = delegate { };
         OnGameEnd = delegate { };
 
         Time.timeScale = 1;
         gameHasEnded = false;
 
-        GoldManager.ResetGameState();
-        Enemy.ResetGameState();
         Tower.ResetGameState();
+        Enemy.ResetGameState();
     }
 }

@@ -23,7 +23,6 @@ public class Tower : Health
         base.Awake();
 
         instance = this;
-        OnDamageTaken += HandleDamageTaken;
     }
 
 
@@ -64,6 +63,16 @@ public class Tower : Health
     void HandleDamageTaken(int damage)
     {
         ScoreManager.Instance.damageTaken += damage;
+    }
+
+    void OnEnable()
+    {
+        OnDamageTaken += HandleDamageTaken;
+    }
+
+    void OnDestroy()
+    {
+        OnDamageTaken -= HandleDamageTaken;
     }
 
     public static void ResetGameState()

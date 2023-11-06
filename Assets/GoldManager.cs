@@ -83,15 +83,10 @@ public class GoldManager : Singleton<GoldManager>
         }
     }
 
-    public static void ResetGameState()
+    protected override void OnDestroy()
     {
-        // StopIncome(); // Stop any running income coroutines.
+        base.OnDestroy();
 
-        // gold = 100; // Reset gold to starting amount or to an appropriate value for a new game.
-        // passiveIncomeRate = 1.0f; // Reset passive income rate.
-        // OnGoldChange(gold); // Update listeners about the reset.
-
-        // // Reset the static event to ensure all old listeners are removed.
         OnGoldChange = delegate { };
     }
 }
