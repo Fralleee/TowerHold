@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : Singleton<GameController>
 {
@@ -76,12 +77,12 @@ public class GameController : Singleton<GameController>
 
     public void ReplayGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Game");
     }
 
     public void Menu()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu");
     }
 
     protected override void OnDestroy()
