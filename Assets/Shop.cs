@@ -62,9 +62,8 @@ public class Shop : MonoBehaviour
 
     void ManualRefresh()
     {
-        if (GameController.Instance.gold >= refreshCost) // Assuming you have a gold system
+        if (GoldManager.Instance.SpendGold(refreshCost))
         {
-            GameController.Instance.gold -= refreshCost;
             RefreshShop();
             refreshCost += 50; // Increase the cost for the next manual refresh
             refreshCostText.text = refreshCost.ToString();

@@ -44,13 +44,13 @@ public partial class Turret : ShopItem
     public override void OnPurchase()
     {
         Tower.instance.AddTurret(this);
+        ScoreManager.Instance.turrets += 1;
     }
 
     void Shoot()
     {
         var rotation = Quaternion.LookRotation(target.transform.position - tower.center.position);
         var projectile = Instantiate(projectilePrefab, tower.center.position, rotation);
-        projectile.target = target;
-        projectile.damage = tower.GetDamage(damageType, baseDamage);
+        projectile.Setup(target, tower.GetDamage(damageType, baseDamage), true);
     }
 }

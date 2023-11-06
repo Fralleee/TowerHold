@@ -1,18 +1,17 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class GameController : Singleton<GameController>
 {
     public static Action OnLevelChanged = delegate { };
+    public static Action OnGameEnd = delegate { };
     public float freezeTime = 5f;
     public float levelTime = 30f;
     public float timeLeft;
     public int startLevel = 1;
     public int currentLevel = 1;
     public int maxLevel = 100;
-    public int gold = 100;
-
+    bool gameHasEnded = false;
     EnemySpawner enemySpawner;
 
     void Start()
@@ -25,7 +24,12 @@ public class GameController : Singleton<GameController>
 
     void Update()
     {
-        if (Tower.instance.health <= 0 || currentLevel > maxLevel)
+        if (gameHasEnded)
+        {
+            return;
+        }
+
+        if (Tower.instance?.health <= 0 || currentLevel > maxLevel)
         {
             EndGame();
             return;
@@ -60,18 +64,37 @@ public class GameController : Singleton<GameController>
 
     void EndGame()
     {
-        Debug.Log("Game Over! Your score is: " + CalculateScore());
-    }
+        if (gameHasEnded)
+        {
+            return;
+        }
 
-    int CalculateScore()
-    {
-        // Boilerplate scoring logic: level * remaining health * base multiplier
-        int baseMultiplier = 10;
-        return currentLevel * Tower.instance.health * baseMultiplier;
+        gameHasEnded = true;
+        Time.timeScale = 0;
+        OnGameEnd();
     }
 
     public void ReplayGame()
     {
+        ResetGameState();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
+
+    public void Menu()
+    {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    void ResetGameState()
+    {
+        OnLevelChanged = delegate { };
+        OnGameEnd = delegate { };
+
+        Time.timeScale = 1;
+        gameHasEnded = false;
+
+        GoldManager.ResetGameState();
+        Enemy.ResetGameState();
+        Tower.ResetGameState();
     }
 }

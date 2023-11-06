@@ -32,6 +32,6 @@ public static class Targeter
             selectedTarget.IsTargeted = true;
         }
 
-        return selectedTarget?.health;
+        return selectedTarget;
     }
 }

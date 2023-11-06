@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : Health
 {
+    public int healthRegenerationRate = 1;
+
     public static Tower instance;
     public List<Turret> turrets;
     public Dictionary<DamageType, float> damageMultipliers = new Dictionary<DamageType, float>() {
@@ -15,10 +18,14 @@ public class Tower : Health
         { DamageType.Chaos, 1f }
     };
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         instance = this;
+        OnDamageTaken += HandleDamageTaken;
     }
+
 
     void Update()
     {
@@ -28,11 +35,11 @@ public class Tower : Health
             turret.Update();
         }
     }
-    
+
     private void RegenerateHealth()
     {
         // Increment health, ensuring that it doesn't exceed the maximum
-        health = Mathf.Min(health + healthRegenerationRate * Time.deltaTime, maxHealth);
+        health = Mathf.Min(health + Mathf.RoundToInt(healthRegenerationRate * Time.deltaTime), maxHealth);
 
         // You may want to add a callback or event when the health changes, for UI updates or other game logic.
     }
@@ -52,5 +59,16 @@ public class Tower : Health
     public float GetDamage(DamageType damageType, float damage)
     {
         return damage * damageMultipliers[damageType];
+    }
+
+    void HandleDamageTaken(int damage)
+    {
+        ScoreManager.Instance.damageTaken += damage;
+    }
+
+    public static void ResetGameState()
+    {
+        instance = null;
+        OnDeath = delegate { };
     }
 }

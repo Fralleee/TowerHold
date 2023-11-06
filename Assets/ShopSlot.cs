@@ -37,9 +37,8 @@ public class ShopSlot : MonoBehaviour
 
     void PurchaseItem()
     {
-        if (GameController.Instance.gold >= item.cost)
+        if (GoldManager.Instance.SpendGold(item.cost))
         {
-            GameController.Instance.gold -= item.cost;
             item.OnPurchase(); // Apply the item      
             DisableButton();
         }

@@ -27,8 +27,8 @@ public class CameraController : Controller
 
     void Start()
     {
-        _mainCam = Camera.main;
         _transform = transform;
+        _mainCam = _cameraTransform.GetComponentInChildren<Camera>();
 
         Controls.Mouse.PrimaryFire.started += MoveStart;
         Controls.Mouse.PrimaryFire.canceled += MoveCanceled;
@@ -125,5 +125,13 @@ public class CameraController : Controller
     void RotationCanceled(InputAction.CallbackContext context)
     {
         _isMouseRotating = false;
+    }
+    void OnDestroy()
+    {
+        Controls.Mouse.PrimaryFire.started -= MoveStart;
+        Controls.Mouse.PrimaryFire.canceled -= MoveCanceled;
+        Controls.Mouse.Rotation.started -= RotationStart;
+        Controls.Mouse.Rotation.canceled -= RotationCanceled;
+        Controls.Mouse.Scroll.performed -= Scroll;
     }
 }

@@ -31,7 +31,6 @@ public class EnemyAttack : MonoBehaviour
     void Shoot()
     {
         var projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        projectile.target = target;
-        projectile.damage = baseDamage;
+        projectile.Setup(target, baseDamage, false);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,5 +19,12 @@ public class Enemy : Health
     void OnDestroy()
     {
         AllEnemies.Remove(this);
+    }
+
+
+    public static void ResetGameState()
+    {
+        AllEnemies = new List<Enemy>();
+        OnDeath = delegate { };
     }
 }
