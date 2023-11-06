@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Tower : Health
 {
-    public int healthRegenerationRate = 1;
+    public int healthRegenerationRate = 5;
 
     public static Tower instance;
     public List<Turret> turrets;
@@ -25,6 +25,11 @@ public class Tower : Health
         instance = this;
     }
 
+    void Start()
+    {
+        StartCoroutine(RegenerateHealth());
+    }
+
 
     void Update()
     {
@@ -35,12 +40,17 @@ public class Tower : Health
         }
     }
 
-    private void RegenerateHealth()
+    private IEnumerator RegenerateHealth()
     {
-        // Increment health, ensuring that it doesn't exceed the maximum
-        health = Mathf.Min(health + Mathf.RoundToInt(healthRegenerationRate * Time.deltaTime), maxHealth);
+        while (true) // Creates an infinite loop, so the coroutine keeps running
+        {
+            // Increment health, ensuring that it doesn't exceed the maximum
+            health = Mathf.Min(health + healthRegenerationRate, maxHealth);
 
-        // You may want to add a callback or event when the health changes, for UI updates or other game logic.
+            // You may want to add a callback or event when the health changes, for UI updates or other game logic.
+
+            yield return new WaitForSeconds(1); // Wait for 1 second before the loop continues
+        }
     }
 
     public void AddTurret(Turret turret)

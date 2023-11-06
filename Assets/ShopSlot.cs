@@ -18,7 +18,6 @@ public class ShopSlot : MonoBehaviour
         itemImage.sprite = item.image;
         costText.text = item.cost.ToString();
         purchaseButton.interactable = true;
-        purchaseButton.onClick.AddListener(PurchaseItem);
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
@@ -35,7 +34,7 @@ public class ShopSlot : MonoBehaviour
         }
     }
 
-    void PurchaseItem()
+    public void PurchaseItem()
     {
         if (GoldManager.Instance.SpendGold(item.cost))
         {

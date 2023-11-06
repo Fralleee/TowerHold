@@ -21,23 +21,22 @@ public partial class Turret : ShopItem
     {
         tower = inputTower;
         lastTargetSearch = Random.Range(0f, timeBetweenFindTarget);
+        lastAttackTime = Random.Range(0f, timeBetweenAttacks); // Add random delay for the first attack
     }
 
     public void Update()
     {
-        if (target == null)
+        if (Time.time - lastTargetSearch > timeBetweenFindTarget)
         {
-            if (Time.time - lastTargetSearch > timeBetweenFindTarget)
-            {
-                target = Targeter.GetTurretTarget(tower.center, attackRange);
-                lastTargetSearch = Time.time;
-            }
+            target = TowerTargeter.GetTurretTarget(tower.center, attackRange);
+            lastTargetSearch = Time.time + Random.Range(-0.1f * timeBetweenFindTarget, 0.1f * timeBetweenFindTarget); // Add some variance to the search timing
         }
-        else if (Time.time - lastAttackTime > timeBetweenAttacks)
+
+        if (target != null && Time.time - lastAttackTime > timeBetweenAttacks)
         {
             Shoot();
-            lastAttackTime = Time.time;
-            lastTargetSearch = 0;
+            lastAttackTime = Time.time + Random.Range(-0.1f * timeBetweenAttacks, 0.1f * timeBetweenAttacks); // Add some variance to the attack timing
+            lastTargetSearch = Time.time; // This should probably be adjusted to have a delay as well
         }
     }
 

@@ -17,8 +17,6 @@ public class Health : MonoBehaviour
         }
     }
 
-
-
     public float TakeDamage(int damage)
     {
         health -= damage;
