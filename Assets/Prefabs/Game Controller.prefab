@@ -1189,8 +1189,14 @@ MonoBehaviour:
   currentLevel: 1
   maxLevel: 100
   goldManagerSettings:
-    startingGold: 100
-    passiveIncomeRate: 1
+    startingGold: 500
+    passiveIncomeRate: 50
+  enemySpawnerSettings:
+    minRadius: 30
+    maxRadius: 40
+    spawnRate: 1
+    prefab: {fileID: 7281807481305759408, guid: e45bb9f78ba7c134bb8b5dc9e126f978,
+      type: 3}
 --- !u!1001 &3588583350959537613
 PrefabInstance:
   m_ObjectHideFlags: 0
