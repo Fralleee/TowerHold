@@ -1,20 +1,17 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-
 public class GoldManager : Singleton<GoldManager>
 {
     public static Action<int> OnGoldChange = delegate { };
-    public int gold = 100; // Starting gold
-    public float passiveIncomeRate = 1.0f; // Gold generated per second
     Coroutine incomeCoroutine;
+    public int gold = 0;
 
     void Start()
     {
         // Delay the start of passive income generation
         incomeCoroutine = StartCoroutine(ActivateIncomeAfterDelay(GameController.Instance.freezeTime));
-        OnGoldChange(gold);
+        EarnGold(GameController.Instance.goldManagerSettings.startingGold);
     }
 
     // Consider separating the start of the coroutine from the method waiting for delay.
@@ -33,7 +30,7 @@ public class GoldManager : Singleton<GoldManager>
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            EarnGold(Mathf.FloorToInt(passiveIncomeRate));
+            EarnGold(Mathf.FloorToInt(GameController.Instance.goldManagerSettings.passiveIncomeRate));
             // Consider updating some UI element here to reflect the change in gold.
         }
     }
@@ -42,7 +39,7 @@ public class GoldManager : Singleton<GoldManager>
     // Consider renaming it to 'IncreaseIncomeRate' or 'UpgradeIncomeRate' for clarity.
     public void AddIncome(float amount)
     {
-        passiveIncomeRate += amount;
+        GameController.Instance.goldManagerSettings.passiveIncomeRate += amount;
     }
 
     public void EarnGold(int amount)

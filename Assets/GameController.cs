@@ -15,6 +15,9 @@ public class GameController : Singleton<GameController>
     bool gameHasEnded = false;
     EnemySpawner enemySpawner;
 
+    public GoldManagerSettings goldManagerSettings;
+    public EnemySpawnerSettings enemySpawnerSettings;
+
     void Start()
     {
         enemySpawner = GetComponentInChildren<EnemySpawner>();
@@ -30,7 +33,7 @@ public class GameController : Singleton<GameController>
             return;
         }
 
-        if (Tower.instance?.health <= 0 || currentLevel > maxLevel)
+        if (Tower.instance?.Health <= 0 || currentLevel > maxLevel)
         {
             EndGame();
             return;
@@ -47,7 +50,7 @@ public class GameController : Singleton<GameController>
     void NextLevel()
     {
         currentLevel++;
-        enemySpawner.spawnRate = Mathf.Max(0.1f, enemySpawner.spawnRate - 0.1f * currentLevel / 10);
+        enemySpawnerSettings.spawnRate = Mathf.Max(0.1f, enemySpawnerSettings.spawnRate - 0.1f * currentLevel / 10);
         timeLeft = levelTime; // Reset the time left for the new level
         OnLevelChanged();
     }

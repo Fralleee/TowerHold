@@ -15,7 +15,7 @@ public partial class Turret : ShopItem
     float lastAttackTime = 0f;
     float lastTargetSearch = 0f;
     Tower tower;
-    Health target;
+    Target target;
 
     public void Setup(Tower inputTower)
     {
@@ -28,7 +28,7 @@ public partial class Turret : ShopItem
     {
         if (Time.time - lastTargetSearch > timeBetweenFindTarget)
         {
-            target = TowerTargeter.GetTurretTarget(tower.center, attackRange);
+            target = TowerTargeter.GetTurretTarget(tower.Center, attackRange);
             lastTargetSearch = Time.time + Random.Range(-0.1f * timeBetweenFindTarget, 0.1f * timeBetweenFindTarget); // Add some variance to the search timing
         }
 
@@ -48,8 +48,8 @@ public partial class Turret : ShopItem
 
     void Shoot()
     {
-        var rotation = Quaternion.LookRotation(target.transform.position - tower.center.position);
-        var projectile = Instantiate(projectilePrefab, tower.center.position, rotation);
+        var rotation = Quaternion.LookRotation(target.transform.position - tower.Center.position);
+        var projectile = Instantiate(projectilePrefab, tower.Center.position, rotation);
         projectile.Setup(target, tower.GetDamage(damageType, baseDamage), true);
     }
 }

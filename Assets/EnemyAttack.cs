@@ -7,7 +7,7 @@ public class EnemyAttack : MonoBehaviour
     public float attackRange = 2f;
     public float timeBetweenAttacks = 1f;
     float lastAttackTime = 0f;
-    [HideInInspector] public Health target;
+    [HideInInspector] public Target target;
     ITargeter targeter;
 
     void Awake()

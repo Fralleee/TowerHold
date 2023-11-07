@@ -1,20 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
     [HideInInspector] public bool IsSpawning;
     [HideInInspector] public Tower target;
-    public int minRadius = 30;
-    public int maxRadius = 40;
-    public float spawnRate = 1f;
     float lastSpawnTime = 0f;
-    public GameObject prefab;
 
     void Update()
     {
-        if (IsSpawning && Time.time - lastSpawnTime > spawnRate)
+        if (IsSpawning && Time.time - lastSpawnTime > GameController.Instance.enemySpawnerSettings.spawnRate)
         {
             Spawn();
             lastSpawnTime = Time.time;
@@ -24,10 +20,10 @@ public class EnemySpawner : MonoBehaviour
     void Spawn()
     {
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
-        Vector3 spawnPosition = transform.position + new Vector3(randomDirection.x, 0, randomDirection.y) * Random.Range(minRadius, maxRadius);
+        Vector3 spawnPosition = transform.position + new Vector3(randomDirection.x, 0, randomDirection.y) * Random.Range(GameController.Instance.enemySpawnerSettings.minRadius, GameController.Instance.enemySpawnerSettings.maxRadius);
         Quaternion rotation = Quaternion.LookRotation(transform.position - spawnPosition, Vector3.up);
 
-        Instantiate(prefab, spawnPosition, rotation);
+        Instantiate(GameController.Instance.enemySpawnerSettings.prefab, spawnPosition, rotation);
     }
 
     void OnDrawGizmosSelected()
@@ -35,8 +31,8 @@ public class EnemySpawner : MonoBehaviour
         Gizmos.color = Color.red;
 
         // Draw circles for min and max radius, not spheres
-        Draw2dCircle(transform.position, minRadius);
-        Draw2dCircle(transform.position, maxRadius);
+        Draw2dCircle(transform.position, GameController.Instance.enemySpawnerSettings.minRadius);
+        Draw2dCircle(transform.position, GameController.Instance.enemySpawnerSettings.maxRadius);
 
     }
 

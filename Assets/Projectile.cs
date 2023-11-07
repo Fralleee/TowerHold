@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    Health _target;
+    Target _target;
     float _damage = 10f;
     bool _towerProjectile;
 
@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     Vector3 lastPosition = Vector3.zero;
 
-    public void Setup(Health target, float damage, bool towerProjectile)
+    public void Setup(Target target, float damage, bool towerProjectile)
     {
         _target = target;
         _damage = damage;
@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     {
         if (_target != null)
         {
-            lastPosition = _target.center.position;
+            lastPosition = _target.Center.position;
         }
 
         transform.position = Vector3.MoveTowards(transform.position, lastPosition, speed * Time.deltaTime);

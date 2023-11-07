@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Health
+public class Enemy : Target
 {
     [SerializeField] int bounty = 10;
     public static List<Enemy> AllEnemies = new List<Enemy>();

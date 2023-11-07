@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : Health
+public class Tower : Target
 {
     public int healthRegenerationRate = 5;
 
@@ -25,8 +25,10 @@ public class Tower : Health
         instance = this;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         StartCoroutine(RegenerateHealth());
     }
 
@@ -45,7 +47,7 @@ public class Tower : Health
         while (true) // Creates an infinite loop, so the coroutine keeps running
         {
             // Increment health, ensuring that it doesn't exceed the maximum
-            health = Mathf.Min(health + healthRegenerationRate, maxHealth);
+            Health = Mathf.Min(Health + healthRegenerationRate, MaxHealth);
 
             // You may want to add a callback or event when the health changes, for UI updates or other game logic.
 

@@ -199,29 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40516c7be85c49d4ebc7b1d130c49bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {fileID: 4051799459260263527}
-  health: 100
-  origin: {fileID: 4051799459260263527}
-  startTurrets:
-  - {fileID: 11400000, guid: 54e20b6c07ae56745847fb8d66128af7, type: 2}
-  - {fileID: 11400000, guid: 54e20b6c07ae56745847fb8d66128af7, type: 2}
-  - {fileID: 11400000, guid: 54e20b6c07ae56745847fb8d66128af7, type: 2}
-  - {fileID: 11400000, guid: 54e20b6c07ae56745847fb8d66128af7, type: 2}
-  - {fileID: 11400000, guid: 54e20b6c07ae56745847fb8d66128af7, type: 2}
+  Center: {fileID: 0}
+  MaxHealth: 1000
+  Health: 1000
+  _healthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
+    type: 3}
+  healthBarOffset: 10
+  healthRegenerationRate: 5
   turrets: []
-  startUpgrades:
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}

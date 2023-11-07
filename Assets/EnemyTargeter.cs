@@ -6,7 +6,7 @@ public class EnemyTargeter : MonoBehaviour, ITargeter
     float lastDistanceCheck = 0f;
     float maxRange = 0;
 
-    Health target;
+    Target target;
 
     void Update()
     {
@@ -26,7 +26,7 @@ public class EnemyTargeter : MonoBehaviour, ITargeter
         }
     }
 
-    public Health GetTarget(float range)
+    public Target GetTarget(float range)
     {
         maxRange = range;
         return target;

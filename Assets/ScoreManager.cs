@@ -26,7 +26,7 @@ public class ScoreManager : Singleton<ScoreManager>
         scoreUI.gameObject.SetActive(false);
     }
 
-    void HandleEnemyDeath(Health enemy)
+    void HandleEnemyDeath(Target enemy)
     {
         enemiesKilled += 1;
     }
