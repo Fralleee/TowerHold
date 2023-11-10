@@ -9,9 +9,11 @@ public class EnemyAttack : MonoBehaviour
     float lastAttackTime = 0f;
     [HideInInspector] public Target target;
     ITargeter targeter;
+    Animator animator;
 
     void Awake()
     {
+        animator = GetComponentInChildren<Animator>();
         targeter = GetComponentInParent<ITargeter>();
     }
 
@@ -32,5 +34,6 @@ public class EnemyAttack : MonoBehaviour
     {
         var projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         projectile.Setup(target, baseDamage, false);
+        animator.SetTrigger("Attack");
     }
 }

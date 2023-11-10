@@ -1195,7 +1195,7 @@ MonoBehaviour:
     minRadius: 30
     maxRadius: 40
     spawnRate: 1
-    prefab: {fileID: 7281807481305759408, guid: e45bb9f78ba7c134bb8b5dc9e126f978,
+    prefab: {fileID: 7281807481305759408, guid: 7720ec57ef69cab4ea5107a5133044f0,
       type: 3}
 --- !u!1001 &3588583350959537613
 PrefabInstance:

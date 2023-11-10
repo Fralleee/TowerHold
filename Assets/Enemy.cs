@@ -10,16 +10,27 @@ public class Enemy : Target
 
     public int attackers = 0;
     public bool HasAttackers => attackers > 0;
+    Animator animator;
 
     protected override void Awake()
     {
         base.Awake();
 
+        animator = GetComponentInChildren<Animator>();
+
         AllEnemies.Add(this);
 
         // Increase bounty based on level
         bounty += GameController.Instance.currentLevel * 2;
+
+        OnDeath += HandleDeath;
     }
+
+    void HandleDeath(Target target)
+    {
+        animator.SetTrigger("Die");
+    }
+
 
     void OnDestroy()
     {
