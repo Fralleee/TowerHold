@@ -51,7 +51,7 @@ public class ScoreManager : Singleton<ScoreManager>
 
     void OnEnable()
     {
-        Enemy.OnDeath += HandleEnemyDeath;
+        Enemy.OnAnyDeath += HandleEnemyDeath;
         GameController.OnGameEnd += HandleGameEnd;
     }
 
@@ -59,7 +59,7 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         base.OnDestroy();
 
-        Enemy.OnDeath -= HandleEnemyDeath;
+        Enemy.OnAnyDeath -= HandleEnemyDeath;
         GameController.OnGameEnd -= HandleGameEnd;
     }
 }

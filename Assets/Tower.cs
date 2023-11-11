@@ -48,6 +48,7 @@ public class Tower : Target
         {
             // Increment health, ensuring that it doesn't exceed the maximum
             Health = Mathf.Min(Health + healthRegenerationRate, MaxHealth);
+            _healthBar.SetHealth(Health);
 
             // You may want to add a callback or event when the health changes, for UI updates or other game logic.
 
@@ -90,6 +91,6 @@ public class Tower : Target
     public static void ResetGameState()
     {
         instance = null;
-        OnDeath = delegate { };
+        OnAnyDeath = delegate { };
     }
 }

@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public static Action<Target> OnDeath = delegate { };
+    public static Action<Target> OnAnyDeath = delegate { };
+    public Action<Target> OnDeath = delegate { };
     public Action<int> OnDamageTaken = delegate { };
     public Transform Center;
     public int MaxHealth = 100;
     public int Health = 100;
-    [SerializeField] HealthBar _healthBar;
+    [SerializeField] protected HealthBar _healthBar;
     [SerializeField] float healthBarOffset = 0f;
+
+    public bool IsDead;
 
     protected virtual void Awake()
     {
@@ -26,6 +29,11 @@ public class Target : MonoBehaviour
 
     public float TakeDamage(int damage)
     {
+        if (IsDead)
+        {
+            return 0;
+        }
+
         Health -= damage;
         _healthBar.SetHealth(Health);
 
@@ -44,6 +52,7 @@ public class Target : MonoBehaviour
     public void Die()
     {
         OnDeath(this);
-        Destroy(gameObject);
+        OnAnyDeath(this);
+        IsDead = true;
     }
 }

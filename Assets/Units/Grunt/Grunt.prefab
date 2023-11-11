@@ -80,7 +80,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -122,6 +122,7 @@ MonoBehaviour:
   _healthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
     type: 3}
   healthBarOffset: 0
+  IsDead: 0
   bounty: 10
   attackers: 0
 --- !u!114 &1326135206077503641
@@ -178,6 +179,10 @@ PrefabInstance:
     - target: {fileID: 100010, guid: 406486edf02d8d74da3b2ca225e21254, type: 3}
       propertyPath: m_Name
       value: Grunt Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 406486edf02d8d74da3b2ca225e21254, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 406486edf02d8d74da3b2ca225e21254, type: 3}
       propertyPath: m_LocalPosition.x

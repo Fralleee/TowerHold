@@ -32,7 +32,7 @@ public partial class Turret : ShopItem
             lastTargetSearch = Time.time + Random.Range(-0.1f * timeBetweenFindTarget, 0.1f * timeBetweenFindTarget); // Add some variance to the search timing
         }
 
-        if (target != null && Time.time - lastAttackTime > timeBetweenAttacks)
+        if (target != null && !target.IsDead && Time.time - lastAttackTime > timeBetweenAttacks)
         {
             Shoot();
             lastAttackTime = Time.time + Random.Range(-0.1f * timeBetweenAttacks, 0.1f * timeBetweenAttacks); // Add some variance to the attack timing

@@ -28,20 +28,35 @@ public class Enemy : Target
 
     void HandleDeath(Target target)
     {
-        animator.SetTrigger("Die");
-    }
-
-
-    void OnDestroy()
-    {
         AllEnemies.Remove(this);
-
         GoldManager.Instance.EarnGold(bounty);
+        animator.SetTrigger("Die");
+
+        // Disable all monobehaviours on gameObject
+        foreach (var component in GetComponents<MonoBehaviour>())
+        {
+            component.enabled = false;
+        }
+
+        Destroy(gameObject, 3f);
     }
 
     public static void ResetGameState()
     {
         AllEnemies.Clear();
-        OnDeath = delegate { };
+        OnAnyDeath = delegate { };
+    }
+
+    public static void GameOver()
+    {
+        foreach (var enemy in AllEnemies)
+        {
+            enemy.animator.SetTrigger("Victory");
+            enemy.GetComponent<MoveToAttack>().Stop();
+            foreach (var component in enemy.GetComponents<MonoBehaviour>())
+            {
+                component.enabled = false;
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ public class EnemyAttack : MonoBehaviour
     [HideInInspector] public Target target;
     ITargeter targeter;
     Animator animator;
+    Enemy enemy;
 
     void Awake()
     {

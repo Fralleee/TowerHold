@@ -74,7 +74,9 @@ public class GameController : Singleton<GameController>
         }
 
         gameHasEnded = true;
-        Time.timeScale = 0;
+
+        enemySpawner.IsSpawning = false;
+        Enemy.GameOver();
         OnGameEnd();
     }
 
