@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeTime: 5
+  freezeTime: 0
   levelTime: 5
   timeLeft: 0
   startLevel: 1
@@ -1193,8 +1193,8 @@ MonoBehaviour:
     passiveIncomeRate: 50
   enemySpawnerSettings:
     minRadius: 30
-    maxRadius: 40
-    spawnRate: 1
+    maxRadius: 50
+    spawnRate: 3
     prefab: {fileID: 7281807481305759408, guid: 7720ec57ef69cab4ea5107a5133044f0,
       type: 3}
 --- !u!1001 &3588583350959537613
