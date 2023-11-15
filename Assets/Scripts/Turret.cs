@@ -7,7 +7,6 @@ public partial class Turret : ShopItem
 {
     [Header("Turret Settings")]
     public Projectile projectilePrefab;
-    public DamageType damageType;
     public float baseDamage = 10f;
     public float attackRange = 2f;
     public float timeBetweenAttacks = 1f;
@@ -50,6 +49,6 @@ public partial class Turret : ShopItem
     {
         var rotation = Quaternion.LookRotation(target.transform.position - tower.Center.position);
         var projectile = Instantiate(projectilePrefab, tower.Center.position, rotation);
-        projectile.Setup(target, tower.GetDamage(damageType, baseDamage), true);
+        projectile.Setup(target, tower.GetDamage(category, baseDamage), true);
     }
 }

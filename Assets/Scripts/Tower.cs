@@ -9,13 +9,12 @@ public class Tower : Target
 
     public static Tower instance;
     public List<Turret> turrets;
-    public Dictionary<DamageType, float> damageMultipliers = new Dictionary<DamageType, float>() {
-        { DamageType.Normal, 1f },
-        { DamageType.Piercing, 1f },
-        { DamageType.Siege, 1f },
-        { DamageType.Magic, 1f },
-        { DamageType.Poison, 1f },
-        { DamageType.Chaos, 1f }
+    public Dictionary<Category, float> damageMultipliers = new Dictionary<Category, float>() {
+        { Category.Normal, 1f },
+        { Category.Piercing, 1f },
+        { Category.Siege, 1f },
+        { Category.Magic, 1f },
+        { Category.Chaos, 1f }
     };
 
     protected override void Awake()
@@ -63,14 +62,14 @@ public class Tower : Target
         turrets.Add(instance);
     }
 
-    public void AddUppgrade(DamageType damageType)
+    public void AddUppgrade(Category category)
     {
-        damageMultipliers[damageType] += 0.1f;
+        damageMultipliers[category] += 0.1f;
     }
 
-    public float GetDamage(DamageType damageType, float damage)
+    public float GetDamage(Category category, float damage)
     {
-        return damage * damageMultipliers[damageType];
+        return damage * damageMultipliers[category];
     }
 
     void HandleDamageTaken(int damage)

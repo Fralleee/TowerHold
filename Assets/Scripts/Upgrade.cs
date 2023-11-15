@@ -6,7 +6,6 @@ using UnityEngine;
 public class Upgrade : ShopItem
 {
     [Header("Upgrade Settings")]
-    public DamageType damageType;
     float increaseDamageFactor = 1.1f;
 
     public float GetDamage(float baseDamage)
@@ -21,7 +20,7 @@ public class Upgrade : ShopItem
 
     public override void OnPurchase()
     {
-        Tower.instance.AddUppgrade(damageType);
+        Tower.instance.AddUppgrade(category);
         ScoreManager.Instance.upgrades += 1;
     }
 }
