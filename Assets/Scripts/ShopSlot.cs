@@ -5,22 +5,24 @@ using UnityEngine.UI;
 public class ShopSlot : MonoBehaviour
 {
     public TextMeshProUGUI itemNameText;
+    public TextMeshProUGUI costText;
     public Image itemImage;
     public Image categoryImage;
-    public TextMeshProUGUI costText;
     public Button purchaseButton;
 
     ShopItem item;
 
-    Image image;
+    Button button;
 
     void Awake()
     {
-        image = GetComponent<Image>();
+        button = GetComponent<Button>();
     }
 
     public void SetupSlot(ShopItem newItem)
     {
+        SetUIAlpha(1f);
+
         item = newItem;
         itemNameText.text = item.itemName;
         itemImage.sprite = item.image;
@@ -36,9 +38,18 @@ public class ShopSlot : MonoBehaviour
 
         if (UIManager.Instance.categoryColors.TryGetValue(item.category, out Color color))
         {
-            image.color = new Color(color.r, color.g, color.b, 0.5f);
             categoryImage.color = color;
             itemImage.color = color;
+
+            button.colors = new ColorBlock()
+            {
+                normalColor = new Color(color.r, color.g, color.b, 0.25f),
+                highlightedColor = new Color(color.r, color.g, color.b, 0.85f),
+                pressedColor = new Color(color.r, color.g, color.b, 0.5f),
+                disabledColor = new Color(color.r, color.g, color.b, 0.1f),
+                colorMultiplier = 1,
+                fadeDuration = 0.1f
+            };
         }
         else
         {
@@ -53,21 +64,25 @@ public class ShopSlot : MonoBehaviour
         }
     }
 
+    void SetUIAlpha(float alpha)
+    {
+        itemNameText.alpha = alpha;
+        costText.alpha = alpha;
+        itemImage.color = new Color(itemImage.color.r, itemImage.color.g, itemImage.color.b, alpha);
+        categoryImage.color = new Color(categoryImage.color.r, categoryImage.color.g, categoryImage.color.b, alpha);
+    }
+
     void DisableButton()
     {
-
-        purchaseButton.interactable = false; // Disable the button after purchase
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        purchaseButton.interactable = false;
+        SetUIAlpha(0.1f);
     }
 
     public void PurchaseItem()
     {
         if (GoldManager.Instance.SpendGold(item.cost))
         {
-            item.OnPurchase(); // Apply the item      
+            item.OnPurchase();
             DisableButton();
         }
     }

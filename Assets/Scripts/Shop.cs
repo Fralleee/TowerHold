@@ -6,13 +6,25 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    public ShopSlot[] slots; // Assign your slots in the editor
+    public ShopSlot ShopSlotPrefab;
+    public int NumberOfSlots = 9;
+    public Transform Main;
+    ShopSlot[] Slots; // Assign your slots in the editor
     public Button refreshButton;
     public Image progressBar;
     public TextMeshProUGUI refreshCostText;
     public ShopItem[] availableItems;
 
     int refreshCost = 50; // Initial cost to refresh the shop manually
+
+    void Awake()
+    {
+        Slots = new ShopSlot[NumberOfSlots];
+        for (int i = 0; i < NumberOfSlots; i++)
+        {
+            Slots[i] = Instantiate(ShopSlotPrefab, Main);
+        }
+    }
 
     void Start()
     {
@@ -28,8 +40,7 @@ public class Shop : MonoBehaviour
 
     public void RefreshShop()
     {
-        // Sample logic to populate shop slots
-        foreach (ShopSlot slot in slots)
+        foreach (ShopSlot slot in Slots)
         {
             ShopItem item = GetRandomItem(GameController.Instance.currentLevel);
             slot.SetupSlot(item);

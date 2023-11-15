@@ -7,6 +7,8 @@ public class GoldManager : Singleton<GoldManager>
     Coroutine incomeCoroutine;
     public int gold = 0;
 
+    public int IncomeRate = 0;
+
     void Start()
     {
         // Delay the start of passive income generation
@@ -30,7 +32,7 @@ public class GoldManager : Singleton<GoldManager>
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            EarnGold(Mathf.FloorToInt(GameController.Instance.goldManagerSettings.passiveIncomeRate));
+            EarnGold(Mathf.FloorToInt(GameController.Instance.goldManagerSettings.passiveIncomeRate + IncomeRate));
             // Consider updating some UI element here to reflect the change in gold.
         }
     }

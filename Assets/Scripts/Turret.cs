@@ -54,4 +54,14 @@ public partial class Turret : ShopItem
 
         SoundManager.Instance.PlayEffect(shootSound);
     }
+
+    void OnValidate()
+    {
+        List<Category> allowedCategories = new List<Category> { Category.Normal, Category.Piercing, Category.Siege, Category.Magic, Category.Chaos };
+        if (!allowedCategories.Contains(category))
+        {
+            Debug.LogWarning("Invalid category for Turret. Resetting to Normal.");
+            category = Category.Normal;
+        }
+    }
 }

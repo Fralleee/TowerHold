@@ -23,3 +23,4 @@ MonoBehaviour:
   attackRange: 40
   timeBetweenAttacks: 0.5
   timeBetweenFindTarget: 1
+  shootSound: {fileID: 8300000, guid: 774a4cde4a2512e4bad8be3f8c6a5680, type: 3}

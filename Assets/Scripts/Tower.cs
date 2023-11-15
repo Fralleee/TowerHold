@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Tower : Target
 {
-    public int healthRegenerationRate = 5;
+    public int HealthRegenerationRate = 5;
 
     public static Tower instance;
     public List<Turret> turrets;
@@ -46,7 +46,7 @@ public class Tower : Target
         while (true) // Creates an infinite loop, so the coroutine keeps running
         {
             // Increment health, ensuring that it doesn't exceed the maximum
-            Health = Mathf.Min(Health + healthRegenerationRate, MaxHealth);
+            Health = Mathf.Min(Health + HealthRegenerationRate, MaxHealth);
             _healthBar.SetHealth(Health);
 
             // You may want to add a callback or event when the health changes, for UI updates or other game logic.
