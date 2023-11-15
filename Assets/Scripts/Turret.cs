@@ -11,6 +11,7 @@ public partial class Turret : ShopItem
     public float attackRange = 2f;
     public float timeBetweenAttacks = 1f;
     public float timeBetweenFindTarget = 1f;
+    public AudioClip shootSound;
     float lastAttackTime = 0f;
     float lastTargetSearch = 0f;
     Tower tower;
@@ -50,5 +51,7 @@ public partial class Turret : ShopItem
         var rotation = Quaternion.LookRotation(target.transform.position - tower.Center.position);
         var projectile = Instantiate(projectilePrefab, tower.Center.position, rotation);
         projectile.Setup(target, tower.GetDamage(category, baseDamage), true);
+
+        SoundManager.Instance.PlayEffect(shootSound);
     }
 }
