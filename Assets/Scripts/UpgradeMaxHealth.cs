@@ -10,7 +10,7 @@ public class UpgradeMaxHealth : ShopItem
 
   public override void OnPurchase()
   {
-    Tower.instance.MaxHealth += HealthIncrease;
+    Tower.instance.UpgradeHealth(HealthIncrease);
     ScoreManager.Instance.upgrades += 1;
   }
 

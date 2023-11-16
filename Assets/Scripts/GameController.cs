@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class GameController : Singleton<GameController>
 {
     public static Action OnLevelChanged = delegate { };
+    public static Action<GameStage> OnStageChanged = delegate { };
     public static Action OnGameEnd = delegate { };
     public float freezeTime = 5f;
     public float levelTime = 30f;
@@ -12,6 +12,7 @@ public class GameController : Singleton<GameController>
     public int startLevel = 1;
     public int currentLevel = 1;
     public int maxLevel = 100;
+    public GameStage currentStage;
     bool gameHasEnded = false;
     EnemySpawner enemySpawner;
 
@@ -22,7 +23,8 @@ public class GameController : Singleton<GameController>
     {
         enemySpawner = GetComponentInChildren<EnemySpawner>();
         currentLevel = startLevel;
-        timeLeft = levelTime; // Initialize time left with level time
+        timeLeft = levelTime;
+        UpdateGameStage();
         Invoke(nameof(StartGame), freezeTime);
     }
 
@@ -50,9 +52,28 @@ public class GameController : Singleton<GameController>
     void NextLevel()
     {
         currentLevel++;
+        UpdateGameStage();
         enemySpawnerSettings.spawnRate = Mathf.Max(0.1f, enemySpawnerSettings.spawnRate - 0.1f * currentLevel / 10);
-        timeLeft = levelTime; // Reset the time left for the new level
+        timeLeft = levelTime;
         OnLevelChanged();
+    }
+
+    void UpdateGameStage()
+    {
+        GameStage previousStage = currentStage;
+
+        int lowThreshold = (int)(maxLevel * 0.4); // 40% of maxLevel
+        int mediumThreshold = (int)(maxLevel * 0.7); // 70% of maxLevel
+
+        if (currentLevel <= lowThreshold)
+            currentStage = GameStage.Low;
+        else if (currentLevel <= mediumThreshold)
+            currentStage = GameStage.Medium;
+        else
+            currentStage = GameStage.High;
+
+        if (currentStage != previousStage)
+            OnStageChanged(currentStage);
     }
 
     void StartGame()

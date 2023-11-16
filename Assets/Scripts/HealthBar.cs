@@ -50,6 +50,11 @@ public class HealthBar : MonoBehaviour
     _doTransition = true;
   }
 
+  public void SetMaxHealth(float newMaxHealth)
+  {
+    _maxHealth = newMaxHealth;
+  }
+
   void Update()
   {
     if (_doTransition)

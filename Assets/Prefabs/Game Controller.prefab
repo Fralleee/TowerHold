@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gold: 0
+  IncomeRate: 0
 --- !u!1 &1545384712742958047
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,14 +581,149 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b991102651993741aad65b278b1645f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 8300000, guid: 3046f95f7409a48a19f9aa67183e210b, type: 3}
+    - {fileID: 8300000, guid: 03e0404e0492d456dbd1d8833bb4d659, type: 3}
+    - {fileID: 8300000, guid: 318035cb36ecf432499b989ad9d66653, type: 3}
+    - {fileID: 8300000, guid: b6e80cfade34349139b4cab82fae797f, type: 3}
+    - {fileID: 8300000, guid: 035535025d1534133be16c31ff9dd1a9, type: 3}
+    - {fileID: 8300000, guid: f570df0b24cb3459fbed791ebe40e398, type: 3}
+    - {fileID: 8300000, guid: 46c63538ff74940eabee2e36e1d584cf, type: 3}
+    - {fileID: 8300000, guid: a14f101a368a94809bc3e27df303a634, type: 3}
+    - {fileID: 8300000, guid: b5a952a675e8243e9ab90fe68ed8b012, type: 3}
+    - {fileID: 8300000, guid: 5698f1d04efa4410c9ad2d42fbaa4725, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: stagePlaylists
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[GameStage, Assembly-CSharp],[System.Collections.Generic.List`1[[UnityEngine.AudioClip,
+        UnityEngine.AudioModule]], mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[GameStage, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   musicSource: {fileID: 7818233753972848621}
   effectSource: {fileID: 7092029708942314798}
-  musicTracks:
-  - {fileID: 8300000, guid: b6e80cfade34349139b4cab82fae797f, type: 3}
-  - {fileID: 8300000, guid: 035535025d1534133be16c31ff9dd1a9, type: 3}
-  - {fileID: 8300000, guid: a8b60a9d6bdec43e69c48866d033c824, type: 3}
-  - {fileID: 8300000, guid: 7a1e36aed902941d49e1179968591149, type: 3}
-  - {fileID: 8300000, guid: 7ff2b1f8e78a64a8db323ed4e41b7d6c, type: 3}
 --- !u!82 &7818233753972848621
 AudioSource:
   m_ObjectHideFlags: 0
@@ -600,7 +736,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -696,7 +832,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.35
+  m_Volume: 0.15
   m_Pitch: 0.35
   Loop: 0
   Mute: 0
@@ -1854,11 +1990,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeTime: 0
-  levelTime: 5
+  levelTime: 2
   timeLeft: 0
   startLevel: 1
   currentLevel: 1
-  maxLevel: 100
+  maxLevel: 50
+  currentStage: 0
   goldManagerSettings:
     startingGold: 500
     passiveIncomeRate: 50

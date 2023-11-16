@@ -72,6 +72,14 @@ public class Tower : Target
         return damage * damageMultipliers[category];
     }
 
+    public void UpgradeHealth(int amount)
+    {
+        MaxHealth += amount;
+        Health += amount;
+        _healthBar.SetMaxHealth(MaxHealth);
+        _healthBar.SetHealth(Health);
+    }
+
     void HandleDamageTaken(int damage)
     {
         ScoreManager.Instance.damageTaken += damage;
