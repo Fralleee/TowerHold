@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public abstract class Spell : ScriptableObject
 {
-  public Sprite image;
-  [HideInInspector] public Button button;
-  public virtual void Perform()
-  {
-    if (button != null)
-    {
-      button.interactable = false;
-    }
-  }
+	public Sprite Image;
+	[HideInInspector] public Button Button;
+	public virtual void Perform()
+	{
+		if (Button != null)
+		{
+			Button.interactable = false;
+		}
+	}
 }

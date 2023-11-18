@@ -3,90 +3,90 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-  static T _instance;
+	static T _instance;
 
-  public static T Instance
-  {
-    get
-    {
-      if (_instance == null)
-      {
-        _instance = FindObjectOfType<T>();
+	public static T Instance
+	{
+		get
+		{
+			if (_instance == null)
+			{
+				_instance = FindObjectOfType<T>();
 
-        if (_instance == null)
-        {
-          var singletonObject = new GameObject();
-          _instance = singletonObject.AddComponent<T>();
-          singletonObject.name = typeof(T) + " (Singleton)";
-        }
-      }
+				if (_instance == null)
+				{
+					var singletonObject = new GameObject();
+					_instance = singletonObject.AddComponent<T>();
+					singletonObject.name = typeof(T) + " (Singleton)";
+				}
+			}
 
-      return _instance;
-    }
-  }
+			return _instance;
+		}
+	}
 
-  protected virtual void Awake()
-  {
-    if (_instance != null && _instance != this)
-    {
-      Destroy(gameObject);
-    }
-    else
-    {
-      _instance = this as T;
-    }
-  }
+	protected virtual void Awake()
+	{
+		if (_instance != null && _instance != this)
+		{
+			Destroy(gameObject);
+		}
+		else
+		{
+			_instance = this as T;
+		}
+	}
 
-  protected virtual void OnDestroy()
-  {
-    if (_instance == this)
-    {
-      _instance = null;
-    }
-  }
+	protected virtual void OnDestroy()
+	{
+		if (_instance == this)
+		{
+			_instance = null;
+		}
+	}
 }
 
 public class SerializedSingleton<T> : SerializedMonoBehaviour where T : SerializedMonoBehaviour
 {
-  static T _instance;
+	static T _instance;
 
-  public static T Instance
-  {
-    get
-    {
-      if (_instance == null)
-      {
-        _instance = FindObjectOfType<T>();
+	public static T Instance
+	{
+		get
+		{
+			if (_instance == null)
+			{
+				_instance = FindObjectOfType<T>();
 
-        if (_instance == null)
-        {
-          var singletonObject = new GameObject();
-          _instance = singletonObject.AddComponent<T>();
-          singletonObject.name = typeof(T) + " (Singleton)";
-        }
-      }
+				if (_instance == null)
+				{
+					var singletonObject = new GameObject();
+					_instance = singletonObject.AddComponent<T>();
+					singletonObject.name = typeof(T) + " (Singleton)";
+				}
+			}
 
-      return _instance;
-    }
-  }
+			return _instance;
+		}
+	}
 
-  protected virtual void Awake()
-  {
-    if (_instance != null && _instance != this)
-    {
-      Destroy(gameObject);
-    }
-    else
-    {
-      _instance = this as T;
-    }
-  }
+	protected virtual void Awake()
+	{
+		if (_instance != null && _instance != this)
+		{
+			Destroy(gameObject);
+		}
+		else
+		{
+			_instance = this as T;
+		}
+	}
 
-  protected virtual void OnDestroy()
-  {
-    if (_instance == this)
-    {
-      _instance = null;
-    }
-  }
+	protected virtual void OnDestroy()
+	{
+		if (_instance == this)
+		{
+			_instance = null;
+		}
+	}
 }

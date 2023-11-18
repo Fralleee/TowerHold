@@ -151,7 +151,6 @@ GameObject:
   - component: {fileID: -5559011461854093663}
   - component: {fileID: 8542767586507960884}
   - component: {fileID: 1326135206077503641}
-  - component: {fileID: 2082302225283696109}
   - component: {fileID: 8977830857369426386}
   m_Layer: 0
   m_Name: Enemy
@@ -237,7 +236,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -273,13 +272,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e503ea083d94c4c8b8f838126685c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Center: {fileID: 0}
+  Center: {fileID: 958655750909989121}
   MaxHealth: 100
   Health: 100
-  _healthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
+  HealthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
     type: 3}
-  bounty: 10
-  attackers: 0
+  _healthBarOffset: 0
+  IsDead: 0
+  _bounty: 10
+  Attackers: 0
 --- !u!114 &1326135206077503641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,19 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda03fdaa8af2b64885ab04cf57600c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkDistanceInterval: 1
---- !u!114 &2082302225283696109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7281807481305759408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5377f4cd8ee1d2448817fba54b8f4d62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  CheckDistanceInterval: 1
 --- !u!114 &8977830857369426386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,9 +306,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0ab6629bd7a944a743ca5e3a8028d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1249967856914140215, guid: 0a7f8874bc4d59549b26e715e0840822,
+  ProjectilePrefab: {fileID: 7504251348261676953, guid: 75ff8dbf415ca4a41ba6f46192b3efe8,
     type: 3}
-  baseDamage: 10
-  attackRange: 20
-  timeBetweenAttacks: 1
-  target: {fileID: 0}
+  BaseDamage: 10
+  AttackRange: 2
+  TimeBetweenAttacks: 1
+  Target: {fileID: 0}

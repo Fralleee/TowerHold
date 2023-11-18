@@ -3,13 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuUI : MonoBehaviour
 {
-    public void Play()
-    {
-        SceneManager.LoadScene("Game");
-    }
+	public void Play() => SceneManager.LoadScene("Game");
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
+	public void Quit() => Application.Quit();
 }

@@ -549,289 +549,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.size
-      value: 39
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.size
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"stagePlaylists","value":{"$id":0,"$type":"System.Collections.Generic.Dictionary`2[[GameStage,
-        Assembly-CSharp],[System.Collections.Generic.List`1[[UnityEngine.AudioClip,
-        UnityEngine.AudioModule]], mscorlib]], mscorlib","comparer":{"$id":1,"$type":"System.Collections.Generic.EnumEqualityComparer`1[[GameStage,
-        Assembly-CSharp]], mscorlib","$rlength":0,"$rcontent":[]},"$rlength":3,"$rcontent":[{"$k":0,"$v":{"$id":2,"$type":"System.Collections.Generic.List`1[[UnityEngine.AudioClip,
-        UnityEngine.AudioModule]], mscorlib","$rlength":5,"$rcontent":[$eref:0,$eref:1,$eref:2,$eref:3,$eref:4]}},{"$k":1,"$v":{"$id":3,"$type":"System.Collections.Generic.List`1[[UnityEngine.AudioClip,
-        UnityEngine.AudioModule]], mscorlib","$rlength":2,"$rcontent":[$eref:5,$eref:6]}},{"$k":2,"$v":{"$id":4,"$type":"System.Collections.Generic.List`1[[UnityEngine.AudioClip,
-        UnityEngine.AudioModule]], mscorlib","$rlength":3,"$rcontent":[$eref:7,$eref:8,$eref:9]}}]}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[1]
-      value: '"path":"stagePlaylists.{0es}","value":{"$id":0,"$type":"System.Collections.Generic.List`1[[UnityEngine.AudioClip,
-        UnityEngine.AudioModule]], mscorlib","$rlength":5,"$rcontent":[$eref:0,$eref:1,$eref:2,$eref:3,$eref:4]}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[2]
-      value: '"path":"stagePlaylists.{0es}.[0]","value":$eref:0'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[3]
-      value: '"path":"stagePlaylists.{0es}.[1]","value":$eref:1'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[4]
-      value: '"path":"stagePlaylists.{0es}.[2]","value":$eref:2'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[5]
-      value: '"path":"stagePlaylists.{0es}.[3]","value":$eref:3'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[6]
-      value: '"path":"stagePlaylists.{0es}.[4]","value":$eref:4'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[7]
-      value: '"path":"stagePlaylists.{1es}","value":{"$id":0,"$type":"System.Collections.Generic.List`1[[UnityEngine.AudioClip,
-        UnityEngine.AudioModule]], mscorlib","$rlength":2,"$rcontent":[$eref:5,$eref:6]}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[8]
-      value: '"path":"stagePlaylists.{1es}.[0]","value":$eref:5'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[9]
-      value: '"path":"stagePlaylists.{1es}.[1]","value":$eref:6'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[10]
-      value: '"path":"stagePlaylists.{2es}","value":{"$id":0,"$type":"System.Collections.Generic.List`1[[UnityEngine.AudioClip,
-        UnityEngine.AudioModule]], mscorlib","$rlength":3,"$rcontent":[$eref:7,$eref:8,$eref:9]}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[11]
-      value: '"path":"stagePlaylists.{2es}.[0]","value":$eref:7'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[12]
-      value: '"path":"stagePlaylists.{2es}.[1]","value":$eref:8'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[13]
-      value: '"path":"stagePlaylists.{2es}.[2]","value":$eref:9'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[5].Data
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[30].Data
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[32].Data
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[33].Data
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[36].Data
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[36].Name
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[37].Data
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[37].Name
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[38].Data
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[39].Data
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[40].Data
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[32].Entry
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[33].Entry
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[34].Entry
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[35].Entry
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[36].Entry
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[37].Entry
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[38].Entry
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[39].Entry
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[40].Entry
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[41].Entry
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[42].Entry
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[43].Entry
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[44].Entry
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[45].Entry
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 3046f95f7409a48a19f9aa67183e210b, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 03e0404e0492d456dbd1d8833bb4d659, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 318035cb36ecf432499b989ad9d66653, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: b6e80cfade34349139b4cab82fae797f, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 035535025d1534133be16c31ff9dd1a9, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: f570df0b24cb3459fbed791ebe40e398, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[6]
-      value: 
-      objectReference: {fileID: 8300000, guid: 46c63538ff74940eabee2e36e1d584cf, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: a14f101a368a94809bc3e27df303a634, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: b5a952a675e8243e9ab90fe68ed8b012, type: 3}
-    - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5698f1d04efa4410c9ad2d42fbaa4725, type: 3}
     - target: {fileID: 5661263283930568339, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 149.36769
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5661263283930568339, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 169.8387
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5661263283930568339, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -47.063896
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5661263283930568339, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
@@ -874,6 +605,59 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[0]
+      value: '"path":"CategoryColors.{0es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",1,0.8503309,0,1}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"CategoryColors.{1es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",1,0.07075471,0.07075471,1}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[2]
+      value: '"path":"CategoryColors.{2es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",0.5754717,0.5754717,0.5754717,1}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[3]
+      value: '"path":"CategoryColors.{3es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",1,1,1,1}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"CategoryColors.{4es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",0,0.9604411,1,1}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[5]
+      value: '"path":"CategoryColors.{5es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",0.509434,0.322693318,0,1}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[6]
+      value: '"path":"CategoryColors.{6es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",0,0.318867683,1,1}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[7]
+      value: '"path":"CategoryColors.{7es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",0,0.8490566,0.005253081,1}'
+      objectReference: {fileID: 0}
     - target: {fileID: 9092241571855922099, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
       propertyPath: m_Name

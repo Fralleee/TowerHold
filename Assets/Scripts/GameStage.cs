@@ -1,6 +1,6 @@
 public enum GameStage
 {
-  Low,
-  Medium,
-  High
+	Low,
+	Medium,
+	High
 }

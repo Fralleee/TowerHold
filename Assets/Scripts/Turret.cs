@@ -1,67 +1,66 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tower/Turret")]
 public partial class Turret : ShopItem
 {
-    [Header("Turret Settings")]
-    public Projectile projectilePrefab;
-    public float baseDamage = 10f;
-    public float attackRange = 2f;
-    public float timeBetweenAttacks = 1f;
-    public float timeBetweenFindTarget = 1f;
-    public AudioClip shootSound;
-    float lastAttackTime = 0f;
-    float lastTargetSearch = 0f;
-    Tower tower;
-    Target target;
+	[Header("Turret Settings")]
+	public Projectile ProjectilePrefab;
+	public float BaseDamage = 10f;
+	public float AttackRange = 2f;
+	public float TimeBetweenAttacks = 1f;
+	public float TimeBetweenFindTarget = 1f;
+	public AudioClip ShootSound;
+	float _lastAttackTime = 0f;
+	float _lastTargetSearch = 0f;
+	Tower _tower;
+	Target _target;
 
-    public void Setup(Tower inputTower)
-    {
-        tower = inputTower;
-        lastTargetSearch = Random.Range(0f, timeBetweenFindTarget);
-        lastAttackTime = Random.Range(0f, timeBetweenAttacks); // Add random delay for the first attack
-    }
+	public void Setup(Tower inputTower)
+	{
+		_tower = inputTower;
+		_lastTargetSearch = Random.Range(0f, TimeBetweenFindTarget);
+		_lastAttackTime = Random.Range(0f, TimeBetweenAttacks); // Add random delay for the first attack
+	}
 
-    public void Update()
-    {
-        if (Time.time - lastTargetSearch > timeBetweenFindTarget)
-        {
-            target = TowerTargeter.GetTurretTarget(tower.Center, attackRange);
-            lastTargetSearch = Time.time + Random.Range(-0.1f * timeBetweenFindTarget, 0.1f * timeBetweenFindTarget); // Add some variance to the search timing
-        }
+	public void Update()
+	{
+		if (Time.time - _lastTargetSearch > TimeBetweenFindTarget)
+		{
+			_target = TowerTargeter.GetTurretTarget(_tower.Center, AttackRange);
+			_lastTargetSearch = Time.time + Random.Range(-0.1f * TimeBetweenFindTarget, 0.1f * TimeBetweenFindTarget); // Add some variance to the search timing
+		}
 
-        if (target != null && !target.IsDead && Time.time - lastAttackTime > timeBetweenAttacks)
-        {
-            Shoot();
-            lastAttackTime = Time.time + Random.Range(-0.1f * timeBetweenAttacks, 0.1f * timeBetweenAttacks); // Add some variance to the attack timing
-            lastTargetSearch = Time.time; // This should probably be adjusted to have a delay as well
-        }
-    }
+		if (_target != null && !_target.IsDead && Time.time - _lastAttackTime > TimeBetweenAttacks)
+		{
+			Shoot();
+			_lastAttackTime = Time.time + Random.Range(-0.1f * TimeBetweenAttacks, 0.1f * TimeBetweenAttacks); // Add some variance to the attack timing
+			_lastTargetSearch = Time.time; // This should probably be adjusted to have a delay as well
+		}
+	}
 
-    public override void OnPurchase()
-    {
-        Tower.instance.AddTurret(this);
-        ScoreManager.Instance.turrets += 1;
-    }
+	public override void OnPurchase()
+	{
+		Tower.Instance.AddTurret(this);
+		ScoreManager.Instance.Turrets += 1;
+	}
 
-    void Shoot()
-    {
-        var rotation = Quaternion.LookRotation(target.transform.position - tower.Center.position);
-        var projectile = Instantiate(projectilePrefab, tower.Center.position, rotation);
-        projectile.Setup(target, tower.GetDamage(category, baseDamage), true);
+	void Shoot()
+	{
+		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
+		var projectile = Instantiate(ProjectilePrefab, _tower.Center.position, rotation);
+		projectile.Setup(_target, _tower.GetDamage(Category, BaseDamage), true);
 
-        SoundManager.Instance.PlayEffect(shootSound);
-    }
+		SoundManager.Instance.PlayEffect(ShootSound);
+	}
 
-    void OnValidate()
-    {
-        List<Category> allowedCategories = new List<Category> { Category.Normal, Category.Piercing, Category.Siege, Category.Magic, Category.Chaos };
-        if (!allowedCategories.Contains(category))
-        {
-            Debug.LogWarning("Invalid category for Turret. Resetting to Normal.");
-            category = Category.Normal;
-        }
-    }
+	void OnValidate()
+	{
+		var allowedCategories = new List<Category> { Category.Normal, Category.Piercing, Category.Siege, Category.Magic, Category.Chaos };
+		if (!allowedCategories.Contains(Category))
+		{
+			Debug.LogWarning("Invalid category for Turret. Resetting to Normal.");
+			Category = Category.Normal;
+		}
+	}
 }

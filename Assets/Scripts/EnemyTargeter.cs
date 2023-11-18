@@ -2,33 +2,33 @@ using UnityEngine;
 
 public class EnemyTargeter : MonoBehaviour, ITargeter
 {
-    public float checkDistanceInterval = 1f;
-    float lastDistanceCheck = 0f;
-    float maxRange = 0;
+	public float CheckDistanceInterval = 1f;
+	float _lastDistanceCheck = 0f;
+	float _maxRange = 0;
 
-    Target target;
+	Target _target;
 
-    void Update()
-    {
-        if (target == null && Time.time - lastDistanceCheck > checkDistanceInterval)
-        {
-            lastDistanceCheck = Time.time;
-            CheckDistance();
-        }
-    }
+	void Update()
+	{
+		if (_target == null && Time.time - _lastDistanceCheck > CheckDistanceInterval)
+		{
+			_lastDistanceCheck = Time.time;
+			CheckDistance();
+		}
+	}
 
-    void CheckDistance()
-    {
-        float distanceToTarget = Vector3.Distance(transform.position, Tower.instance.transform.position);
-        if (distanceToTarget < maxRange)
-        {
-            target = Tower.instance;
-        }
-    }
+	void CheckDistance()
+	{
+		var distanceToTarget = Vector3.Distance(transform.position, Tower.Instance.transform.position);
+		if (distanceToTarget < _maxRange)
+		{
+			_target = Tower.Instance;
+		}
+	}
 
-    public Target GetTarget(float range)
-    {
-        maxRange = range;
-        return target;
-    }
+	public Target GetTarget(float range)
+	{
+		_maxRange = range;
+		return _target;
+	}
 }

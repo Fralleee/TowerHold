@@ -45,13 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0780703fc15b441b69ab0d3a13081f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  rotateTowardsTarget: 1
-  isSpinning: 0
-  spinAxis: {x: 0, y: 1, z: 0}
-  spinSpeed: 360
-  useGravity: 1
-  arcHeight: 5
+  _speed: 10
+  _rotateTowardsTarget: 1
+  _isSpinning: 0
+  _spinAxis: {x: 0, y: 0, z: 0}
+  _spinSpeed: 0
+  _useGravity: 1
 --- !u!1001 &4161031761316373556
 PrefabInstance:
   m_ObjectHideFlags: 0

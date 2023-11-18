@@ -2,15 +2,12 @@ using System;
 using UnityEngine;
 public class ShopItem : ScriptableObject
 {
-    [Header("Shop Settings")]
-    public string itemName;
-    public Sprite image;
-    public Category category;
-    public int cost;
-    public int minLevel;
+	[Header("Shop Settings")]
+	public string ItemName;
+	public Sprite Image;
+	public Category Category;
+	public int Cost;
+	public int MinLevel;
 
-    public virtual void OnPurchase()
-    {
-        throw new NotImplementedException();
-    }
+	public virtual void OnPurchase() => throw new NotImplementedException();
 }

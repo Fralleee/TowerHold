@@ -5,105 +5,107 @@ using UnityEngine;
 
 public class SoundManager : SerializedSingleton<SoundManager>
 {
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource effectSource;
-    [SerializeField] private Dictionary<GameStage, List<AudioClip>> stagePlaylists;
+	[SerializeField] AudioSource _musicSource;
+	[SerializeField] AudioSource _effectSource;
+	[SerializeField]
+	Dictionary<GameStage, List<AudioClip>> _stagePlaylists = new Dictionary<GameStage, List<AudioClip>>{
+		{GameStage.Low, new List<AudioClip>()},
+		{GameStage.Medium, new List<AudioClip>()},
+		{GameStage.High, new List<AudioClip>()}
+	};
 
-    private List<AudioClip> currentPlaylist;
-    private int currentTrackIndex = 0;
-    private bool isPlayingMusic = false;
-    private GameStage currentStage;
-    private float fadeDuration = 1.5f; // Duration of the fade in seconds
+	List<AudioClip> _currentPlaylist;
+	int _currentTrackIndex = 0;
+	bool _isPlayingMusic = false;
+	GameStage _currentStage;
+	readonly float _fadeDuration = 1.5f;
 
-    private void Start()
-    {
-        GameController.OnStageChanged += ChangePlaylist;
-        currentPlaylist = stagePlaylists[GameStage.Low];
-        PlayMusic();
-    }
+	void Start()
+	{
+		GameController.OnStageChanged += ChangePlaylist;
+		_currentPlaylist = _stagePlaylists[GameStage.Low];
+		PlayMusic();
+	}
 
-    private void Update()
-    {
-        if (!musicSource.isPlaying && isPlayingMusic)
-        {
-            PlayRandomTrack();
-        }
-    }
+	void Update()
+	{
+		if (!_musicSource.isPlaying && _isPlayingMusic)
+		{
+			PlayRandomTrack();
+		}
+	}
 
-    public void PlayEffect(AudioClip clip)
-    {
-        effectSource.PlayOneShot(clip);
-    }
+	public void PlayEffect(AudioClip clip) => _effectSource.PlayOneShot(clip);
 
-    private void PlayMusic()
-    {
-        if (currentPlaylist.Count > 0)
-        {
-            isPlayingMusic = true;
-            musicSource.clip = currentPlaylist[currentTrackIndex];
-            StartCoroutine(FadeIn(musicSource, fadeDuration));
-        }
-    }
+	void PlayMusic()
+	{
+		if (_currentPlaylist.Count > 0)
+		{
+			_isPlayingMusic = true;
+			_musicSource.clip = _currentPlaylist[_currentTrackIndex];
+			StartCoroutine(FadeIn(_musicSource, _fadeDuration));
+		}
+	}
 
-    private void PlayRandomTrack()
-    {
-        if (currentPlaylist.Count > 0)
-        {
-            isPlayingMusic = true;
-            musicSource.clip = currentPlaylist[UnityEngine.Random.Range(0, currentPlaylist.Count)];
-            StartCoroutine(FadeIn(musicSource, fadeDuration));
-        }
-    }
+	void PlayRandomTrack()
+	{
+		if (_currentPlaylist.Count > 0)
+		{
+			_isPlayingMusic = true;
+			_musicSource.clip = _currentPlaylist[UnityEngine.Random.Range(0, _currentPlaylist.Count)];
+			StartCoroutine(FadeIn(_musicSource, _fadeDuration));
+		}
+	}
 
-    private void ChangePlaylist(GameStage newStage)
-    {
-        if (newStage != currentStage)
-        {
-            currentStage = newStage;
-            currentPlaylist = stagePlaylists[currentStage];
-            currentTrackIndex = 0;
+	void ChangePlaylist(GameStage newStage)
+	{
+		if (newStage != _currentStage)
+		{
+			_currentStage = newStage;
+			_currentPlaylist = _stagePlaylists[_currentStage];
+			_currentTrackIndex = 0;
 
-            // Start fading out the current track and then play the next track
-            StartCoroutine(FadeOut(musicSource, fadeDuration, PlayMusic));
-        }
-    }
+			// Start fading out the current track and then play the next track
+			StartCoroutine(FadeOut(_musicSource, _fadeDuration, PlayMusic));
+		}
+	}
 
-    public void StopMusic()
-    {
-        musicSource.Stop();
-        isPlayingMusic = false;
-    }
+	public void StopMusic()
+	{
+		_musicSource.Stop();
+		_isPlayingMusic = false;
+	}
 
-    private IEnumerator FadeOut(AudioSource audioSource, float duration, Action onComplete = null)
-    {
-        float startVolume = audioSource.volume;
+	IEnumerator FadeOut(AudioSource audioSource, float duration, Action onComplete = null)
+	{
+		var startVolume = audioSource.volume;
 
-        while (audioSource.volume > 0)
-        {
-            audioSource.volume -= startVolume * Time.deltaTime / duration;
-            yield return null;
-        }
+		while (audioSource.volume > 0)
+		{
+			audioSource.volume -= startVolume * Time.deltaTime / duration;
+			yield return null;
+		}
 
-        audioSource.Stop();
-        audioSource.volume = startVolume;
-        onComplete?.Invoke();
-    }
+		audioSource.Stop();
+		audioSource.volume = startVolume;
+		onComplete?.Invoke();
+	}
 
-    private IEnumerator FadeIn(AudioSource audioSource, float duration)
-    {
-        audioSource.volume = 0;
-        audioSource.Play();
+	IEnumerator FadeIn(AudioSource audioSource, float duration)
+	{
+		audioSource.volume = 0;
+		audioSource.Play();
 
-        while (audioSource.volume < 1)
-        {
-            audioSource.volume += Time.deltaTime / duration;
-            yield return null;
-        }
-    }
+		while (audioSource.volume < 1)
+		{
+			audioSource.volume += Time.deltaTime / duration;
+			yield return null;
+		}
+	}
 
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-        GameController.OnStageChanged -= ChangePlaylist; // Unsubscribe when destroyed
-    }
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+		GameController.OnStageChanged -= ChangePlaylist; // Unsubscribe when destroyed
+	}
 }

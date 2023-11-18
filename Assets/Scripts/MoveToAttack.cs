@@ -1,47 +1,39 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MoveToAttack : MonoBehaviour
 {
-    Animator animator;
-    NavMeshAgent agent;
-    EnemyAttack attack;
+	Animator _animator;
+	NavMeshAgent _agent;
+	EnemyAttack _attack;
+	Enemy _enemy;
 
-    Enemy enemy;
+	void Awake()
+	{
+		_animator = GetComponentInChildren<Animator>();
+		_agent = GetComponent<NavMeshAgent>();
+		_attack = GetComponent<EnemyAttack>();
+		_enemy = GetComponent<Enemy>();
+	}
 
-    void Awake()
-    {
-        animator = GetComponentInChildren<Animator>();
-        agent = GetComponent<NavMeshAgent>();
-        attack = GetComponent<EnemyAttack>();
-        enemy = GetComponent<Enemy>();
-    }
+	void Start()
+	{
+		_agent.SetDestination(Tower.Instance.transform.position);
+		_animator.SetBool("IsWalking", true);
 
-    void Start()
-    {
-        agent.SetDestination(Tower.instance.transform.position);
-        animator.SetBool("IsWalking", true);
+		_enemy.OnDeath += HandleDeath;
+	}
 
-        enemy.OnDeath += HandleDeath;
-    }
+	void Update()
+	{
+		if (_attack.Target != null)
+		{
+			_animator.SetBool("IsWalking", false);
+			_agent.isStopped = true;
+		}
+	}
 
-    void Update()
-    {
-        if (attack.target != null)
-        {
-            animator.SetBool("IsWalking", false);
-            agent.isStopped = true;
-        }
-    }
+	void HandleDeath(Target target) => Stop();
 
-    void HandleDeath(Target target)
-    {
-        Stop();
-    }
-
-    public void Stop()
-    {
-        agent.isStopped = true;
-    }
+	public void Stop() => _agent.isStopped = true;
 }

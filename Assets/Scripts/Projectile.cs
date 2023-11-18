@@ -2,104 +2,102 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    Target _target;
-    float _damage = 10f;
-    bool _towerProjectile;
-
-    [SerializeField] float speed = 10f;
-    [SerializeField] bool rotateTowardsTarget;
-    [SerializeField] bool isSpinning;
-    [SerializeField] Vector3 spinAxis = Vector3.up; // Default spin axis
-    [SerializeField] float spinSpeed = 360f; // Degrees per second
-    [SerializeField] bool useGravity;
+	[SerializeField] float _speed = 10f;
+	[SerializeField] bool _rotateTowardsTarget;
+	[SerializeField] bool _isSpinning;
+	[SerializeField] Vector3 _spinAxis = Vector3.up; // Default spin axis
+	[SerializeField] float _spinSpeed = 360f; // Degrees per second
+	[SerializeField] bool _useGravity;
 
 
-    Vector3 targetLastPosition = Vector3.zero;
-    Vector3 velocity;
+	Target _target;
+	float _damage = 10f;
+	bool _towerProjectile;
+	Vector3 _targetLastPosition = Vector3.zero;
+	Vector3 _velocity;
 
-    public void Setup(Target target, float damage, bool towerProjectile)
-    {
-        _target = target;
-        _damage = damage;
-        _towerProjectile = towerProjectile;
+	public void Setup(Target target, float damage, bool towerProjectile)
+	{
+		_target = target;
+		_damage = damage;
+		_towerProjectile = towerProjectile;
 
-        if (useGravity)
-        {
-            targetLastPosition = _target.Center.position;
-            CalculateTrajectory();
-        }
-    }
+		if (_useGravity)
+		{
+			_targetLastPosition = _target.Center.position;
+			CalculateTrajectory();
+		}
+	}
 
-    void Update()
-    {
-        if (_target != null)
-        {
-            targetLastPosition = _target.Center.position;
-            if (useGravity)
-            {
-                CalculateTrajectory();  // Recalculate if target moves
-            }
-        }
+	void Update()
+	{
+		if (_target != null)
+		{
+			_targetLastPosition = _target.Center.position;
+			if (_useGravity)
+			{
+				CalculateTrajectory();  // Recalculate if target moves
+			}
+		}
 
-        if (useGravity)
-        {
-            velocity.y += Physics.gravity.y * Time.deltaTime;
-            transform.position += velocity * Time.deltaTime;
-            if (rotateTowardsTarget)
-            {
-                transform.LookAt(transform.position + velocity);
-            }
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetLastPosition, speed * Time.deltaTime);
-            if (rotateTowardsTarget)
-            {
-                transform.LookAt(targetLastPosition);
-            }
-        }
+		if (_useGravity)
+		{
+			_velocity.y += Physics.gravity.y * Time.deltaTime;
+			transform.position += _velocity * Time.deltaTime;
+			if (_rotateTowardsTarget)
+			{
+				transform.LookAt(transform.position + _velocity);
+			}
+		}
+		else
+		{
+			transform.position = Vector3.MoveTowards(transform.position, _targetLastPosition, _speed * Time.deltaTime);
+			if (_rotateTowardsTarget)
+			{
+				transform.LookAt(_targetLastPosition);
+			}
+		}
 
-        if (isSpinning)
-        {
-            transform.Rotate(spinAxis, spinSpeed * Time.deltaTime);
-        }
+		if (_isSpinning)
+		{
+			transform.Rotate(_spinAxis, _spinSpeed * Time.deltaTime);
+		}
 
-        if (Vector3.Distance(transform.position, targetLastPosition) < 0.2f)
-        {
-            HitTarget();
-        }
-    }
+		if (Vector3.Distance(transform.position, _targetLastPosition) < 0.2f)
+		{
+			HitTarget();
+		}
+	}
 
-    void HitTarget()
-    {
-        if (_target != null)
-        {
-            var actualDamage = _target.TakeDamage(Mathf.RoundToInt(_damage));
-            if (_towerProjectile)
-            {
-                ScoreManager.Instance.damageDone += actualDamage;
-            }
-        }
-        Destroy(gameObject);
-    }
+	void HitTarget()
+	{
+		if (_target != null)
+		{
+			var actualDamage = _target.TakeDamage(Mathf.RoundToInt(_damage));
+			if (_towerProjectile)
+			{
+				ScoreManager.Instance.DamageDone += actualDamage;
+			}
+		}
+		Destroy(gameObject);
+	}
 
-    void CalculateTrajectory()
-    {
-        float distanceToTarget = Vector3.Distance(transform.position, targetLastPosition);
-        float yOffset = targetLastPosition.y - transform.position.y;
+	void CalculateTrajectory()
+	{
+		var distanceToTarget = Vector3.Distance(transform.position, _targetLastPosition);
+		var yOffset = _targetLastPosition.y - transform.position.y;
 
-        Vector3 toTarget = targetLastPosition - transform.position;
-        toTarget.y = 0;
+		var toTarget = _targetLastPosition - transform.position;
+		toTarget.y = 0;
 
-        float time = distanceToTarget / speed;
-        velocity = toTarget.normalized * speed;
+		var time = distanceToTarget / _speed;
+		_velocity = toTarget.normalized * _speed;
 
-        // Adjust for arc height
-        velocity.y = yOffset / time + 0.5f * Mathf.Abs(Physics.gravity.y) * time;
+		_velocity.y = (yOffset / time) + (0.5f * Mathf.Abs(Physics.gravity.y) * time);
 
-        if (rotateTowardsTarget)
-        {
-            transform.LookAt(targetLastPosition);
-        }
-    }
+		if (_rotateTowardsTarget)
+		{
+			transform.LookAt(_targetLastPosition);
+		}
+	}
 }

@@ -1,62 +1,71 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Enemy : Target
 {
-    [SerializeField] int bounty = 10;
-    public static List<Enemy> AllEnemies = new List<Enemy>();
+	public static Action<Enemy> OnAnyDeath = delegate { };
+	[SerializeField] int _bounty = 10;
+	public static List<Enemy> AllEnemies = new List<Enemy>();
 
-    public int attackers = 0;
-    public bool HasAttackers => attackers > 0;
-    Animator animator;
+	[ReadOnly] public int Attackers = 0;
+	public bool HasAttackers => Attackers > 0;
+	Animator _animator;
 
-    protected override void Awake()
-    {
-        base.Awake();
+	protected override void Awake()
+	{
+		base.Awake();
 
-        animator = GetComponentInChildren<Animator>();
+		_animator = GetComponentInChildren<Animator>();
 
-        AllEnemies.Add(this);
+		AllEnemies.Add(this);
 
-        // Increase bounty based on level
-        bounty += GameController.Instance.currentLevel * 2;
+		// Increase bounty based on level
+		_bounty += GameController.Instance.CurrentLevel * 2;
 
-        OnDeath += HandleDeath;
-    }
+		OnDeath += HandleDeath;
+	}
 
-    void HandleDeath(Target target)
-    {
-        AllEnemies.Remove(this);
-        GoldManager.Instance.EarnGold(bounty);
-        animator.SetTrigger("Die");
+	void HandleDeath(Target target)
+	{
+		_ = AllEnemies.Remove(this);
+		GoldManager.Instance.EarnGold(_bounty);
+		_animator.SetTrigger("Die");
 
-        // Disable all monobehaviours on gameObject
-        foreach (var component in GetComponents<MonoBehaviour>())
-        {
-            component.enabled = false;
-        }
+		// Disable all monobehaviours on gameObject
+		foreach (var component in GetComponents<MonoBehaviour>())
+		{
+			component.enabled = false;
+		}
 
-        Destroy(gameObject, 3f);
-    }
+		Destroy(gameObject, 3f);
+	}
 
-    public static void ResetGameState()
-    {
-        AllEnemies.Clear();
-        OnAnyDeath = delegate { };
-    }
+	public static void ResetGameState()
+	{
+		AllEnemies.Clear();
+		OnAnyDeath = delegate
+		{ };
+	}
 
-    public static void GameOver()
-    {
-        foreach (var enemy in AllEnemies)
-        {
-            enemy.animator.SetTrigger("Victory");
-            enemy.GetComponent<MoveToAttack>().Stop();
-            foreach (var component in enemy.GetComponents<MonoBehaviour>())
-            {
-                component.enabled = false;
-            }
-        }
-    }
+	public static void GameOver()
+	{
+		foreach (var enemy in AllEnemies)
+		{
+			enemy._animator.SetTrigger("Victory");
+			enemy.GetComponent<MoveToAttack>().Stop();
+			foreach (var component in enemy.GetComponents<MonoBehaviour>())
+			{
+				component.enabled = false;
+			}
+		}
+	}
+
+	public override void Die()
+	{
+		base.Die();
+
+		OnAnyDeath(this);
+	}
 }

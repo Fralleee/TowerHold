@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a7aea870d312443b5cab9b222199d3, type: 3}
   m_Name: Normal Upgrade
   m_EditorClassIdentifier: 
-  itemName: Upgrade Normal
-  image: {fileID: 21300000, guid: 9ccc20fc3aee28444bd8dbe60f53e661, type: 3}
-  category: 3
-  cost: 50
-  minLevel: 0
+  ItemName: Normal Upgrade
+  Image: {fileID: 21300000, guid: 9ccc20fc3aee28444bd8dbe60f53e661, type: 3}
+  Category: 3
+  Cost: 100
+  MinLevel: 0

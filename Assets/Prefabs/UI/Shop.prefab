@@ -400,17 +400,17 @@ MonoBehaviour:
     type: 3}
   NumberOfSlots: 9
   Main: {fileID: 7628891920521371862}
-  refreshButton: {fileID: 3541608241482770818}
-  progressBar: {fileID: 905480982134936020}
-  refreshCostText: {fileID: 4491374529413660429}
-  availableItems:
+  RefreshButton: {fileID: 3541608241482770818}
+  ProgressBar: {fileID: 905480982134936020}
+  RefreshCostText: {fileID: 4491374529413660429}
+  AvailableItems:
   - {fileID: 11400000, guid: 54e20b6c07ae56745847fb8d66128af7, type: 2}
-  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
   - {fileID: 11400000, guid: 85636c24e2c6985478bcdb298b9bca55, type: 2}
-  - {fileID: 11400000, guid: 335173189dfd3e942b94c15606f38859, type: 2}
   - {fileID: 11400000, guid: 8f83e3b0b30d48f44a3a92f6275ce019, type: 2}
   - {fileID: 11400000, guid: db53c0450d4efe8438b0ef015755c2e1, type: 2}
   - {fileID: 11400000, guid: 0c1cd5abd22e44240ab71bffe0a26d87, type: 2}
+  - {fileID: 11400000, guid: c37340c339c41a64abe890e38004d261, type: 2}
+  - {fileID: 11400000, guid: 335173189dfd3e942b94c15606f38859, type: 2}
 --- !u!1 &6425967227543154609
 GameObject:
   m_ObjectHideFlags: 0

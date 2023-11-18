@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d12bd7fb98aa141bbe6a1532e2ffb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells:
+  _spells:
   - {fileID: 11400000, guid: cda59b8ca52453746916727ce80084f7, type: 2}
-  buttonPrefab: {fileID: 6940128607990146, guid: 3a3e27aa278459d4293530bf68175489,
+  _buttonPrefab: {fileID: 6940128607990146, guid: 3a3e27aa278459d4293530bf68175489,
     type: 3}

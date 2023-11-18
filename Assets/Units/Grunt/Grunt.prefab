@@ -116,15 +116,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e503ea083d94c4c8b8f838126685c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Center: {fileID: 0}
+  Center: {fileID: 958655750909989121}
   MaxHealth: 100
   Health: 100
-  _healthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
+  HealthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
     type: 3}
-  healthBarOffset: 0
+  _healthBarOffset: 0
   IsDead: 0
-  bounty: 10
-  attackers: 0
+  _bounty: 10
+  Attackers: 0
 --- !u!114 &1326135206077503641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda03fdaa8af2b64885ab04cf57600c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkDistanceInterval: 1
+  CheckDistanceInterval: 1
 --- !u!114 &2082302225283696109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,12 +162,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0ab6629bd7a944a743ca5e3a8028d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1249967856914140215, guid: 0a7f8874bc4d59549b26e715e0840822,
+  ProjectilePrefab: {fileID: 7504251348261676953, guid: 75ff8dbf415ca4a41ba6f46192b3efe8,
     type: 3}
-  baseDamage: 10
-  attackRange: 20
-  timeBetweenAttacks: 1
-  target: {fileID: 0}
+  BaseDamage: 10
+  AttackRange: 2
+  TimeBetweenAttacks: 1
+  Target: {fileID: 0}
 --- !u!1001 &603092964026042168
 PrefabInstance:
   m_ObjectHideFlags: 0

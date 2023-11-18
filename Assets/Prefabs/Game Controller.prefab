@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde69a74bf27149478d4eb00329a1772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 0
+  Gold: 0
   IncomeRate: 0
 --- !u!1 &1545384712742958047
 GameObject:
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63
 --- !u!114 &6834087172713449924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be30cef35baaf7b4489cf66dccbee8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 4587786235014785882}
+  _scoreText: {fileID: 4587786235014785882}
 --- !u!1 &5222404987313105210
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +600,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: stagePlaylists
+    - Name: _stagePlaylists
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[GameStage, Assembly-CSharp],[System.Collections.Generic.List`1[[UnityEngine.AudioClip,
         UnityEngine.AudioModule]], mscorlib]], mscorlib
@@ -722,8 +722,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  musicSource: {fileID: 7818233753972848621}
-  effectSource: {fileID: 7092029708942314798}
+  _musicSource: {fileID: 7818233753972848621}
+  _effectSource: {fileID: 7092029708942314798}
 --- !u!82 &7818233753972848621
 AudioSource:
   m_ObjectHideFlags: 0
@@ -975,7 +975,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: categorySprites
+    - Name: CategorySprites
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[Category, Assembly-CSharp],[UnityEngine.Sprite,
         UnityEngine.CoreModule]], mscorlib
@@ -1097,23 +1097,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: categoryColors
+    - Name: CategoryColors
       Entry: 7
       Data: 2|System.Collections.Generic.Dictionary`2[[Category, Assembly-CSharp],[UnityEngine.Color,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
-      Entry: 7
-      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[Category, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 1
     - Name: 
       Entry: 12
       Data: 8
@@ -1131,10 +1121,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 4
-      Data: 0.956714749
+      Data: 0.8503309
     - Name: 
       Entry: 4
-      Data: 0.4481132
+      Data: 0
     - Name: 
       Entry: 4
       Data: 1
@@ -1155,13 +1145,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.555878
-    - Name: 
-      Entry: 4
       Data: 1
     - Name: 
       Entry: 4
-      Data: 0.5330188
+      Data: 0.07075471
+    - Name: 
+      Entry: 4
+      Data: 0.07075471
     - Name: 
       Entry: 4
       Data: 1
@@ -1182,13 +1172,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.7735849
+      Data: 0.5754717
     - Name: 
       Entry: 4
-      Data: 0.7735849
+      Data: 0.5754717
     - Name: 
       Entry: 4
-      Data: 0.7735849
+      Data: 0.5754717
     - Name: 
       Entry: 4
       Data: 1
@@ -1209,13 +1199,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.458170146
+      Data: 1
     - Name: 
       Entry: 4
-      Data: 0.9770305
+      Data: 1
     - Name: 
       Entry: 4
-      Data: 0.9811321
+      Data: 1
     - Name: 
       Entry: 4
       Data: 1
@@ -1236,10 +1226,10 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.8753052
+      Data: 0
     - Name: 
       Entry: 4
-      Data: 0.495283
+      Data: 0.9604411
     - Name: 
       Entry: 4
       Data: 1
@@ -1263,13 +1253,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.509434
     - Name: 
       Entry: 4
-      Data: 0.367029518
+      Data: 0.322693318
     - Name: 
       Entry: 4
-      Data: 0.3537736
+      Data: 0
     - Name: 
       Entry: 4
       Data: 1
@@ -1290,10 +1280,10 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.23113209
+      Data: 0
     - Name: 
       Entry: 4
-      Data: 0.406012118
+      Data: 0.318867683
     - Name: 
       Entry: 4
       Data: 1
@@ -1317,13 +1307,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.3759045
-    - Name: 
-      Entry: 4
-      Data: 0.8018868
-    - Name: 
-      Entry: 4
       Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0.8490566
+    - Name: 
+      Entry: 4
+      Data: 0.005253081
     - Name: 
       Entry: 4
       Data: 1
@@ -1799,14 +1789,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea974d63be15718498d16964f0094a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreUI: {fileID: 6834087172713449924}
-  damageDone: 0
-  damageTaken: 0
-  enemiesKilled: 0
-  goldSpent: 0
-  goldEarned: 0
-  turrets: 0
-  upgrades: 0
+  _scoreUI: {fileID: 6834087172713449924}
+  DamageDone: 0
+  DamageTaken: 0
+  EnemiesKilled: 0
+  GoldSpent: 0
+  GoldEarned: 0
+  Turrets: 0
+  Upgrades: 0
 --- !u!1 &8147977568380882487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,21 +1979,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeTime: 0
-  levelTime: 2
-  timeLeft: 0
-  startLevel: 1
-  currentLevel: 1
-  maxLevel: 50
-  currentStage: 0
-  goldManagerSettings:
-    startingGold: 500
-    passiveIncomeRate: 50
-  enemySpawnerSettings:
-    minRadius: 30
-    maxRadius: 50
-    spawnRate: 3
-    prefab: {fileID: 7281807481305759408, guid: 7720ec57ef69cab4ea5107a5133044f0,
+  FreezeTime: 5
+  LevelTime: 30
+  TimeLeft: 0
+  StartLevel: 1
+  CurrentLevel: 1
+  MaxLevel: 100
+  CurrentStage: 0
+  GoldManagerSettings:
+    StartingGold: 500
+    PassiveIncomeRate: 50
+  EnemySpawnerSettings:
+    MinRadius: 30
+    MaxRadius: 40
+    SpawnRate: 1
+    Prefab: {fileID: 7281807481305759408, guid: 7720ec57ef69cab4ea5107a5133044f0,
       type: 3}
 --- !u!1001 &3588583350959537613
 PrefabInstance:
@@ -2016,17 +2006,17 @@ PrefabInstance:
     - target: {fileID: 2719166403069648916, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -149.36769
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2719166403069648916, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -169.8387
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2719166403069648916, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.063896
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2719166403069648916, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}
@@ -2036,17 +2026,17 @@ PrefabInstance:
     - target: {fileID: 2719166403069648916, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2719166403069648916, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2719166403069648916, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2719166403069648916, guid: 08c6901d66576af489288398f874e9ad,
         type: 3}

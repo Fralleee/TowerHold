@@ -1,65 +1,59 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
-    [Header("References")]
-    [SerializeField] ScoreUI scoreUI;
+	[Header("References")]
+	[SerializeField] ScoreUI _scoreUI;
 
-    [Header("Scores")]
-    public float damageDone = 0; // Done
-    public float damageTaken = 0; // Done
-    public int enemiesKilled = 0; // Done
+	[Header("Scores")]
+	public float DamageDone = 0; // Done
+	public float DamageTaken = 0; // Done
+	public int EnemiesKilled = 0; // Done
 
-    public int goldSpent = 0; // Done
-    public int goldEarned = 0; // Done
+	public int GoldSpent = 0; // Done
+	public int GoldEarned = 0; // Done
 
-    public int turrets = 0; // Done
-    public int upgrades = 0; // Done
+	public int Turrets = 0; // Done
+	public int Upgrades = 0; // Done
 
-    protected override void Awake()
-    {
-        base.Awake();
+	protected override void Awake()
+	{
+		base.Awake();
 
-        scoreUI.gameObject.SetActive(false);
-    }
+		_scoreUI.gameObject.SetActive(false);
+	}
 
-    void HandleEnemyDeath(Target enemy)
-    {
-        enemiesKilled += 1;
-    }
+	void HandleEnemyDeath(Target enemy) => EnemiesKilled += 1;
 
-    public string GetScoresAsText()
-    {
-        string scores = "Damage Done: " + damageDone + "\n";
-        scores += "Damage Taken: " + damageTaken + "\n";
-        scores += "Enemies Killed: " + enemiesKilled + "\n";
-        scores += "Gold Spent: " + goldSpent + "\n";
-        scores += "Gold Earned: " + goldEarned + "\n";
-        scores += "Turrets: " + turrets + "\n";
-        scores += "Upgrades: " + upgrades + "\n";
-        return scores;
-    }
+	public string GetScoresAsText()
+	{
+		var scores = "Damage Done: " + DamageDone + "\n";
+		scores += "Damage Taken: " + DamageTaken + "\n";
+		scores += "Enemies Killed: " + EnemiesKilled + "\n";
+		scores += "Gold Spent: " + GoldSpent + "\n";
+		scores += "Gold Earned: " + GoldEarned + "\n";
+		scores += "Turrets: " + Turrets + "\n";
+		scores += "Upgrades: " + Upgrades + "\n";
+		return scores;
+	}
 
-    void HandleGameEnd()
-    {
-        scoreUI.gameObject.SetActive(true);
-        scoreUI.SetScores(GetScoresAsText());
-    }
+	void HandleGameEnd()
+	{
+		_scoreUI.gameObject.SetActive(true);
+		_scoreUI.SetScores(GetScoresAsText());
+	}
 
-    void OnEnable()
-    {
-        Enemy.OnAnyDeath += HandleEnemyDeath;
-        GameController.OnGameEnd += HandleGameEnd;
-    }
+	void OnEnable()
+	{
+		Enemy.OnAnyDeath += HandleEnemyDeath;
+		GameController.OnGameEnd += HandleGameEnd;
+	}
 
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
 
-        Enemy.OnAnyDeath -= HandleEnemyDeath;
-        GameController.OnGameEnd -= HandleGameEnd;
-    }
+		Enemy.OnAnyDeath -= HandleEnemyDeath;
+		GameController.OnGameEnd -= HandleGameEnd;
+	}
 }
