@@ -28,16 +28,13 @@ public class Enemy : Target
 
 		OnDeath += HandleDeath;
 
-		SetupRagdoll();
+		_rigidbodies = GetComponentsInChildren<Rigidbody>().ToArray();
 	}
-
-	void SetupRagdoll() => _rigidbodies = GetComponentsInChildren<Rigidbody>().ToArray();
 
 	void HandleDeath(Target target)
 	{
 		_ = AllEnemies.Remove(this);
 		GoldManager.Instance.EarnGold(_bounty);
-		// _animator.SetTrigger("Die");
 
 		// Disable all monobehaviours on gameObject
 		_animator.enabled = false;
