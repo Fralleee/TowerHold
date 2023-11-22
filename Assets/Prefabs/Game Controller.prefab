@@ -1979,7 +1979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FreezeTime: 5
+  FreezeTime: 0
   LevelTime: 30
   TimeLeft: 0
   StartLevel: 1
@@ -1993,7 +1993,7 @@ MonoBehaviour:
     MinRadius: 40
     MaxRadius: 60
     SpawnRate: 1
-    Prefab: {fileID: 7281807481305759408, guid: 7720ec57ef69cab4ea5107a5133044f0,
+    Prefab: {fileID: 7281807481305759408, guid: 5cb0825fd4abc1e4fa80de9e9bba71bf,
       type: 3}
 --- !u!1001 &3588583350959537613
 PrefabInstance:

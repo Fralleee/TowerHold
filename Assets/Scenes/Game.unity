@@ -480,11 +480,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Rig
       objectReference: {fileID: 0}
-    - target: {fileID: 5400589477088309577, guid: 8a50c1218295d1c48831a741859bde10,
-        type: 3}
-      propertyPath: _maxZoomAmount
-      value: 135
-      objectReference: {fileID: 0}
     - target: {fileID: 6976134468037405941, guid: 8a50c1218295d1c48831a741859bde10,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Enemy : Target
 	[ReadOnly] public int Attackers = 0;
 	public bool HasAttackers => Attackers > 0;
 	Animator _animator;
+	Rigidbody[] _rigidbodies;
 
 	protected override void Awake()
 	{
@@ -25,18 +27,31 @@ public class Enemy : Target
 		_bounty += GameController.Instance.CurrentLevel * 2;
 
 		OnDeath += HandleDeath;
+
+		SetupRagdoll();
 	}
+
+	void SetupRagdoll() => _rigidbodies = GetComponentsInChildren<Rigidbody>().ToArray();
 
 	void HandleDeath(Target target)
 	{
 		_ = AllEnemies.Remove(this);
 		GoldManager.Instance.EarnGold(_bounty);
-		_animator.SetTrigger("Die");
+		// _animator.SetTrigger("Die");
 
 		// Disable all monobehaviours on gameObject
+		_animator.enabled = false;
 		foreach (var component in GetComponents<MonoBehaviour>())
 		{
 			component.enabled = false;
+		}
+
+		var offset = transform.forward + transform.up;
+		foreach (var rigidBody in _rigidbodies)
+		{
+			rigidBody.isKinematic = false;
+			rigidBody.velocity = Vector3.zero;
+			rigidBody.AddForceAtPosition(-transform.forward * 20f, offset, ForceMode.Impulse);
 		}
 
 		Destroy(gameObject, 3f);
