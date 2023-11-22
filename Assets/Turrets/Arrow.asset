@@ -19,8 +19,8 @@ MonoBehaviour:
   MinLevel: 0
   ProjectilePrefab: {fileID: 7504251348261676953, guid: 5ad82d711fe2a6f439b72a69dd06d1a1,
     type: 3}
-  BaseDamage: 10
-  AttackRange: 2
+  BaseDamage: 40
+  AttackRange: 50
   TimeBetweenAttacks: 1
   TimeBetweenFindTarget: 1
   ShootSound: {fileID: 8300000, guid: ad5346f2caa518e47bdd2bbce1141b98, type: 3}

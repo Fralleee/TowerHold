@@ -60,10 +60,11 @@ public class Projectile : MonoBehaviour
 
 		if (_isSpinning)
 		{
+			Debug.Log("Spinning");
 			transform.Rotate(_spinAxis, _spinSpeed * Time.deltaTime);
 		}
 
-		if (Vector3.Distance(transform.position, _targetLastPosition) < 0.2f)
+		if (Vector3.Distance(transform.position, _targetLastPosition) < 0.5f)
 		{
 			HitTarget();
 		}

@@ -1990,8 +1990,8 @@ MonoBehaviour:
     StartingGold: 500
     PassiveIncomeRate: 50
   EnemySpawnerSettings:
-    MinRadius: 30
-    MaxRadius: 40
+    MinRadius: 40
+    MaxRadius: 60
     SpawnRate: 1
     Prefab: {fileID: 7281807481305759408, guid: 7720ec57ef69cab4ea5107a5133044f0,
       type: 3}

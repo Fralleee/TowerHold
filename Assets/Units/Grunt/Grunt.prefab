@@ -165,7 +165,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 7504251348261676953, guid: 75ff8dbf415ca4a41ba6f46192b3efe8,
     type: 3}
   BaseDamage: 10
-  AttackRange: 2
+  AttackRange: 30
   TimeBetweenAttacks: 1
   Target: {fileID: 0}
 --- !u!1001 &603092964026042168

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0780703fc15b441b69ab0d3a13081f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 30
   _rotateTowardsTarget: 1
   _isSpinning: 0
   _spinAxis: {x: 0, y: 0, z: 0}
