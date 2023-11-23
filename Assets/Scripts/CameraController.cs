@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class CameraController : Controller
@@ -102,13 +103,15 @@ public class CameraController : Controller
 		_newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / rotationDivisionAmount));
 	}
 
-	void HandleKeyboardRotation()
-	{
-		_newRotation *= Quaternion.Euler(Vector3.up * KeyboardRotation);
-	}
+	void HandleKeyboardRotation() => _newRotation *= Quaternion.Euler(Vector3.up * KeyboardRotation);
 
 	void MoveStart(InputAction.CallbackContext context)
 	{
+		if (EventSystem.current.IsPointerOverGameObject())
+		{
+			// The mouse is over a UI element, do not move the camera
+			return;
+		}
 		var plane = new Plane(Vector3.up, Vector3.zero);
 		var ray = _mainCam.ScreenPointToRay(MousePosition);
 		plane.Raycast(ray, out var entry);
@@ -116,15 +119,9 @@ public class CameraController : Controller
 		_isMouseMoving = true;
 	}
 
-	void MoveCanceled(InputAction.CallbackContext context)
-	{
-		_isMouseMoving = false;
-	}
+	void MoveCanceled(InputAction.CallbackContext context) => _isMouseMoving = false;
 
-	void Scroll(InputAction.CallbackContext context)
-	{
-		_newZoom += context.ReadValue<float>() * _zoomVector;
-	}
+	void Scroll(InputAction.CallbackContext context) => _newZoom += context.ReadValue<float>() * _zoomVector;
 
 	void RotationStart(InputAction.CallbackContext context)
 	{
@@ -132,10 +129,7 @@ public class CameraController : Controller
 		_isMouseRotating = true;
 	}
 
-	void RotationCanceled(InputAction.CallbackContext context)
-	{
-		_isMouseRotating = false;
-	}
+	void RotationCanceled(InputAction.CallbackContext context) => _isMouseRotating = false;
 	void OnDestroy()
 	{
 		Controls.Mouse.PrimaryFire.started -= MoveStart;
