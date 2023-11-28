@@ -1,0 +1,5 @@
+Normal (bullet, sniper, rocket, acid)
+Siege (grenade, missile, nuke)
+Technology (laser, antimatter, proton, black hole)
+Elemental (magic arrow, ice lance, fireball, lightning)
+Void (plasma, black hole, antimatter)

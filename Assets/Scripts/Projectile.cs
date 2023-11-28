@@ -60,7 +60,6 @@ public class Projectile : MonoBehaviour
 
 		if (_isSpinning)
 		{
-			Debug.Log("Spinning");
 			transform.Rotate(_spinAxis, _spinSpeed * Time.deltaTime);
 		}
 
