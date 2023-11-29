@@ -34,7 +34,7 @@ public class Enemy : Target
 	void HandleDeath(Target target)
 	{
 		_ = AllEnemies.Remove(this);
-		GoldManager.Instance.EarnGold(_bounty);
+		ResourceManager.Instance.AddResource(_bounty);
 
 		// Disable all monobehaviours on gameObject
 		_animator.enabled = false;

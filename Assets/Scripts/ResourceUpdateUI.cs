@@ -8,8 +8,8 @@ public class ResourceUpdateUI : MonoBehaviour
 	void Awake()
 	{
 		_text = GetComponent<TextMeshProUGUI>();
-		GoldManager.OnGoldChange += UpdateGold;
+		ResourceManager.OnResourceChange += UpdateResources;
 	}
 
-	void UpdateGold(int gold) => _text.text = gold.ToString();
+	void UpdateResources(int resources) => _text.text = resources.ToString();
 }

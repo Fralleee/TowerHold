@@ -23,34 +23,23 @@ public class ShopSlot : MonoBehaviour
 		ItemNameText.text = _item.ItemName;
 		ItemImage.sprite = _item.Image;
 
-		if (UIManager.Instance.CategorySprites.TryGetValue(_item.Category, out var sprite))
-		{
-			CategoryImage.sprite = sprite;
-		}
-		else
-		{
-			Debug.LogError("No sprite found for category: " + _item.Category);
-		}
+		var (shopImage, shopColor) = UIManager.Instance.GetShopItemUIValues(_item);
 
-		if (UIManager.Instance.CategoryColors.TryGetValue(_item.Category, out var color))
-		{
-			CategoryImage.color = color;
-			ItemImage.color = color;
+		CategoryImage.sprite = shopImage;
 
-			_button.colors = new ColorBlock()
-			{
-				normalColor = new Color(color.r, color.g, color.b, 0.25f),
-				highlightedColor = new Color(color.r, color.g, color.b, 0.85f),
-				pressedColor = new Color(color.r, color.g, color.b, 0.5f),
-				disabledColor = new Color(color.r, color.g, color.b, 0.1f),
-				colorMultiplier = 1,
-				fadeDuration = 0.1f
-			};
-		}
-		else
+		CategoryImage.color = shopColor;
+		ItemImage.color = shopColor;
+
+		_button.colors = new ColorBlock()
 		{
-			Debug.LogError("No color found for category: " + _item.Category);
-		}
+			normalColor = new Color(shopColor.r, shopColor.g, shopColor.b, 0.25f),
+			highlightedColor = new Color(shopColor.r, shopColor.g, shopColor.b, 0.85f),
+			pressedColor = new Color(shopColor.r, shopColor.g, shopColor.b, 0.5f),
+			disabledColor = new Color(shopColor.r, shopColor.g, shopColor.b, 0.1f),
+			colorMultiplier = 1,
+			fadeDuration = 0.1f
+		};
+
 
 		CostText.text = _item.Cost.ToString();
 		PurchaseButton.interactable = true;
@@ -76,7 +65,7 @@ public class ShopSlot : MonoBehaviour
 
 	public void PurchaseItem()
 	{
-		if (GoldManager.Instance.SpendGold(_item.Cost))
+		if (ResourceManager.Instance.SpendResources(_item.Cost))
 		{
 			_item.OnPurchase();
 			DisableButton();

@@ -1,8 +1,8 @@
 using System;
 
 [Serializable]
-public class GoldManagerSettings
+public class ResourceManagerSettings
 {
-	public int StartingGold = 500;
+	public int StartingResources = 500;
 	public float PassiveIncomeRate = 50f;
 }

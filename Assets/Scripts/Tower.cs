@@ -8,12 +8,12 @@ public class Tower : Target
 
 	public static Tower Instance;
 	public List<Turret> Turrets;
-	public Dictionary<Category, float> DamageMultipliers = new Dictionary<Category, float>() {
-		{ Category.Normal, 1f },
-		{ Category.Piercing, 1f },
-		{ Category.Siege, 1f },
-		{ Category.Magic, 1f },
-		{ Category.Chaos, 1f }
+	public Dictionary<DamageType, float> DamageMultipliers = new Dictionary<DamageType, float>() {
+		{ DamageType.Normal, 1f },
+		{ DamageType.Siege, 1f },
+		{ DamageType.Technology, 1f },
+		{ DamageType.Arcane, 1f },
+		{ DamageType.Void, 1f }
 	};
 
 	protected override void Awake()
@@ -61,9 +61,9 @@ public class Tower : Target
 		Turrets.Add(instance);
 	}
 
-	public void AddUppgrade(Category category) => DamageMultipliers[category] += 0.1f;
+	public void AddUppgrade(DamageType damageType) => DamageMultipliers[damageType] += 0.1f;
 
-	public float GetDamage(Category category, float damage) => damage * DamageMultipliers[category];
+	public float GetDamage(DamageType damageType, float damage) => damage * DamageMultipliers[damageType];
 
 	public void UpgradeHealth(int amount)
 	{

@@ -17,7 +17,7 @@ public class GameController : Singleton<GameController>
 	bool _gameHasEnded = false;
 	EnemySpawner _enemySpawner;
 
-	public GoldManagerSettings GoldManagerSettings;
+	public ResourceManagerSettings ResourceManagerSettings;
 	public EnemySpawnerSettings EnemySpawnerSettings;
 
 	void Start()

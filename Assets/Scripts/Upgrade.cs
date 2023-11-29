@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tower/Upgrade")]
-public class Upgrade : ShopItem
+public class Upgrade : DamageShopItem
 {
 	[Header("Upgrade Settings")]
 	float _increaseDamageFactor = 1.1f;

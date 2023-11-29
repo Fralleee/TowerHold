@@ -543,6 +543,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 224015357014918273, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: m_Name
+      value: Resource Manager
+      objectReference: {fileID: 0}
     - target: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
       propertyPath: serializationData.Prefab

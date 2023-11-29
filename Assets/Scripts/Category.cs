@@ -1,11 +1,19 @@
-public enum Category
+public enum ResourceType
 {
-	Gold,
+	Income
+}
+
+public enum DefenseType
+{
 	Health,
-	Armor,
+	Defense
+}
+
+public enum DamageType
+{
 	Normal,
-	Piercing,
 	Siege,
-	Magic,
-	Chaos
+	Technology,
+	Arcane,
+	Void
 }

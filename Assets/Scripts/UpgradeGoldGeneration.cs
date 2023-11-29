@@ -1,23 +1,14 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tower/Upgrade Gold Generation")]
-public class UpgradeGoldGeneration : ShopItem
+[CreateAssetMenu(menuName = "Shop/Income/Resource Generation")]
+public class UpgradeResourceGeneration : ResourceShopItem
 {
 	[Header("Upgrade Settings")]
-	public int GoldGenerationIncrease = 10;
+	public int ResourceGenerationIncrease = 10;
 
 	public override void OnPurchase()
 	{
-		GoldManager.Instance.IncomeRate += GoldGenerationIncrease;
+		ResourceManager.Instance.IncomeRate += ResourceGenerationIncrease;
 		ScoreManager.Instance.Upgrades += 1;
-	}
-
-	void OnValidate()
-	{
-		if (Category != Category.Gold)
-		{
-			Debug.LogWarning("Invalid category. Resetting to Gold.");
-			Category = Category.Gold;
-		}
 	}
 }

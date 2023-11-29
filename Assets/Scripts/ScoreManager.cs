@@ -10,8 +10,8 @@ public class ScoreManager : Singleton<ScoreManager>
 	public float DamageTaken = 0; // Done
 	public int EnemiesKilled = 0; // Done
 
-	public int GoldSpent = 0; // Done
-	public int GoldEarned = 0; // Done
+	public int ResourcesSpent = 0; // Done
+	public int ResourcesEarned = 0; // Done
 
 	public int Turrets = 0; // Done
 	public int Upgrades = 0; // Done
@@ -30,8 +30,8 @@ public class ScoreManager : Singleton<ScoreManager>
 		var scores = "Damage Done: " + DamageDone + "\n";
 		scores += "Damage Taken: " + DamageTaken + "\n";
 		scores += "Enemies Killed: " + EnemiesKilled + "\n";
-		scores += "Gold Spent: " + GoldSpent + "\n";
-		scores += "Gold Earned: " + GoldEarned + "\n";
+		scores += "Resources Spent: " + ResourcesSpent + "\n";
+		scores += "Resources Earned: " + ResourcesEarned + "\n";
 		scores += "Turrets: " + Turrets + "\n";
 		scores += "Upgrades: " + Upgrades + "\n";
 		return scores;

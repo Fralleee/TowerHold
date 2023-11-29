@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
-public class GoldManager : Singleton<GoldManager>
+public class ResourceManager : Singleton<ResourceManager>
 {
-	public static Action<int> OnGoldChange = delegate { };
-	public int Gold = 0;
+	public static Action<int> OnResourceChange = delegate { };
+	public int Resources = 0;
 	public int IncomeRate = 0;
 
 	Coroutine _incomeCoroutine;
@@ -12,7 +12,7 @@ public class GoldManager : Singleton<GoldManager>
 	void Start()
 	{
 		_incomeCoroutine = StartCoroutine(ActivateIncomeAfterDelay(GameController.Instance.FreezeTime));
-		EarnGold(GameController.Instance.GoldManagerSettings.StartingGold);
+		AddResource(GameController.Instance.ResourceManagerSettings.StartingResources);
 	}
 
 	IEnumerator ActivateIncomeAfterDelay(float delay)
@@ -26,33 +26,31 @@ public class GoldManager : Singleton<GoldManager>
 		while (true)
 		{
 			yield return new WaitForSeconds(1f);
-			EarnGold(Mathf.FloorToInt(GameController.Instance.GoldManagerSettings.PassiveIncomeRate + IncomeRate));
+			AddResource(Mathf.FloorToInt(GameController.Instance.ResourceManagerSettings.PassiveIncomeRate + IncomeRate));
 		}
 	}
 
-	public void AddIncome(float amount) => GameController.Instance.GoldManagerSettings.PassiveIncomeRate += amount;
+	public void AddIncome(float amount) => GameController.Instance.ResourceManagerSettings.PassiveIncomeRate += amount;
 
-	public void EarnGold(int amount)
+	public void AddResource(int amount)
 	{
-		Gold += amount;
-		OnGoldChange(Gold);
-		ScoreManager.Instance.GoldEarned += amount;
+		Resources += amount;
+		OnResourceChange(Resources);
+		ScoreManager.Instance.ResourcesEarned += amount;
 	}
 
-	public bool SpendGold(int amount)
+	public bool SpendResources(int amount)
 	{
-		if (amount <= Gold)
+		if (amount <= Resources)
 		{
-			Gold -= amount;
-			OnGoldChange(Gold);
-			ScoreManager.Instance.GoldSpent += amount;
+			Resources -= amount;
+			OnResourceChange(Resources);
+			ScoreManager.Instance.ResourcesSpent += amount;
 			return true;
 		}
 
 		return false;
 	}
-
-	public int GetCurrentGold() => Gold;
 
 	public void StopIncome()
 	{
@@ -67,7 +65,7 @@ public class GoldManager : Singleton<GoldManager>
 	{
 		base.OnDestroy();
 
-		OnGoldChange = delegate
+		OnResourceChange = delegate
 		{ };
 	}
 }

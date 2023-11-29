@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tower/Upgrade Max Health")]
-public class UpgradeMaxHealth : ShopItem
+[CreateAssetMenu(menuName = "Shop/Upgrade/Max Health")]
+public class UpgradeMaxHealth : DefenseShopItem
 {
 	[Header("Upgrade Settings")]
 	public int HealthIncrease = 500;
@@ -10,14 +10,5 @@ public class UpgradeMaxHealth : ShopItem
 	{
 		Tower.Instance.UpgradeHealth(HealthIncrease);
 		ScoreManager.Instance.Upgrades += 1;
-	}
-
-	void OnValidate()
-	{
-		if (Category != Category.Health)
-		{
-			Debug.LogWarning("Invalid category. Resetting to Health.");
-			Category = Category.Health;
-		}
 	}
 }

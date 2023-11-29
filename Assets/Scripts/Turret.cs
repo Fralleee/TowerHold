@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tower/Turret")]
-public partial class Turret : ShopItem
+public partial class Turret : DamageShopItem
 {
 	[Header("Turret Settings")]
 	public Projectile ProjectilePrefab;
@@ -52,15 +51,5 @@ public partial class Turret : ShopItem
 		projectile.Setup(_target, _tower.GetDamage(Category, BaseDamage), true);
 
 		SoundManager.Instance.PlayEffect(ShootSound);
-	}
-
-	void OnValidate()
-	{
-		var allowedCategories = new List<Category> { Category.Normal, Category.Piercing, Category.Siege, Category.Magic, Category.Chaos };
-		if (!allowedCategories.Contains(Category))
-		{
-			Debug.LogWarning("Invalid category for Turret. Resetting to Normal.");
-			Category = Category.Normal;
-		}
 	}
 }

@@ -71,7 +71,7 @@ public class Shop : MonoBehaviour
 
 	void ManualRefresh()
 	{
-		if (GoldManager.Instance.SpendGold(_refreshCost))
+		if (ResourceManager.Instance.SpendResources(_refreshCost))
 		{
 			RefreshShop();
 			_refreshCost += 50;
