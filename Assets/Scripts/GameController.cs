@@ -17,9 +17,6 @@ public class GameController : Singleton<GameController>
 	bool _gameHasEnded = false;
 	EnemySpawner _enemySpawner;
 
-	public ResourceManagerSettings ResourceManagerSettings;
-	public EnemySpawnerSettings EnemySpawnerSettings;
-
 	void Start()
 	{
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
@@ -54,7 +51,7 @@ public class GameController : Singleton<GameController>
 	{
 		CurrentLevel++;
 		UpdateGameStage();
-		EnemySpawnerSettings.SpawnRate = Mathf.Max(0.1f, EnemySpawnerSettings.SpawnRate - (0.1f * CurrentLevel / 10));
+		EnemySpawner.Instance.SpawnRate = Mathf.Max(0.1f, EnemySpawner.Instance.SpawnRate - (0.1f * CurrentLevel / 10));
 		TimeLeft = LevelTime;
 		OnLevelChanged();
 	}

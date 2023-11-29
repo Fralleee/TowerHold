@@ -1,14 +1,18 @@
 using UnityEngine;
-
 public class Projectile : MonoBehaviour
 {
-	[SerializeField] float _speed = 10f;
-	[SerializeField] bool _rotateTowardsTarget;
-	[SerializeField] bool _isSpinning;
-	[SerializeField] Vector3 _spinAxis = Vector3.up; // Default spin axis
-	[SerializeField] float _spinSpeed = 360f; // Degrees per second
-	[SerializeField] bool _useGravity;
+	[Header("Graphics")]
+	[SerializeField] GameObject _impactParticle;
+	[SerializeField] GameObject _projectileParticle;
+	[SerializeField] GameObject _muzzleParticle;
+	[SerializeField] GameObject[] _trailParticles;
 
+	float _speed = 10f;
+	bool _rotateTowardsTarget;
+	bool _isSpinning;
+	Vector3 _spinAxis = Vector3.up; // Default spin axis
+	float _spinSpeed = 360f; // Degrees per second
+	bool _useGravity;
 
 	Target _target;
 	float _damage = 10f;
@@ -16,16 +20,35 @@ public class Projectile : MonoBehaviour
 	Vector3 _targetLastPosition = Vector3.zero;
 	Vector3 _velocity;
 
-	public void Setup(Target target, float damage, bool towerProjectile)
+	public void Setup(Target target, float damage, bool towerProjectile, ProjectileSettings projectileSettings)
 	{
 		_target = target;
 		_damage = damage;
 		_towerProjectile = towerProjectile;
 
+		_speed = projectileSettings.Speed;
+		_rotateTowardsTarget = projectileSettings.RotateTowardsTarget;
+		_isSpinning = projectileSettings.IsSpinning;
+		_spinAxis = projectileSettings.SpinAxis;
+		_spinSpeed = projectileSettings.SpinSpeed;
+		_useGravity = projectileSettings.UseGravity;
+
 		if (_useGravity)
 		{
 			_targetLastPosition = _target.Center.position;
 			CalculateTrajectory();
+		}
+	}
+
+	void Start()
+	{
+		_projectileParticle = Instantiate(_projectileParticle, transform.position, transform.rotation);
+		_projectileParticle.transform.parent = transform;
+
+		if (_muzzleParticle)
+		{
+			_muzzleParticle = Instantiate(_muzzleParticle, transform.position, transform.rotation);
+			Destroy(_muzzleParticle, 1.5f);
 		}
 	}
 
@@ -79,7 +102,33 @@ public class Projectile : MonoBehaviour
 				ScoreManager.Instance.DamageDone += actualDamage;
 			}
 		}
+
+		DestroyProjectile();
+	}
+
+	void DestroyProjectile()
+	{
+		_impactParticle = Instantiate(_impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, -transform.forward));
+		foreach (var trail in _trailParticles)
+		{
+			var curTrail = transform.Find(_projectileParticle.name + "/" + trail.name).gameObject;
+			curTrail.transform.parent = null;
+			Destroy(curTrail, 3f);
+		}
+		Destroy(_projectileParticle, 3f);
+		Destroy(_impactParticle, 5.0f);
 		Destroy(gameObject);
+
+		var trails = GetComponentsInChildren<ParticleSystem>();
+		for (var i = 1; i < trails.Length; i++)
+		{
+			var trail = trails[i];
+			if (trail.gameObject.name.Contains("Trail"))
+			{
+				trail.transform.SetParent(null);
+				Destroy(trail.gameObject, 2f);
+			}
+		}
 	}
 
 	void CalculateTrajectory()

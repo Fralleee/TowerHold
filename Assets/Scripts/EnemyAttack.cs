@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
@@ -6,6 +7,10 @@ public class EnemyAttack : MonoBehaviour
 	public float BaseDamage = 10f;
 	public float AttackRange = 2f;
 	public float TimeBetweenAttacks = 1f;
+
+	[SerializeField]
+	[InlineProperty(LabelWidth = 140)]
+	ProjectileSettings _projectileSettings;
 	float _lastAttackTime = 0f;
 	[HideInInspector] public Target Target;
 	ITargeter _targeter;
@@ -33,7 +38,7 @@ public class EnemyAttack : MonoBehaviour
 	void Shoot()
 	{
 		var projectile = Instantiate(ProjectilePrefab, transform.position, transform.rotation);
-		projectile.Setup(Target, BaseDamage, false);
+		projectile.Setup(Target, BaseDamage, false, _projectileSettings);
 		_animator.SetTrigger("Attack");
 	}
 }

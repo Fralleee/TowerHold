@@ -20,7 +20,7 @@ public class ShopSlot : MonoBehaviour
 		SetUIAlpha(1f);
 
 		_item = newItem;
-		ItemNameText.text = _item.ItemName;
+		ItemNameText.text = _item.name;
 		ItemImage.sprite = _item.Image;
 
 		var (shopImage, shopColor) = UIManager.Instance.GetShopItemUIValues(_item);

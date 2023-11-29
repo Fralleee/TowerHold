@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1587250918974726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4615003313031166}
+  - component: {fileID: -2343517627577055232}
+  m_Layer: 0
+  m_Name: Bullet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4615003313031166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587250918974726}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2343517627577055232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587250918974726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0780703fc15b441b69ab0d3a13081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _impactParticle: {fileID: 1469201857544070, guid: d1e27766830781946b7e50a599bfaaac,
+    type: 3}
+  _projectileParticle: {fileID: 1203708572482856, guid: 10ad1120f54e1924e945f7c26f3fabe3,
+    type: 3}
+  _muzzleParticle: {fileID: 1670457245891842, guid: acad5363ee599db48a2fc0aecd98bc29,
+    type: 3}
+  _trailParticles: []
+  _speed: 50
+  _rotateTowardsTarget: 0
+  _isSpinning: 0
+  _spinAxis: {x: 0, y: 1, z: 0}
+  _spinSpeed: 360
+  _useGravity: 0

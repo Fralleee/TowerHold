@@ -11,5 +11,9 @@ public class ResourceUpdateUI : MonoBehaviour
 		ResourceManager.OnResourceChange += UpdateResources;
 	}
 
-	void UpdateResources(int resources) => _text.text = resources.ToString();
+	void UpdateResources(int resources)
+	{
+		Debug.Log("Updating resources: " + resources);
+		_text.text = resources.ToString();
+	}
 }

@@ -11,7 +11,7 @@ public class Shop : MonoBehaviour
 	public Button RefreshButton;
 	public Image ProgressBar;
 	public TextMeshProUGUI RefreshCostText;
-	public ShopItem[] AvailableItems;
+	public ShopInventory Inventory;
 
 	ShopSlot[] _slots;
 	int _refreshCost = 50;
@@ -49,7 +49,7 @@ public class Shop : MonoBehaviour
 	{
 		// Filter out the items that meet the level requirement
 		var eligibleItems = new List<ShopItem>();
-		foreach (var item in AvailableItems)
+		foreach (var item in Inventory.Items)
 		{
 			if (item.MinLevel <= currentLevel)
 			{

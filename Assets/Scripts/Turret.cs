@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tower/Turret")]
@@ -9,7 +10,11 @@ public partial class Turret : DamageShopItem
 	public float AttackRange = 2f;
 	public float TimeBetweenAttacks = 1f;
 	public float TimeBetweenFindTarget = 1f;
-	public AudioClip ShootSound;
+
+	[SerializeField]
+	[InlineProperty(LabelWidth = 140)]
+	ProjectileSettings _projectileSettings;
+
 	float _lastAttackTime = 0f;
 	float _lastTargetSearch = 0f;
 	Tower _tower;
@@ -48,8 +53,6 @@ public partial class Turret : DamageShopItem
 	{
 		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
 		var projectile = Instantiate(ProjectilePrefab, _tower.Center.position, rotation);
-		projectile.Setup(_target, _tower.GetDamage(Category, BaseDamage), true);
-
-		SoundManager.Instance.PlayEffect(ShootSound);
+		projectile.Setup(_target, _tower.GetDamage(Category, BaseDamage), true, _projectileSettings);
 	}
 }
