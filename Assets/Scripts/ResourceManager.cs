@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+
 public class ResourceManager : Singleton<ResourceManager>
 {
 	public static Action<int> OnResourceChange = delegate { };

@@ -9,6 +9,9 @@ public class EnemyAttack : MonoBehaviour
 	public float TimeBetweenAttacks = 1f;
 
 	[SerializeField]
+	Transform attackOrigin;
+
+	[SerializeField]
 	[InlineProperty(LabelWidth = 140)]
 	ProjectileSettings _projectileSettings;
 	float _lastAttackTime = 0f;
@@ -20,6 +23,11 @@ public class EnemyAttack : MonoBehaviour
 	{
 		_animator = GetComponentInChildren<Animator>();
 		_targeter = GetComponentInParent<ITargeter>();
+
+		if (attackOrigin == null)
+		{
+			attackOrigin = transform;
+		}
 	}
 
 	void Update()
@@ -30,15 +38,16 @@ public class EnemyAttack : MonoBehaviour
 		}
 		else if (Time.time - _lastAttackTime > TimeBetweenAttacks)
 		{
-			Shoot();
+			StartAttack();
 			_lastAttackTime = Time.time;
 		}
 	}
 
-	void Shoot()
+	void StartAttack() => _animator.SetTrigger("Attack");
+
+	public void PerformAttack()
 	{
-		var projectile = Instantiate(ProjectilePrefab, transform.position, transform.rotation);
+		var projectile = Instantiate(ProjectilePrefab, attackOrigin.position, attackOrigin.rotation);
 		projectile.Setup(Target, BaseDamage, false, _projectileSettings);
-		_animator.SetTrigger("Attack");
 	}
 }

@@ -6,7 +6,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	public int MinRadius = 30;
 	public int MaxRadius = 40;
 	public float SpawnRate = 1f;
-	public GameObject Prefab;
+	public GameObject[] Prefabs;
 	[HideInInspector] public bool IsSpawning;
 	[HideInInspector] public Tower Target;
 	float _lastSpawnTime = 0f;
@@ -26,7 +26,9 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		var spawnPosition = transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * Random.Range(MinRadius, MaxRadius));
 		var rotation = Quaternion.LookRotation(transform.position - spawnPosition, Vector3.up);
 
-		Instantiate(Prefab, spawnPosition, rotation);
+		var prefab = Prefabs[Random.Range(0, Prefabs.Length)];
+
+		Instantiate(prefab, spawnPosition, rotation);
 	}
 
 	void OnDrawGizmosSelected()
