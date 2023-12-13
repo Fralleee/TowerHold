@@ -48,7 +48,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -121,16 +121,16 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: -2343517627577055232, guid: bd5fc6f248bd95e41a520dcdecfb3ffe,
     type: 3}
   BaseDamage: 10
-  AttackRange: 25
+  AttackRange: 10
   TimeBetweenAttacks: 1
   attackOrigin: {fileID: 4065088150377289127}
   _projectileSettings:
     Speed: 30
-    RotateTowardsTarget: 0
     IsSpinning: 0
     SpinAxis: {x: 0, y: 1, z: 0}
     SpinSpeed: 360
-    UseGravity: 0
+    UseTrajectory: 0
+    ArcHeight: 5
   Target: {fileID: 0}
 --- !u!1 &6619729562962141707
 GameObject:

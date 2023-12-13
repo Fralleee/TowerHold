@@ -13,8 +13,4 @@ MonoBehaviour:
   m_Name: All Weapons
   m_EditorClassIdentifier: 
   Items:
-  - {fileID: 11400000, guid: 8c9f6b710edf9114d931790439a3095a, type: 2}
-  - {fileID: 11400000, guid: 3c3201c615db1aa4b8ad76a61a03d0d6, type: 2}
-  - {fileID: 11400000, guid: b880b186c549ce644bb4d2542dca3cc7, type: 2}
   - {fileID: 11400000, guid: 3d37d6ee9b7396d40a9e13af59aaaca0, type: 2}
-  - {fileID: 11400000, guid: 8e4e13b5842ccc7468c2702f90fe9a38, type: 2}

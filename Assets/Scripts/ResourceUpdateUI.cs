@@ -13,7 +13,6 @@ public class ResourceUpdateUI : MonoBehaviour
 
 	void UpdateResources(int resources)
 	{
-		Debug.Log("Updating resources: " + resources);
 		_text.text = resources.ToString();
 	}
 }

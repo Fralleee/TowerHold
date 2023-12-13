@@ -23,9 +23,9 @@ MonoBehaviour:
   TimeBetweenAttacks: 1
   TimeBetweenFindTarget: 1
   _projectileSettings:
-    Speed: 40
-    RotateTowardsTarget: 1
+    Speed: 25
     IsSpinning: 0
-    SpinAxis: {x: 0, y: 1, z: 0}
+    SpinAxis: {x: 1, y: 0, z: 0}
     SpinSpeed: 360
     UseGravity: 1
+    ArcHeight: 5

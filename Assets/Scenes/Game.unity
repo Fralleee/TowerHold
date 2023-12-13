@@ -480,35 +480,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3523848769767768334, guid: 8a50c1218295d1c48831a741859bde10,
-        type: 3}
-      propertyPath: m_Antialiasing
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523848769767768334, guid: 8a50c1218295d1c48831a741859bde10,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523848769767768334, guid: 8a50c1218295d1c48831a741859bde10,
-        type: 3}
-      propertyPath: m_VolumeLayerMask.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523848769767768334, guid: 8a50c1218295d1c48831a741859bde10,
-        type: 3}
-      propertyPath: m_TaaSettings.contrastAdaptiveSharpening
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4849291385008119724, guid: 8a50c1218295d1c48831a741859bde10,
         type: 3}
       propertyPath: m_Name
       value: Camera Rig
-      objectReference: {fileID: 0}
-    - target: {fileID: 4849291385008119724, guid: 8a50c1218295d1c48831a741859bde10,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6976134468037405941, guid: 8a50c1218295d1c48831a741859bde10,
         type: 3}
@@ -560,11 +535,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7932052166119934872, guid: 8a50c1218295d1c48831a741859bde10,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -584,6 +554,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3634275075844339597, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
+    - target: {fileID: 3837510598274050313, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: SpawnRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5661263283930568339, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -643,55 +618,18 @@ PrefabInstance:
     - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"CategoryColors.{0es}","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",1,0.8503309,0,1}'
+      value: '"path":"DamageTypeColors.{3es}","value":{"$id":0,"$type":"UnityEngine.Color,
+        UnityEngine.CoreModule",0.495283,0.7372546,1,1}'
       objectReference: {fileID: 0}
     - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[1]
-      value: '"path":"CategoryColors.{1es}","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",1,0.07075471,0.07075471,1}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[2]
-      value: '"path":"CategoryColors.{2es}","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",0.5754717,0.5754717,0.5754717,1}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[3]
-      value: '"path":"CategoryColors.{3es}","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",1,1,1,1}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[4]
-      value: '"path":"CategoryColors.{4es}","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",0,0.9604411,1,1}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[5]
-      value: '"path":"CategoryColors.{5es}","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",0.509434,0.322693318,0,1}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[6]
-      value: '"path":"CategoryColors.{6es}","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",0,0.318867683,1,1}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7213463198124289355, guid: 1793df4fa2d36d54db4482f1448a013f,
-        type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[7]
-      value: '"path":"CategoryColors.{7es}","value":{"$id":0,"$type":"UnityEngine.Color,
-        UnityEngine.CoreModule",0,0.8490566,0.005253081,1}'
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9092241571855922099, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
