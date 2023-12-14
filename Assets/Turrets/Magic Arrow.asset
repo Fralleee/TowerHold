@@ -27,5 +27,5 @@ MonoBehaviour:
     IsSpinning: 0
     SpinAxis: {x: 1, y: 0, z: 0}
     SpinSpeed: 360
-    UseGravity: 1
+    UseTrajectory: 0
     ArcHeight: 5

@@ -129,7 +129,7 @@ MonoBehaviour:
     IsSpinning: 0
     SpinAxis: {x: 0, y: 1, z: 0}
     SpinSpeed: 360
-    UseGravity: 0
+    UseTrajectory: 0
     ArcHeight: 5
   Target: {fileID: 0}
 --- !u!1 &6619729562962141707
@@ -225,32 +225,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4a9ce1375d6c8f84396ad629f2d5a44b, type: 2}
+      objectReference: {fileID: 2100000, guid: 3ae6a7e10460a2549a35609e9eae4eef, type: 2}
     - target: {fileID: -6652725513331149018, guid: 665a457d1683f464ba15fcf5a1a9ea85,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c64652ab5e6a6ab4da267446c716ce70, type: 2}
+      objectReference: {fileID: 2100000, guid: 67ffc9ba102c6d945840df5ba1766351, type: 2}
     - target: {fileID: -4771708757947356217, guid: 665a457d1683f464ba15fcf5a1a9ea85,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4a9ce1375d6c8f84396ad629f2d5a44b, type: 2}
+      objectReference: {fileID: 2100000, guid: 67559871f9799ac4bb27adfb9ddae676, type: 2}
     - target: {fileID: -4157524182732408741, guid: 665a457d1683f464ba15fcf5a1a9ea85,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c64652ab5e6a6ab4da267446c716ce70, type: 2}
+      objectReference: {fileID: 2100000, guid: 67ffc9ba102c6d945840df5ba1766351, type: 2}
     - target: {fileID: -3820810127951259293, guid: 665a457d1683f464ba15fcf5a1a9ea85,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c64652ab5e6a6ab4da267446c716ce70, type: 2}
+      objectReference: {fileID: 2100000, guid: 67ffc9ba102c6d945840df5ba1766351, type: 2}
     - target: {fileID: -3290806332015045900, guid: 665a457d1683f464ba15fcf5a1a9ea85,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c64652ab5e6a6ab4da267446c716ce70, type: 2}
+      objectReference: {fileID: 2100000, guid: 67ffc9ba102c6d945840df5ba1766351, type: 2}
     - target: {fileID: 919132149155446097, guid: 665a457d1683f464ba15fcf5a1a9ea85,
         type: 3}
       propertyPath: m_Name
