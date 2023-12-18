@@ -6,6 +6,7 @@ public class MoveToAttack : MonoBehaviour
 	Animator _animator;
 	NavMeshAgent _agent;
 	EnemyAttack _attack;
+	Bobbing _bobbing;
 	Enemy _enemy;
 
 	void Awake()
@@ -13,12 +14,13 @@ public class MoveToAttack : MonoBehaviour
 		_animator = GetComponentInChildren<Animator>();
 		_agent = GetComponent<NavMeshAgent>();
 		_attack = GetComponent<EnemyAttack>();
+		_bobbing = GetComponentInChildren<Bobbing>();
 		_enemy = GetComponent<Enemy>();
 	}
 
 	void Start()
 	{
-		_agent.SetDestination(Tower.Instance.transform.position);
+		_ = _agent.SetDestination(Tower.Instance.transform.position);
 		_animator.SetBool("IsWalking", true);
 
 		_enemy.OnDeath += HandleDeath;
@@ -30,6 +32,7 @@ public class MoveToAttack : MonoBehaviour
 		{
 			_animator.SetBool("IsWalking", false);
 			_agent.isStopped = true;
+			_bobbing.Stop();
 		}
 	}
 

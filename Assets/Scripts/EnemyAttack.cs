@@ -8,8 +8,8 @@ public class EnemyAttack : MonoBehaviour
 	public float AttackRange = 2f;
 	public float TimeBetweenAttacks = 1f;
 
-	[SerializeField]
-	Transform attackOrigin;
+	[SerializeField, ChildGameObjectsOnly]
+	Transform _attackOrigin;
 
 	[SerializeField]
 	[InlineProperty(LabelWidth = 140)]
@@ -24,9 +24,9 @@ public class EnemyAttack : MonoBehaviour
 		_animator = GetComponentInChildren<Animator>();
 		_targeter = GetComponentInParent<ITargeter>();
 
-		if (attackOrigin == null)
+		if (_attackOrigin == null)
 		{
-			attackOrigin = transform;
+			_attackOrigin = transform;
 		}
 	}
 
@@ -47,7 +47,7 @@ public class EnemyAttack : MonoBehaviour
 
 	public void PerformAttack()
 	{
-		var projectile = Instantiate(ProjectilePrefab, attackOrigin.position, attackOrigin.rotation);
+		var projectile = Instantiate(ProjectilePrefab, _attackOrigin.position, _attackOrigin.rotation);
 		projectile.Setup(Target, BaseDamage, false, _projectileSettings);
 	}
 }

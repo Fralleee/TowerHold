@@ -11,22 +11,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 781e8994b549b134a8f10ba370c1df4c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/Polygon Arsenal/Demo/Scenes/Combat/PolyAura.unity
     guid: 5dcf687eb68d33740bf535209c33ef71
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/Polygon Arsenal/Demo/Scenes/Combat/PolyAura2.unity
     guid: 29f88a071ad3fa148926426896207d6e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/Polygon Arsenal/Demo/Scenes/Combat/PolyAura3.unity
     guid: 04b3d7fd4c0293d4da6b02cb72608b0c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/Polygon Arsenal/Demo/Scenes/Combat/PolyAura4.unity
     guid: f9a8de4e0a0f76743b817e66e54705a3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/Polygon Arsenal/Demo/Scenes/Combat/PolyBarrage.unity
     guid: 1a9090c9745c87246af56a4500c17d2f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Plugins/Polygon Arsenal/Demo/Scenes/Combat/PolyBarrage2.unity
     guid: 5a26a4e213eb21441a62c490b0847510
   - enabled: 1
