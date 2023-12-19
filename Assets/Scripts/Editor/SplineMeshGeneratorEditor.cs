@@ -34,6 +34,7 @@ public class SplineMeshGeneratorEditor : Editor
 	void OnSceneGUI()
 	{
 		var basePosition = _splineMeshGenerator.transform.position;
+		Handles.color = Color.cyan;
 		for (var i = 0; i < _splineMeshGenerator.SplinePoints.Count; i++)
 		{
 			// Handle for position

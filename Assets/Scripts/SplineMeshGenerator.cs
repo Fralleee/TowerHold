@@ -293,19 +293,4 @@ public class SplineMeshGenerator : MonoBehaviour
 		}
 		return result;
 	}
-
-	public void Nullify()
-	{
-		var list = new List<Vector3>();
-		for (var i = 0; i < transform.childCount; i++)
-		{
-			var child = transform.GetChild(i);
-			list.Add(child.transform.position);
-		}
-		transform.position = Vector3.zero;
-		for (var j = 0; j < transform.childCount; j++)
-		{
-			transform.GetChild(j).transform.position = list[j];
-		}
-	}
 }

@@ -46,7 +46,7 @@ public class Tower : Target
 		{
 			// Increment health, ensuring that it doesn't exceed the maximum
 			Health = Mathf.Min(Health + HealthRegenerationRate, MaxHealth);
-			HealthBar.SetHealth(Health);
+			HealthBar.SetHealth(Health, true);
 
 			// You may want to add a callback or event when the health changes, for UI updates or other game logic.
 
@@ -70,7 +70,7 @@ public class Tower : Target
 		MaxHealth += amount;
 		Health += amount;
 		HealthBar.SetMaxHealth(MaxHealth);
-		HealthBar.SetHealth(Health);
+		HealthBar.SetHealth(Health, true);
 	}
 
 	void HandleDamageTaken(int damage) => ScoreManager.Instance.DamageTaken += damage;
