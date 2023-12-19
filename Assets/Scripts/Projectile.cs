@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
 
 	Target _target;
 	Vector3 _startPosition;
+	Vector3 _lastPosition;
 	Vector3 _spinAxis = Vector3.up;
 	bool _isSpinning;
 	bool _useParabolicArc;
@@ -54,9 +55,9 @@ public class Projectile : MonoBehaviour
 
 	void Update()
 	{
-		if (_target == null)
+		if (_target != null)
 		{
-			return;
+			_lastPosition = _target.Center.position;
 		}
 
 		var timeElapsed = Time.time - _startTime;
@@ -68,12 +69,11 @@ public class Projectile : MonoBehaviour
 
 
 		var normalizedTime = timeElapsed / _hitTime;
-		var targetPosition = _target.Center.position;
 
 		if (_useParabolicArc)
 		{
 			var arcHeight = Mathf.Max(0f, (1f - Mathf.Pow(2f * normalizedTime - 1f, 2f)) * _maxArcHeight);
-			var arcPosition = Vector3.Lerp(_startPosition, targetPosition, normalizedTime);
+			var arcPosition = Vector3.Lerp(_startPosition, _lastPosition, normalizedTime);
 			arcPosition.y += arcHeight;
 
 			if (!_isSpinning)
@@ -86,11 +86,11 @@ public class Projectile : MonoBehaviour
 		}
 		else
 		{
-			transform.position = Vector3.Lerp(_startPosition, targetPosition, normalizedTime);
+			transform.position = Vector3.Lerp(_startPosition, _lastPosition, normalizedTime);
 
 			if (!_isSpinning)
 			{
-				var rotation = Quaternion.LookRotation(targetPosition - transform.position);
+				var rotation = Quaternion.LookRotation(_lastPosition - transform.position);
 				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _speed * Time.deltaTime);
 			}
 		}

@@ -2025,16 +2025,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
-    - target: {fileID: 590568292814494773, guid: c195d7bea1ac6b0419de3966a5e16516,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1503034442138021683, guid: c195d7bea1ac6b0419de3966a5e16516,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e0f6539c94784b64b91abc07b28066b3, type: 2}
     - target: {fileID: 7952038010542429487, guid: c195d7bea1ac6b0419de3966a5e16516,
         type: 3}
       propertyPath: m_LocalPosition.x
