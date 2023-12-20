@@ -13,13 +13,10 @@ public class Enemy : Target
 
 	[ReadOnly] public int Attackers = 0;
 	public bool HasAttackers => Attackers > 0;
-	Animator _animator;
 
 	protected override void Awake()
 	{
 		base.Awake();
-
-		_animator = GetComponentInChildren<Animator>();
 
 		AllEnemies.Add(this);
 
@@ -33,7 +30,6 @@ public class Enemy : Target
 		_ = AllEnemies.Remove(this);
 		ResourceManager.Instance.AddResource(_bounty);
 
-		_animator.enabled = false;
 		foreach (var component in GetComponents<MonoBehaviour>())
 		{
 			component.enabled = false;
@@ -56,7 +52,6 @@ public class Enemy : Target
 	{
 		foreach (var enemy in AllEnemies)
 		{
-			enemy._animator.SetTrigger("Victory");
 			enemy.GetComponent<MoveToAttack>().Stop();
 			foreach (var component in enemy.GetComponents<MonoBehaviour>())
 			{

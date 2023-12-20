@@ -8,7 +8,6 @@ public class EnemyAnimationEvent : MonoBehaviour
 
 	void PerformAttack()
 	{
-		Debug.Log("EnemyAnimationEvent::PerformAttack");
 		_enemyAttack.PerformAttack();
 	}
 }
