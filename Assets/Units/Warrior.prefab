@@ -80,9 +80,8 @@ MonoBehaviour:
   _healthBarOffset: 0
   IsDead: 0
   _bounty: 30
-  _deathEffect: {fileID: 4967960123261288979, guid: aad0a7a858e110c40b0bd2973ded0121,
+  _deathEffect: {fileID: 1186030354075607, guid: 74a22e399f24c974da3d44b1b4247b28,
     type: 3}
-  _model: {fileID: 0}
   Attackers: 0
 --- !u!114 &1256222014440585348
 MonoBehaviour:
@@ -121,19 +120,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0ab6629bd7a944a743ca5e3a8028d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: -2343517627577055232, guid: bd5fc6f248bd95e41a520dcdecfb3ffe,
+  ProjectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
     type: 3}
   BaseDamage: 10
   AttackRange: 25
   TimeBetweenAttacks: 1
-  _attackOrigin: {fileID: 0}
-  _animator: {fileID: 0}
+  _attackOrigin: {fileID: 5316753469387279234}
   _projectileSettings:
     Speed: 30
     IsSpinning: 0
     SpinAxis: {x: 0, y: 1, z: 0}
     SpinSpeed: 360
-    UseParabolicArc: 0
+    UseParabolicArc: 1
     MaxArcHeight: 5
   Target: {fileID: 0}
 --- !u!1 &6619729562962141707
@@ -271,6 +269,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df8ce22d817b47a42bf5a6106eba65e4, type: 3}
+--- !u!4 &5316753469387279234 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7672853714916499233, guid: df8ce22d817b47a42bf5a6106eba65e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2572563439507854499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6846261405597263511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8985062412504969780, guid: df8ce22d817b47a42bf5a6106eba65e4,
@@ -303,7 +307,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ede35d1ccb613814ba7385bf26e5621f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ede35d1ccb613814ba7385bf26e5621f,
         type: 3}
@@ -318,12 +322,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ede35d1ccb613814ba7385bf26e5621f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ede35d1ccb613814ba7385bf26e5621f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ede35d1ccb613814ba7385bf26e5621f,
         type: 3}
@@ -384,4 +388,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bobbingAmount: 0.125
   _bobbingSpeed: 25
-  _rotationAmount: 1
+  _rotationAmount: 5
+  _rotationSpeed: 10

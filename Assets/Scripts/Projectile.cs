@@ -117,15 +117,13 @@ public class Projectile : MonoBehaviour
 
 	void DestroyProjectile()
 	{
-		_impactParticle = Instantiate(_impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, -transform.forward));
-		foreach (var trail in _trailParticles)
+		if (_impactParticle)
 		{
-			var curTrail = transform.Find(_projectileParticle.name + "/" + trail.name).gameObject;
-			curTrail.transform.parent = null;
-			Destroy(curTrail, 3f);
+			_impactParticle = Instantiate(_impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, -transform.forward));
+			Destroy(_impactParticle, 5.0f);
 		}
+
 		Destroy(_projectileParticle, 3f);
-		Destroy(_impactParticle, 5.0f);
 		Destroy(gameObject);
 
 		var trails = GetComponentsInChildren<ParticleSystem>();

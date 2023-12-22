@@ -1387,6 +1387,16 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 3837510598274050313, guid: 1793df4fa2d36d54db4482f1448a013f,
         type: 3}
+      propertyPath: MaxRadius
+      value: 77
+      objectReference: {fileID: 0}
+    - target: {fileID: 3837510598274050313, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
+      propertyPath: MinRadius
+      value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 3837510598274050313, guid: 1793df4fa2d36d54db4482f1448a013f,
+        type: 3}
       propertyPath: SpawnRate
       value: 1
       objectReference: {fileID: 0}

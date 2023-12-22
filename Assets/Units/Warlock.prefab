@@ -80,9 +80,8 @@ MonoBehaviour:
   _healthBarOffset: 0
   IsDead: 0
   _bounty: 30
-  _deathEffect: {fileID: 4967960123261288979, guid: aad0a7a858e110c40b0bd2973ded0121,
+  _deathEffect: {fileID: 1186030354075607, guid: 74a22e399f24c974da3d44b1b4247b28,
     type: 3}
-  _model: {fileID: 0}
   Attackers: 0
 --- !u!114 &1256222014440585348
 MonoBehaviour:
@@ -121,19 +120,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0ab6629bd7a944a743ca5e3a8028d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: -2343517627577055232, guid: bd5fc6f248bd95e41a520dcdecfb3ffe,
+  ProjectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
     type: 3}
   BaseDamage: 10
   AttackRange: 25
   TimeBetweenAttacks: 1
   _attackOrigin: {fileID: 4937025505566767208}
-  _animator: {fileID: 5598004769746153486}
   _projectileSettings:
     Speed: 30
     IsSpinning: 0
     SpinAxis: {x: 0, y: 1, z: 0}
     SpinSpeed: 360
-    UseParabolicArc: 0
+    UseParabolicArc: 1
     MaxArcHeight: 5
   Target: {fileID: 0}
 --- !u!1 &6619729562962141707
@@ -268,7 +266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bobbingAmount: 0.125
   _bobbingSpeed: 25
-  _rotationAmount: 1
+  _rotationAmount: 5
+  _rotationSpeed: 10
 --- !u!4 &3183831062132539088 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ede35d1ccb613814ba7385bf26e5621f,
@@ -387,12 +386,6 @@ Transform:
 --- !u!4 &4937025505566767208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3083670039303100690, guid: 89469a1fd645c6d469fa14bc3bf10825,
-    type: 3}
-  m_PrefabInstance: {fileID: 7946798467340607866}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &5598004769746153486 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2592007091981767028, guid: 89469a1fd645c6d469fa14bc3bf10825,
     type: 3}
   m_PrefabInstance: {fileID: 7946798467340607866}
   m_PrefabAsset: {fileID: 0}

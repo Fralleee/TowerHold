@@ -10,7 +10,6 @@ public class EnemyAttack : MonoBehaviour
 
 	[SerializeField, ChildGameObjectsOnly]
 	Transform _attackOrigin;
-	[SerializeField, ChildGameObjectsOnly] Animator _animator;
 
 	[SerializeField]
 	[InlineProperty(LabelWidth = 140)]
@@ -18,6 +17,7 @@ public class EnemyAttack : MonoBehaviour
 	float _lastAttackTime = 0f;
 	[HideInInspector] public Target Target;
 	ITargeter _targeter;
+	Animator _animator;
 
 	void Awake()
 	{

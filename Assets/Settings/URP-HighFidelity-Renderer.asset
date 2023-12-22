@@ -129,3 +129,29 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &5303911275744733499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682514c59e1a9684aac2f49ca6a5f9e1, type: 3}
+  m_Name: ScreenSpaceCavity
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: cf5fcd1da11e0b44180882ced33177b0, type: 3}
+  m_Settings:
+    cavityType: 0
+    debug: 0
+    curvatureScale: 3
+    curvatureRidge: 1.391
+    curvatureValley: 1.128
+    cavityDistance: 0.594
+    cavityAttenuation: 0.545
+    cavityRidge: 1.636
+    cavityValley: 1.729
+    cavitySamples: 7
+  m_Material: {fileID: 0}

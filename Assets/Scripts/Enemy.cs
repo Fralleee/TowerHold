@@ -8,7 +8,6 @@ public class Enemy : Target
 	public static Action<Enemy> OnAnyDeath = delegate { };
 	[SerializeField] int _bounty = 10;
 	[SerializeField] GameObject _deathEffect;
-	[SerializeField] GameObject _model;
 	public static List<Enemy> AllEnemies = new List<Enemy>();
 
 	[ReadOnly] public int Attackers = 0;
@@ -36,7 +35,7 @@ public class Enemy : Target
 		}
 
 		var instance = Instantiate(_deathEffect, Center.position, Quaternion.LookRotation(-transform.forward));
-		Destroy(instance, 3f);
+		Destroy(instance, 10f);
 
 		Destroy(gameObject);
 	}

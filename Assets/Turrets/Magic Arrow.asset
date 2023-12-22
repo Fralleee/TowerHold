@@ -16,7 +16,7 @@ MonoBehaviour:
   Cost: 100
   MinLevel: 0
   Category: 3
-  ProjectilePrefab: {fileID: -1529734094400017419, guid: 9d01c415bf8891748a82f362e96d9664,
+  ProjectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
     type: 3}
   BaseDamage: 40
   AttackRange: 50
@@ -27,5 +27,5 @@ MonoBehaviour:
     IsSpinning: 0
     SpinAxis: {x: 1, y: 0, z: 0}
     SpinSpeed: 360
-    UseParabolicArc: 0
+    UseParabolicArc: 1
     MaxArcHeight: 5
