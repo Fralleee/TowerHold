@@ -11,6 +11,9 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	[HideInInspector] public Tower Target;
 	float _lastSpawnTime = 0f;
 
+	[Header("Debug")]
+	public bool ShowGizmos;
+
 	void Update()
 	{
 		if (IsSpawning && Time.time - _lastSpawnTime > SpawnRate)
@@ -31,8 +34,13 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		Instantiate(prefab, spawnPosition, rotation);
 	}
 
-	void OnDrawGizmosSelected()
+
+	void OnDrawGizmos()
 	{
+		if (!ShowGizmos)
+		{
+			return;
+		}
 		Gizmos.color = Color.red;
 
 		// Draw circles for min and max radius, not spheres

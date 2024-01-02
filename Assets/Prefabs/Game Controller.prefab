@@ -1231,10 +1231,10 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 0.495283
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 0.7372546
     - Name: 
       Entry: 4
       Data: 1
@@ -2046,11 +2046,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ca8b2d7aa2dd548aa1ffa6d9f027b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinRadius: 30
-  MaxRadius: 40
+  MinRadius: 50
+  MaxRadius: 55
   SpawnRate: 1
   Prefabs:
-  - {fileID: 4373877528160310618, guid: ca68baf6af05d644a9aafaafe7ab55b0, type: 3}
-  - {fileID: 4373877528160310618, guid: 30cf2a1f46ff57f4cbde7eb844efa252, type: 3}
+  - {fileID: 4373877528160310618, guid: ae1bcaeb097ddc64ab800529405c0a75, type: 3}
+  - {fileID: 4373877528160310618, guid: 91c4e1c274ba1e541aae293d0bc9cd80, type: 3}
   IsSpawning: 0
   Target: {fileID: 0}
+  ShowGizmos: 0
