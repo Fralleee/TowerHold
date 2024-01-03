@@ -15,9 +15,8 @@ public static class RandomManager
 
 	public static void SetSeed(int startSeed, int currentLevel)
 	{
-		var seedString = startSeed.ToString() + currentLevel.ToString();
-		var seed = int.Parse(seedString);
-		InitializeWithSeed(seed);
+		var hash = HashCode.Combine(startSeed, currentLevel);
+		InitializeWithSeed(hash);
 	}
 
 	public static int Shop(int minValue, int maxValue)
