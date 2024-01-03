@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameController : Singleton<GameController>
 {
@@ -21,6 +22,11 @@ public class GameController : Singleton<GameController>
 	void Start()
 	{
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
+
+		if (StartSeed == 0)
+		{
+			StartSeed = Random.Range(0, int.MaxValue);
+		}
 
 		RunLevel(StartLevel);
 		Invoke(nameof(StartGame), FreezeTime);
