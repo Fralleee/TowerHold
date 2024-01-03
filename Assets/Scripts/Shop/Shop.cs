@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
 
 	ShopSlot[] _slots;
 	int _refreshCost = 50;
-	int _shopTypeCount = System.Enum.GetValues(typeof(ShopType)).Length;
+	readonly int _shopTypeCount = System.Enum.GetValues(typeof(ShopType)).Length;
 
 	void Awake()
 	{
@@ -69,15 +69,15 @@ public class Shop : MonoBehaviour
 		}
 
 		// Step 3: Randomly select a category
-		var randomCategory = (ShopType)Random.Range(0, _shopTypeCount);
+		var randomCategory = (ShopType)RandomManager.Shop(0, _shopTypeCount);
 		while (!groupedItems.ContainsKey(randomCategory) || groupedItems[randomCategory].Count == 0)
 		{
-			randomCategory = (ShopType)Random.Range(0, _shopTypeCount);
+			randomCategory = (ShopType)RandomManager.Shop(0, _shopTypeCount);
 		}
 
 		// Step 4: Choose a random item from the selected category
 		var itemsInCategory = groupedItems[randomCategory];
-		var randomIndex = Random.Range(0, itemsInCategory.Count);
+		var randomIndex = RandomManager.Shop(0, itemsInCategory.Count);
 		return itemsInCategory[randomIndex];
 	}
 

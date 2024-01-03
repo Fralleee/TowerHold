@@ -25,11 +25,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
 	void Spawn()
 	{
-		var randomDirection = Random.insideUnitCircle.normalized;
-		var spawnPosition = transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * Random.Range(MinRadius, MaxRadius));
+		var randomDirection = RandomManager.InsideUnitCircleNormalized();
+		var spawnPosition = transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * RandomManager.Enemy(MinRadius, MaxRadius));
 		var rotation = Quaternion.LookRotation(transform.position - spawnPosition, Vector3.up);
 
-		var prefab = Prefabs[Random.Range(0, Prefabs.Length)];
+		var prefab = Prefabs[RandomManager.Enemy(0, Prefabs.Length)];
 
 		Instantiate(prefab, spawnPosition, rotation);
 	}

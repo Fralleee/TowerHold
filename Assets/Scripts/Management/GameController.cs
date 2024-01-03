@@ -14,15 +14,15 @@ public class GameController : Singleton<GameController>
 	public int CurrentLevel = 1;
 	public int MaxLevel = 100;
 	public GameStage CurrentStage;
+	public int StartSeed;
 	bool _gameHasEnded = false;
 	EnemySpawner _enemySpawner;
 
 	void Start()
 	{
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
-		CurrentLevel = StartLevel;
-		TimeLeft = LevelTime;
-		UpdateGameStage();
+
+		RunLevel(StartLevel);
 		Invoke(nameof(StartGame), FreezeTime);
 	}
 
@@ -43,16 +43,19 @@ public class GameController : Singleton<GameController>
 
 		if (TimeLeft <= 0)
 		{
-			NextLevel();
+			RunLevel(CurrentLevel + 1);
 		}
 	}
 
-	void NextLevel()
+	void RunLevel(int level)
 	{
-		CurrentLevel++;
+		RandomManager.SetSeed(StartSeed, level);
+
+		CurrentLevel = level;
 		UpdateGameStage();
 		EnemySpawner.Instance.SpawnRate = Mathf.Max(0.1f, EnemySpawner.Instance.SpawnRate - (0.1f * CurrentLevel / 10));
 		TimeLeft = LevelTime;
+
 		OnLevelChanged();
 	}
 
