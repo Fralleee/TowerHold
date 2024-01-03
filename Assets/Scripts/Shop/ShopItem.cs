@@ -7,6 +7,7 @@ public class ShopItem : ScriptableObject
 	public Sprite Image;
 	public int Cost;
 	public int MinLevel;
+	[HideInInspector] public ShopType ShopType;
 
 	public virtual void OnPurchase() => throw new NotImplementedException();
 }

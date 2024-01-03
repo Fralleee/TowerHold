@@ -15,6 +15,7 @@ MonoBehaviour:
   Image: {fileID: 21300000, guid: bc17cdf26c6b0cf4e917bf11c53970d4, type: 3}
   Cost: 100
   MinLevel: 0
+  ShopType: 3
   Category: 0
   ProjectilePrefab: {fileID: -2343517627577055232, guid: bd5fc6f248bd95e41a520dcdecfb3ffe,
     type: 3}
@@ -24,8 +25,8 @@ MonoBehaviour:
   TimeBetweenFindTarget: 1
   _projectileSettings:
     Speed: 50
-    RotateTowardsTarget: 0
     IsSpinning: 0
     SpinAxis: {x: 0, y: 1, z: 0}
     SpinSpeed: 360
-    UseGravity: 0
+    UseParabolicArc: 0
+    MaxArcHeight: 5

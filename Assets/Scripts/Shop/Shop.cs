@@ -15,6 +15,7 @@ public class Shop : MonoBehaviour
 
 	ShopSlot[] _slots;
 	int _refreshCost = 50;
+	int _shopTypeCount = System.Enum.GetValues(typeof(ShopType)).Length;
 
 	void Awake()
 	{
@@ -47,25 +48,37 @@ public class Shop : MonoBehaviour
 
 	ShopItem GetRandomItem(int currentLevel)
 	{
-		// Filter out the items that meet the level requirement
-		var eligibleItems = new List<ShopItem>();
+		// Step 1: Group items by broader categories
+		var groupedItems = new Dictionary<ShopType, List<ShopItem>>();
 		foreach (var item in Inventory.Items)
 		{
 			if (item.MinLevel <= currentLevel)
 			{
-				eligibleItems.Add(item);
+				if (!groupedItems.ContainsKey(item.ShopType))
+				{
+					groupedItems[item.ShopType] = new List<ShopItem>();
+				}
+				groupedItems[item.ShopType].Add(item);
 			}
 		}
 
-		// If there are no eligible items, return null or handle it as you prefer
-		if (eligibleItems.Count == 0)
+		// Step 2: Check if there are eligible items
+		if (groupedItems.Count == 0)
 		{
 			return null;
 		}
 
-		// Choose a random item from the eligible items
-		var randomIndex = Random.Range(0, eligibleItems.Count);
-		return eligibleItems[randomIndex];
+		// Step 3: Randomly select a category
+		var randomCategory = (ShopType)Random.Range(0, _shopTypeCount);
+		while (!groupedItems.ContainsKey(randomCategory) || groupedItems[randomCategory].Count == 0)
+		{
+			randomCategory = (ShopType)Random.Range(0, _shopTypeCount);
+		}
+
+		// Step 4: Choose a random item from the selected category
+		var itemsInCategory = groupedItems[randomCategory];
+		var randomIndex = Random.Range(0, itemsInCategory.Count);
+		return itemsInCategory[randomIndex];
 	}
 
 

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a7aea870d312443b5cab9b222199d3, type: 3}
   m_Name: Piercing Upgrade
   m_EditorClassIdentifier: 
-  ItemName: Piercing Upgrade
   Image: {fileID: 21300000, guid: d06064f4caeea4947b71e0ad7eb40522, type: 3}
-  Category: 4
   Cost: 100
   MinLevel: 0
+  ShopType: 7
+  Category: 4

@@ -4,4 +4,17 @@ using UnityEngine;
 public class DamageShopItem : ShopItem
 {
 	public DamageType Category;
+
+	void OnValidate()
+	{
+		ShopType = Category switch
+		{
+			DamageType.Normal => ShopType.Normal,
+			DamageType.Siege => ShopType.Siege,
+			DamageType.Technology => ShopType.Technology,
+			DamageType.Arcane => ShopType.Arcane,
+			DamageType.Void => ShopType.Void,
+			_ => ShopType.Unspecified,
+		};
+	}
 }

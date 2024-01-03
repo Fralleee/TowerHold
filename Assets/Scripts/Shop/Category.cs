@@ -17,3 +17,15 @@ public enum DamageType
 	Arcane,
 	Void
 }
+
+public enum ShopType
+{
+	Unspecified,
+	Resource,
+	Defense,
+	Normal,
+	Siege,
+	Technology,
+	Arcane,
+	Void
+}
