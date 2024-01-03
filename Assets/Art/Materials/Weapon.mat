@@ -12,7 +12,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - DR_CEL_EXTRA_ON
   - DR_OUTLINE_ON
   - _CELPRIMARYMODE_SINGLE
   - _TEXTUREBLENDINGMODE_MULTIPLY
@@ -55,7 +54,7 @@ Material:
     - _Blend: 0
     - _BumpScale: 1
     - _CameraDistanceImpact: 0
-    - _CelExtraEnabled: 1
+    - _CelExtraEnabled: 0
     - _CelNumSteps: 3
     - _CelPrimaryMode: 1
     - _ClearCoatMask: 0
@@ -97,7 +96,7 @@ Material:
     - _ReceiveShadows: 1
     - _RimEnabled: 0
     - _SelfShadingSize: 0.8
-    - _SelfShadingSizeExtra: 0.5
+    - _SelfShadingSizeExtra: 0
     - _ShadowEdgeSize: 0
     - _ShadowEdgeSizeExtra: 0
     - _Smoothness: 0.5
@@ -116,9 +115,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.6053756, g: 0.7169812, b: 0.63726294, a: 1}
+    - _BaseColor: {r: 0.5613208, g: 1, b: 0.91919065, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDim: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+    - _ColorDim: {r: 0.3820755, g: 1, b: 0.7087438, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
     - _ColorDimExtra: {r: 0, g: 0.15356854, b: 0.16981131, a: 1}
     - _ColorDimSteps: {r: 1, g: 0.9029215, b: 0.8632076, a: 1}

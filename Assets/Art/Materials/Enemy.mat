@@ -97,7 +97,7 @@ Material:
     - _ReceiveShadows: 1
     - _RimEnabled: 0
     - _SelfShadingSize: 0.8
-    - _SelfShadingSizeExtra: 0.5
+    - _SelfShadingSizeExtra: 0.25
     - _ShadowEdgeSize: 0
     - _ShadowEdgeSizeExtra: 0
     - _Smoothness: 0.5
@@ -116,11 +116,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.9715377, b: 0.8627451, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDim: {r: 0.83137256, g: 0.21650577, b: 0.17928973, a: 1}
+    - _ColorDim: {r: 0.78431374, g: 0.2156862, b: 0.2156862, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
-    - _ColorDimExtra: {r: 0, g: 0.15356854, b: 0.16981131, a: 1}
+    - _ColorDimExtra: {r: 0.37254903, g: 0.09803922, b: 0.09803922, a: 1}
     - _ColorDimSteps: {r: 1, g: 0.9029215, b: 0.8632076, a: 1}
     - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

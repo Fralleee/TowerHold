@@ -40,15 +40,17 @@ Material:
     - _OutlineWidth: 1
     - _SelfShadingSize: 0.815
     - _SelfShadingSizeExtra: 0.641
+    - _ShadowEdgeSize: 0
     - _ShadowEdgeSizeExtra: 0.05
     - _TextureImpact: 0
     - _UnityShadowMode: 2
     - _UnityShadowPower: 0.2
+    - _UnityShadowSharpness: 10
     m_Colors:
     - _BaseColor: {r: 0.20392157, g: 0.67058825, b: 0.39607844, a: 1}
     - _ColorDim: {r: 0.20392153, g: 0.67058825, b: 0.3960784, a: 1}
     - _ColorDimExtra: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UnityShadowColor: {r: 0, g: 0.15294118, b: 0.16862746, a: 1}
+    - _UnityShadowColor: {r: 0, g: 0.2823607, b: 0.31132078, a: 1}
   m_BuildTextureStacks: []

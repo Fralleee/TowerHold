@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - DR_CEL_EXTRA_ON
+  - DR_GRADIENT_ON
   - DR_OUTLINE_ON
   - _CELPRIMARYMODE_SINGLE
   - _TEXTUREBLENDINGMODE_MULTIPLY
@@ -72,15 +73,15 @@ Material:
     - _FlatSpecularEdgeSmoothness: 0
     - _FlatSpecularSize: 0.1
     - _Flatness: 1
-    - _FlatnessExtra: 1
+    - _FlatnessExtra: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GradientAngle: 0
     - _GradientCenterX: 0
     - _GradientCenterY: 0
-    - _GradientEnabled: 0
-    - _GradientSize: 10
+    - _GradientEnabled: 1
+    - _GradientSize: 0.5
     - _LightContribution: 0.6
     - _LightFalloffSize: 0
     - _LightmapDirectionPitch: 0
@@ -118,11 +119,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.5377358, g: 0.4682223, b: 0.4388127, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDim: {r: 1, g: 0.96859485, b: 0.8443396, a: 1}
+    - _ColorDim: {r: 0.745283, g: 0.73473656, b: 0.6925507, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
-    - _ColorDimExtra: {r: 0.027450982, g: 0.0627451, b: 0.24313727, a: 1}
+    - _ColorDimExtra: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
     - _ColorDimSteps: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
-    - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorGradient: {r: 0.001214108, g: 0.29613832, b: 0.07818743, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _FlatSpecularColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
