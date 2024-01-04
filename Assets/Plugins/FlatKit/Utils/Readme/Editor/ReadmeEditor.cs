@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -11,10 +10,10 @@ public class ReadmeEditor : Editor {
     private static readonly string AssetName = "Flat Kit";
 
     private static readonly GUID UnityPackageUrpGuid = new GUID("41e59f562b69648719f2424c438758f3");
-
     private static readonly GUID UnityPackageBuiltInGuid = new GUID("f4227764308e84f89a765fbf315e2945");
 
-    private static readonly GUID UrpPipelineAssetGuid = new GUID("ecbd363870e07455ea237f5753668d30");
+    // 2b85f0b7-3248-4e28-8900-a861e01241ba
+    // 95b02117-de66-49f0-91e7-cc5f4291cf90
 
     private FlatKitReadme _readme;
     private bool _showingVersionMessage;
@@ -62,11 +61,11 @@ public class ReadmeEditor : Editor {
 
         {
             if (_showingVersionMessage) {
-                EditorGUILayout.Space(20);
-
                 if (_versionLatest == null) {
                     EditorGUILayout.HelpBox($"Checking the latest version...", MessageType.None);
                 } else {
+                    EditorGUILayout.Space(20);
+
                     var local = Version.Parse(_readme.FlatKitVersion);
                     var remote = Version.Parse(_versionLatest);
                     if (local >= remote) {
@@ -80,8 +79,7 @@ public class ReadmeEditor : Editor {
 
 #if !UNITY_2020_3_OR_NEWER
                         EditorGUILayout.HelpBox(
-                            $"Please update Unity to 2020.3 or newer to get the latest " +
-                            $"version of Flat Kit.",
+                            $"Please update Unity to 2020.3 or newer to get the latest version of Flat Kit.",
                             MessageType.Error);
 #endif
                     }
@@ -119,7 +117,7 @@ public class ReadmeEditor : Editor {
                 DrawUILine(Color.yellow, 1, 0);
 
                 EditorGUILayout.HelpBox(
-                    $"Before using {AssetName} you need to unpack it depending on your " + "project's Render Pipeline.",
+                    $"Before using {AssetName} you need to unpack it depending on your project's Render Pipeline.",
                     MessageType.Warning);
 
                 GUILayout.BeginHorizontal();
@@ -151,35 +149,11 @@ public class ReadmeEditor : Editor {
 
         {
             DrawUILine(Color.gray, 1, 20);
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Configure project for", EditorStyles.label);
-
-            if (GUILayout.Button("URP", EditorStyles.miniButtonLeft)) {
-                ConfigureUrp();
-            }
-
-            if (GUILayout.Button("Built-in RP", EditorStyles.miniButtonLeft)) {
-                ConfigureBuiltIn();
-            }
-
-            GUILayout.EndHorizontal();
-        }
-
-        {
-            DrawUILine(Color.gray, 1, 20);
             EditorGUILayout.LabelField("Package Manager", EditorStyles.label);
-
-            GUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Clear cache")) {
                 ClearPackageCache();
             }
-
-            if (GUILayout.Button($"Select {AssetName}")) {
-                OpenPackageManager();
-            }
-
-            GUILayout.EndHorizontal();
 
             if (_showingClearCacheMessage) {
                 if (_cacheClearedSuccessfully) {
@@ -256,21 +230,6 @@ public class ReadmeEditor : Editor {
         EditorGUIUtility.systemCopyBuffer = GetDebugInfoString();
     }
 
-    private void OpenPackageManager() {
-#if UNITY_2020_1_OR_NEWER
-        Client.Resolve();
-#endif
-
-        const string packageName = "Flat Kit: Toon Shading and Water";
-        UnityEditor.PackageManager.UI.Window.Open(packageName);
-
-        /*
-        var request = Client.Add(packageName);
-        while (!request.IsCompleted) System.Threading.Tasks.Task.Delay(100);
-        if (request.Status != StatusCode.Success) Debug.LogError("Cannot import asset: " + request.Error.message);
-        */
-    }
-
     private void ClearPackageCache() {
         string path = string.Empty;
         if (Application.platform == RuntimePlatform.OSXEditor) {
@@ -326,51 +285,6 @@ public class ReadmeEditor : Editor {
 
     private void OnImportPackageCancelled(string packageName) {
         Debug.LogError($"<b>[{AssetName}]</b> Cancelled unpacking {packageName}.");
-    }
-
-    private void ConfigureUrp() {
-        string path = AssetDatabase.GUIDToAssetPath(UrpPipelineAssetGuid.ToString());
-        if (path == null) {
-            Debug.LogError($"[{AssetName}] Couldn't find the URP pipeline asset. " +
-                           "Have you unpacked the URP package?");
-            return;
-        }
-
-        var pipelineAsset = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(path);
-        if (pipelineAsset == null) {
-            Debug.LogError($"[{AssetName}] Couldn't load the URP pipeline asset.");
-            return;
-        }
-
-        Debug.Log(
-            $"<b>[{AssetName}]</b> Set the render pipeline asset in the Graphics settings to the {AssetName} example.");
-        GraphicsSettings.renderPipelineAsset = pipelineAsset;
-        GraphicsSettings.defaultRenderPipeline = pipelineAsset;
-
-        ChangePipelineAssetAllQualityLevels(pipelineAsset);
-    }
-
-    private void ConfigureBuiltIn() {
-        GraphicsSettings.renderPipelineAsset = null;
-        Debug.Log($"<b>[{AssetName}]</b> Cleared the render pipeline asset in the Graphics settings.");
-
-        ChangePipelineAssetAllQualityLevels(null);
-    }
-
-    private void ChangePipelineAssetAllQualityLevels(RenderPipelineAsset pipelineAsset) {
-        var originalQualityLevel = QualitySettings.GetQualityLevel();
-
-        var logString = $"<b>[{AssetName}]</b> Set the render pipeline asset for the quality levels:";
-
-        for (int i = 0; i < QualitySettings.names.Length; i++) {
-            logString += $"\n\t{QualitySettings.names[i]}";
-            QualitySettings.SetQualityLevel(i, false);
-            QualitySettings.renderPipeline = pipelineAsset;
-        }
-
-        Debug.Log(logString);
-
-        QualitySettings.SetQualityLevel(originalQualityLevel, false);
     }
 
     private void DrawColorSpaceCheck() {

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : Target
 {
 	public static Action<Enemy> OnAnyDeath = delegate { };
-	[SerializeField] int _bounty = 10;
+	public int Value = 10;
 	[SerializeField] GameObject _deathEffect;
 	public static List<Enemy> AllEnemies = new List<Enemy>();
 
@@ -19,7 +19,7 @@ public class Enemy : Target
 
 		AllEnemies.Add(this);
 
-		_bounty += GameController.Instance.CurrentLevel * 2;
+		Value += GameController.Instance.CurrentLevel * 2;
 
 		OnDeath += HandleDeath;
 	}
@@ -27,7 +27,7 @@ public class Enemy : Target
 	void HandleDeath(Target target)
 	{
 		_ = AllEnemies.Remove(this);
-		ResourceManager.Instance.AddResource(_bounty);
+		ResourceManager.Instance.AddResource(Value);
 
 		foreach (var component in GetComponents<MonoBehaviour>())
 		{

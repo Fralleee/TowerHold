@@ -48,7 +48,7 @@ MonoBehaviour:
   _cameraTransform: {fileID: 766685257449881033}
   _keyboardMovementSpeed: 0.25
   _zoomAmount: 10
-  _maxZoomAmount: 100
+  _maxZoomAmount: 150
   _smoothingTime: 10
 --- !u!1 &7932052166119934872
 GameObject:
@@ -117,7 +117,7 @@ Camera:
     height: 1
   near clip plane: 1
   far clip plane: 1000
-  field of view: 10
+  field of view: 12
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

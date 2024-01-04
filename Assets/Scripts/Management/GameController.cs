@@ -9,7 +9,7 @@ public class GameController : Singleton<GameController>
 	public static Action<GameStage> OnStageChanged = delegate { };
 	public static Action OnGameEnd = delegate { };
 	public float FreezeTime = 5f;
-	public float LevelTime = 30f;
+	public float TimePerLevel = 10f;
 	public float TimeLeft;
 	public int StartLevel = 1;
 	public int CurrentLevel = 1;
@@ -19,16 +19,22 @@ public class GameController : Singleton<GameController>
 	bool _gameHasEnded = false;
 	EnemySpawner _enemySpawner;
 
-	void Start()
+	protected override void Awake()
 	{
-		_enemySpawner = GetComponentInChildren<EnemySpawner>();
+		base.Awake();
 
 		if (StartSeed == 0)
 		{
 			StartSeed = Random.Range(0, int.MaxValue);
 		}
+		RandomManager.SetSeed(StartSeed, StartLevel);
+	}
 
-		RunLevel(StartLevel);
+	void Start()
+	{
+		_enemySpawner = GetComponentInChildren<EnemySpawner>();
+
+		RunLevel(StartLevel, true);
 		Invoke(nameof(StartGame), FreezeTime);
 	}
 
@@ -45,7 +51,7 @@ public class GameController : Singleton<GameController>
 			return;
 		}
 
-		TimeLeft -= Time.deltaTime; // Decrease the time left by the time passed since last frame
+		TimeLeft -= Time.deltaTime;
 
 		if (TimeLeft <= 0)
 		{
@@ -53,14 +59,17 @@ public class GameController : Singleton<GameController>
 		}
 	}
 
-	void RunLevel(int level)
+	void RunLevel(int level, bool ignoreSeed = false)
 	{
-		RandomManager.SetSeed(StartSeed, level);
+		if (!ignoreSeed)
+		{
+			RandomManager.SetSeed(StartSeed, level);
+		}
 
 		CurrentLevel = level;
 		UpdateGameStage();
 		EnemySpawner.Instance.SpawnRate = Mathf.Max(0.1f, EnemySpawner.Instance.SpawnRate - (0.1f * CurrentLevel / 10));
-		TimeLeft = LevelTime;
+		TimeLeft += TimePerLevel;
 
 		OnLevelChanged();
 	}

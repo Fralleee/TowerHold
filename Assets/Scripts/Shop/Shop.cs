@@ -33,7 +33,7 @@ public class Shop : MonoBehaviour
 		GameController.OnLevelChanged += RefreshShop;
 	}
 
-	void Update() => ProgressBar.fillAmount = GameController.Instance.TimeLeft / GameController.Instance.LevelTime;
+	void Update() => ProgressBar.fillAmount = GameController.Instance.TimeLeft / GameController.Instance.TimePerLevel;
 
 	public void RefreshShop()
 	{

@@ -50,10 +50,14 @@ Shader "Hidden/Flat Kit/Terrain/Lit (Add Pass)"
     {
         Tags { "Queue" = "Geometry-99" "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True"}
 
+    	HLSLINCLUDE
+    	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
+    	ENDHLSL
+
         Pass
         {
             Name "TerrainAddLit"
-            Tags { "LightMode" = "UniversalForward" }
+            Tags { "LightMode" = "UniversalForwardOnly" }
             Blend One One
             HLSLPROGRAM
             #pragma target 3.0
@@ -72,14 +76,28 @@ Shader "Hidden/Flat Kit/Terrain/Lit (Add Pass)"
 
             // -------------------------------------
             // Universal Pipeline keywords
+            #if UNITY_VERSION >= 202130
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            #else
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+            #endif
             #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
             #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
             #pragma multi_compile _ SHADOWS_SHADOWMASK
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
             #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
+            #if UNITY_VERSION >= 202130
+            #pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
+            #pragma multi_compile_fragment _ _LIGHT_LAYERS
+            #pragma multi_compile_fragment _ _LIGHT_COOKIES
+            #pragma multi_compile _ _CLUSTERED_RENDERING
+            #endif
+            #if UNITY_VERSION >= 202220
+            #pragma multi_compile _ _FORWARD_PLUS
+            #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
+            #endif
 
             // -------------------------------------
             // Unity defined keywords
@@ -87,6 +105,10 @@ Shader "Hidden/Flat Kit/Terrain/Lit (Add Pass)"
             #pragma multi_compile _ LIGHTMAP_ON
             #pragma multi_compile_fog
             #pragma multi_compile_instancing
+            #if UNITY_VERSION >= 202230
+            #pragma multi_compile _ DYNAMICLIGHTMAP_ON
+            #pragma multi_compile_fragment _ DEBUG_DISPLAY
+            #endif
             #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
 
             #pragma shader_feature_local_fragment _TERRAIN_BLEND_HEIGHT
@@ -98,72 +120,12 @@ Shader "Hidden/Flat Kit/Terrain/Lit (Add Pass)"
 
             #define FLATKIT_TERRAIN 1
 
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/TerrainLitInput.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/TerrainLitPasses.hlsl"
-            #include "LibraryUrp/StylizedInput.hlsl"
-            #include "LibraryUrp/Lighting_DR.hlsl"
-            #include "LibraryUrp/TerrainLitPasses_DR.hlsl"
-            
-			/* start CurvedWorld */
-			//#define CURVEDWORLD_BEND_TYPE_CLASSICRUNNER_X_POSITIVE
-			//#define CURVEDWORLD_BEND_ID_1
-			//#pragma shader_feature_local CURVEDWORLD_DISABLED_ON
-			//#pragma shader_feature_local CURVEDWORLD_NORMAL_TRANSFORMATION_ON
-			//#include "Assets/Amazing Assets/Curved World/Shaders/Core/CurvedWorldTransform.cginc"
-			/* end CurvedWorld */
+            // Detail map.
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #pragma shader_feature_local_fragment _DETAILMAPBLENDINGMODE_MULTIPLY _DETAILMAPBLENDINGMODE_ADD _DETAILMAPBLENDINGMODE_INTERPOLATE
 
-            ENDHLSL
-        }
-
-        Pass
-        {
-            Name "GBuffer"
-            Tags{"LightMode" = "UniversalGBuffer"}
-
-            Blend One One
-
-            HLSLPROGRAM
-            #pragma exclude_renderers gles
-            #pragma target 3.0
-            #pragma vertex SplatmapVert
-            #pragma fragment SplatmapFragment_DSTRM
-
-            // -------------------------------------
-            // Flat Kit
-            #pragma shader_feature_local __ _CELPRIMARYMODE_SINGLE _CELPRIMARYMODE_STEPS _CELPRIMARYMODE_CURVE
-            #pragma shader_feature_local DR_CEL_EXTRA_ON
-            #pragma shader_feature_local DR_GRADIENT_ON
-            #pragma shader_feature_local DR_SPECULAR_ON
-            #pragma shader_feature_local DR_RIM_ON
-            #pragma shader_feature_local __ _UNITYSHADOWMODE_MULTIPLY _UNITYSHADOWMODE_COLOR
-
-            // -------------------------------------
-            // Universal Pipeline keywords
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            //#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            //#pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile _ _SHADOWS_SOFT
-            #pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
-
-            // -------------------------------------
-            // Unity defined keywords
-            #pragma multi_compile _ DIRLIGHTMAP_COMBINED
-            #pragma multi_compile _ LIGHTMAP_ON
-            #pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
-            //#pragma multi_compile_fog
-            #pragma multi_compile_instancing
-            #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap
-
-            #pragma shader_feature_local _TERRAIN_BLEND_HEIGHT
-            #pragma shader_feature_local _NORMALMAP
-            #pragma shader_feature_local _MASKMAP
-            // Sample normal in pixel shader when doing instancing
-            #pragma shader_feature_local _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-            #define TERRAIN_SPLAT_ADDPASS 1
-            #define TERRAIN_GBUFFER 1
-
-            #define FLATKIT_TERRAIN 1
+            TEXTURE2D(_DetailMap);
+            SAMPLER(sampler_DetailMap);
 
             #include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/TerrainLitInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/Terrain/TerrainLitPasses.hlsl"
@@ -182,5 +144,6 @@ Shader "Hidden/Flat Kit/Terrain/Lit (Add Pass)"
             ENDHLSL
         }
     }
+
     Fallback "Hidden/Universal Render Pipeline/FallbackError"
 }

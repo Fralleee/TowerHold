@@ -19,7 +19,7 @@ public class FlatKitReadme : ScriptableObject {
     public bool FlatKitInstalled;
 
     [NonSerialized]
-    public readonly string FlatKitVersion = "2.9.0";
+    public readonly string FlatKitVersion = "4.3.0";
 
     [NonSerialized]
     public bool? UrpInstalled;
@@ -36,8 +36,7 @@ public class FlatKitReadme : ScriptableObject {
 
     private const string UrpPackageID = "com.unity.render-pipelines.universal";
 
-    private static readonly GUID StylizedShaderGuid =
-        new GUID("bee44b4a58655ee4cbff107302a3e131");
+    private static readonly GUID StylizedShaderGuid = new GUID("bee44b4a58655ee4cbff107302a3e131");
 
     public void Refresh() {
         UrpInstalled = false;
@@ -62,10 +61,11 @@ public class FlatKitReadme : ScriptableObject {
     private PackageCollection GetPackageList() {
         var listRequest = Client.List(true);
 
-        while (listRequest.Status == StatusCode.InProgress) continue;
+        while (listRequest.Status == StatusCode.InProgress) { }
 
         if (listRequest.Status == StatusCode.Failure) {
             PackageManagerError = listRequest.Error.message;
+            // 22b5f7ed-989d-49d1-90d9-c62d76c3081a
             Debug.LogWarning("[Flat Kit] Failed to get packages from Package Manager.");
             return null;
         }

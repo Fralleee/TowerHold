@@ -2,67 +2,56 @@
 {
     Properties
     {
-        [Header(Colors)][Space]
-        [KeywordEnum(Linear, Gradient Texture)] _ColorMode ("     Source{Colors}", Float) = 0.0
-        _ColorShallow ("[_COLORMODE_LINEAR]     Shallow", Color) = (0.35, 0.6, 0.75, 0.8) // Color alpha controls opacity
-        _ColorDeep ("[_COLORMODE_LINEAR]     Deep", Color) = (0.65, 0.9, 1.0, 1.0)
-        [NoScaleOffset] _ColorGradient("[_COLORMODE_GRADIENT_TEXTURE]     Gradient", 2D) = "white" {}
-        _FadeDistance("     Shallow depth", Float) = 0.5
-        _WaterDepth("     Gradient size", Float) = 5.0
-        _LightContribution("     Light Color Contribution", Range(0, 1)) = 0
+        [KeywordEnum(Linear, Gradient Texture)] _ColorMode ("[FOLDOUT(Colors){9}]Source{Colors}", Float) = 0.0
+        _ColorShallow ("[_COLORMODE_LINEAR]Shallow", Color) = (0.35, 0.6, 0.75, 0.8) // Color alpha controls opacity
+        _ColorDeep ("[_COLORMODE_LINEAR]Deep", Color) = (0.65, 0.9, 1.0, 1.0)
+        [NoScaleOffset] _ColorGradient("[_COLORMODE_GRADIENT_TEXTURE]Gradient", 2D) = "white" {}
+        _FadeDistance("Shallow Depth", Float) = 0.5
+        _WaterDepth("Gradient Size", Float) = 5.0
+        _LightContribution("Light Color Contribution", Range(0, 1)) = 0
+        _WaterClearness("Transparency", Range(0, 1)) = 0.3
+        _ShadowStrength("Shadow Strength", Range(0, 1)) = 0.35
 
+        _CrestColor("[FOLDOUT(Crest){3}]Color{Crest}", Color) = (1.0, 1.0, 1.0, 0.9)
+        _CrestSize("Size{Crest}", Range(0, 1)) = 0.1
+        _CrestSharpness("Sharp transition{Crest}", Range(0, 1)) = 0.1
+
+        [KeywordEnum(None, Round, Grid, Pointy)] _WaveMode ("[FOLDOUT(Wave Geometry){6}]Shape{Wave}", Float) = 1.0
+        _WaveSpeed("[!_WAVEMODE_NONE]Speed{Wave}", Float) = 0.5
+        _WaveAmplitude("[!_WAVEMODE_NONE]Amplitude{Wave}", Float) = 0.25
+        _WaveFrequency("[!_WAVEMODE_NONE]Frequency{Wave}", Float) = 1.0
+        _WaveDirection("[!_WAVEMODE_NONE]Direction{Wave}", Range(-1.0, 1.0)) = 0
+        _WaveNoise("[!_WAVEMODE_NONE]Noise{Wave}", Range(0, 1)) = 0.25
+
+        [KeywordEnum(None, Gradient Noise, Texture)] _FoamMode ("[FOLDOUT(Foam){12}]Source{Foam}", Float) = 1.0
+        [NoScaleOffset] _NoiseMap("[_FOAMMODE_TEXTURE]Texture{Foam}", 2D) = "white" {}
+        _FoamColor("[!_FOAMMODE_NONE]Color{Foam}", Color) = (1, 1, 1, 1)
         [Space]
-        _WaterClearness("     Transparency", Range(0, 1)) = 0.3
-        _ShadowStrength("     Shadow strength", Range(0, 1)) = 0.35
-
-        [Header(Crest)][Space]
-        _CrestColor("     Color{Crest}", Color) = (1.0, 1.0, 1.0, 0.9)
-        _CrestSize("     Size{Crest}", Range(0, 1)) = 0.1
-        _CrestSharpness("     Sharp transition{Crest}", Range(0, 1)) = 0.1
-
-        [Space][Header(Wave geometry)][Space]
-        [KeywordEnum(None, Round, Grid, Pointy)] _WaveMode ("     Shape{Wave}", Float) = 1.0
-        _WaveSpeed("[!_WAVEMODE_NONE]     Speed{Wave}", Float) = 0.5
-        _WaveAmplitude("[!_WAVEMODE_NONE]     Amplitude{Wave}", Float) = 0.25
-        _WaveFrequency("[!_WAVEMODE_NONE]     Frequency{Wave}", Float) = 1.0
-        _WaveDirection("[!_WAVEMODE_NONE]     Direction{Wave}", Range(-1.0, 1.0)) = 0
-        _WaveNoise("[!_WAVEMODE_NONE]     Noise{Wave}", Range(0, 1)) = 0.25
-
-        [Space][Header(Foam)][Space]
-        [KeywordEnum(None, Gradient Noise, Texture)] _FoamMode ("     Source{Foam}", Float) = 1.0
-        [NoScaleOffset] _NoiseMap("[_FOAMMODE_TEXTURE]           Texture{Foam}", 2D) = "white" {}
-        _FoamColor("[!_FOAMMODE_NONE]     Color{Foam}", Color) = (1, 1, 1, 1)
+        _FoamDepth("[!_FOAMMODE_NONE]Shore Depth{Foam}", Float) = 0.5
+        _FoamNoiseAmount("[!_FOAMMODE_NONE]Shore Blending{Foam}", Range(0.0, 1.0)) = 1.0
         [Space]
-        _FoamDepth("[!_FOAMMODE_NONE]     Shore Depth{Foam}", Float) = 0.5
-        _FoamNoiseAmount("[!_FOAMMODE_NONE]     Shore Blending{Foam}", Range(0.0, 1.0)) = 1.0
+        _FoamAmount("[!_FOAMMODE_NONE]Amount{Foam}", Range(0, 3)) = 0.25
         [Space]
-        _FoamAmount("[!_FOAMMODE_NONE]     Amount{Foam}", Range(0, 3)) = 0.25
+        _FoamScale("[!_FOAMMODE_NONE]Scale{Foam}", Range(0, 3)) = 1
+        _FoamStretchX("[!_FOAMMODE_NONE]Stretch X{Foam}", Range(0, 10)) = 1
+        _FoamStretchY("[!_FOAMMODE_NONE]Stretch Y{Foam}", Range(0, 10)) = 1
         [Space]
-        _FoamScale("[!_FOAMMODE_NONE]     Scale{Foam}", Range(0, 3)) = 1
-        _FoamStretchX("[!_FOAMMODE_NONE]     Stretch X{Foam}", Range(0, 10)) = 1
-        _FoamStretchY("[!_FOAMMODE_NONE]     Stretch Y{Foam}", Range(0, 10)) = 1
+        _FoamSharpness("[!_FOAMMODE_NONE]Sharpness{Foam}", Range(0, 1)) = 0.5
         [Space]
-        _FoamSharpness("[!_FOAMMODE_NONE]     Sharpness{Foam}", Range(0, 1)) = 0.5
-        [Space]
-        _FoamSpeed("[!_FOAMMODE_NONE]     Speed{Foam}", Float) = 0.1
-        _FoamDirection("[!_FOAMMODE_NONE]     Direction{Foam}", Range(-1.0, 1.0)) = 0
+        _FoamSpeed("[!_FOAMMODE_NONE]Speed{Foam}", Float) = 0.1
+        _FoamDirection("[!_FOAMMODE_NONE]Direction{Foam}", Range(-1.0, 1.0)) = 0
 
-        [Space][Header(Refraction)][Space]
-        _RefractionFrequency("     Frequency", Float) = 35
-        _RefractionAmplitude("     Amplitude", Range(0, 0.1)) = 0.01
-        _RefractionSpeed("     Speed", Float) = 0.1
-        _RefractionScale("     Scale", Float) = 1
+        _RefractionFrequency("[FOLDOUT(Refraction){4}]Frequency", Float) = 35
+        _RefractionAmplitude("Amplitude", Range(0, 0.1)) = 0.01
+        _RefractionSpeed("Speed", Float) = 0.1
+        _RefractionScale("Scale", Float) = 1
 
-        /*
-        [Space][Header(Specular (Experimental))][Space]
-        _FresnelAmount("     Amount", Range(0, 1)) = 0.0
-        _FresnelSharpness("     Sharpness", Range(0, 1)) = 0.5
-        _SpecularColor("     Color", Color) = (1, 1, 1, 0)
-        _SunReflection("     Sun Reflection", Range(0, 1)) = 0.0
-        */
+/*
+        _SpecularAmount("[FOLDOUT(Specular){2}]Amount{Specular}", Range(0, 1)) = 0.5
+        [HDR] _SpecularColor("Color{Specular}", Color) = (1, 1, 1, 1)
+*/
 
-        [Space][Header(Rendering options)][Space]
-        [ToggleOff] _Opaque("     Opaque", Float) = 0.0
+        [HideInInspector] [ToggleOff] _Opaque("Opaque", Float) = 0.0
         [HideInInspector] _QueueOffset("Queue offset", Float) = 0.0
     }
 
@@ -77,24 +66,61 @@
         Lighting Off
         ZWrite[_ZWrite]
 
+    	HLSLINCLUDE
+    	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
+    	ENDHLSL
+
         Pass
         {
             HLSLPROGRAM
             #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
             #pragma target 2.0
 
             #pragma shader_feature_local _COLORMODE_LINEAR _COLORMODE_GRADIENT_TEXTURE
             #pragma shader_feature_local _FOAMMODE_NONE _FOAMMODE_GRADIENT_NOISE _FOAMMODE_TEXTURE
             #pragma shader_feature_local _WAVEMODE_NONE _WAVEMODE_ROUND _WAVEMODE_GRID _WAVEMODE_POINTY
 
-            #pragma multi_compile_fog
-
             // -------------------------------------
-            // Universal Render Pipeline keywords
+            // Universal Pipeline keywords
+            #if VERSION_GREATER_EQUAL(11, 0)
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            #else
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma multi_compile _ _SHADOWS_SOFT
+            #endif
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
+            #pragma multi_compile _ SHADOWS_SHADOWMASK
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
+            #if VERSION_GREATER_EQUAL(12, 0)
+            #pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
+            #pragma multi_compile_fragment _ _LIGHT_LAYERS
+            #pragma multi_compile_fragment _ _LIGHT_COOKIES
+            #pragma multi_compile _ _CLUSTERED_RENDERING
+            #endif
+            #if UNITY_VERSION >= 202220
+            #pragma multi_compile _ _FORWARD_PLUS
+            #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
+            #endif
+
+            // -------------------------------------
+            // Unity defined keywords
+            #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+            #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile_fog
+            #if UNITY_VERSION >= 202220
+            #pragma multi_compile _ DYNAMICLIGHTMAP_ON
+            #pragma multi_compile_fragment _ DEBUG_DISPLAY
+            #pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
+            #endif
+
+            //--------------------------------------
+            // GPU Instancing
+            #pragma multi_compile_instancing
+            #pragma instancing_options renderinglayer
+            #pragma multi_compile _ DOTS_INSTANCING_ON
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl"
@@ -108,13 +134,12 @@
             #if defined(_COLORMODE_GRADIENT_TEXTURE)
             TEXTURE2D(_ColorGradient);
             SAMPLER(sampler_ColorGradient);
-            float4 _ColorGradient_ST;
             #endif
 
-            #if defined(_COLORMODE_LINEAR)
-            half4 _ColorShallow, _ColorDeep;
-            #endif
+            TEXTURE2D(_NoiseMap);
+            SAMPLER(sampler_NoiseMap);
 
+            CBUFFER_START(UnityPerMaterial)
             float _FadeDistance, _WaterDepth;
 
             half _LightContribution;
@@ -128,12 +153,18 @@
                  _FoamDirection, _FoamNoiseAmount, _RefractionFrequency, _RefractionAmplitude, _RefractionSpeed,
                  _RefractionScale, _FresnelAmount, _FresnelSharpness, _SunReflection;
 
+            /*
+            half _SpecularAmount;
             half4 _SpecularColor;
-            half _SpecularStrength;
+            */
 
-            TEXTURE2D(_NoiseMap);
-            SAMPLER(sampler_NoiseMap);
             float4 _NoiseMap_ST;
+
+            // _COLORMODE_LINEAR:
+            half4 _ColorShallow, _ColorDeep;
+            // _COLORMODE_GRADIENT_TEXTURE:
+            float4 _ColorGradient_ST;
+            CBUFFER_END
 
             struct VertexInput
             {
@@ -147,8 +178,8 @@
 
             struct VertexOutput
             {
-                float4 positionCS : POSITION0;
-                float3 positionWS : POSITION1;
+                float4 positionHCS : SV_POSITION;
+                float3 positionWS : TEXCOORD6;
                 float2 uv : TEXCOORD0;
                 float4 screenPosition : TEXCOORD1;
                 float waveHeight : TEXCOORD2;
@@ -197,8 +228,7 @@
                 const float scene_depth = lerp(_ProjectionParams.z, _ProjectionParams.y, depth_packed) * is_ortho +
                     LinearEyeDepth(SampleSceneDepth(uv), _ZBufferParams) * is_persp;
                 const float surface_depth = lerp(_ProjectionParams.z, _ProjectionParams.y, i.screenPosition.z) *
-                    is_ortho + i.
-                               screenPosition.w * is_persp;
+                    is_ortho + i.screenPosition.w * is_persp;
 
                 const float water_depth = scene_depth - surface_depth;
 
@@ -212,7 +242,7 @@
                         cos(offset + _WaveDirection * PI)) * _WaveFrequency);
             }
 
-            inline float WaveHeight(float2 texcoord, float3 positionOS)
+            inline float WaveHeight(float2 texcoord, float3 position)
             {
                 float s = 0;
 
@@ -221,10 +251,10 @@
                     float noise01 = GradientNoise(noise_uv, 1.0);
                     float noise = (noise01 * 2.0 - 1.0) * _WaveNoise;
 
-                    s = SineWave(positionOS, noise);
+                    s = SineWave(position, noise);
 
                 #if defined(_WAVEMODE_GRID)
-                        s *= SineWave(positionOS, HALF_PI + noise);
+                        s *= SineWave(position, HALF_PI + noise);
                 #endif
 
                 #if defined(_WAVEMODE_POINTY)
@@ -235,19 +265,22 @@
                 return s;
             }
 
-            /*
-            void Unity_NormalFromHeight_World(float In, out float3 Out)
-            {
-                float3 worldDerivativeX = ddx(Position * 100);
-                float3 worldDerivativeY = ddy(Position * 100);
-                float3 crossX = cross(TangentMatrix[2].xyz, worldDerivativeX);
-                float3 crossY = cross(TangentMatrix[2].xyz, worldDerivativeY);
-                float3 d = abs(dot(crossY, worldDerivativeX));
-                float3 inToNormal = ((((In + ddx(In)) - In) * crossY) + (((In + ddy(In)) - In) * crossX)) * sign(d);
-                inToNormal.y *= -1.0;
-                Out = normalize((d * TangentMatrix[2].xyz) - inToNormal);
+            inline void AdditionalLights(float3 WorldPosition, out half3 Color, out half Attenuation) {
+                Color = 0;
+                Attenuation = 0;
+
+                #ifdef _ADDITIONAL_LIGHTS
+                const half4 shadowMask = half4(1, 1, 1, 1);
+                const uint numAdditionalLights = GetAdditionalLightsCount();
+                for (uint lightI = 0; lightI < numAdditionalLights; lightI++) {
+                    Light light = GetAdditionalLight(lightI, WorldPosition, shadowMask);
+                    Color += light.color;
+                    Attenuation += light.distanceAttenuation * light.shadowAttenuation;
+                }
+
+                Attenuation = saturate(Attenuation);
+                #endif
             }
-            */
 
             VertexOutput vert(VertexInput i)
             {
@@ -258,15 +291,14 @@
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
                 // Vertex animation.
-                const float3 original_pos_ws = TransformObjectToWorld(i.positionOS.xyz);
-                const float s = WaveHeight(i.texcoord, original_pos_ws);
-                o.positionWS = original_pos_ws;
-                o.positionWS.y += s * _WaveAmplitude;
-                o.positionCS = TransformWorldToHClip(o.positionWS);
-                const float4 screenPosition = ComputeScreenPos(o.positionCS);
-                o.screenPosition = screenPosition;
+                const float3 originalPositionWS = TransformObjectToWorld(i.positionOS.xyz);
+                const float s = WaveHeight(i.texcoord, originalPositionWS);
                 o.waveHeight = s;
+                o.positionWS = originalPositionWS;
+                o.positionWS.y += s * _WaveAmplitude;
 
+                o.positionHCS = TransformWorldToHClip(o.positionWS);
+                o.screenPosition = ComputeScreenPos(o.positionHCS);
                 o.uv = i.texcoord;
 
                 {
@@ -278,10 +310,10 @@
 
                     const float sample_distance = 0.01;
 
-                    float3 pos_tangent = original_pos_ws + normalInput.tangentWS * sample_distance;
+                    float3 pos_tangent = originalPositionWS + normalInput.tangentWS * sample_distance;
                     pos_tangent.y += WaveHeight(i.texcoord, pos_tangent) * _WaveAmplitude;
 
-                    float3 pos_bitangent = original_pos_ws + normalInput.bitangentWS * sample_distance;
+                    float3 pos_bitangent = originalPositionWS + normalInput.bitangentWS * sample_distance;
                     pos_bitangent.y += WaveHeight(i.texcoord, pos_bitangent) * _WaveAmplitude;
 
                     const float3 modified_tangent = pos_tangent - o.positionWS;
@@ -291,7 +323,7 @@
                     o.normal = normalize(modified_normal);
                 }
 
-                half fogFactor = ComputeFogFactor(o.positionCS.z);
+                const half fogFactor = ComputeFogFactor(o.positionHCS.z);
                 o.fogFactor = fogFactor;
 
                 return o;
@@ -346,32 +378,35 @@
 
                 // Foam.
                 #if !defined(_FOAMMODE_NONE)
-                    float uv_angle = atan2(i.uv.y, i.uv.x);
-                    float cs = cos(uv_angle + _FoamDirection * PI);
-                    float sn = sin(uv_angle + _FoamDirection * PI);
-                    float2 rotated_uv = float2(i.uv.x * cs - i.uv.y * sn, i.uv.x * sn + i.uv.y * cs);
-                    float2 noise_uv_foam = rotated_uv * 100.0f + _Time.zz * _FoamSpeed;
-
+                    float2 stretch_factor = float2(_FoamStretchX, _FoamStretchY);
                     float noise_foam_base;
+
                 #if defined(_FOAMMODE_TEXTURE)
-                        float2 stretch_factor = float2(_FoamStretchX, _FoamStretchY);
-                        noise_foam_base = SAMPLE_TEXTURE2D(_NoiseMap, sampler_NoiseMap,
-                            noise_uv_foam * stretch_factor / (_FoamScale * 100.0)).r;
+                    const float2 rotated_uv = i.uv * cos(_FoamDirection * PI) +
+                        float2(i.uv.y, -i.uv.x) * sin(_FoamDirection * PI);
+                    const float2 noise_uv_foam = rotated_uv * 100.0f + _Time.zz * _FoamSpeed;
+                    noise_foam_base = SAMPLE_TEXTURE2D(_NoiseMap, sampler_NoiseMap,
+                        noise_uv_foam * stretch_factor / (_FoamScale * 100.0)).r;
                 #endif
 
                 #if defined(_FOAMMODE_GRADIENT_NOISE)
-                        float2 stretch_factor = float2(_FoamStretchX, _FoamStretchY);
-                        noise_foam_base = GradientNoise(noise_uv_foam * stretch_factor, _FoamScale);
+                    // This rotation is not exactly correct, but we're keeping it for backwards compatibility.
+                    const float uv_angle = atan2(i.uv.y, i.uv.x);
+                    const float cs = cos(uv_angle + _FoamDirection * PI);
+                    const float sn = sin(uv_angle + _FoamDirection * PI);
+                    const float2 rotated_uv = float2(i.uv.x * cs - i.uv.y * sn, i.uv.x * sn + i.uv.y * cs);
+                    const float2 noise_uv_foam = rotated_uv * 100.0f + _Time.zz * _FoamSpeed;
+                    noise_foam_base = GradientNoise(noise_uv_foam * stretch_factor, _FoamScale);
                 #endif
 
-                    float foam_blur = 1.0 - _FoamSharpness;
+                    float foam_blur = 1.0 - _FoamSharpness + 1e-6;
                     float shore_fade = saturate(depth_fade / _FoamDepth);
                     float hard_foam_end = 0.1;
                     float soft_foam_end = hard_foam_end + foam_blur * 0.3;
                     float foam_shore = smoothstep(0.5 - foam_blur * 0.5, 0.5 + foam_blur * 0.5, noise_foam_base);
                     foam_shore = saturate(smoothstep(soft_foam_end, hard_foam_end, shore_fade) +
                         smoothstep(1, soft_foam_end, shore_fade) * foam_shore * _FoamNoiseAmount);
-                
+
                     float foam_surface = smoothstep(noise_foam_base, noise_foam_base + foam_blur, _FoamAmount);
                     foam_surface = smoothstep(0.5 - foam_blur * 0.5, 0.5 + foam_blur * 0.5, foam_surface);
 
@@ -379,52 +414,40 @@
                     c = lerp(c, _FoamColor.rgb, foam * _FoamColor.a);
                 #endif
 
-                // Shadow.
+                // Shadows.
+                #define _MAIN_LIGHT_SHADOWS  // Since URP 13 or 14 this is not defined by default.
                 #if defined(_MAIN_LIGHT_SHADOWS)
-                    /*
-                    struct VertexPositionInputs
-                        float3 positionWS; // World space position
-                        float3 positionVS; // View space position
-                        float4 positionCS; // Homogeneous clip space position
-                        float4 positionNDC;// Homogeneous normalized device coordinates
-                    */
                     VertexPositionInputs vertexInput = (VertexPositionInputs)0;
                     vertexInput.positionWS = i.positionWS.xyz;
                     float4 shadowCoord = GetShadowCoord(vertexInput);
                     half shadowAttenutation = MainLightRealtimeShadow(shadowCoord);
-                    c = lerp(c, c * color_shallow, _ShadowStrength * (1.0h - shadowAttenutation));
+                    c = lerp(c, c * color_shallow.rgb, _ShadowStrength * (1.0h - shadowAttenutation));
                 #endif
 
                 /*
                 // Specular.
                 {
-                    const float3 normalWS = NormalizeNormalPerPixel(i.normal);
-                    const float3 viewDirWS = SafeNormalize(i.viewDir);
-
-                    const Light mainLight = GetMainLight(); // _MainLightColor, _MainLightPosition
-
-                    // Fresnel.
-                    float fresnel = Pow4(saturate(_FresnelAmount * 2.0 - saturate(dot(normalWS, -viewDirWS))));
-                    const float fresnel_blur = 1.0 - _FresnelSharpness;
-                    fresnel = smoothstep(0.5 - fresnel_blur * 0.5, 0.5 + fresnel_blur * 0.5, fresnel);
-                    c = lerp(c, _SpecularColor.rgb, fresnel * _SpecularColor.a);
-
-                    // Sun reflection.
-                    const float3 reflect_view = reflect(-viewDirWS.xzy, normalWS.xzy);
-                    const float light_reflection_alignment = saturate(dot(_MainLightPosition.xyz, reflect_view));
-
-                    const float3 reflect_planar = reflect(-viewDirWS.xzy, half3(0, 0, 1));
-                    const float plane_reflection_alignment = saturate(dot(_MainLightPosition.xyz, reflect_planar));
-
-                    c += step(0.9, plane_reflection_alignment) * step(0.985, light_reflection_alignment) *
-                        mainLight.color * _SpecularColor.rgb * _SpecularColor.a * _SunReflection;
-
-                    // Sun glitter.
-                    // TODO.
+                    const float3 viewDirWS = normalize(i.viewDir);
+                    const float3 normalWS = normalize(i.normal);
+                    const float3 lightDirWS = -GetMainLight().direction;
+                    const float3 halfDirWS = normalize(viewDirWS + lightDirWS);
+                    const float specular = pow(saturate(dot(normalWS, halfDirWS)), 1.0f);
+                    c = lerp(c, c * _SpecularColor.rgb, specular * _SpecularAmount);
                 }
                 */
 
                 c *= lerp(half3(1, 1, 1), _MainLightColor.rgb, _LightContribution);
+
+                #if defined(_ADDITIONAL_LIGHTS)
+                half3 lightColor;
+                half lightAttenuation;
+                AdditionalLights(i.positionWS, lightColor, lightAttenuation);
+                lightColor = lerp(half3(1, 1, 1), lightColor, _LightContribution);
+                c += lightColor * lightAttenuation;
+                #if !defined(_FOAMMODE_NONE)
+                    c = lerp(c, _FoamColor.rgb * lightColor, foam * _FoamColor.a * lightAttenuation);
+                #endif
+                #endif
 
                 c = MixFog(c, i.fogFactor);
 
