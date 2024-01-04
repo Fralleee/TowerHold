@@ -2012,12 +2012,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FreezeTime: 0
-  LevelTime: 30
+  TimePerLevel: 10
   TimeLeft: 0
   StartLevel: 1
   CurrentLevel: 1
   MaxLevel: 100
   CurrentStage: 0
+  StartSeed: 100
 --- !u!114 &5997500516575327268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2048,10 +2049,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinRadius: 50
   MaxRadius: 55
-  SpawnRate: 1
-  Prefabs:
-  - {fileID: 4373877528160310618, guid: ae1bcaeb097ddc64ab800529405c0a75, type: 3}
-  - {fileID: 4373877528160310618, guid: 91c4e1c274ba1e541aae293d0bc9cd80, type: 3}
+  SpawnRate: 5
+  EnemyVariants: {fileID: 11400000, guid: 9518e5eb0f4d6474f8994e11ad100c09, type: 2}
+  LevelSpecificSpawns: {fileID: 11400000, guid: c63e1f2e7ff051544b08184ec094a06f,
+    type: 2}
+  MinPointsPerSpawn: 20
+  MaxPointsPerSpawn: 30
   IsSpawning: 0
   Target: {fileID: 0}
   ShowGizmos: 0

@@ -69,14 +69,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
 	LevelSpawnConfiguration? GetSpawnOverride(int currentLevel)
 	{
-		Debug.Log($"Checking for spawn override for level {currentLevel}");
 		if (_levelSpawnConfigurations.TryGetValue(currentLevel, out var spawnOverride))
 		{
-			Debug.Log($"Found spawn override for level {currentLevel}");
 			return spawnOverride;
 		}
 
-		Debug.Log($"No spawn override for level {currentLevel}");
 		return null;
 	}
 
