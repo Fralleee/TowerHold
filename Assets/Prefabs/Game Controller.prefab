@@ -2011,10 +2011,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FreezeTime: 0
-  TimePerLevel: 10
+  FreezeTime: 1
+  TimePerLevel: 30
   TimeLeft: 0
-  StartLevel: 1
+  StartLevel: 2
   CurrentLevel: 1
   MaxLevel: 100
   CurrentStage: 0
@@ -2047,14 +2047,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ca8b2d7aa2dd548aa1ffa6d9f027b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinRadius: 50
-  MaxRadius: 55
-  SpawnRate: 5
-  EnemyVariants: {fileID: 11400000, guid: 9518e5eb0f4d6474f8994e11ad100c09, type: 2}
-  LevelSpecificSpawns: {fileID: 11400000, guid: c63e1f2e7ff051544b08184ec094a06f,
-    type: 2}
-  MinPointsPerSpawn: 20
-  MaxPointsPerSpawn: 30
   IsSpawning: 0
   Target: {fileID: 0}
-  ShowGizmos: 0
+  _minRadius: 30
+  _maxRadius: 40
+  _enemyVariants: {fileID: 11400000, guid: 9518e5eb0f4d6474f8994e11ad100c09, type: 2}
+  _levelSpecificSpawns: {fileID: 11400000, guid: c63e1f2e7ff051544b08184ec094a06f,
+    type: 2}
+  _showGizmos: 0
