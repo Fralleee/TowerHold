@@ -39,7 +39,7 @@ public class EnemyAttack : MonoBehaviour
 		else if (Time.time - _lastAttackTime > TimeBetweenAttacks)
 		{
 			StartAttack();
-			_lastAttackTime = Time.time + RandomManager.RandomDelay(TimeBetweenAttacks, 0.1f);
+			_lastAttackTime = Time.time + RandomManager.RandomDelay(TimeBetweenAttacks);
 		}
 	}
 

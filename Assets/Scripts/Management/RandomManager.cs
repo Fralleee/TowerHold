@@ -36,9 +36,9 @@ public static class RandomManager
 		return (float)(_delayRandom.NextDouble() * (maxValue - minValue) + minValue);
 	}
 
-	public static float RandomDelay(float value, float minMaxModifier)
+	public static float RandomDelay(float value)
 	{
-		return value + (float)((_delayRandom.NextDouble() * minMaxModifier * 2) - minMaxModifier);
+		return value + (float)((_delayRandom.NextDouble() * 0.1 * 2) - 0.1);
 	}
 
 	public static Vector2 InsideUnitCircleNormalized()

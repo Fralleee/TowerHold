@@ -172,27 +172,15 @@ public class ObjectSpawner : MonoBehaviour
 	void DrawGizmosSettings(ObjectSpawnerSettings settings)
 	{
 		Gizmos.color = Color.yellow;
-		Draw2dCircle(transform.position, settings.StartRadius);
+		GizmosExtras.Draw2dCircle(transform.position, settings.StartRadius);
 
 		Gizmos.color = Color.blue;
-		Draw2dCircle(transform.position, settings.EndRadius);
+		GizmosExtras.Draw2dCircle(transform.position, settings.EndRadius);
 
 		Gizmos.color = Color.cyan;
 		foreach (var obj in _spawnedObjects)
 		{
 			Gizmos.DrawWireCube(obj.transform.position, Vector3.one * settings.MinSpacing);
-		}
-	}
-
-	void Draw2dCircle(Vector3 center, float radius)
-	{
-		var prevPos = center + new Vector3(radius, 0, 0);
-		for (var i = 0; i < 30; i++)
-		{
-			var angle = i / 30f * Mathf.PI * 2f;
-			var newPos = center + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
-			Gizmos.DrawLine(prevPos, newPos);
-			prevPos = newPos;
 		}
 	}
 }

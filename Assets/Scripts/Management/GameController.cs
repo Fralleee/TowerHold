@@ -16,6 +16,7 @@ public class GameController : Singleton<GameController>
 	public int MaxLevel = 100;
 	public GameStage CurrentStage;
 	public int StartSeed;
+	bool _gameHasStarted = false;
 	bool _gameHasEnded = false;
 	EnemySpawner _enemySpawner;
 
@@ -34,13 +35,13 @@ public class GameController : Singleton<GameController>
 	{
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
 
-		RunLevel(StartLevel, true);
+		Debug.Log("Starting game in " + FreezeTime + " seconds");
 		Invoke(nameof(StartGame), FreezeTime);
 	}
 
 	void Update()
 	{
-		if (_gameHasEnded)
+		if (_gameHasEnded || !_gameHasStarted)
 		{
 			return;
 		}
@@ -68,7 +69,6 @@ public class GameController : Singleton<GameController>
 
 		CurrentLevel = level;
 		UpdateGameStage();
-		EnemySpawner.Instance.SpawnRate = Mathf.Max(0.1f, EnemySpawner.Instance.SpawnRate - (0.1f * CurrentLevel / 10));
 		TimeLeft += TimePerLevel;
 
 		OnLevelChanged();
@@ -100,12 +100,14 @@ public class GameController : Singleton<GameController>
 		}
 	}
 
-	void StartGame() => StartSpawning();
-
-	void StartSpawning()
+	void StartGame()
 	{
+		RunLevel(StartLevel, true);
+
 		_enemySpawner.Target = Tower.Instance;
 		_enemySpawner.IsSpawning = true;
+
+		_gameHasStarted = true;
 	}
 
 	void EndGame()

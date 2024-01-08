@@ -1,23 +1,30 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : Singleton<EnemySpawner>
 {
-	public int MinRadius = 30;
-	public int MaxRadius = 40;
-	public float SpawnRate = 1f;
-	public EnemyVariants EnemyVariants;
-	public LevelSpecificSpawns LevelSpecificSpawns;
-	public int MinPointsPerSpawn = 4;
-	public int MaxPointsPerSpawn = 6;
+	const int PointLevelScaling = 5;
+	const int StartMinPoints = 20;
+	const int StartMaxPoints = 20;
+	const int TotalSpawnsPerLevel = 5;
+
 	[HideInInspector] public bool IsSpawning;
 	[HideInInspector] public Tower Target;
+
+	public int MinRadius = 30;
+	public int MaxRadius = 40;
+	public EnemyVariants EnemyVariants;
+	public LevelSpecificSpawns LevelSpecificSpawns;
 
 	[Header("Debug")]
 	public bool ShowGizmos;
 
-	float _lastSpawnTime;
+
+	float _nextSpawnTime;
+	float _timePerSpawn;
+	int _spawnedWavesCurrentLevel;
 	int _pointsRemainingFromLastSpawn;
 	readonly int _groupOffsetDistanceMax = 3;
 	Dictionary<int, LevelSpawnConfiguration> _levelSpawnConfigurations;
@@ -26,48 +33,78 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	{
 		base.Awake();
 
-		_lastSpawnTime = -SpawnRate + 0.1f; // Spawn immediately on start
 		_levelSpawnConfigurations = new Dictionary<int, LevelSpawnConfiguration>();
 		foreach (var spawnOverride in LevelSpecificSpawns)
 		{
 			_levelSpawnConfigurations[spawnOverride.Level] = spawnOverride;
 		}
+
+		GameController.OnLevelChanged += OnLevelChanged;
+	}
+
+
+	void InitializeForLevel()
+	{
+		_timePerSpawn = GameController.Instance.TimePerLevel / TotalSpawnsPerLevel;
+		CalculateNextSpawnTime(true);
+		IsSpawning = true;
+		_spawnedWavesCurrentLevel = 0;
 	}
 
 	void Update()
 	{
-		if (IsSpawning && Time.time - _lastSpawnTime > SpawnRate)
+		if (IsSpawning && Time.time >= _nextSpawnTime)
 		{
 			TrySpawn();
-			_lastSpawnTime += SpawnRate;
+			CalculateNextSpawnTime();
 		}
+	}
+
+	void CalculateNextSpawnTime(bool levelStart = false)
+	{
+		_nextSpawnTime = levelStart ? Time.time : _nextSpawnTime + _timePerSpawn;
 	}
 
 	void TrySpawn()
 	{
-		var spawnOverride = GetSpawnOverride(GameController.Instance.CurrentLevel);
-		if (spawnOverride.HasValue)
+		if (_spawnedWavesCurrentLevel == TotalSpawnsPerLevel)
+		{
+			return;
+		}
+
+		_spawnedWavesCurrentLevel++;
+		var levelSpecificSpawn = GetLevelSpecificSpawn(GameController.Instance.CurrentLevel);
+		if (levelSpecificSpawn.HasValue)
 		{
 			var spawnPosition = GetRandomSpawnPosition();
-			foreach (var enemy in spawnOverride.Value.Enemies)
+			foreach (var enemy in levelSpecificSpawn.Value.Enemies)
 			{
 				SpawnEnemy(enemy.gameObject, spawnPosition);
-				if (!spawnOverride.Value.SpawnAsGroup)
+				if (!levelSpecificSpawn.Value.SpawnAsGroup)
 				{
 					spawnPosition = GetRandomSpawnPosition(); // Update position for next spawn
 				}
 			}
+
+			if (levelSpecificSpawn.Value.SpawnOnce)
+			{
+				IsSpawning = false; // Stop spawning, this gets reset when the level changes
+			}
+
+			if (!levelSpecificSpawn.Value.ContinueDefaultSpawns)
+			{
+				return;
+			}
 		}
-		else
-		{
-			var pointsForThisSpawn = RandomManager.Enemy(MinPointsPerSpawn, MaxPointsPerSpawn + 1);
-			pointsForThisSpawn += _pointsRemainingFromLastSpawn;
-			_pointsRemainingFromLastSpawn = 0;
-			SpawnGroup(pointsForThisSpawn);
-		}
+
+		var (minPointsPerSpawn, maxPointsPerSpawn) = CalculatePointsForLevel(GameController.Instance.CurrentLevel);
+		var pointsForThisSpawn = RandomManager.Enemy(minPointsPerSpawn, maxPointsPerSpawn + 1);
+		pointsForThisSpawn += _pointsRemainingFromLastSpawn;
+		_pointsRemainingFromLastSpawn = 0;
+		SpawnGroup(pointsForThisSpawn);
 	}
 
-	LevelSpawnConfiguration? GetSpawnOverride(int currentLevel)
+	LevelSpawnConfiguration? GetLevelSpecificSpawn(int currentLevel)
 	{
 		if (_levelSpawnConfigurations.TryGetValue(currentLevel, out var spawnOverride))
 		{
@@ -131,6 +168,20 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	}
 
 
+	(int minPoints, int maxPoints) CalculatePointsForLevel(int level)
+	{
+		var minPoints = StartMinPoints + (PointLevelScaling * (level - 1));
+		var maxPoints = StartMaxPoints + (PointLevelScaling * (level - 1));
+		return (minPoints, maxPoints);
+	}
+
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+		GameController.OnLevelChanged -= OnLevelChanged;
+	}
+
 	void OnDrawGizmos()
 	{
 		if (!ShowGizmos)
@@ -140,20 +191,12 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		Gizmos.color = Color.red;
 
 		// Draw circles for min and max radius, not spheres
-		Draw2dCircle(transform.position, MinRadius);
-		Draw2dCircle(transform.position, MaxRadius);
-
+		GizmosExtras.Draw2dCircle(transform.position, MinRadius);
+		GizmosExtras.Draw2dCircle(transform.position, MaxRadius);
 	}
 
-	void Draw2dCircle(Vector3 center, float radius)
+	void OnLevelChanged()
 	{
-		var prevPos = center + new Vector3(radius, 0, 0);
-		for (var i = 0; i < 30; i++)
-		{
-			var angle = i / 30f * Mathf.PI * 2f;
-			var newPos = center + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
-			Gizmos.DrawLine(prevPos, newPos);
-			prevPos = newPos;
-		}
+		InitializeForLevel();
 	}
 }
