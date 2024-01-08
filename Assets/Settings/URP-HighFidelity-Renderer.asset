@@ -38,11 +38,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: RenderObjects
+  m_Name: Render Enemies Outlines
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: RenderObjects
+    passTag: Render Enemies Outlines
     Event: 300
     filterSettings:
       RenderQueueType: 0
@@ -170,11 +170,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: RenderObjects
+  m_Name: Render Enemies
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: RenderObjects
+    passTag: Render Enemies
     Event: 300
     filterSettings:
       RenderQueueType: 0

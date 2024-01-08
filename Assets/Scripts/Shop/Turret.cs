@@ -23,8 +23,8 @@ public partial class Turret : DamageShopItem
 	public void Setup(Tower inputTower)
 	{
 		_tower = inputTower;
-		_lastTargetSearch = Random.Range(0f, TimeBetweenFindTarget);
-		_lastAttackTime = Random.Range(0f, TimeBetweenAttacks); // Add random delay for the first attack
+		_lastTargetSearch = RandomManager.Delay(0f, TimeBetweenFindTarget);
+		_lastAttackTime = RandomManager.Delay(0f, TimeBetweenAttacks); // Add random delay for the first attack
 	}
 
 	public void Update()
@@ -32,13 +32,13 @@ public partial class Turret : DamageShopItem
 		if (Time.time - _lastTargetSearch > TimeBetweenFindTarget)
 		{
 			_target = TowerTargeter.GetTurretTarget(_tower.Center, AttackRange);
-			_lastTargetSearch = Time.time + Random.Range(-0.1f * TimeBetweenFindTarget, 0.1f * TimeBetweenFindTarget); // Add some variance to the search timing
+			_lastTargetSearch = Time.time + RandomManager.RandomDelay(TimeBetweenFindTarget, 0.1f); // Add some variance to the search timing
 		}
 
 		if (_target != null && !_target.IsDead && Time.time - _lastAttackTime > TimeBetweenAttacks)
 		{
 			Shoot();
-			_lastAttackTime = Time.time + Random.Range(-0.1f * TimeBetweenAttacks, 0.1f * TimeBetweenAttacks); // Add some variance to the attack timing
+			_lastAttackTime = Time.time + RandomManager.RandomDelay(TimeBetweenAttacks, 0.1f); // Add some variance to the attack timing
 			_lastTargetSearch = Time.time; // This should probably be adjusted to have a delay as well
 		}
 	}

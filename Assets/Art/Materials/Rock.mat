@@ -12,15 +12,14 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - DR_GRADIENT_ON
   - DR_OUTLINE_ON
   - _CELPRIMARYMODE_SINGLE
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _GRADIENTSPACE_WORLD
   - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
-  - _UNITYSHADOWMODE_MULTIPLY
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -89,7 +88,7 @@ Material:
     - _GradientAngle: 0
     - _GradientCenterX: 0
     - _GradientCenterY: 0
-    - _GradientEnabled: 1
+    - _GradientEnabled: 0
     - _GradientSize: 0.5
     - _GradientSpace: 0
     - _LightContribution: 0.6
@@ -102,7 +101,7 @@ Material:
     - _OutlineEnabled: 1
     - _OutlineScale: 1
     - _OutlineSpace: 0
-    - _OutlineWidth: 2
+    - _OutlineWidth: 1.5
     - _OverrideLightmapDir: 0
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -121,7 +120,7 @@ Material:
     - _Surface: 0
     - _TextureBlendingMode: 0
     - _TextureImpact: 1
-    - _UnityShadowMode: 1
+    - _UnityShadowMode: 0
     - _UnityShadowOcclusion: 0
     - _UnityShadowPower: 0.5
     - _UnityShadowSharpness: 10
@@ -142,7 +141,7 @@ Material:
     - _FlatRimColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _FlatSpecularColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _UnityShadowColor: {r: 0, g: 0.15356854, b: 0.16981131, a: 1}
   m_BuildTextureStacks: []

@@ -6,11 +6,13 @@ public static class RandomManager
 {
 	static System.Random _shopRandom;
 	static System.Random _enemyRandom;
+	static System.Random _delayRandom;
 
 	public static void InitializeWithSeed(int seed)
 	{
 		_shopRandom = new System.Random(seed);
 		_enemyRandom = new System.Random(seed);
+		_delayRandom = new System.Random(seed);
 	}
 
 	public static void SetSeed(int startSeed, int currentLevel)
@@ -27,6 +29,16 @@ public static class RandomManager
 	public static int Enemy(int minValue, int maxValue)
 	{
 		return _enemyRandom.Next(minValue, maxValue);
+	}
+
+	public static float Delay(float minValue, float maxValue)
+	{
+		return (float)(_delayRandom.NextDouble() * (maxValue - minValue) + minValue);
+	}
+
+	public static float RandomDelay(float value, float minMaxModifier)
+	{
+		return value + (float)((_delayRandom.NextDouble() * minMaxModifier * 2) - minMaxModifier);
 	}
 
 	public static Vector2 InsideUnitCircleNormalized()
