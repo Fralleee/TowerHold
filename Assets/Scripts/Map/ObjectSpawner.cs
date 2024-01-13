@@ -6,9 +6,9 @@ using UnityEngine.AI;
 [ExecuteInEditMode]
 public class ObjectSpawner : MonoBehaviour
 {
-	[Header("Spawn Settings")]
+	[Header("Settings")]
 	[SerializeField] Transform _parentObject;
-	[SerializeField] ObjectSpawnerSettings[] _settings;
+	[SerializeField] ObjectSpawnProfile[] _profiles;
 
 	[Header("Debug")]
 	[SerializeField] bool _showGizmos;
@@ -41,61 +41,83 @@ public class ObjectSpawner : MonoBehaviour
 	}
 
 	[Button]
-	public void GenerateObjects()
+	public void ExecuteSpawnProfiles()
 	{
-		if (_settings.Length == 0)
+		if (!ValidateSettings())
 		{
-			Debug.LogWarning("No spawnable objects assigned.");
 			return;
+		}
+
+		foreach (var profile in _profiles)
+		{
+			ExecuteSpawnProfile(profile);
+		}
+	}
+
+	bool ValidateSettings()
+	{
+		var isValid = true;
+
+		if (_profiles.Length == 0)
+		{
+			Debug.LogWarning("ObjectSpawner: No spawnable objects assigned.");
+			isValid = false;
 		}
 
 		if (_parentObject == null)
 		{
-			Debug.LogWarning("No parent object assigned. Objects will be parented to this script's GameObject.");
-			return;
+			Debug.LogWarning("ObjectSpawner: No parent object assigned. Objects will be parented to this script's GameObject.");
+			isValid = false;
 		}
 
 		if (_parentObject == transform)
 		{
-			Debug.LogWarning("Parent object is the same as this script's GameObject.");
-			return;
+			Debug.LogWarning("ObjectSpawner: Parent object is the same as this script's GameObject.");
+			isValid = false;
 		}
 
-		foreach (var setting in _settings)
-		{
-			GenerateObjectsSettings(setting);
-		}
+		// Add more validation checks as needed
+
+		return isValid;
 	}
 
-	void GenerateObjectsSettings(ObjectSpawnerSettings settings)
+	void ExecuteSpawnProfile(ObjectSpawnProfile profile)
 	{
 
-		for (var distance = settings.StartRadius; distance <= settings.EndRadius; distance++)
+		for (var distance = profile.StartRadius; distance <= profile.EndRadius; distance++)
 		{
-			var normalizedDistance = Mathf.InverseLerp(settings.StartRadius, settings.EndRadius, distance);
+			var normalizedDistance = Mathf.InverseLerp(profile.StartRadius, profile.EndRadius, distance);
 			var spawnChanceModifier = Mathf.Lerp(0.1f, 1f, normalizedDistance);
 
-			for (var i = 0; i < settings.Intensity; i++)
+			for (var i = 0; i < profile.Intensity; i++)
 			{
 				var randomValue = Random.value;
 				if (randomValue > spawnChanceModifier)
 				{
 					continue;
 				}
-				SpawnObject(distance, settings);
+				TrySpawnObject(distance, profile);
 			}
 		}
 	}
 
-	void SpawnObject(int distance, ObjectSpawnerSettings settings)
+	void TrySpawnObject(int distance, ObjectSpawnProfile profile)
 	{
 
 		var randomDirection = Random.insideUnitCircle.normalized;
 		var spawnPosition = transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * distance);
+		var noiseValue = Mathf.PerlinNoise(spawnPosition.x * profile.NoiseScale, spawnPosition.z * profile.NoiseScale);
+		var normalizedDistance = Mathf.InverseLerp(profile.StartRadius, profile.EndRadius, distance);
+		var spawnChanceModifier = Mathf.Lerp(0.1f, 1f, normalizedDistance) * noiseValue;
 
-		if (!IsObstructed(spawnPosition, settings.MinSpacing))
+		if (Random.value > spawnChanceModifier)
 		{
-			var spawnableObject = SelectRandomObject(settings.Collection.Objects);
+			return;
+		}
+
+		if (!IsPositionObstructed(spawnPosition, profile.MinSpacing))
+		{
+			var spawnableObject = ChooseRandomObject(profile.Collection.Objects);
 			if (spawnableObject != null)
 			{
 				var scale = Random.Range(spawnableObject.MinScale, spawnableObject.MaxScale);
@@ -108,7 +130,7 @@ public class ObjectSpawner : MonoBehaviour
 				var spawnedObject = Instantiate(spawnableObject.Prefab, spawnPosition, Quaternion.Euler(rotation), _parentObject);
 				spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
 
-				if (settings.CarveNavMesh)
+				if (profile.CarveNavMesh)
 				{
 					var navMeshObstacle = spawnedObject.AddComponent<NavMeshObstacle>();
 					navMeshObstacle.carving = true;
@@ -120,7 +142,7 @@ public class ObjectSpawner : MonoBehaviour
 		}
 	}
 
-	bool IsObstructed(Vector3 position, float minSpacing)
+	bool IsPositionObstructed(Vector3 position, float minSpacing)
 	{
 		foreach (var obj in _spawnedObjects)
 		{
@@ -132,7 +154,7 @@ public class ObjectSpawner : MonoBehaviour
 		return false;
 	}
 
-	SpawnableObject SelectRandomObject(SpawnableObject[] objects)
+	SpawnableObject ChooseRandomObject(SpawnableObject[] objects)
 	{
 		var totalSpawnChance = 0f;
 		foreach (var spawnableObject in objects)
@@ -163,24 +185,24 @@ public class ObjectSpawner : MonoBehaviour
 			return;
 		}
 
-		foreach (var setting in _settings)
+		foreach (var profile in _profiles)
 		{
-			DrawGizmosSettings(setting);
+			DrawGizmosSettings(profile);
 		}
 	}
 
-	void DrawGizmosSettings(ObjectSpawnerSettings settings)
+	void DrawGizmosSettings(ObjectSpawnProfile profile)
 	{
 		Gizmos.color = Color.yellow;
-		GizmosExtras.Draw2dCircle(transform.position, settings.StartRadius);
+		GizmosExtras.Draw2dCircle(transform.position, profile.StartRadius);
 
 		Gizmos.color = Color.blue;
-		GizmosExtras.Draw2dCircle(transform.position, settings.EndRadius);
+		GizmosExtras.Draw2dCircle(transform.position, profile.EndRadius);
 
 		Gizmos.color = Color.cyan;
 		foreach (var obj in _spawnedObjects)
 		{
-			Gizmos.DrawWireCube(obj.transform.position, Vector3.one * settings.MinSpacing);
+			Gizmos.DrawWireCube(obj.transform.position, Vector3.one * profile.MinSpacing);
 		}
 	}
 }
