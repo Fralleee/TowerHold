@@ -56,7 +56,7 @@ public class Bobbing : MonoBehaviour
 
 			var bobbingOffset = Mathf.Sin(_bobbingTimer) * _bobbingAmount;
 			var rotationOffset = Mathf.Sin(_rotationTimer) * _rotationAmount;  // Use rotation timer
-			transform.SetLocalPositionAndRotation(_startingPosition + new Vector3(0f, bobbingOffset, 0f), _startingRotation * Quaternion.Euler(0f, rotationOffset, rotationOffset));
+			transform.SetLocalPositionAndRotation(_startingPosition + new Vector3(0f, bobbingOffset + _bobbingAmount, 0f), _startingRotation * Quaternion.Euler(0f, rotationOffset, rotationOffset));
 		}
 	}
 

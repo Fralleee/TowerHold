@@ -45,7 +45,6 @@ public class EnemyAttack : MonoBehaviour
 
 	void StartAttack()
 	{
-		_animator.SetInteger("AttackType", Random.Range(0, 2));
 		_animator.SetTrigger("Attack");
 	}
 

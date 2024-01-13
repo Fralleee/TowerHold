@@ -7,6 +7,7 @@ public static class RandomManager
 	static System.Random _shopRandom;
 	static System.Random _enemyRandom;
 	static System.Random _delayRandom;
+	static System.Random _unSeededRandom = new System.Random();
 
 	public static void InitializeWithSeed(int seed)
 	{
@@ -33,7 +34,12 @@ public static class RandomManager
 
 	public static float Delay(float minValue, float maxValue)
 	{
-		return (float)(_delayRandom.NextDouble() * (maxValue - minValue) + minValue);
+		return (float)((_delayRandom.NextDouble() * (maxValue - minValue)) + minValue);
+	}
+
+	public static float DelayUnseed(float minValue, float maxValue)
+	{
+		return (float)((_unSeededRandom.NextDouble() * (maxValue - minValue)) + minValue);
 	}
 
 	public static float RandomDelay(float value)
