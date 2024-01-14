@@ -28,6 +28,7 @@ public class GameController : Singleton<GameController>
 		{
 			StartSeed = Random.Range(0, int.MaxValue);
 		}
+
 		RandomManager.SetSeed(StartSeed, StartLevel);
 	}
 
@@ -35,7 +36,7 @@ public class GameController : Singleton<GameController>
 	{
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
 
-		Debug.Log("Starting game in " + FreezeTime + " seconds");
+		Debug.Log($"Starting game in {FreezeTime} seconds | Seed: {StartSeed} | Level: {StartLevel} | Map: {NameGeneration.GenerateLevelName(StartSeed)}");
 		Invoke(nameof(StartGame), FreezeTime);
 	}
 

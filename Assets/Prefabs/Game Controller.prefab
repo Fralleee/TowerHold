@@ -2018,7 +2018,7 @@ MonoBehaviour:
   CurrentLevel: 1
   MaxLevel: 100
   CurrentStage: 0
-  StartSeed: 100
+  StartSeed: 0
 --- !u!114 &5997500516575327268
 MonoBehaviour:
   m_ObjectHideFlags: 0

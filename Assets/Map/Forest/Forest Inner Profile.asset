@@ -15,10 +15,7 @@ MonoBehaviour:
   Collection: {fileID: 11400000, guid: 9dfcbeee1662ed94c964dca550a2457b, type: 2}
   StartRadius: 10
   EndRadius: 53
-  ObstructionLayer:
-    serializedVersion: 2
-    m_Bits: 0
   MinSpacing: 1
   NoiseScale: 1
-  Intensity: 2
+  Intensity: 6
   CarveNavMesh: 1

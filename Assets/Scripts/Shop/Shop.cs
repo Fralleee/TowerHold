@@ -69,15 +69,15 @@ public class Shop : MonoBehaviour
 		}
 
 		// Step 3: Randomly select a category
-		var randomCategory = (ShopType)RandomManager.Shop(0, _shopTypeCount);
+		var randomCategory = (ShopType)RandomManager.Shop.Next(0, _shopTypeCount);
 		while (!groupedItems.ContainsKey(randomCategory) || groupedItems[randomCategory].Count == 0)
 		{
-			randomCategory = (ShopType)RandomManager.Shop(0, _shopTypeCount);
+			randomCategory = (ShopType)RandomManager.Shop.Next(0, _shopTypeCount);
 		}
 
 		// Step 4: Choose a random item from the selected category
 		var itemsInCategory = groupedItems[randomCategory];
-		var randomIndex = RandomManager.Shop(0, itemsInCategory.Count);
+		var randomIndex = RandomManager.Shop.Next(0, itemsInCategory.Count);
 		return itemsInCategory[randomIndex];
 	}
 
