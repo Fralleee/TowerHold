@@ -1,12 +1,3 @@
-It didn't work. I don't think we're finding any edge vertices.
-Can we instead save the edge vertices when we are generating the meshes and store them for this occasion?
-
-Let me paste you my full code and you can apply those changes:
-
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using UnityEngine;
-
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -26,6 +17,9 @@ public class FloatingIslandGenerator : MonoBehaviour
 	public float BottomNoiseScaleDetails = 0.3f;
 	public float BottomNoiseHeight = 128f;
 
+	List<int> _topEdgeVerticesIndices;
+	List<int> _bottomEdgeVerticesIndices;
+	float EdgeVertexThreshold => (Radius - ExitBevel) * (Radius - ExitBevel);
 
 	void Start()
 	{
@@ -35,17 +29,20 @@ public class FloatingIslandGenerator : MonoBehaviour
 	[Button]
 	void GenerateIsland()
 	{
-		Mesh topMesh = GenerateTopPlane();
-		Mesh bottomMesh = GenerateBottomPlane();
+		_topEdgeVerticesIndices = new List<int>();
+		_bottomEdgeVerticesIndices = new List<int>();
 
-		List<Vector3> combinedVertices = new List<Vector3>();
-		List<int> combinedTriangles = new List<int>();
+		var topMesh = GenerateTopPlane();
+		var bottomMesh = GenerateBottomPlane();
+
+		var combinedVertices = new List<Vector3>();
+		var combinedTriangles = new List<int>();
 
 		// Add top mesh vertices and triangles
 		combinedVertices.AddRange(topMesh.vertices);
 		combinedTriangles.AddRange(topMesh.triangles);
 
-		int bottomMeshVertexOffset = combinedVertices.Count;
+		var bottomMeshVertexOffset = combinedVertices.Count;
 
 		// Add bottom mesh vertices and triangles
 		combinedVertices.AddRange(bottomMesh.vertices);
@@ -54,40 +51,48 @@ public class FloatingIslandGenerator : MonoBehaviour
 			combinedTriangles.Add(tri + bottomMeshVertexOffset);
 		}
 
-		// Connect edges
-		ConnectMeshEdges(combinedVertices, combinedTriangles, topMesh, bottomMesh, bottomMeshVertexOffset);
+		// Connect edges using stored edge vertices
+		ConnectMeshEdges(combinedVertices, combinedTriangles);
 
-		Mesh combinedMesh = new Mesh();
-		combinedMesh.vertices = combinedVertices.ToArray();
-		combinedMesh.triangles = combinedTriangles.ToArray();
+		var combinedMesh = new Mesh
+		{
+			vertices = combinedVertices.ToArray(),
+			triangles = combinedTriangles.ToArray()
+		};
 		combinedMesh.RecalculateNormals();
 
 		GetComponent<MeshFilter>().mesh = combinedMesh;
 	}
 
-	void ConnectMeshEdges(List<Vector3> combinedVertices, List<int> combinedTriangles, Mesh topMesh, Mesh bottomMesh, int bottomMeshVertexOffset)
+	void ConnectMeshEdges(List<Vector3> combinedVertices, List<int> combinedTriangles)
 	{
-		// Find edge vertices based on their position
-		List<int> topEdgeVertices = FindEdgeVertices(topMesh);
-		List<int> bottomEdgeVertices = FindEdgeVertices(bottomMesh, bottomMeshVertexOffset);
-
-		// Connect the edge vertices
-		for (int i = 0; i < topEdgeVertices.Count; i++)
+		for (var i = 0; i < _topEdgeVerticesIndices.Count; i++)
 		{
-			int nextIndex = (i + 1) % topEdgeVertices.Count;
+			var topIndex = _topEdgeVerticesIndices[i];
+			var bottomIndex = _bottomEdgeVerticesIndices[i] + (combinedVertices.Count / 2); // Adjust for offset
 
-			int topVertexIndex1 = topEdgeVertices[i];
-			int topVertexIndex2 = topEdgeVertices[nextIndex];
-			int bottomVertexIndex1 = bottomEdgeVertices[i];
-			int bottomVertexIndex2 = bottomEdgeVertices[nextIndex];
+			// Weld vertices by averaging their positions
+			var weldedPosition = (combinedVertices[topIndex] + combinedVertices[bottomIndex]) / 2;
+			combinedVertices[topIndex] = weldedPosition;
+			combinedVertices[bottomIndex] = weldedPosition;
+		}
 
-			// Create triangles to connect the edges
+		for (var i = 0; i < _topEdgeVerticesIndices.Count; i++)
+		{
+			var nextIndex = (i + 1) % _topEdgeVerticesIndices.Count;
+
+			var topVertexIndex1 = _topEdgeVerticesIndices[i];
+			var topVertexIndex2 = _topEdgeVerticesIndices[nextIndex];
+			var bottomVertexIndex1 = _bottomEdgeVerticesIndices[i];
+			var bottomVertexIndex2 = _bottomEdgeVerticesIndices[nextIndex];
+
+			// Correctly orient the triangles
 			combinedTriangles.Add(topVertexIndex1);
-			combinedTriangles.Add(bottomVertexIndex1);
 			combinedTriangles.Add(topVertexIndex2);
+			combinedTriangles.Add(bottomVertexIndex1);
 
-			combinedTriangles.Add(topVertexIndex2);
 			combinedTriangles.Add(bottomVertexIndex1);
+			combinedTriangles.Add(topVertexIndex2);
 			combinedTriangles.Add(bottomVertexIndex2);
 		}
 	}
@@ -106,13 +111,21 @@ public class FloatingIslandGenerator : MonoBehaviour
 		{
 			for (var x = 0; x < Resolution; x++, i++)
 			{
-				var xPos = (x / Resolution - 0.5f) * 2 * Radius;
-				var yPos = (y / Resolution - 0.5f) * 2 * Radius;
+				var xPos = ((x / Resolution) - 0.5f) * 2 * Radius;
+				var yPos = ((y / Resolution) - 0.5f) * 2 * Radius;
 
-				if (xPos * xPos + yPos * yPos <= Radius * Radius) // Inside the circle
+				// Check if vertex is on the edge
+				var pos = (xPos * xPos) + (yPos * yPos);
+
+				if ((xPos * xPos) + (yPos * yPos) >= EdgeVertexThreshold)
+				{
+					_topEdgeVerticesIndices.Add(i);
+				}
+
+				if ((xPos * xPos) + (yPos * yPos) <= Radius * Radius) // Inside the circle
 				{
 					var height = Mathf.PerlinNoise(x * TopNoiseScale, y * TopNoiseScale) * TopNoiseHeight;
-					var distanceFromEdge = Radius - Mathf.Sqrt(xPos * xPos + yPos * yPos);
+					var distanceFromEdge = Radius - Mathf.Sqrt((xPos * xPos) + (yPos * yPos));
 
 					// Apply exit bevel
 					if (distanceFromEdge < ExitBevel)
@@ -171,12 +184,18 @@ public class FloatingIslandGenerator : MonoBehaviour
 		{
 			for (var x = 0; x < Resolution; x++, i++)
 			{
-				var xPos = (x / Resolution - 0.5f) * 2 * Radius;
-				var yPos = (y / Resolution - 0.5f) * 2 * Radius;
+				var xPos = ((x / Resolution) - 0.5f) * 2 * Radius;
+				var yPos = ((y / Resolution) - 0.5f) * 2 * Radius;
 
-				if (xPos * xPos + yPos * yPos <= Radius * Radius) // Inside the circle
+				// Check if vertex is on the edge
+				if ((xPos * xPos) + (yPos * yPos) >= EdgeVertexThreshold)
 				{
-					var distanceFromCenter = Mathf.Sqrt(xPos * xPos + yPos * yPos);
+					_bottomEdgeVerticesIndices.Add(i);
+				}
+
+				if ((xPos * xPos) + (yPos * yPos) <= Radius * Radius) // Inside the circle
+				{
+					var distanceFromCenter = Mathf.Sqrt((xPos * xPos) + (yPos * yPos));
 					var largeNoise = Mathf.PerlinNoise(xPos * BottomNoiseScalePeaks, yPos * BottomNoiseScalePeaks) * BottomNoiseHeight;
 					var smallNoise = Mathf.PerlinNoise(xPos * BottomNoiseScaleDetails, yPos * BottomNoiseScaleDetails) * (BottomNoiseHeight / 3);
 					var height = largeNoise + smallNoise;
@@ -235,27 +254,9 @@ public class FloatingIslandGenerator : MonoBehaviour
 
 	bool IsInsideCircle(Vector3[] vertices, int index, int res, float rad)
 	{
-		return vertices[index].x * vertices[index].x + vertices[index].z * vertices[index].z <= rad * rad &&
-			   vertices[index + 1].x * vertices[index + 1].x + vertices[index + 1].z * vertices[index + 1].z <= rad * rad &&
-			   vertices[index + res].x * vertices[index + res].x + vertices[index + res].z * vertices[index + res].z <= rad * rad &&
-			   vertices[index + res + 1].x * vertices[index + res + 1].x + vertices[index + res + 1].z * vertices[index + res + 1].z <= rad * rad;
-	}
-
-	List<int> FindEdgeVertices(Mesh mesh, int offset = 0)
-	{
-		List<int> edgeVertices = new List<int>();
-
-		for (int i = 0; i < mesh.vertexCount; i++)
-		{
-			Vector3 vertex = mesh.vertices[i];
-
-			// Assuming vertices on the boundary have y-values at either the max or min
-			if (Mathf.Abs(vertex.y - MinHeight) < 0.01f || Mathf.Abs(vertex.y - (MinHeight + TopNoiseHeight)) < 0.01f)
-			{
-				edgeVertices.Add(i + offset);
-			}
-		}
-
-		return edgeVertices;
+		return (vertices[index].x * vertices[index].x) + (vertices[index].z * vertices[index].z) <= rad * rad &&
+				 (vertices[index + 1].x * vertices[index + 1].x) + (vertices[index + 1].z * vertices[index + 1].z) <= rad * rad &&
+				 (vertices[index + res].x * vertices[index + res].x) + (vertices[index + res].z * vertices[index + res].z) <= rad * rad &&
+				 (vertices[index + res + 1].x * vertices[index + res + 1].x) + (vertices[index + res + 1].z * vertices[index + res + 1].z) <= rad * rad;
 	}
 }
