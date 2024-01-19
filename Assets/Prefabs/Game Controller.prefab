@@ -1882,9 +1882,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FreezeTime: 1
-  TimePerLevel: 30
+  FreezeTimeLeft: 3
   TimeLeft: 0
+  GameHasStarted: 0
+  FreezeTime: 3
+  TimePerLevel: 30
   StartLevel: 1
   CurrentLevel: 1
   MaxLevel: 100

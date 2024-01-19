@@ -51,8 +51,22 @@ public partial class Turret : DamageShopItem
 
 	void Shoot()
 	{
+		if (ProjectilePrefab == null)
+		{
+			InstantAttack();
+			return;
+		}
 		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
 		var projectile = Instantiate(ProjectilePrefab, _tower.Center.position, rotation);
 		projectile.Setup(_target, _tower.GetDamage(Category, BaseDamage), true, _projectileSettings);
+	}
+
+	void InstantAttack()
+	{
+		if (_target != null)
+		{
+			var damage = _tower.GetDamage(Category, BaseDamage);
+			_target.TakeDamage(Mathf.RoundToInt(damage));
+		}
 	}
 }

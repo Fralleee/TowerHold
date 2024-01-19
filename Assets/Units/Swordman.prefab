@@ -169,10 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0ab6629bd7a944a743ca5e3a8028d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
-    type: 3}
+  ProjectilePrefab: {fileID: 0}
   BaseDamage: 10
-  AttackRange: 8
+  AttackRange: 6
   TimeBetweenAttacks: 1
   _attackOrigin: {fileID: 0}
   _projectileSettings:

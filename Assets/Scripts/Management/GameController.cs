@@ -5,20 +5,21 @@ using Random = UnityEngine.Random;
 
 public class GameController : Singleton<GameController>
 {
-	[HideInInspector]
-	public RandomGenerator RandomGenerator;
+	[HideInInspector] public RandomGenerator RandomGenerator;
+	[HideInInspector] public float FreezeTimeLeft;
+	[HideInInspector] public float TimeLeft;
+	[HideInInspector] public bool GameHasStarted = false;
 
+	public static Action OnGameStart = delegate { };
 	public static Action OnLevelChanged = delegate { };
 	public static Action OnGameEnd = delegate { };
 	public float FreezeTime = 5f;
 	public float TimePerLevel = 10f;
-	public float TimeLeft;
 	public int StartLevel = 1;
 	public int CurrentLevel = 1;
 	public int MaxLevel = 100;
 	public int StartSeed;
 
-	bool _gameHasStarted = false;
 	bool _gameHasEnded = false;
 
 	EnemySpawner _enemySpawner;
@@ -39,14 +40,22 @@ public class GameController : Singleton<GameController>
 	{
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
 		RandomGenerator = new RandomGenerator(StartSeed);
-
-		Invoke(nameof(StartGame), FreezeTime);
 	}
 
 	void Update()
 	{
-		if (_gameHasEnded || !_gameHasStarted)
+		if (_gameHasEnded)
 		{
+			return;
+		}
+
+		if (!GameHasStarted)
+		{
+			FreezeTimeLeft -= Time.deltaTime;
+			if (FreezeTimeLeft <= 0)
+			{
+				StartGame();
+			}
 			return;
 		}
 
@@ -57,7 +66,6 @@ public class GameController : Singleton<GameController>
 		}
 
 		TimeLeft -= Time.deltaTime;
-
 		if (TimeLeft <= 0)
 		{
 			RunLevel(CurrentLevel + 1);
@@ -79,7 +87,8 @@ public class GameController : Singleton<GameController>
 		_enemySpawner.Target = Tower.Instance;
 		_enemySpawner.IsSpawning = true;
 
-		_gameHasStarted = true;
+		GameHasStarted = true;
+		OnGameStart();
 	}
 
 	void EndGame()
@@ -114,5 +123,11 @@ public class GameController : Singleton<GameController>
 
 		Tower.ResetGameState();
 		Enemy.ResetGameState();
+	}
+
+	void OnValidate()
+	{
+		FreezeTimeLeft = FreezeTime;
+		TimeLeft = 0;
 	}
 }

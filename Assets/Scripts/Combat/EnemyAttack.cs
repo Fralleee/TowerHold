@@ -50,7 +50,21 @@ public class EnemyAttack : MonoBehaviour
 
 	public void PerformAttack()
 	{
+		if (ProjectilePrefab == null)
+		{
+			InstantAttack();
+			return;
+		}
+
 		var projectile = Instantiate(ProjectilePrefab, _attackOrigin.position, _attackOrigin.rotation);
 		projectile.Setup(Target, BaseDamage, false, _projectileSettings);
+	}
+
+	void InstantAttack()
+	{
+		if (Target != null)
+		{
+			Target.TakeDamage(Mathf.RoundToInt(BaseDamage));
+		}
 	}
 }

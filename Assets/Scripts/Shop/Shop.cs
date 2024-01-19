@@ -25,28 +25,42 @@ public class Shop : MonoBehaviour
 		{
 			_slots[i] = Instantiate(ShopSlotPrefab, Main);
 		}
+
+		Main.gameObject.SetActive(false);
 	}
 
 	void Start()
 	{
 		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
 
-		RefreshShop();
 		RefreshButton.onClick.AddListener(ManualRefresh);
+		RefreshCostText.text = _refreshCost.ToString();
+
 		GameController.OnLevelChanged += RefreshShop;
 	}
 
-	void Update() => ProgressBar.fillAmount = GameController.Instance.TimeLeft / GameController.Instance.TimePerLevel;
+	void Update()
+	{
+		if (!GameController.Instance.GameHasStarted)
+		{
+			ProgressBar.fillAmount = GameController.Instance.FreezeTimeLeft / GameController.Instance.FreezeTime;
+			ProgressBar.color = Color.yellow;
+		}
+		else
+		{
+			ProgressBar.fillAmount = GameController.Instance.TimeLeft / GameController.Instance.TimePerLevel;
+			ProgressBar.color = Color.cyan;
+		}
+	}
 
 	public void RefreshShop()
 	{
+		Main.gameObject.SetActive(true);
 		foreach (var slot in _slots)
 		{
 			var item = GetRandomItem(GameController.Instance.CurrentLevel);
 			slot.SetupSlot(item);
 		}
-
-		RefreshCostText.text = _refreshCost.ToString();
 	}
 
 	ShopItem GetRandomItem(int currentLevel)
