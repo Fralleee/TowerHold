@@ -6,9 +6,9 @@ public class TopPlaneGenerator : MonoBehaviour
 {
 	public float Resolution = 256;
 	public float Radius = 128f;
-	public float NoiseScale = 0.3f;
+	public float NoiseScalePeaks = 0.05f;
+	public float NoiseScaleDetails = 0.3f;
 	public float NoiseHeight = 5f;
-	public float ExitBevel = 10f; // Width of the beveled edge
 
 	void Start()
 	{
@@ -35,14 +35,14 @@ public class TopPlaneGenerator : MonoBehaviour
 
 				if (xPos * xPos + yPos * yPos <= Radius * Radius) // Inside the circle
 				{
-					var height = Mathf.PerlinNoise(x * NoiseScale, y * NoiseScale) * NoiseHeight;
-					var distanceFromEdge = Radius - Mathf.Sqrt(xPos * xPos + yPos * yPos);
 
-					// Apply exit bevel
-					if (distanceFromEdge < ExitBevel)
-					{
-						height *= distanceFromEdge / ExitBevel;
-					}
+					// Use two layers of noise to generate more interesting terrain
+					var distanceFromCenter = Mathf.Sqrt(xPos * xPos + yPos * yPos);
+					var largeNoise = Mathf.PerlinNoise(xPos * NoiseScalePeaks, yPos * NoiseScalePeaks) * NoiseHeight;
+					var smallNoise = Mathf.PerlinNoise(xPos * NoiseScaleDetails, yPos * NoiseScaleDetails) * (NoiseHeight / 3);
+					var height = largeNoise + smallNoise;
+					var normalizedDistance = distanceFromCenter / Radius;
+					height *= normalizedDistance;
 
 					vertices[i] = new Vector3(xPos, height, yPos);
 				}

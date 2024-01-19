@@ -13,26 +13,38 @@ MonoBehaviour:
   m_Name: Forest Object Collection
   m_EditorClassIdentifier: 
   Objects:
-  - Prefab: {fileID: 747086834558915603, guid: 40529fa191d00e14b82169c1c5fd05ed, type: 3}
-    SpawnChance: 0.2
-    MinScale: 0.4
-    MaxScale: 0.5
+  - Prefab: {fileID: 615049079644918011, guid: 7eeb2fc34e7c2a74e95f4f03b214569a, type: 3}
+    SpawnChance: 0.25
+    MinScale: 0.7
+    MaxScale: 1.2
     RotationAxis: {x: 0, y: 1, z: 0}
-  - Prefab: {fileID: 6918428046614637669, guid: a7348eeac15587d47845c39d32715f13,
+  - Prefab: {fileID: 4917940541030532815, guid: 867dfc219bc048b4e961532daff86153,
       type: 3}
     SpawnChance: 0.2
-    MinScale: 0.4
-    MaxScale: 0.5
+    MinScale: 0.7
+    MaxScale: 1.2
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 4769749896292685420, guid: 5a73c645632ee5f489b56ded7266c2eb,
+      type: 3}
+    SpawnChance: 0.2
+    MinScale: 0.7
+    MaxScale: 1.2
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 1130013190937789750, guid: 43502fe9118d26b428a40f5c075bf6e1,
+      type: 3}
+    SpawnChance: 0.2
+    MinScale: 0.7
+    MaxScale: 1.2
     RotationAxis: {x: 0, y: 1, z: 0}
   - Prefab: {fileID: 6469677208131152525, guid: f1ebbfdea7eab564bbab8d7160c1f1c4,
       type: 3}
-    SpawnChance: 0.3
+    SpawnChance: 0.25
     MinScale: 0.8
     MaxScale: 2
     RotationAxis: {x: 1, y: 1, z: 1}
   - Prefab: {fileID: 2292694632710745736, guid: 0ac0dbffb95f7084c93aadf374ab8c73,
       type: 3}
-    SpawnChance: 0.1
+    SpawnChance: 0.05
     MinScale: 0.4
     MaxScale: 0.4
     RotationAxis: {x: 0, y: 1, z: 0}

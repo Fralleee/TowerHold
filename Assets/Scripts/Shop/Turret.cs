@@ -18,27 +18,27 @@ public partial class Turret : DamageShopItem
 	float _lastAttackTime = 0f;
 	float _lastTargetSearch = 0f;
 	Tower _tower;
-	Target _target;
+	Enemy _target;
 
 	public void Setup(Tower inputTower)
 	{
 		_tower = inputTower;
-		_lastTargetSearch = RandomManager.Delay.NextFloat(0f, TimeBetweenFindTarget);
-		_lastAttackTime = RandomManager.Delay.NextFloat(0f, TimeBetweenAttacks); // Add random delay for the first attack
+		_lastTargetSearch = GameController.Instance.RandomGenerator.NextFloat(0f, TimeBetweenFindTarget);
+		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, TimeBetweenAttacks); // Add random delay for the first attack
 	}
 
 	public void Update()
 	{
 		if (Time.time - _lastTargetSearch > TimeBetweenFindTarget)
 		{
-			_target = TowerTargeter.GetTurretTarget(_tower.Center, AttackRange);
-			_lastTargetSearch = Time.time + RandomManager.Delay.Variance(TimeBetweenFindTarget); // Add some variance to the search timing
+			_target = TowerTargeter.GetEnemyTarget(_tower.Center, AttackRange);
+			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(TimeBetweenFindTarget); // Add some variance to the search timing
 		}
 
 		if (_target != null && !_target.IsDead && Time.time - _lastAttackTime > TimeBetweenAttacks)
 		{
 			Shoot();
-			_lastAttackTime = Time.time + RandomManager.Delay.Variance(TimeBetweenAttacks); // Add some variance to the attack timing
+			_lastAttackTime = Time.time + GameController.Instance.RandomGenerator.Variance(TimeBetweenAttacks); // Add some variance to the attack timing
 			_lastTargetSearch = Time.time; // This should probably be adjusted to have a delay as well
 		}
 	}

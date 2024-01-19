@@ -538,146 +538,17 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 8300000, guid: 3046f95f7409a48a19f9aa67183e210b, type: 3}
-    - {fileID: 8300000, guid: 03e0404e0492d456dbd1d8833bb4d659, type: 3}
-    - {fileID: 8300000, guid: 318035cb36ecf432499b989ad9d66653, type: 3}
-    - {fileID: 8300000, guid: b6e80cfade34349139b4cab82fae797f, type: 3}
-    - {fileID: 8300000, guid: 035535025d1534133be16c31ff9dd1a9, type: 3}
-    - {fileID: 8300000, guid: f570df0b24cb3459fbed791ebe40e398, type: 3}
-    - {fileID: 8300000, guid: 46c63538ff74940eabee2e36e1d584cf, type: 3}
-    - {fileID: 8300000, guid: a14f101a368a94809bc3e27df303a634, type: 3}
-    - {fileID: 8300000, guid: b5a952a675e8243e9ab90fe68ed8b012, type: 3}
-    - {fileID: 8300000, guid: 5698f1d04efa4410c9ad2d42fbaa4725, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _stagePlaylists
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[GameStage, Assembly-CSharp],[System.Collections.Generic.List`1[[UnityEngine.AudioClip,
-        UnityEngine.AudioModule]], mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[GameStage, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 0
-    - Name: $v
-      Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 5
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 10
-      Data: 4
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 5
-    - Name: 
-      Entry: 10
-      Data: 6
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 2
-    - Name: $v
-      Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 10
-      Data: 7
-    - Name: 
-      Entry: 10
-      Data: 8
-    - Name: 
-      Entry: 10
-      Data: 9
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   _musicSource: {fileID: 7818233753972848621}
   _effectSource: {fileID: 7092029708942314798}
+  _playList:
+  - {fileID: 8300000, guid: 4b56a07190dac614dba02b0bdef79649, type: 3}
+  - {fileID: 8300000, guid: 5d73b690789c85c42a78bf3326418304, type: 3}
 --- !u!82 &7818233753972848621
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2014,11 +1885,10 @@ MonoBehaviour:
   FreezeTime: 1
   TimePerLevel: 30
   TimeLeft: 0
-  StartLevel: 2
+  StartLevel: 1
   CurrentLevel: 1
   MaxLevel: 100
-  CurrentStage: 0
-  StartSeed: 0
+  StartSeed: 32
 --- !u!114 &5997500516575327268
 MonoBehaviour:
   m_ObjectHideFlags: 0

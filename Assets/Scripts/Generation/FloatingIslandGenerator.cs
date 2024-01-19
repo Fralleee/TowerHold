@@ -5,258 +5,374 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class FloatingIslandGenerator : MonoBehaviour
 {
-	public float Resolution = 256;
-	public float Radius = 128f;
-	public float MinHeight = 1f;
-	public float ExitBevel = 1f;
+	public int MapWidth = 256;
+	public int MapHeight = 256;
+	public float MapScale = 20f;
 
-	public float TopNoiseScale = 0.1f;
-	public float TopNoiseHeight = 1f;
+	Texture2D _topHeightMap;
+	Texture2D _bottomHeightMap;
 
-	public float BottomNoiseScalePeaks = 0.05f;
-	public float BottomNoiseScaleDetails = 0.3f;
-	public float BottomNoiseHeight = 128f;
-
-	List<int> _topEdgeVerticesIndices;
-	List<int> _bottomEdgeVerticesIndices;
-	float EdgeVertexThreshold => (Radius - ExitBevel) * (Radius - ExitBevel);
+	Mesh _islandMesh;
 
 	void Start()
 	{
+
 		GenerateIsland();
 	}
 
 	[Button]
 	void GenerateIsland()
 	{
-		_topEdgeVerticesIndices = new List<int>();
-		_bottomEdgeVerticesIndices = new List<int>();
+		_islandMesh = new Mesh();
+		GetComponent<MeshFilter>().mesh = _islandMesh;
 
-		var topMesh = GenerateTopPlane();
-		var bottomMesh = GenerateBottomPlane();
+		// Generate the height maps
+		_topHeightMap = GenerateHeightMap();
+		_bottomHeightMap = GenerateHeightMap(isBottomMap: true);
 
-		var combinedVertices = new List<Vector3>();
-		var combinedTriangles = new List<int>();
+		// Generate the top and bottom meshes using the height maps
+		var (topVertices, bottomVertices) = GenerateVerticesFromHeightMaps(_topHeightMap, _bottomHeightMap);
 
-		// Add top mesh vertices and triangles
-		combinedVertices.AddRange(topMesh.vertices);
-		combinedTriangles.AddRange(topMesh.triangles);
+		// Generate triangles for top and bottom meshes
+		var topTriangles = GenerateTriangles(MapWidth, MapHeight);
+		var bottomTriangles = GenerateTriangles(MapWidth, MapHeight, topVertices.Length);
 
-		var bottomMeshVertexOffset = combinedVertices.Count;
+		// Identify edge vertices and find their neighbors
+		var isEdgeVertex = IdentifyEdgeVertices(MapWidth, MapHeight * 2); // *2 for top and bottom
+		var vertexNeighbors = FindVertexNeighbors(MapWidth, MapHeight * 2); // *2 for top and bottom
 
-		// Add bottom mesh vertices and triangles
-		combinedVertices.AddRange(bottomMesh.vertices);
-		foreach (var tri in bottomMesh.triangles)
-		{
-			combinedTriangles.Add(tri + bottomMeshVertexOffset);
-		}
+		// Create side vertices and triangles
+		var sideVertices = CreateSideVertices(topVertices, bottomVertices, isEdgeVertex, MapWidth, MapHeight);
+		var sideTriangles = GenerateSideTriangles(sideVertices, MapWidth, MapHeight);
 
-		// Connect edges using stored edge vertices
-		ConnectMeshEdges(combinedVertices, combinedTriangles);
+		// Combine top, bottom, and side vertices
+		var totalVertices = new Vector3[topVertices.Length + bottomVertices.Length + sideVertices.Count];
+		topVertices.CopyTo(totalVertices, 0);
+		bottomVertices.CopyTo(totalVertices, topVertices.Length);
+		sideVertices.CopyTo(totalVertices, topVertices.Length + bottomVertices.Length);
 
-		var combinedMesh = new Mesh
-		{
-			vertices = combinedVertices.ToArray(),
-			triangles = combinedTriangles.ToArray()
-		};
-		combinedMesh.RecalculateNormals();
+		// Displace vertices using Simplex Noise
+		DisplaceVertices(totalVertices);
 
-		GetComponent<MeshFilter>().mesh = combinedMesh;
+		// Smooth edges with the AVG Algorithm
+		SmoothEdges(totalVertices, isEdgeVertex, vertexNeighbors);
+
+		// Calculate normals and apply Normal Smoothing
+		var combinedTriangles = new List<int>(topTriangles);
+		combinedTriangles.AddRange(bottomTriangles);
+		combinedTriangles.AddRange(sideTriangles);
+		var normals = CalculateSmoothNormals(totalVertices, combinedTriangles.ToArray());
+
+		// Apply Tri-planar projection texturing technique
+		// TODO: Implement this
+
+		_islandMesh.vertices = totalVertices;
+		_islandMesh.triangles = combinedTriangles.ToArray();
+		_islandMesh.normals = normals;
 	}
 
-	void ConnectMeshEdges(List<Vector3> combinedVertices, List<int> combinedTriangles)
+	(Vector3[], Vector3[]) GenerateVerticesFromHeightMaps(Texture2D topMap, Texture2D bottomMap)
 	{
-		for (var i = 0; i < _topEdgeVerticesIndices.Count; i++)
-		{
-			var topIndex = _topEdgeVerticesIndices[i];
-			var bottomIndex = _bottomEdgeVerticesIndices[i] + (combinedVertices.Count / 2); // Adjust for offset
+		var width = topMap.width;
+		var height = topMap.height;
 
-			// Weld vertices by averaging their positions
-			var weldedPosition = (combinedVertices[topIndex] + combinedVertices[bottomIndex]) / 2;
-			combinedVertices[topIndex] = weldedPosition;
-			combinedVertices[bottomIndex] = weldedPosition;
+		if (bottomMap.width != width || bottomMap.height != height)
+		{
+			Debug.LogError("Top and bottom height maps must be of the same size.");
+			return (null, null);
 		}
 
-		for (var i = 0; i < _topEdgeVerticesIndices.Count; i++)
+		var topVertices = new Vector3[width * height];
+		var bottomVertices = new Vector3[width * height];
+
+		var scaleFactor = 10.0f;
+		var yOffsetTop = 0.0f;
+		var yOffsetBottom = -5.0f;
+
+		// Introduce a small vertical offset between the two meshes
+		var verticalOffset = 3f; // Adjust this value as needed
+
+		for (var y = 0; y < height; y++)
 		{
-			var nextIndex = (i + 1) % _topEdgeVerticesIndices.Count;
-
-			var topVertexIndex1 = _topEdgeVerticesIndices[i];
-			var topVertexIndex2 = _topEdgeVerticesIndices[nextIndex];
-			var bottomVertexIndex1 = _bottomEdgeVerticesIndices[i];
-			var bottomVertexIndex2 = _bottomEdgeVerticesIndices[nextIndex];
-
-			// Correctly orient the triangles
-			combinedTriangles.Add(topVertexIndex1);
-			combinedTriangles.Add(topVertexIndex2);
-			combinedTriangles.Add(bottomVertexIndex1);
-
-			combinedTriangles.Add(bottomVertexIndex1);
-			combinedTriangles.Add(topVertexIndex2);
-			combinedTriangles.Add(bottomVertexIndex2);
-		}
-	}
-
-	Mesh GenerateTopPlane()
-	{
-		var mesh = new Mesh();
-		GetComponent<MeshFilter>().mesh = mesh;
-
-		var vertices = new Vector3[(int)Resolution * (int)Resolution];
-		var triangles = new int[((int)Resolution - 1) * ((int)Resolution - 1) * 6];
-
-		// Generate vertices
-		var i = 0;
-		for (var y = 0; y < Resolution; y++)
-		{
-			for (var x = 0; x < Resolution; x++, i++)
+			for (var x = 0; x < width; x++)
 			{
-				var xPos = ((x / Resolution) - 0.5f) * 2 * Radius;
-				var yPos = ((y / Resolution) - 0.5f) * 2 * Radius;
+				var index = x + (y * width);
+				var topHeight = topMap.GetPixel(x, y).grayscale;
+				var bottomHeight = bottomMap.GetPixel(x, y).grayscale;
 
-				// Check if vertex is on the edge
-				var pos = (xPos * xPos) + (yPos * yPos);
+				topVertices[index] = new Vector3(x, (topHeight * scaleFactor) + yOffsetTop, y);
+				bottomVertices[index] = new Vector3(x, ((1.0f - bottomHeight) * scaleFactor) + yOffsetBottom - verticalOffset, y);
+			}
+		}
 
-				if ((xPos * xPos) + (yPos * yPos) >= EdgeVertexThreshold)
+		return (topVertices, bottomVertices);
+	}
+
+	void DisplaceVertices(Vector3[] vertices)
+	{
+		var noiseScale = 0.1f; // Adjust this scale to change the noise frequency
+		var displacementScale = 5.0f; // Adjust this scale to change the maximum displacement
+
+		for (var i = 0; i < vertices.Length; i++)
+		{
+			var noiseValue = Mathf.PerlinNoise(vertices[i].x * noiseScale, vertices[i].z * noiseScale);
+			vertices[i].y += noiseValue * displacementScale;
+		}
+	}
+
+	Vector3[] CalculateSmoothNormals(Vector3[] vertices, int[] triangles)
+	{
+		var normals = new Vector3[vertices.Length];
+		var triangleNormals = new Vector3[triangles.Length / 3];
+
+		// Calculate normals for each triangle
+		for (var i = 0; i < triangles.Length; i += 3)
+		{
+			var p1 = vertices[triangles[i]];
+			var p2 = vertices[triangles[i + 1]];
+			var p3 = vertices[triangles[i + 2]];
+
+			var normal = Vector3.Cross(p2 - p1, p3 - p1).normalized;
+			var triangleIndex = i / 3;
+			triangleNormals[triangleIndex] = normal;
+
+			normals[triangles[i]] += normal;
+			normals[triangles[i + 1]] += normal;
+			normals[triangles[i + 2]] += normal;
+		}
+
+		// Normalize the vertex normals
+		for (var i = 0; i < normals.Length; i++)
+		{
+			normals[i] = normals[i].normalized;
+		}
+
+		return normals;
+	}
+
+	int[] GenerateTriangles(int width, int height, int vertexOffset = 0)
+	{
+		var triangles = new int[(width - 1) * (height - 1) * 6];
+		var triangleIndex = 0;
+
+		for (var y = 0; y < height - 1; y++)
+		{
+			for (var x = 0; x < width - 1; x++)
+			{
+				var bottomLeft = (y * width) + x + vertexOffset;
+				var bottomRight = bottomLeft + 1;
+				var topLeft = bottomLeft + width;
+				var topRight = topLeft + 1;
+
+				// Top mesh or Bottom mesh with correct winding order
+				var order = vertexOffset == 0 ? new int[] { topLeft, bottomRight, bottomLeft, topLeft, topRight, bottomRight }
+												: new int[] { bottomLeft, bottomRight, topLeft, bottomRight, topRight, topLeft };
+
+				for (var i = 0; i < 6; i++)
 				{
-					_topEdgeVerticesIndices.Add(i);
+					triangles[triangleIndex++] = order[i];
 				}
+			}
+		}
 
-				if ((xPos * xPos) + (yPos * yPos) <= Radius * Radius) // Inside the circle
+		return triangles;
+	}
+
+	Texture2D GenerateHeightMap(bool isBottomMap = false)
+	{
+		var heightMap = new Texture2D(MapWidth, MapHeight);
+
+		for (var x = 0; x < MapWidth; x++)
+		{
+			for (var y = 0; y < MapHeight; y++)
+			{
+				float sample;
+				if (isBottomMap)
 				{
-					var height = Mathf.PerlinNoise(x * TopNoiseScale, y * TopNoiseScale) * TopNoiseHeight;
-					var distanceFromEdge = Radius - Mathf.Sqrt((xPos * xPos) + (yPos * yPos));
-
-					// Apply exit bevel
-					if (distanceFromEdge < ExitBevel)
-					{
-						height *= distanceFromEdge / ExitBevel;
-					}
-
-					vertices[i] = new Vector3(xPos, height, yPos);
+					sample = CalculateBottomMapValue(x, y, MapWidth, MapHeight);
 				}
 				else
 				{
-					vertices[i] = new Vector3(xPos, 0, yPos); // Outside the circle
+					var xCoord = (float)x / MapWidth * MapScale;
+					var yCoord = (float)y / MapHeight * MapScale;
+					sample = Mathf.PerlinNoise(xCoord, yCoord);
 				}
+
+				var color = new Color(sample, sample, sample);
+				heightMap.SetPixel(x, y, color);
 			}
 		}
 
-		// Generate triangles
-		var vert = 0;
-		var tris = 0;
-		for (var y = 0; y < Resolution - 1; y++)
-		{
-			for (var x = 0; x < Resolution - 1; x++)
-			{
-				if (IsInsideCircle(vertices, vert, (int)Resolution, Radius))
-				{
-					triangles[tris] = vert;
-					triangles[tris + 3] = triangles[tris + 2] = vert + 1;
-					triangles[tris + 4] = triangles[tris + 1] = vert + (int)Resolution;
-					triangles[tris + 5] = vert + (int)Resolution + 1;
-
-					tris += 6;
-				}
-				vert++;
-			}
-			vert++;
-		}
-
-		mesh.vertices = vertices;
-		mesh.triangles = triangles;
-		mesh.RecalculateNormals();
-
-		return mesh;
+		heightMap.Apply();
+		return heightMap;
 	}
 
-	Mesh GenerateBottomPlane()
+	float CalculateBottomMapValue(int x, int y, int width, int height)
 	{
-		var mesh = new Mesh();
-		GetComponent<MeshFilter>().mesh = mesh;
+		// Calculate distance from the center
+		var centerX = width / 2f;
+		var centerY = height / 2f;
+		var distance = Mathf.Sqrt(Mathf.Pow(x - centerX, 2) + Mathf.Pow(y - centerY, 2));
 
-		var vertices = new Vector3[(int)Resolution * (int)Resolution];
-		var triangles = new int[((int)Resolution - 1) * ((int)Resolution - 1) * 6];
+		// Normalize distance
+		var maxDistance = Mathf.Sqrt((centerX * centerX) + (centerY * centerY));
+		var normalizedDistance = distance / maxDistance;
 
-		// Generate vertices
-		var i = 0;
-		for (var y = 0; y < Resolution; y++)
+		// Invert and scale the distance to create a fade-out effect
+		var fadeOutValue = 1.0f - normalizedDistance;
+		fadeOutValue = Mathf.Clamp(fadeOutValue, 0f, 1f);
+
+		// Combine fade-out with Perlin noise for variation
+		var noiseValue = Mathf.PerlinNoise((float)x / width * MapScale, (float)y / height * MapScale);
+		return (1.0f - noiseValue) * fadeOutValue;
+	}
+
+	bool[] IdentifyEdgeVertices(int width, int height)
+	{
+		var totalVertices = width * height * 2; // *2 for top and bottom
+		var isEdgeVertex = new bool[totalVertices];
+
+		for (var i = 0; i < totalVertices; i++)
 		{
-			for (var x = 0; x < Resolution; x++, i++)
+			var x = i % width;
+			var y = i / width % height;
+			var isTopLayer = i < width * height;
+
+			isEdgeVertex[i] = x == 0 || y == 0 || x == width - 1 || y == height - 1;
+			if (isTopLayer)
 			{
-				var xPos = ((x / Resolution) - 0.5f) * 2 * Radius;
-				var yPos = ((y / Resolution) - 0.5f) * 2 * Radius;
+				// Additional logic for top layer if needed
+			}
+			else
+			{
+				// Additional logic for bottom layer if needed
+			}
+		}
 
-				// Check if vertex is on the edge
-				if ((xPos * xPos) + (yPos * yPos) >= EdgeVertexThreshold)
+		return isEdgeVertex;
+	}
+
+	List<int>[] FindVertexNeighbors(int width, int height)
+	{
+		var totalVertices = width * height * 2; // *2 for top and bottom meshes only
+		var vertexNeighbors = new List<int>[totalVertices];
+		for (var i = 0; i < totalVertices; i++)
+		{
+			vertexNeighbors[i] = new List<int>();
+			var layerOffset = i < width * height ? 0 : width * height;  // Determine if it's a top or bottom layer
+			var x = i % width;
+			var y = i / width % height;
+
+			for (var dy = -1; dy <= 1; dy++)
+			{
+				for (var dx = -1; dx <= 1; dx++)
 				{
-					_bottomEdgeVerticesIndices.Add(i);
-				}
-
-				if ((xPos * xPos) + (yPos * yPos) <= Radius * Radius) // Inside the circle
-				{
-					var distanceFromCenter = Mathf.Sqrt((xPos * xPos) + (yPos * yPos));
-					var largeNoise = Mathf.PerlinNoise(xPos * BottomNoiseScalePeaks, yPos * BottomNoiseScalePeaks) * BottomNoiseHeight;
-					var smallNoise = Mathf.PerlinNoise(xPos * BottomNoiseScaleDetails, yPos * BottomNoiseScaleDetails) * (BottomNoiseHeight / 3);
-					var height = largeNoise + smallNoise;
-					var normalizedDistance = 1 - (distanceFromCenter / Radius);
-					height *= normalizedDistance;
-					height += MinHeight;
-
-					// Apply exit bevel
-					if (distanceFromCenter > Radius - ExitBevel)
+					if (dx == 0 && dy == 0)
 					{
-						var bevelFactor = (Radius - distanceFromCenter) / ExitBevel;
-						height *= bevelFactor;
+						continue; // Skip the vertex itself
 					}
 
-					vertices[i] = new Vector3(xPos, -height, yPos); // Invert height for the bottom plane
+					var neighborX = x + dx;
+					var neighborY = y + dy;
+
+					if (neighborX >= 0 && neighborX < width && neighborY >= 0 && neighborY < height)
+					{
+						var neighborIndex = neighborY * width + neighborX + layerOffset;
+						if (neighborIndex < totalVertices) // Ensure the index is within bounds
+						{
+							vertexNeighbors[i].Add(neighborIndex);
+						}
+					}
+				}
+			}
+		}
+		return vertexNeighbors;
+
+	}
+
+
+
+
+	void SmoothEdges(Vector3[] vertices, bool[] isEdgeVertex, List<int>[] vertexNeighbors)
+	{
+		var smoothedVertices = new Vector3[vertices.Length];
+
+		for (var i = 0; i < vertices.Length; i++)
+		{
+			if (isEdgeVertex[i])
+			{
+				var averagePosition = Vector3.zero;
+				var neighborCount = 0;
+
+				foreach (var neighborIndex in vertexNeighbors[i])
+				{
+					averagePosition += vertices[neighborIndex];
+					neighborCount++;
+				}
+
+				if (neighborCount > 0)
+				{
+					averagePosition /= neighborCount;
+					smoothedVertices[i] = averagePosition;
 				}
 				else
 				{
-					vertices[i] = new Vector3(xPos, 0, yPos); // Outside the circle
+					smoothedVertices[i] = vertices[i];
 				}
 			}
-		}
-
-
-		// Generate triangles
-		var vert = 0;
-		var tris = 0;
-		for (var y = 0; y < Resolution - 1; y++)
-		{
-			for (var x = 0; x < Resolution - 1; x++)
+			else
 			{
-				if (IsInsideCircle(vertices, vert, (int)Resolution, Radius))
-				{
-					triangles[tris + 0] = vert + 0;
-					triangles[tris + 1] = vert + 1;
-					triangles[tris + 2] = vert + (int)Resolution + 1;
-					triangles[tris + 3] = vert + (int)Resolution + 1;
-					triangles[tris + 4] = vert + (int)Resolution;
-					triangles[tris + 5] = vert + 0;
-
-					tris += 6;
-				}
-				vert++;
+				smoothedVertices[i] = vertices[i];
 			}
-			vert++;
-
 		}
 
-		mesh.vertices = vertices;
-		mesh.triangles = triangles;
-		mesh.RecalculateNormals();
-
-		return mesh;
+		// Update original vertices with smoothed positions
+		for (var i = 0; i < vertices.Length; i++)
+		{
+			vertices[i] = smoothedVertices[i];
+		}
 	}
 
-
-	bool IsInsideCircle(Vector3[] vertices, int index, int res, float rad)
+	List<Vector3> CreateSideVertices(Vector3[] topVertices, Vector3[] bottomVertices, bool[] isEdgeVertex, int width, int height)
 	{
-		return (vertices[index].x * vertices[index].x) + (vertices[index].z * vertices[index].z) <= rad * rad &&
-				 (vertices[index + 1].x * vertices[index + 1].x) + (vertices[index + 1].z * vertices[index + 1].z) <= rad * rad &&
-				 (vertices[index + res].x * vertices[index + res].x) + (vertices[index + res].z * vertices[index + res].z) <= rad * rad &&
-				 (vertices[index + res + 1].x * vertices[index + res + 1].x) + (vertices[index + res + 1].z * vertices[index + res + 1].z) <= rad * rad;
+		var sideVertices = new List<Vector3>();
+
+		// Top edge vertices
+		for (var i = 0; i < width * height; i++)
+		{
+			if (isEdgeVertex[i]) // If it's an edge vertex
+			{
+				sideVertices.Add(topVertices[i]); // Add top vertex
+				sideVertices.Add(bottomVertices[i]); // Add corresponding bottom vertex directly below
+			}
+		}
+
+		return sideVertices;
 	}
+
+
+	int[] GenerateSideTriangles(List<Vector3> sideVertices, int width, int height)
+	{
+		var sideTriangles = new List<int>();
+
+		// Iterate over the edge vertices to create quads (two triangles per quad)
+		for (var i = 0; i < sideVertices.Count; i += 2)
+		{
+			if (i + 3 < sideVertices.Count) // Check to avoid out-of-range
+			{
+				// First triangle
+				sideTriangles.Add(i);
+				sideTriangles.Add(i + 1);
+				sideTriangles.Add(i + 2);
+
+				// Second triangle
+				sideTriangles.Add(i + 2);
+				sideTriangles.Add(i + 1);
+				sideTriangles.Add(i + 3);
+			}
+		}
+
+		return sideTriangles.ToArray();
+	}
+
 }

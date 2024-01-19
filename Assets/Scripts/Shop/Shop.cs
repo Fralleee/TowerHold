@@ -14,6 +14,7 @@ public class Shop : MonoBehaviour
 	public ShopInventory Inventory;
 
 	ShopSlot[] _slots;
+	RandomGenerator _randomGenerator;
 	int _refreshCost = 50;
 	readonly int _shopTypeCount = System.Enum.GetValues(typeof(ShopType)).Length;
 
@@ -28,6 +29,8 @@ public class Shop : MonoBehaviour
 
 	void Start()
 	{
+		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+
 		RefreshShop();
 		RefreshButton.onClick.AddListener(ManualRefresh);
 		GameController.OnLevelChanged += RefreshShop;
@@ -69,15 +72,15 @@ public class Shop : MonoBehaviour
 		}
 
 		// Step 3: Randomly select a category
-		var randomCategory = (ShopType)RandomManager.Shop.Next(0, _shopTypeCount);
+		var randomCategory = (ShopType)_randomGenerator.Next(0, _shopTypeCount);
 		while (!groupedItems.ContainsKey(randomCategory) || groupedItems[randomCategory].Count == 0)
 		{
-			randomCategory = (ShopType)RandomManager.Shop.Next(0, _shopTypeCount);
+			randomCategory = (ShopType)_randomGenerator.Next(0, _shopTypeCount);
 		}
 
 		// Step 4: Choose a random item from the selected category
 		var itemsInCategory = groupedItems[randomCategory];
-		var randomIndex = RandomManager.Shop.Next(0, itemsInCategory.Count);
+		var randomIndex = _randomGenerator.Next(0, itemsInCategory.Count);
 		return itemsInCategory[randomIndex];
 	}
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class TowerTargeter
 {
-	public static Target GetTurretTarget(Transform turret, float range)
+	public static Enemy GetEnemyTarget(Transform turret, float range)
 	{
 		Enemy selectedTarget = null;
 		var closestDistance = float.MaxValue;

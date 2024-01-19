@@ -5,8 +5,10 @@ using Random = UnityEngine.Random;
 
 public class GameController : Singleton<GameController>
 {
+	[HideInInspector]
+	public RandomGenerator RandomGenerator;
+
 	public static Action OnLevelChanged = delegate { };
-	public static Action<GameStage> OnStageChanged = delegate { };
 	public static Action OnGameEnd = delegate { };
 	public float FreezeTime = 5f;
 	public float TimePerLevel = 10f;
@@ -14,10 +16,11 @@ public class GameController : Singleton<GameController>
 	public int StartLevel = 1;
 	public int CurrentLevel = 1;
 	public int MaxLevel = 100;
-	public GameStage CurrentStage;
 	public int StartSeed;
+
 	bool _gameHasStarted = false;
 	bool _gameHasEnded = false;
+
 	EnemySpawner _enemySpawner;
 
 	protected override void Awake()
@@ -29,14 +32,14 @@ public class GameController : Singleton<GameController>
 			StartSeed = Random.Range(0, int.MaxValue);
 		}
 
-		RandomManager.SetSeed(StartSeed, StartLevel);
+		Debug.Log($"Starting game in {FreezeTime} seconds | Seed: {StartSeed} | Level: {StartLevel} | Map: {NameGeneration.GenerateLevelName(StartSeed)}");
 	}
 
 	void Start()
 	{
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
+		RandomGenerator = new RandomGenerator(StartSeed);
 
-		Debug.Log($"Starting game in {FreezeTime} seconds | Seed: {StartSeed} | Level: {StartLevel} | Map: {NameGeneration.GenerateLevelName(StartSeed)}");
 		Invoke(nameof(StartGame), FreezeTime);
 	}
 
@@ -61,49 +64,17 @@ public class GameController : Singleton<GameController>
 		}
 	}
 
-	void RunLevel(int level, bool ignoreSeed = false)
+	void RunLevel(int level)
 	{
-		if (!ignoreSeed)
-		{
-			RandomManager.SetSeed(StartSeed, level);
-		}
-
 		CurrentLevel = level;
-		UpdateGameStage();
 		TimeLeft += TimePerLevel;
 
 		OnLevelChanged();
 	}
 
-	void UpdateGameStage()
-	{
-		var previousStage = CurrentStage;
-
-		var lowThreshold = (int)(MaxLevel * 0.4); // 40% of maxLevel
-		var mediumThreshold = (int)(MaxLevel * 0.7); // 70% of maxLevel
-
-		if (CurrentLevel <= lowThreshold)
-		{
-			CurrentStage = GameStage.Low;
-		}
-		else if (CurrentLevel <= mediumThreshold)
-		{
-			CurrentStage = GameStage.Medium;
-		}
-		else
-		{
-			CurrentStage = GameStage.High;
-		}
-
-		if (CurrentStage != previousStage)
-		{
-			OnStageChanged(CurrentStage);
-		}
-	}
-
 	void StartGame()
 	{
-		RunLevel(StartLevel, true);
+		RunLevel(StartLevel);
 
 		_enemySpawner.Target = Tower.Instance;
 		_enemySpawner.IsSpawning = true;

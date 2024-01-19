@@ -14,6 +14,7 @@ public class ObjectSpawner : MonoBehaviour
 	[Header("Debug")]
 	[SerializeField] bool _showGizmos;
 
+	RandomGenerator _randomGenerator;
 	readonly List<GameObject> _spawnedObjects = new List<GameObject>();
 	const int ROTATIONDEGREES = 180;
 
@@ -57,6 +58,7 @@ public class ObjectSpawner : MonoBehaviour
 
 	void Start()
 	{
+		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
 		if (_spawnOnStart && Application.isPlaying)
 		{
 			ClearObjects();
@@ -86,8 +88,6 @@ public class ObjectSpawner : MonoBehaviour
 			isValid = false;
 		}
 
-		// Add more validation checks as needed
-
 		return isValid;
 	}
 
@@ -101,7 +101,7 @@ public class ObjectSpawner : MonoBehaviour
 
 			for (var i = 0; i < profile.Intensity; i++)
 			{
-				var randomValue = RandomManager.World.NextFloat();
+				var randomValue = _randomGenerator.NextFloat();
 				if (randomValue > spawnChanceModifier)
 				{
 					continue;
@@ -114,8 +114,8 @@ public class ObjectSpawner : MonoBehaviour
 	void TrySpawnObject(int distance, ObjectSpawnProfile profile)
 	{
 
-		var randomValue = RandomManager.World.NextFloat();
-		var randomDirection = RandomManager.World.InsideUnitCircleNormalized();
+		var randomValue = _randomGenerator.NextFloat();
+		var randomDirection = _randomGenerator.InsideUnitCircleNormalized();
 		var spawnPosition = transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * distance);
 		var noiseValue = Mathf.PerlinNoise(spawnPosition.x * profile.NoiseScale, spawnPosition.z * profile.NoiseScale);
 		var normalizedDistance = Mathf.InverseLerp(profile.StartRadius, profile.EndRadius, distance);
@@ -131,11 +131,11 @@ public class ObjectSpawner : MonoBehaviour
 			var spawnableObject = ChooseRandomObject(profile.Collection.Objects);
 			if (spawnableObject != null)
 			{
-				var scale = RandomManager.World.NextFloat(spawnableObject.MinScale, spawnableObject.MaxScale);
+				var scale = _randomGenerator.NextFloat(spawnableObject.MinScale, spawnableObject.MaxScale);
 				var rotation = new Vector3(
-					RandomManager.World.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.x,
-					RandomManager.World.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.y,
-					RandomManager.World.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
+					_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.x,
+					_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.y,
+					_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
 				);
 
 				var spawnedObject = Instantiate(spawnableObject.Prefab, spawnPosition, Quaternion.Euler(rotation), _parentObject);
@@ -173,7 +173,7 @@ public class ObjectSpawner : MonoBehaviour
 			totalSpawnChance += spawnableObject.SpawnChance;
 		}
 
-		var randomValue = RandomManager.World.NextFloat(0f, totalSpawnChance);
+		var randomValue = _randomGenerator.NextFloat(0f, totalSpawnChance);
 		foreach (var spawnableObject in objects)
 		{
 			if (randomValue <= spawnableObject.SpawnChance)

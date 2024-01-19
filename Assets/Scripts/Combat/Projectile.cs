@@ -109,6 +109,7 @@ public class Projectile : MonoBehaviour
 			if (_towerProjectile)
 			{
 				ScoreManager.Instance.DamageDone += actualDamage;
+				(_target as Enemy).Attackers--;
 			}
 		}
 

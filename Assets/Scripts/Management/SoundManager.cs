@@ -7,23 +7,16 @@ public class SoundManager : SerializedSingleton<SoundManager>
 {
 	[SerializeField] AudioSource _musicSource;
 	[SerializeField] AudioSource _effectSource;
-	[SerializeField]
-	Dictionary<GameStage, List<AudioClip>> _stagePlaylists = new Dictionary<GameStage, List<AudioClip>>{
-		{GameStage.Low, new List<AudioClip>()},
-		{GameStage.Medium, new List<AudioClip>()},
-		{GameStage.High, new List<AudioClip>()}
-	};
+	[SerializeField] List<AudioClip> _playList;
 
 	List<AudioClip> _currentPlaylist;
 	int _currentTrackIndex = 0;
 	bool _isPlayingMusic = false;
-	GameStage _currentStage;
 	readonly float _fadeDuration = 1.5f;
 
 	void Start()
 	{
-		GameController.OnStageChanged += ChangePlaylist;
-		_currentPlaylist = _stagePlaylists[GameStage.Low];
+		_currentPlaylist = _playList;
 		PlayMusic();
 	}
 
@@ -54,19 +47,6 @@ public class SoundManager : SerializedSingleton<SoundManager>
 			_isPlayingMusic = true;
 			_musicSource.clip = _currentPlaylist[UnityEngine.Random.Range(0, _currentPlaylist.Count)];
 			StartCoroutine(FadeIn(_musicSource, _fadeDuration));
-		}
-	}
-
-	void ChangePlaylist(GameStage newStage)
-	{
-		if (newStage != _currentStage)
-		{
-			_currentStage = newStage;
-			_currentPlaylist = _stagePlaylists[_currentStage];
-			_currentTrackIndex = 0;
-
-			// Start fading out the current track and then play the next track
-			StartCoroutine(FadeOut(_musicSource, _fadeDuration, PlayMusic));
 		}
 	}
 
@@ -106,6 +86,5 @@ public class SoundManager : SerializedSingleton<SoundManager>
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
-		GameController.OnStageChanged -= ChangePlaylist; // Unsubscribe when destroyed
 	}
 }

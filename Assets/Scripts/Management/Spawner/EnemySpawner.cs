@@ -28,6 +28,8 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	int _pointsRemainingFromLastSpawn;
 	Dictionary<int, LevelSpawnConfiguration> _levelSpawnConfigurations;
 
+	RandomGenerator _randomGenerator;
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -35,6 +37,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		InitializeLevelSpawnConfigurations();
 
 		GameController.OnLevelChanged += OnLevelChanged;
+	}
+
+	void Start()
+	{
+		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
 	}
 
 	void Update()
@@ -96,7 +103,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		}
 
 		var (minPointsPerSpawn, maxPointsPerSpawn) = CalculatePointsForLevel(GameController.Instance.CurrentLevel);
-		var pointsForThisSpawn = RandomManager.Enemy.Next(minPointsPerSpawn, maxPointsPerSpawn + 1);
+		var pointsForThisSpawn = _randomGenerator.Next(minPointsPerSpawn, maxPointsPerSpawn + 1);
 		pointsForThisSpawn += _pointsRemainingFromLastSpawn;
 		_pointsRemainingFromLastSpawn = 0;
 		SpawnGroup(pointsForThisSpawn);
@@ -130,7 +137,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	void SpawnEnemy(GameObject prefab, Vector3 groupSpawnPosition)
 	{
 		// Slight random offset from the group's central spawn position
-		var offset = new Vector3(RandomManager.Enemy.Next(-GroupOffsetDistanceMax, GroupOffsetDistanceMax), 0, RandomManager.Enemy.Next(-GroupOffsetDistanceMax, GroupOffsetDistanceMax)); // Offset range can be adjusted
+		var offset = new Vector3(_randomGenerator.Next(-GroupOffsetDistanceMax, GroupOffsetDistanceMax), 0, _randomGenerator.Next(-GroupOffsetDistanceMax, GroupOffsetDistanceMax)); // Offset range can be adjusted
 		var spawnPosition = groupSpawnPosition + offset;
 		var rotation = Quaternion.LookRotation(transform.position - spawnPosition, Vector3.up);
 
@@ -149,8 +156,8 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
 	Vector3 GetRandomSpawnPosition()
 	{
-		var randomDirection = RandomManager.Enemy.InsideUnitCircleNormalized();
-		return transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * RandomManager.Enemy.Next(_minRadius, _maxRadius));
+		var randomDirection = _randomGenerator.InsideUnitCircleNormalized();
+		return transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * _randomGenerator.Next(_minRadius, _maxRadius));
 	}
 
 	Enemy ChooseEnemyToSpawn(int remainingPoints)
@@ -162,7 +169,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 			return null;
 		}
 
-		return possibleEnemies[RandomManager.Enemy.Next(0, possibleEnemies.Length)];
+		return possibleEnemies[_randomGenerator.Next(0, possibleEnemies.Length)];
 	}
 
 	(int minPoints, int maxPoints) CalculatePointsForLevel(int level)

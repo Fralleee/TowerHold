@@ -24,7 +24,7 @@ public class Bobbing : MonoBehaviour
 		_startingPosition = transform.localPosition;
 		_startingRotation = transform.localRotation;
 
-		var randomTimer = RandomManager.Delay.NextFloat(0f, 2f * Mathf.PI);
+		var randomTimer = GameController.Instance.RandomGenerator.NextFloat(0f, 2f * Mathf.PI);
 		_bobbingTimer = randomTimer;
 		_rotationTimer = randomTimer;
 	}

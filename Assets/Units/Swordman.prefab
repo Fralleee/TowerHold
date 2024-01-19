@@ -172,7 +172,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
     type: 3}
   BaseDamage: 10
-  AttackRange: 4
+  AttackRange: 8
   TimeBetweenAttacks: 1
   _attackOrigin: {fileID: 0}
   _projectileSettings:
@@ -291,7 +291,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: afcef2d921c130c49bf8444632f1d4ed, type: 2}
+      objectReference: {fileID: 2100000, guid: 268a73043229db540a2fb8f4f2dfb2a7, type: 2}
     - target: {fileID: 919132149155446097, guid: b4e6ab4d2acb8914a9c89e5b10d3657a,
         type: 3}
       propertyPath: m_Name
