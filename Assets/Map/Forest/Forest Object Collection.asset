@@ -36,12 +36,6 @@ MonoBehaviour:
     MinScale: 0.7
     MaxScale: 1.2
     RotationAxis: {x: 0, y: 1, z: 0}
-  - Prefab: {fileID: 6469677208131152525, guid: f1ebbfdea7eab564bbab8d7160c1f1c4,
-      type: 3}
-    SpawnChance: 0.25
-    MinScale: 0.8
-    MaxScale: 2
-    RotationAxis: {x: 1, y: 1, z: 1}
   - Prefab: {fileID: 2292694632710745736, guid: 0ac0dbffb95f7084c93aadf374ab8c73,
       type: 3}
     SpawnChance: 0.05
@@ -53,4 +47,21 @@ MonoBehaviour:
     SpawnChance: 0.05
     MinScale: 0.4
     MaxScale: 0.4
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 7019904234377758171, guid: 92e90209d1ecf5740941555543c9687a,
+      type: 3}
+    SpawnChance: 0.1
+    MinScale: 0.85
+    MaxScale: 1.15
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 3317037631939852415, guid: 8ae78abba89575846851a4d6f2e2f62c,
+      type: 3}
+    SpawnChance: 0.1
+    MinScale: 0.85
+    MaxScale: 1.15
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 186304265961449117, guid: 7a339f1c9ade95a418246f02ca4f918a, type: 3}
+    SpawnChance: 0.1
+    MinScale: 0.85
+    MaxScale: 1.15
     RotationAxis: {x: 0, y: 1, z: 0}
