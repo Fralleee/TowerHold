@@ -30,7 +30,10 @@ public class SoundManager : SerializedSingleton<SoundManager>
 		}
 	}
 
-	public void PlayEffect(AudioClip clip) => _effectSource.PlayOneShot(clip);
+	public void PlayEffect(AudioClip clip)
+	{
+		_effectSource.PlayOneShot(clip);
+	}
 
 	void PlayMusic()
 	{

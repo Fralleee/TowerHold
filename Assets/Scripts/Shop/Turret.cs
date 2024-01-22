@@ -5,15 +5,15 @@ using UnityEngine;
 public partial class Turret : DamageShopItem
 {
 	[Header("Turret Settings")]
-	public Projectile ProjectilePrefab;
-	public float BaseDamage = 10f;
-	public float AttackRange = 2f;
-	public float TimeBetweenAttacks = 1f;
-	public float TimeBetweenFindTarget = 1f;
+	[SerializeField] float _baseDamage = 10f;
+	[SerializeField] float _attackRange = 2f;
+	[SerializeField] float _timeBetweenAttacks = 1f;
+	[SerializeField] float _timeBetweenFindTarget = 1f;
 
-	[SerializeField]
-	[InlineProperty(LabelWidth = 140)]
-	ProjectileSettings _projectileSettings;
+	[SerializeField] Projectile _projectilePrefab;
+	[ShowIf("_projectilePrefab")][SerializeField][InlineProperty(LabelWidth = 140)] ProjectileSettings _projectileSettings;
+	[HideIf("_projectilePrefab")][SerializeField] AudioClip _attackSound;
+	[HideIf("_projectilePrefab")][SerializeField] AudioSettings _audioSettings;
 
 	float _lastAttackTime = 0f;
 	float _lastTargetSearch = 0f;
@@ -23,22 +23,22 @@ public partial class Turret : DamageShopItem
 	public void Setup(Tower inputTower)
 	{
 		_tower = inputTower;
-		_lastTargetSearch = GameController.Instance.RandomGenerator.NextFloat(0f, TimeBetweenFindTarget);
-		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, TimeBetweenAttacks); // Add random delay for the first attack
+		_lastTargetSearch = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenFindTarget);
+		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenAttacks); // Add random delay for the first attack
 	}
 
 	public void Update()
 	{
-		if (Time.time - _lastTargetSearch > TimeBetweenFindTarget)
+		if (Time.time - _lastTargetSearch > _timeBetweenFindTarget)
 		{
-			_target = TowerTargeter.GetEnemyTarget(_tower.Center, AttackRange);
-			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(TimeBetweenFindTarget); // Add some variance to the search timing
+			_target = TowerTargeter.GetEnemyTarget(_tower.Center, _attackRange);
+			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenFindTarget); // Add some variance to the search timing
 		}
 
-		if (_target != null && !_target.IsDead && Time.time - _lastAttackTime > TimeBetweenAttacks)
+		if (_target != null && !_target.IsDead && Time.time - _lastAttackTime > _timeBetweenAttacks)
 		{
 			Shoot();
-			_lastAttackTime = Time.time + GameController.Instance.RandomGenerator.Variance(TimeBetweenAttacks); // Add some variance to the attack timing
+			_lastAttackTime = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenAttacks); // Add some variance to the attack timing
 			_lastTargetSearch = Time.time; // This should probably be adjusted to have a delay as well
 		}
 	}
@@ -51,22 +51,36 @@ public partial class Turret : DamageShopItem
 
 	void Shoot()
 	{
-		if (ProjectilePrefab == null)
+		if (_projectilePrefab == null)
 		{
 			InstantAttack();
 			return;
 		}
 		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
-		var projectile = Instantiate(ProjectilePrefab, _tower.Center.position, rotation);
-		projectile.Setup(_target, _tower.GetDamage(Category, BaseDamage), true, _projectileSettings);
+		var projectile = Instantiate(_projectilePrefab, _tower.Center.position, rotation);
+		projectile.Setup(_target, _tower.GetDamage(Category, _baseDamage), true, _projectileSettings);
 	}
 
 	void InstantAttack()
 	{
 		if (_target != null)
 		{
-			var damage = _tower.GetDamage(Category, BaseDamage);
+			var damage = _tower.GetDamage(Category, _baseDamage);
 			_target.TakeDamage(Mathf.RoundToInt(damage));
+		}
+
+		var audioSource = _tower.GetComponent<AudioSource>();
+		if (_attackSound != null && audioSource != null)
+		{
+			audioSource.minDistance = _audioSettings.MinDistance;
+			audioSource.maxDistance = _audioSettings.MaxDistance;
+			audioSource.spatialBlend = _audioSettings.SpatialBlend;
+			audioSource.rolloffMode = _audioSettings.RolloffMode;
+			audioSource.PlayOneShot(_attackSound);
+		}
+		else
+		{
+			Debug.LogWarning("EnemyAttack: No audio source or attack sound assigned to enemy.");
 		}
 	}
 }
