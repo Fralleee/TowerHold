@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : Target
 {
@@ -13,9 +14,17 @@ public class Enemy : Target
 	[ReadOnly] public int Attackers = 0;
 	public bool HasAttackers => Attackers > 0;
 
+	NavMeshAgent _agent;
+	EnemyAttack _attack;
+	Bobbing _bobbing;
+
 	protected override void Awake()
 	{
 		base.Awake();
+
+		_agent = GetComponent<NavMeshAgent>();
+		_attack = GetComponent<EnemyAttack>();
+		_bobbing = GetComponentInChildren<Bobbing>();
 
 		AllEnemies.Add(this);
 
@@ -24,8 +33,26 @@ public class Enemy : Target
 		OnDeath += HandleDeath;
 	}
 
+	protected override void Start()
+	{
+		base.Start();
+
+		_ = _agent.SetDestination(Tower.Instance.transform.position);
+	}
+
+	void Update()
+	{
+		if (_attack.Target != null)
+		{
+			_agent.isStopped = true;
+			_bobbing.Stop();
+		}
+	}
+
 	void HandleDeath(Target target)
 	{
+		StopMovement();
+
 		_ = AllEnemies.Remove(this);
 		ResourceManager.Instance.AddResource(Value);
 
@@ -40,6 +67,15 @@ public class Enemy : Target
 		Destroy(gameObject);
 	}
 
+	public void StopMovement()
+	{
+		if (_agent && _agent.enabled)
+		{
+			_agent.isStopped = true;
+		}
+		_bobbing.Stop();
+	}
+
 	public static void ResetGameState()
 	{
 		AllEnemies.Clear();
@@ -51,7 +87,7 @@ public class Enemy : Target
 	{
 		foreach (var enemy in AllEnemies)
 		{
-			enemy.GetComponent<MoveToAttack>().Stop();
+			enemy.StopMovement();
 			foreach (var component in enemy.GetComponents<MonoBehaviour>())
 			{
 				component.enabled = false;

@@ -7,15 +7,16 @@ public class Projectile : MonoBehaviour
 	[SerializeField] GameObject _muzzleParticle;
 	[SerializeField] GameObject[] _trailParticles;
 
+	[Header("Audio")]
+	[SerializeField] AudioClip _attackSound;
+	[SerializeField] AudioSettings _audioSettings;
+
 	Target _target;
 	Vector3 _startPosition;
 	Vector3 _lastPosition;
-	Vector3 _spinAxis = Vector3.up;
-	bool _isSpinning;
 	bool _useParabolicArc;
 	bool _towerProjectile;
 	float _speed = 10f;
-	float _spinSpeed = 360f;
 	float _maxArcHeight;
 	float _damage;
 	float _hitTime;
@@ -26,11 +27,7 @@ public class Projectile : MonoBehaviour
 		_target = target;
 		_damage = damage;
 		_towerProjectile = towerProjectile;
-
 		_speed = projectileSettings.Speed;
-		_isSpinning = projectileSettings.IsSpinning;
-		_spinAxis = projectileSettings.SpinAxis;
-		_spinSpeed = projectileSettings.SpinSpeed;
 		_useParabolicArc = projectileSettings.UseParabolicArc;
 		_maxArcHeight = projectileSettings.MaxArcHeight;
 
@@ -50,6 +47,20 @@ public class Projectile : MonoBehaviour
 		{
 			_muzzleParticle = Instantiate(_muzzleParticle, transform.position, transform.rotation);
 			Destroy(_muzzleParticle, 1.5f);
+		}
+
+		var audioSource = GetComponent<AudioSource>();
+		if (_attackSound != null && audioSource != null)
+		{
+			audioSource.minDistance = _audioSettings.MinDistance;
+			audioSource.maxDistance = _audioSettings.MaxDistance;
+			audioSource.spatialBlend = _audioSettings.SpatialBlend;
+			audioSource.rolloffMode = _audioSettings.RolloffMode;
+			audioSource.PlayOneShot(_attackSound);
+		}
+		else
+		{
+			Debug.LogWarning("Projectile: No audio source or attack sound assigned to projectile.", gameObject);
 		}
 	}
 
@@ -76,28 +87,15 @@ public class Projectile : MonoBehaviour
 			var arcPosition = Vector3.Lerp(_startPosition, _lastPosition, normalizedTime);
 			arcPosition.y += arcHeight;
 
-			if (!_isSpinning)
-			{
-				var rotation = Quaternion.LookRotation(arcPosition - transform.position);
-				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _speed * Time.deltaTime);
-			}
-
-			transform.position = arcPosition;
+			var rotation = Quaternion.LookRotation(arcPosition - transform.position);
+			transform.SetPositionAndRotation(arcPosition, Quaternion.Slerp(transform.rotation, rotation, _speed * Time.deltaTime));
 		}
 		else
 		{
 			transform.position = Vector3.Lerp(_startPosition, _lastPosition, normalizedTime);
 
-			if (!_isSpinning)
-			{
-				var rotation = Quaternion.LookRotation(_lastPosition - transform.position);
-				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _speed * Time.deltaTime);
-			}
-		}
-
-		if (_isSpinning)
-		{
-			transform.Rotate(_spinAxis, _spinSpeed * Time.deltaTime);
+			var rotation = Quaternion.LookRotation(_lastPosition - transform.position);
+			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _speed * Time.deltaTime);
 		}
 	}
 

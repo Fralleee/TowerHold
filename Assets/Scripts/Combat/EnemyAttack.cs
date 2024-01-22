@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-	public Projectile ProjectilePrefab;
-	public float BaseDamage = 10f;
-	public float AttackRange = 2f;
-	public float TimeBetweenAttacks = 1f;
-
-	[SerializeField, ChildGameObjectsOnly]
-	Transform _attackOrigin;
-
-	[SerializeField]
-	[InlineProperty(LabelWidth = 140)]
-	ProjectileSettings _projectileSettings;
-	float _lastAttackTime = 0f;
 	[HideInInspector] public Target Target;
+
+	[SerializeField] float _baseDamage = 10f;
+	[SerializeField] float _attackRange = 4f;
+	[SerializeField] float _timeBetweenAttacks = 1f;
+
+	[SerializeField] Projectile _projectilePrefab;
+	[ShowIf("_projectilePrefab")][SerializeField, ChildGameObjectsOnly] Transform _attackOrigin;
+	[ShowIf("_projectilePrefab")][SerializeField][InlineProperty(LabelWidth = 140)] ProjectileSettings _projectileSettings;
+	[HideIf("_projectilePrefab")][SerializeField] AudioClip _attackSound;
+	[HideIf("_projectilePrefab")][SerializeField] AudioSettings _audioSettings;
+
 	ITargeter _targeter;
 	Animator _animator;
+	float _lastAttackTime = 0f;
 
 	void Awake()
 	{
@@ -34,12 +34,12 @@ public class EnemyAttack : MonoBehaviour
 	{
 		if (Target == null)
 		{
-			Target = _targeter.GetTarget(AttackRange);
+			Target = _targeter.GetTarget(_attackRange);
 		}
-		else if (Time.time - _lastAttackTime > TimeBetweenAttacks)
+		else if (Time.time - _lastAttackTime > _timeBetweenAttacks)
 		{
 			StartAttack();
-			_lastAttackTime = Time.time + GameController.Instance.RandomGenerator.Variance(TimeBetweenAttacks);
+			_lastAttackTime = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenAttacks);
 		}
 	}
 
@@ -50,21 +50,35 @@ public class EnemyAttack : MonoBehaviour
 
 	public void PerformAttack()
 	{
-		if (ProjectilePrefab == null)
+		if (_projectilePrefab == null)
 		{
 			InstantAttack();
 			return;
 		}
 
-		var projectile = Instantiate(ProjectilePrefab, _attackOrigin.position, _attackOrigin.rotation);
-		projectile.Setup(Target, BaseDamage, false, _projectileSettings);
+		var projectile = Instantiate(_projectilePrefab, _attackOrigin.position, _attackOrigin.rotation);
+		projectile.Setup(Target, _baseDamage, false, _projectileSettings);
 	}
 
 	void InstantAttack()
 	{
 		if (Target != null)
 		{
-			Target.TakeDamage(Mathf.RoundToInt(BaseDamage));
+			Target.TakeDamage(Mathf.RoundToInt(_baseDamage));
+		}
+
+		var audioSource = GetComponent<AudioSource>();
+		if (_attackSound != null && audioSource != null)
+		{
+			audioSource.minDistance = _audioSettings.MinDistance;
+			audioSource.maxDistance = _audioSettings.MaxDistance;
+			audioSource.spatialBlend = _audioSettings.SpatialBlend;
+			audioSource.rolloffMode = _audioSettings.RolloffMode;
+			audioSource.PlayOneShot(_attackSound);
+		}
+		else
+		{
+			Debug.LogWarning("EnemyAttack: No audio source or attack sound assigned to enemy.", gameObject);
 		}
 	}
 }

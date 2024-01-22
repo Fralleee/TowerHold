@@ -58,9 +58,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7436592427366047359}
+  - component: {fileID: 5932621036956699449}
   - component: {fileID: 7968482255819381450}
   - component: {fileID: 1035760656611226112}
-  - component: {fileID: 1256222014440585348}
   - component: {fileID: 6730998812033025015}
   - component: {fileID: 9177058180970674094}
   m_Layer: 8
@@ -87,6 +87,102 @@ Transform:
   - {fileID: 732106468331393587}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5932621036956699449
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4373877528160310618}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!195 &7968482255819381450
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -132,18 +228,6 @@ MonoBehaviour:
   _deathEffect: {fileID: 1186030354075607, guid: 74a22e399f24c974da3d44b1b4247b28,
     type: 3}
   Attackers: 0
---- !u!114 &1256222014440585348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4373877528160310618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5377f4cd8ee1d2448817fba54b8f4d62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6730998812033025015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,20 +253,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b0ab6629bd7a944a743ca5e3a8028d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
+  Target: {fileID: 0}
+  _baseDamage: 10
+  _attackRange: 35
+  _timeBetweenAttacks: 1
+  _projectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
     type: 3}
-  BaseDamage: 10
-  AttackRange: 35
-  TimeBetweenAttacks: 1
   _attackOrigin: {fileID: 4560925534984523161}
   _projectileSettings:
     Speed: 30
-    IsSpinning: 0
-    SpinAxis: {x: 0, y: 1, z: 0}
-    SpinSpeed: 360
     UseParabolicArc: 1
     MaxArcHeight: 5
-  Target: {fileID: 0}
+  _attackSound: {fileID: 0}
+  _audioSettings: {fileID: 0}
 --- !u!1 &6619729562962141707
 GameObject:
   m_ObjectHideFlags: 0
