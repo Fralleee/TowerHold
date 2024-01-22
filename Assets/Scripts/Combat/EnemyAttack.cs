@@ -15,6 +15,7 @@ public class EnemyAttack : MonoBehaviour
 	[HideIf("_projectilePrefab")][SerializeField] AudioClip _attackSound;
 	[HideIf("_projectilePrefab")][SerializeField] AudioSettings _audioSettings;
 
+	AudioSource _audioSource;
 	ITargeter _targeter;
 	Animator _animator;
 	float _lastAttackTime = 0f;
@@ -23,6 +24,7 @@ public class EnemyAttack : MonoBehaviour
 	{
 		_animator = GetComponentInChildren<Animator>();
 		_targeter = GetComponentInParent<ITargeter>();
+		_audioSource = GetComponent<AudioSource>();
 
 		if (_attackOrigin == null)
 		{
@@ -67,14 +69,10 @@ public class EnemyAttack : MonoBehaviour
 			Target.TakeDamage(Mathf.RoundToInt(_baseDamage));
 		}
 
-		var audioSource = GetComponent<AudioSource>();
-		if (_attackSound != null && audioSource != null)
+		if (_attackSound != null && _audioSource != null)
 		{
-			audioSource.minDistance = _audioSettings.MinDistance;
-			audioSource.maxDistance = _audioSettings.MaxDistance;
-			audioSource.spatialBlend = _audioSettings.SpatialBlend;
-			audioSource.rolloffMode = _audioSettings.RolloffMode;
-			audioSource.PlayOneShot(_attackSound);
+			_audioSettings.ApplySettings(_audioSource);
+			_audioSource.PlayOneShot(_attackSound);
 		}
 		else
 		{

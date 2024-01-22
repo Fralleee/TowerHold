@@ -58,6 +58,7 @@ public class HealthBar : MonoBehaviour
 			_isHidden = false;
 		}
 
+		var oldFillAmount = _healthBar.fillAmount;
 		_healthBar.fillAmount = newHP / _maxHealth;
 
 		if (silent)
@@ -69,9 +70,13 @@ public class HealthBar : MonoBehaviour
 		_targetValue = newHP / _maxHealth;
 		_startValue = _transitionHealthbar.fillAmount;
 
-		_healthUI.transform.localScale = _targetScale;
-		_scaleTimeElapsed = 0;
-		_doScale = true;
+		var difference = Mathf.Abs(oldFillAmount - _targetValue);
+		if (difference > 0.1f)
+		{
+			_healthUI.transform.localScale = _targetScale;
+			_scaleTimeElapsed = 0;
+			_doScale = true;
+		}
 
 		if (_transitionCoroutine != null)
 		{

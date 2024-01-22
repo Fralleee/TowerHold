@@ -17,16 +17,15 @@ MonoBehaviour:
   MinLevel: 0
   ShopType: 6
   Category: 3
-  ProjectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
+  _baseDamage: 10
+  _attackRange: 35
+  _timeBetweenAttacks: 1
+  _timeBetweenFindTarget: 1
+  _projectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
     type: 3}
-  BaseDamage: 40
-  AttackRange: 50
-  TimeBetweenAttacks: 1
-  TimeBetweenFindTarget: 1
   _projectileSettings:
     Speed: 25
-    IsSpinning: 0
-    SpinAxis: {x: 1, y: 0, z: 0}
-    SpinSpeed: 360
     UseParabolicArc: 1
     MaxArcHeight: 5
+  _attackSound: {fileID: 0}
+  _audioSettings: {fileID: 0}

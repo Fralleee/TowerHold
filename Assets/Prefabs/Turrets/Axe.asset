@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
-  m_Name: Bullet
+  m_Name: Axe
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: bc17cdf26c6b0cf4e917bf11c53970d4, type: 3}
   Cost: 100
   MinLevel: 0
   ShopType: 3
   Category: 0
-  ProjectilePrefab: {fileID: -2343517627577055232, guid: bd5fc6f248bd95e41a520dcdecfb3ffe,
+  _baseDamage: 10
+  _attackRange: 35
+  _timeBetweenAttacks: 1
+  _timeBetweenFindTarget: 1
+  _projectilePrefab: {fileID: 9212724085591995478, guid: ae3cff54fd2ef1042a7ec4520c94d5ca,
     type: 3}
-  BaseDamage: 40
-  AttackRange: 50
-  TimeBetweenAttacks: 1
-  TimeBetweenFindTarget: 1
   _projectileSettings:
     Speed: 50
-    IsSpinning: 0
-    SpinAxis: {x: 0, y: 1, z: 0}
-    SpinSpeed: 360
-    UseParabolicArc: 0
+    UseParabolicArc: 1
     MaxArcHeight: 5
+  _attackSound: {fileID: 0}
+  _audioSettings: {fileID: 0}

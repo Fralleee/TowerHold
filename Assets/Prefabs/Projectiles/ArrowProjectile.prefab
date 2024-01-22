@@ -146,5 +146,6 @@ MonoBehaviour:
     type: 3}
   _muzzleParticle: {fileID: 0}
   _trailParticles: []
-  _attackSound: {fileID: 8300000, guid: be9c71bb9027c7b4297f7f3c16a2fd97, type: 3}
+  _attackSound: {fileID: 8300000, guid: 40f9dc839d97a454782e11bf5da041c2, type: 3}
+  _hitSound: {fileID: 8300000, guid: 4873a99fcfa4bf4498ce683d0f0594e7, type: 3}
   _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}

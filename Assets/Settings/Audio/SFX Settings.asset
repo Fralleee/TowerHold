@@ -15,4 +15,7 @@ MonoBehaviour:
   MinDistance: 100
   MaxDistance: 300
   SpatialBlend: 1
+  DopplerLevel: 0
+  OutputAudioMixerGroup: {fileID: -520496798812680158, guid: 633887cea0f42fa42bebbe9cb94522af,
+    type: 2}
   RolloffMode: 0

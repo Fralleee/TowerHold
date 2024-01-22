@@ -19,12 +19,14 @@ public partial class Turret : DamageShopItem
 	float _lastTargetSearch = 0f;
 	Tower _tower;
 	Enemy _target;
+	AudioSource _audioSource;
 
 	public void Setup(Tower inputTower)
 	{
 		_tower = inputTower;
 		_lastTargetSearch = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenFindTarget);
 		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenAttacks); // Add random delay for the first attack
+		_audioSource = _tower.GetComponent<AudioSource>();
 	}
 
 	public void Update()
@@ -35,6 +37,7 @@ public partial class Turret : DamageShopItem
 			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenFindTarget); // Add some variance to the search timing
 		}
 
+		Debug.Log(_target);
 		if (_target != null && !_target.IsDead && Time.time - _lastAttackTime > _timeBetweenAttacks)
 		{
 			Shoot();
@@ -51,6 +54,7 @@ public partial class Turret : DamageShopItem
 
 	void Shoot()
 	{
+		Debug.Log($"Turret {name}: Shooting {_target.name}");
 		if (_projectilePrefab == null)
 		{
 			InstantAttack();
@@ -69,14 +73,10 @@ public partial class Turret : DamageShopItem
 			_target.TakeDamage(Mathf.RoundToInt(damage));
 		}
 
-		var audioSource = _tower.GetComponent<AudioSource>();
-		if (_attackSound != null && audioSource != null)
+		if (_attackSound != null && _audioSource != null)
 		{
-			audioSource.minDistance = _audioSettings.MinDistance;
-			audioSource.maxDistance = _audioSettings.MaxDistance;
-			audioSource.spatialBlend = _audioSettings.SpatialBlend;
-			audioSource.rolloffMode = _audioSettings.RolloffMode;
-			audioSource.PlayOneShot(_attackSound);
+			_audioSettings.ApplySettings(_audioSource);
+			_audioSource.PlayOneShot(_attackSound);
 		}
 		else
 		{

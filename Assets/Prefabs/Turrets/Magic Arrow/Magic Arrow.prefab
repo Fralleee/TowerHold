@@ -51,9 +51,5 @@ MonoBehaviour:
   _muzzleParticle: {fileID: 3564993737778466243, guid: 8cb851ec20d733e41a29be7b82509528,
     type: 3}
   _trailParticles: []
-  _speed: 40
-  _rotateTowardsTarget: 1
-  _isSpinning: 0
-  _spinAxis: {x: 0, y: 1, z: 0}
-  _spinSpeed: 360
-  _useGravity: 1
+  _attackSound: {fileID: 0}
+  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}

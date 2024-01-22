@@ -224,6 +224,8 @@ MonoBehaviour:
     type: 3}
   _healthBarOffset: 0
   IsDead: 0
+  _hitSound: {fileID: 8300000, guid: 4873a99fcfa4bf4498ce683d0f0594e7, type: 3}
+  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   Value: 10
   _deathEffect: {fileID: 1186030354075607, guid: 74a22e399f24c974da3d44b1b4247b28,
     type: 3}
@@ -262,10 +264,10 @@ MonoBehaviour:
   _attackOrigin: {fileID: 4560925534984523161}
   _projectileSettings:
     Speed: 30
-    UseParabolicArc: 1
+    UseParabolicArc: 0
     MaxArcHeight: 5
   _attackSound: {fileID: 0}
-  _audioSettings: {fileID: 0}
+  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
 --- !u!1 &6619729562962141707
 GameObject:
   m_ObjectHideFlags: 0

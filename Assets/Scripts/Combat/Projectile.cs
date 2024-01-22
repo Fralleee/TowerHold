@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
 	[SerializeField] AudioSettings _audioSettings;
 
 	Target _target;
+	AudioSource _audioSource;
 	Vector3 _startPosition;
 	Vector3 _lastPosition;
 	bool _useParabolicArc;
@@ -30,12 +31,13 @@ public class Projectile : MonoBehaviour
 		_speed = projectileSettings.Speed;
 		_useParabolicArc = projectileSettings.UseParabolicArc;
 		_maxArcHeight = projectileSettings.MaxArcHeight;
-
 		_startPosition = transform.position;
 
 		var initialDistance = Vector3.Distance(_startPosition, target.Center.position);
 		_hitTime = initialDistance / _speed;
 		_startTime = Time.time;
+
+		_audioSource = GetComponent<AudioSource>();
 	}
 
 	void Start()
@@ -49,19 +51,7 @@ public class Projectile : MonoBehaviour
 			Destroy(_muzzleParticle, 1.5f);
 		}
 
-		var audioSource = GetComponent<AudioSource>();
-		if (_attackSound != null && audioSource != null)
-		{
-			audioSource.minDistance = _audioSettings.MinDistance;
-			audioSource.maxDistance = _audioSettings.MaxDistance;
-			audioSource.spatialBlend = _audioSettings.SpatialBlend;
-			audioSource.rolloffMode = _audioSettings.RolloffMode;
-			audioSource.PlayOneShot(_attackSound);
-		}
-		else
-		{
-			Debug.LogWarning("Projectile: No audio source or attack sound assigned to projectile.", gameObject);
-		}
+		PlaySound(_attackSound);
 	}
 
 	void Update()
@@ -134,6 +124,19 @@ public class Projectile : MonoBehaviour
 				trail.transform.SetParent(null);
 				Destroy(trail.gameObject, 2f);
 			}
+		}
+	}
+
+	void PlaySound(AudioClip clip)
+	{
+		if (clip != null && _audioSource != null)
+		{
+			_audioSettings.ApplySettings(_audioSource);
+			_audioSource.PlayOneShot(clip);
+		}
+		else
+		{
+			Debug.LogWarning("Projectile: No audio source or attack sound assigned to projectile.", gameObject);
 		}
 	}
 }

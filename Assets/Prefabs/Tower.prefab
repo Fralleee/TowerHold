@@ -76,7 +76,8 @@ AudioSource:
   m_GameObject: {fileID: 7943569025180232256}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 633887cea0f42fa42bebbe9cb94522af,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -198,6 +199,8 @@ MonoBehaviour:
     type: 3}
   _healthBarOffset: 6
   IsDead: 0
+  _hitSound: {fileID: 8300000, guid: aaa2e807c1a417c47b8728f403f3eaa2, type: 3}
+  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   HealthRegenerationRate: 5
   Turrets: []
 --- !u!1001 &2768778147646213959

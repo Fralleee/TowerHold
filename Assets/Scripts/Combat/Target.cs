@@ -1,7 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Target : MonoBehaviour
 {
@@ -14,12 +13,20 @@ public class Target : MonoBehaviour
 	[SerializeField] float _healthBarOffset = 0f;
 	[ReadOnly] public bool IsDead;
 
+	[Header("Audio")]
+	[SerializeField] AudioClip _hitSound;
+	[SerializeField] AudioSettings _audioSettings;
+
+	AudioSource _audioSource;
+
 	protected virtual void Awake()
 	{
 		if (Center == null)
 		{
 			Center = transform;
 		}
+
+		_audioSource = GetComponent<AudioSource>();
 	}
 
 	protected virtual void Start() => HealthBar = Instantiate(HealthBar, transform.position + (Vector3.up * _healthBarOffset), Quaternion.identity, transform);
@@ -33,6 +40,7 @@ public class Target : MonoBehaviour
 
 		Health -= damage;
 		HealthBar.SetHealth(Health);
+		PlaySound(_hitSound);
 
 		if (Health <= 0)
 		{
@@ -44,6 +52,19 @@ public class Target : MonoBehaviour
 		OnDamageTaken(damage);
 		return damage;
 
+	}
+
+	void PlaySound(AudioClip clip)
+	{
+		if (clip != null && _audioSource != null)
+		{
+			_audioSettings.ApplySettings(_audioSource);
+			_audioSource.PlayOneShot(clip);
+		}
+		else
+		{
+			Debug.LogWarning("Projectile: No audio source or attack sound assigned to projectile.", gameObject);
+		}
 	}
 
 	public virtual void Die()
