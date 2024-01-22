@@ -156,7 +156,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
 	Vector3 GetRandomSpawnPosition()
 	{
-		var randomDirection = _randomGenerator.InsideUnitCircleNormalized();
+		var randomDirection = _randomGenerator.InsideUnitCircle().normalized;
 		return transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * _randomGenerator.Next(_minRadius, _maxRadius));
 	}
 

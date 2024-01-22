@@ -45,6 +45,8 @@ public class ObjectSpawner : MonoBehaviour
 	[Button]
 	public void ExecuteSpawnProfiles()
 	{
+		_randomGenerator ??= new RandomGenerator(GameController.Instance.StartSeed);
+
 		if (!ValidateSettings())
 		{
 			return;
@@ -106,21 +108,28 @@ public class ObjectSpawner : MonoBehaviour
 				{
 					continue;
 				}
-				TrySpawnObject(distance, profile);
+				if (profile is SingleSpawnProfile singleSpawnProfile)
+				{
+					TrySpawnObject(distance, singleSpawnProfile);
+				}
+				else if (profile is ClusterSpawnProfile clusterSpawnProfile)
+				{
+					TrySpawnCluster(distance, clusterSpawnProfile);
+				}
 			}
 		}
 	}
 
-	void TrySpawnObject(int distance, ObjectSpawnProfile profile)
+	void TrySpawnObject(int distance, SingleSpawnProfile profile)
 	{
-
+		var objects = profile.Objects;
 		var randomValue = _randomGenerator.NextFloat();
-		var randomDirection = _randomGenerator.InsideUnitCircleNormalized();
+		var randomDirection = _randomGenerator.InsideUnitCircle().normalized;
 		var spawnPosition = transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * distance);
+
 		var noiseValue = Mathf.PerlinNoise(spawnPosition.x * profile.NoiseScale, spawnPosition.z * profile.NoiseScale);
 		var normalizedDistance = Mathf.InverseLerp(profile.StartRadius, profile.EndRadius, distance);
 		var spawnChanceModifier = Mathf.Lerp(0.1f, 1f, normalizedDistance) * noiseValue;
-
 		if (randomValue > spawnChanceModifier)
 		{
 			return;
@@ -128,7 +137,7 @@ public class ObjectSpawner : MonoBehaviour
 
 		if (!IsPositionObstructed(spawnPosition, profile.MinSpacing))
 		{
-			var spawnableObject = ChooseRandomObject(profile.Collection.Objects);
+			var spawnableObject = ChooseRandomObject(objects);
 			if (spawnableObject != null)
 			{
 				var scale = _randomGenerator.NextFloat(spawnableObject.MinScale, spawnableObject.MaxScale);
@@ -151,6 +160,53 @@ public class ObjectSpawner : MonoBehaviour
 				_spawnedObjects.Add(spawnedObject);
 			}
 		}
+	}
+
+	void TrySpawnCluster(int distance, ClusterSpawnProfile profile)
+	{
+		var objects = profile.Objects;
+		var clusterCenter = GetRandomSpawnPosition(distance);
+		var clusterSize = _randomGenerator.Next(profile.MinClusterSize, profile.MaxClusterSize);
+		for (var i = 0; i < clusterSize; i++)
+		{
+			var clusterRadius = clusterSize * profile.MinSpacing;
+			var offset = _randomGenerator.InsideUnitSphere() * clusterRadius;
+			offset.y = 0;  // Keep the offset in the horizontal plane
+			var spawnPosition = clusterCenter + offset;
+
+			if (!IsPositionObstructed(spawnPosition, profile.MinSpacing))
+			{
+				var spawnableObject = ChooseRandomObject(objects);
+				if (spawnableObject != null)
+				{
+					var scale = _randomGenerator.NextFloat(spawnableObject.MinScale, spawnableObject.MaxScale);
+					var rotation = new Vector3(
+						_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.x,
+						_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.y,
+						_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
+					);
+
+					var spawnedObject = Instantiate(spawnableObject.Prefab, spawnPosition, Quaternion.Euler(rotation), _parentObject);
+					spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
+
+					if (profile.CarveNavMesh)
+					{
+						var navMeshObstacle = spawnedObject.AddComponent<NavMeshObstacle>();
+						navMeshObstacle.carving = true;
+						navMeshObstacle.size = Vector3.one * (Mathf.Max(scale, 1f) + 1f);
+					}
+
+					_spawnedObjects.Add(spawnedObject);
+				}
+			}
+		}
+
+	}
+
+	Vector3 GetRandomSpawnPosition(int distance)
+	{
+		var randomDirection = _randomGenerator.InsideUnitCircle().normalized;
+		return transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * distance);
 	}
 
 	bool IsPositionObstructed(Vector3 position, float minSpacing)

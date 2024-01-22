@@ -30,7 +30,7 @@ public class RandomGenerator
 		return value + (float)((_random.NextDouble() * 0.1 * 2) - 0.1);
 	}
 
-	public Vector2 InsideUnitCircleNormalized()
+	public Vector2 InsideUnitCircle()
 	{
 		var angle = _random.NextDouble() * Math.PI * 2;
 		var radius = Math.Sqrt(_random.NextDouble());
@@ -39,6 +39,22 @@ public class RandomGenerator
 		var y = (float)(radius * Math.Sin(angle));
 
 		var point = new Vector2(x, y);
-		return point.normalized;
+		return point;
 	}
+
+	public Vector3 InsideUnitSphere()
+	{
+		var u = _random.NextDouble();
+		var v = _random.NextDouble();
+		var theta = u * 2.0 * Math.PI;
+		var phi = Math.Acos(2.0 * v - 1.0);
+		var r = Math.Pow(_random.NextDouble(), 1.0 / 3.0); // Cube root for uniform distribution
+
+		var x = r * Math.Sin(phi) * Math.Cos(theta);
+		var y = r * Math.Sin(phi) * Math.Sin(theta);
+		var z = r * Math.Cos(phi);
+
+		return new Vector3((float)x, (float)y, (float)z);
+	}
+
 }
