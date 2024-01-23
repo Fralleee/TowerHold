@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tower/Turret")]
-public partial class Turret : DamageShopItem
+public class Turret : DamageShopItem
 {
 	[Header("Turret Settings")]
 	[SerializeField] float _baseDamage = 10f;
@@ -29,7 +29,7 @@ public partial class Turret : DamageShopItem
 		_audioSource = _tower.GetComponent<AudioSource>();
 	}
 
-	public void Update()
+	public void FixedUpdate()
 	{
 		if (Time.time - _lastTargetSearch > _timeBetweenFindTarget)
 		{
@@ -37,7 +37,6 @@ public partial class Turret : DamageShopItem
 			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenFindTarget); // Add some variance to the search timing
 		}
 
-		Debug.Log(_target);
 		if (_target != null && !_target.IsDead && Time.time - _lastAttackTime > _timeBetweenAttacks)
 		{
 			Shoot();
@@ -54,7 +53,6 @@ public partial class Turret : DamageShopItem
 
 	void Shoot()
 	{
-		Debug.Log($"Turret {name}: Shooting {_target.name}");
 		if (_projectilePrefab == null)
 		{
 			InstantAttack();

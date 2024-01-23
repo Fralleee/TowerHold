@@ -44,7 +44,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (IsSpawning && Time.time >= _nextSpawnTime)
 		{

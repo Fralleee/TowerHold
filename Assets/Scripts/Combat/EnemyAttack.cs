@@ -32,7 +32,7 @@ public class EnemyAttack : MonoBehaviour
 		}
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (Target == null)
 		{

@@ -31,12 +31,16 @@ public class Tower : Target
 	}
 
 
-	void Update()
+	void FixedUpdate()
 	{
-		_ = RegenerateHealth();
+		if (GameController.Instance.GameHasEnded)
+		{
+			return;
+		}
+
 		foreach (var turret in Turrets)
 		{
-			turret.Update();
+			turret.FixedUpdate();
 		}
 	}
 

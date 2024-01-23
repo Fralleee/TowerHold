@@ -8,7 +8,7 @@ public class EnemyTargeter : MonoBehaviour, ITargeter
 
 	Target _target;
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (_target == null && Time.time - _lastDistanceCheck > CheckDistanceInterval)
 		{

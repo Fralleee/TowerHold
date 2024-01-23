@@ -40,7 +40,7 @@ public class Enemy : Target
 		_ = _agent.SetDestination(Tower.Instance.transform.position);
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (_attack.Target != null)
 		{

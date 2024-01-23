@@ -39,7 +39,7 @@ public class Shop : MonoBehaviour
 		GameController.OnLevelChanged += RefreshShop;
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (!GameController.Instance.GameHasStarted)
 		{

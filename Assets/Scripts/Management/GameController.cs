@@ -9,6 +9,7 @@ public class GameController : Singleton<GameController>
 	[HideInInspector] public float FreezeTimeLeft;
 	[HideInInspector] public float TimeLeft;
 	[HideInInspector] public bool GameHasStarted = false;
+	[HideInInspector] public bool GameHasEnded = false;
 
 	public static Action OnGameStart = delegate { };
 	public static Action OnLevelChanged = delegate { };
@@ -19,8 +20,6 @@ public class GameController : Singleton<GameController>
 	public int CurrentLevel = 1;
 	public int MaxLevel = 100;
 	public int StartSeed;
-
-	bool _gameHasEnded = false;
 
 	EnemySpawner _enemySpawner;
 
@@ -40,11 +39,13 @@ public class GameController : Singleton<GameController>
 	{
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
 		RandomGenerator = new RandomGenerator(StartSeed);
+
+		Tower.Instance.OnDeath += OnTowerDeath;
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
-		if (_gameHasEnded)
+		if (GameHasEnded)
 		{
 			return;
 		}
@@ -59,12 +60,6 @@ public class GameController : Singleton<GameController>
 			return;
 		}
 
-		if (Tower.Instance.Health <= 0 || CurrentLevel > MaxLevel)
-		{
-			EndGame();
-			return;
-		}
-
 		TimeLeft -= Time.deltaTime;
 		if (TimeLeft <= 0)
 		{
@@ -74,6 +69,12 @@ public class GameController : Singleton<GameController>
 
 	void RunLevel(int level)
 	{
+		if (level > MaxLevel)
+		{
+			EndGame();
+			return;
+		}
+
 		CurrentLevel = level;
 		TimeLeft += TimePerLevel;
 
@@ -93,12 +94,12 @@ public class GameController : Singleton<GameController>
 
 	void EndGame()
 	{
-		if (_gameHasEnded)
+		if (GameHasEnded)
 		{
 			return;
 		}
 
-		_gameHasEnded = true;
+		GameHasEnded = true;
 
 		_enemySpawner.IsSpawning = false;
 		Enemy.GameOver();
@@ -119,7 +120,7 @@ public class GameController : Singleton<GameController>
 		{ };
 
 		Time.timeScale = 1;
-		_gameHasEnded = false;
+		GameHasEnded = false;
 
 		Tower.ResetGameState();
 		Enemy.ResetGameState();
@@ -129,5 +130,10 @@ public class GameController : Singleton<GameController>
 	{
 		FreezeTimeLeft = FreezeTime;
 		TimeLeft = 0;
+	}
+
+	void OnTowerDeath(Target target)
+	{
+		EndGame();
 	}
 }
