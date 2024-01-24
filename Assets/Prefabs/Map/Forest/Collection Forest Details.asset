@@ -42,3 +42,9 @@ MonoBehaviour:
     MinScale: 0.85
     MaxScale: 1.15
     RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 7279731596968483123, guid: a7ff310eede82b5449e410cb825ebb8b,
+      type: 3}
+    SpawnChance: 0.3
+    MinScale: 0.85
+    MaxScale: 1.15
+    RotationAxis: {x: 1, y: 0, z: 1}
