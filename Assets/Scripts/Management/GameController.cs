@@ -32,14 +32,14 @@ public class GameController : Singleton<GameController>
 			StartSeed = Random.Range(0, int.MaxValue);
 		}
 
+		_enemySpawner = GetComponentInChildren<EnemySpawner>();
+		RandomGenerator = new RandomGenerator(StartSeed);
+
 		Debug.Log($"Starting game in {FreezeTime} seconds | Seed: {StartSeed} | Level: {StartLevel} | Map: {NameGeneration.GenerateLevelName(StartSeed)}");
 	}
 
 	void Start()
 	{
-		_enemySpawner = GetComponentInChildren<EnemySpawner>();
-		RandomGenerator = new RandomGenerator(StartSeed);
-
 		Tower.Instance.OnDeath += OnTowerDeath;
 	}
 

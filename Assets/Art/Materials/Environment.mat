@@ -7,13 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy Details
+  m_Name: Environment
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - DR_CEL_EXTRA_ON
-  - DR_SPECULAR_ON
+  - DR_GRADIENT_ON
+  - DR_OUTLINE_ON
   - _CELPRIMARYMODE_SINGLE
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _GRADIENTSPACE_WORLD
@@ -27,8 +28,7 @@ Material:
   m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
-  disabledShaderPasses:
-  - SRPDEFAULTUNLIT
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -89,9 +89,9 @@ Material:
     - _GlossyReflections: 0
     - _GradientAngle: 0
     - _GradientCenterX: 0
-    - _GradientCenterY: 0
-    - _GradientEnabled: 0
-    - _GradientSize: 10
+    - _GradientCenterY: 0.2
+    - _GradientEnabled: 1
+    - _GradientSize: 1
     - _GradientSpace: 0
     - _LightContribution: 0.5
     - _LightFalloffSize: 0
@@ -100,7 +100,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlineDepthOffset: 0
-    - _OutlineEnabled: 0
+    - _OutlineEnabled: 1
     - _OutlineScale: 1
     - _OutlineSpace: 0
     - _OutlineWidth: 1
@@ -116,7 +116,7 @@ Material:
     - _ShadowEdgeSizeExtra: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SpecularEnabled: 1
+    - _SpecularEnabled: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
@@ -133,11 +133,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDim: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    - _ColorDim: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
-    - _ColorDimExtra: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
+    - _ColorDimExtra: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
     - _ColorDimSteps: {r: 1, g: 0.9029215, b: 0.8632076, a: 1}
-    - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorGradient: {r: 0, g: 0, b: 0, a: 1}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 1, g: 1, b: 1, a: 1}

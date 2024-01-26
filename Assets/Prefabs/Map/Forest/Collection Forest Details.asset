@@ -25,19 +25,20 @@ MonoBehaviour:
     MinScale: 0.4
     MaxScale: 0.4
     RotationAxis: {x: 0, y: 1, z: 0}
-  - Prefab: {fileID: 7019904234377758171, guid: 92e90209d1ecf5740941555543c9687a,
+  - Prefab: {fileID: 6393702602462421140, guid: 75cd19d2fb19cc949b08ab7e0fc296db,
       type: 3}
     SpawnChance: 0.3
     MinScale: 0.85
     MaxScale: 1.15
     RotationAxis: {x: 0, y: 1, z: 0}
-  - Prefab: {fileID: 3317037631939852415, guid: 8ae78abba89575846851a4d6f2e2f62c,
+  - Prefab: {fileID: 7707964859161563305, guid: 8ae78abba89575846851a4d6f2e2f62c,
       type: 3}
     SpawnChance: 0.3
     MinScale: 0.85
     MaxScale: 1.15
     RotationAxis: {x: 0, y: 1, z: 0}
-  - Prefab: {fileID: 186304265961449117, guid: 7a339f1c9ade95a418246f02ca4f918a, type: 3}
+  - Prefab: {fileID: 1374705786085696003, guid: 7a339f1c9ade95a418246f02ca4f918a,
+      type: 3}
     SpawnChance: 0.3
     MinScale: 0.85
     MaxScale: 1.15
