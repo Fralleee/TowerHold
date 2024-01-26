@@ -16,7 +16,7 @@ public class Bobbing : MonoBehaviour
 	float _bobbingTimer;
 	float _rotationTimer;  // Separate timer for rotation
 	bool _isStopping;
-	bool _isStopped;
+	bool _isStopped = true;
 	float _stopProgress;
 
 	void Start()
@@ -60,7 +60,13 @@ public class Bobbing : MonoBehaviour
 		}
 	}
 
-	public void Stop()
+	public void StartBobbing()
+	{
+		_isStopping = false;
+		_isStopped = false;
+	}
+
+	public void StopBobbing()
 	{
 		_isStopping = true;
 	}

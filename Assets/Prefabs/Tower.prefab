@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6968498760919862443}
   - component: {fileID: 7634988441715190626}
-  - component: {fileID: 3051079823233394647}
   - component: {fileID: 4814542400900873202}
   m_Layer: 8
   m_Name: Tower
@@ -164,22 +163,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!208 &3051079823233394647
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7943569025180232256}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1, y: 0.5, z: 1}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!114 &4814542400900873202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +183,7 @@ MonoBehaviour:
   _healthBarOffset: 6
   IsDead: 0
   _hitSound: {fileID: 8300000, guid: aaa2e807c1a417c47b8728f403f3eaa2, type: 3}
-  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
+  AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   HealthRegenerationRate: 5
   Turrets: []
 --- !u!1001 &2768778147646213959

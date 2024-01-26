@@ -6,18 +6,19 @@ public class Target : MonoBehaviour
 {
 	public Action<Target> OnDeath = delegate { };
 	public Action<int> OnDamageTaken = delegate { };
+
 	public Transform Center;
 	public int MaxHealth = 100;
-	public int Health = 100;
+	[ProgressBar(0, "MaxHealth", ColorGetter = "GetHealthBarColor")] public int Health;
 	[SerializeField] protected HealthBar HealthBar;
 	[SerializeField] float _healthBarOffset = 0f;
 	[ReadOnly] public bool IsDead;
 
 	[Header("Audio")]
 	[SerializeField] AudioClip _hitSound;
-	[SerializeField] AudioSettings _audioSettings;
+	[SerializeField] protected AudioSettings AudioSettings;
 
-	AudioSource _audioSource;
+	protected AudioSource AudioSource;
 
 	protected virtual void Awake()
 	{
@@ -26,7 +27,8 @@ public class Target : MonoBehaviour
 			Center = transform;
 		}
 
-		_audioSource = GetComponent<AudioSource>();
+		AudioSource = GetComponent<AudioSource>();
+		AudioSettings.ApplySettings(AudioSource);
 	}
 
 	protected virtual void Start() => HealthBar = Instantiate(HealthBar, transform.position + (Vector3.up * _healthBarOffset), Quaternion.identity, transform);
@@ -56,10 +58,9 @@ public class Target : MonoBehaviour
 
 	void PlaySound(AudioClip clip)
 	{
-		if (clip != null && _audioSource != null)
+		if (clip != null && AudioSource != null)
 		{
-			_audioSettings.ApplySettings(_audioSource);
-			_audioSource.PlayOneShot(clip);
+			AudioSource.PlayOneShot(clip);
 		}
 		else
 		{
@@ -71,5 +72,15 @@ public class Target : MonoBehaviour
 	{
 		OnDeath(this);
 		IsDead = true;
+	}
+
+	Color GetHealthBarColor(float value)
+	{
+		return Color.Lerp(Color.red, Color.green, Mathf.Pow(value / 100f, 2));
+	}
+
+	protected virtual void OnValidate()
+	{
+		Health = MaxHealth;
 	}
 }

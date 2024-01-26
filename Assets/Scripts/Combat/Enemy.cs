@@ -4,48 +4,179 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : Target
+public partial class Enemy : Target
 {
 	public static Action<Enemy> OnAnyDeath = delegate { };
-	public int Value = 10;
-	[SerializeField] GameObject _deathEffect;
 	public static List<Enemy> AllEnemies = new List<Enemy>();
 
-	[ReadOnly] public int Attackers = 0;
-	public bool HasAttackers => Attackers > 0;
+	[HideInInspector] public int Attackers = 0;
+	[HideInInspector] public bool HasAttackers => Attackers > 0;
 
+	[Header("State")]
+	[SerializeField, ReadOnly] EnemyState _currentState;
+
+	[Header("Enemy Settings")]
+	public int Value = 10;
+	[SerializeField] GameObject _deathEffect;
+
+	[Header("Attack Settings")]
+	[SerializeField] AttackType _attackType;
+	[SerializeField] float _baseDamage = 10f;
+	[SerializeField] float _attacksPerSecond = 1f;
+	[HideIf("_attackType", AttackType.MELEE), SerializeField] float _attackRange = 4f;
+
+	[Space(10)]
+	[ShowIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField] Projectile _projectilePrefab;
+	[ShowIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField, ChildGameObjectsOnly] Transform _attackOrigin;
+	[ShowIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField, InlineProperty(LabelWidth = 140)] ProjectileSettings _projectileSettings;
+	[HideIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField] AudioClip _attackSound;
+
+	Target _target;
+	Animator _animator;
 	NavMeshAgent _agent;
-	EnemyAttack _attack;
 	Bobbing _bobbing;
+
+	float _lastAttackTime = 0f;
+	float TimeBetweenAttacks => 1f / _attacksPerSecond;
 
 	protected override void Awake()
 	{
 		base.Awake();
 
 		_agent = GetComponent<NavMeshAgent>();
-		_attack = GetComponent<EnemyAttack>();
 		_bobbing = GetComponentInChildren<Bobbing>();
+		_animator = GetComponentInChildren<Animator>();
 
-		AllEnemies.Add(this);
+		_currentState = EnemyState.Idle;
+
+		if (_attackOrigin == null)
+		{
+			_attackOrigin = transform;
+		}
 
 		Value += GameController.Instance.CurrentLevel * 2;
-
 		OnDeath += HandleDeath;
+
+		AllEnemies.Add(this);
 	}
 
 	protected override void Start()
 	{
 		base.Start();
-
-		_ = _agent.SetDestination(Tower.Instance.transform.position);
 	}
 
 	void FixedUpdate()
 	{
-		if (_attack.Target != null)
+		switch (_currentState)
 		{
-			_agent.isStopped = true;
-			_bobbing.Stop();
+			case EnemyState.Idle:
+				SearchForTarget();
+				break;
+			case EnemyState.MovingToTarget:
+				MoveToTarget();
+				break;
+			case EnemyState.Attacking:
+				AttackTarget();
+				break;
+			case EnemyState.Victory:
+				Celebrate();
+				break;
+			default:
+				break;
+		}
+	}
+
+	void ChangeState(EnemyState newState)
+	{
+		_currentState = newState;
+		switch (newState)
+		{
+			case EnemyState.Idle:
+				StopMovement();
+				break;
+			case EnemyState.MovingToTarget:
+				StartMovement();
+				break;
+			case EnemyState.Attacking:
+				StopMovement();
+				break;
+			case EnemyState.Victory:
+				StopMovement();
+				break;
+			default:
+				break;
+		}
+	}
+
+	void SearchForTarget()
+	{
+		if (Tower.Instance != null)
+		{
+			_target = Tower.Instance;
+			ChangeState(EnemyState.MovingToTarget);
+		}
+	}
+
+	void MoveToTarget()
+	{
+		if (_agent.hasPath && _agent.remainingDistance <= _agent.stoppingDistance)
+		{
+			if (Tower.Instance != null)
+			{
+				ChangeState(EnemyState.Attacking);
+			}
+			else
+			{
+				ChangeState(EnemyState.Idle);
+			}
+		}
+	}
+
+	void AttackTarget()
+	{
+		if (Time.time - _lastAttackTime > TimeBetweenAttacks)
+		{
+			StartAttack();
+			_lastAttackTime = Time.time + GameController.Instance.RandomGenerator.Variance(TimeBetweenAttacks);
+		}
+	}
+
+	void Celebrate()
+	{
+		// Victory state logic here, if any
+	}
+
+	void StartAttack()
+	{
+		_animator.SetTrigger("Attack");
+	}
+
+	public void PerformAttack()
+	{
+		if (_projectilePrefab == null)
+		{
+			InstantAttack();
+			return;
+		}
+
+		var projectile = Instantiate(_projectilePrefab, _attackOrigin.position, _attackOrigin.rotation);
+		projectile.Setup(_target, _baseDamage, false, _projectileSettings);
+	}
+
+	void InstantAttack()
+	{
+		if (_target != null)
+		{
+			_target.TakeDamage(Mathf.RoundToInt(_baseDamage));
+		}
+
+		if (_attackSound != null && AudioSource != null)
+		{
+			AudioSource.PlayOneShot(_attackSound);
+		}
+		else
+		{
+			Debug.LogWarning("EnemyAttack: No audio source or attack sound assigned to enemy.", gameObject);
 		}
 	}
 
@@ -67,13 +198,21 @@ public class Enemy : Target
 		Destroy(gameObject);
 	}
 
+	public void StartMovement()
+	{
+		_ = _agent.SetDestination(Tower.Instance.transform.position);
+		_agent.stoppingDistance = _attackRange;
+		_agent.isStopped = false;
+		_bobbing.StartBobbing();
+	}
+
 	public void StopMovement()
 	{
 		if (_agent && _agent.enabled)
 		{
 			_agent.isStopped = true;
 		}
-		_bobbing.Stop();
+		_bobbing.StopBobbing();
 	}
 
 	public static void ResetGameState()
@@ -87,11 +226,7 @@ public class Enemy : Target
 	{
 		foreach (var enemy in AllEnemies)
 		{
-			enemy.StopMovement();
-			foreach (var component in enemy.GetComponents<MonoBehaviour>())
-			{
-				component.enabled = false;
-			}
+			enemy.ChangeState(EnemyState.Victory);
 		}
 	}
 
@@ -100,5 +235,19 @@ public class Enemy : Target
 		base.Die();
 
 		OnAnyDeath(this);
+	}
+
+	protected override void OnValidate()
+	{
+		base.OnValidate();
+		if (_attackType == AttackType.MELEE)
+		{
+			_attackRange = 2f;
+			_projectilePrefab = null;
+		}
+		else if (_attackType == AttackType.RANGED_PROJECTILE)
+		{
+			_attackSound = null;
+		}
 	}
 }

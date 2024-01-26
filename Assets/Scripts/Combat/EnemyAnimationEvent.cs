@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EnemyAnimationEvent : MonoBehaviour
 {
-	EnemyAttack _enemyAttack;
+	Enemy _enemy;
 
-	void Awake() => _enemyAttack = GetComponentInParent<EnemyAttack>();
+	void Awake() => _enemy = GetComponentInParent<Enemy>();
 
-	void PerformAttack()
+	public void PerformAttack()
 	{
-		_enemyAttack.PerformAttack();
+		_enemy.PerformAttack();
 	}
 }

@@ -584,6 +584,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 117450959216186253, guid: c195d7bea1ac6b0419de3966a5e16516,
+        type: 3}
+      propertyPath: m_VoxelSize
+      value: 0.16666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 117450959216186253, guid: c195d7bea1ac6b0419de3966a5e16516,
+        type: 3}
+      propertyPath: m_AgentTypeID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 117450959216186253, guid: c195d7bea1ac6b0419de3966a5e16516,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 26ef117fa8bde4e4881bf0fb0cad807a,
+        type: 2}
     - target: {fileID: 3742065541525161942, guid: c195d7bea1ac6b0419de3966a5e16516,
         type: 3}
       propertyPath: _showGizmos

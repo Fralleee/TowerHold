@@ -61,8 +61,6 @@ GameObject:
   - component: {fileID: 7930167525227578384}
   - component: {fileID: 7968482255819381450}
   - component: {fileID: 1035760656611226112}
-  - component: {fileID: 6730998812033025015}
-  - component: {fileID: 9177058180970674094}
   m_Layer: 8
   m_Name: Axeman
   m_TagString: Untagged
@@ -225,40 +223,16 @@ MonoBehaviour:
   _healthBarOffset: 0
   IsDead: 0
   _hitSound: {fileID: 8300000, guid: 4873a99fcfa4bf4498ce683d0f0594e7, type: 3}
-  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
+  AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
+  Attackers: 0
+  _currentState: 0
   Value: 10
   _deathEffect: {fileID: 1186030354075607, guid: 74a22e399f24c974da3d44b1b4247b28,
     type: 3}
-  Attackers: 0
---- !u!114 &6730998812033025015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4373877528160310618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda03fdaa8af2b64885ab04cf57600c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CheckDistanceInterval: 1
---- !u!114 &9177058180970674094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4373877528160310618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b0ab6629bd7a944a743ca5e3a8028d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  _attackType: 2
   _baseDamage: 10
-  _attackRange: 45
-  _timeBetweenAttacks: 1
+  _attacksPerSecond: 2
+  _attackRange: 15
   _projectilePrefab: {fileID: 9212724085591995478, guid: ae3cff54fd2ef1042a7ec4520c94d5ca,
     type: 3}
   _attackOrigin: {fileID: 4560925534984523161}
@@ -267,7 +241,6 @@ MonoBehaviour:
     UseParabolicArc: 1
     MaxArcHeight: 5
   _attackSound: {fileID: 0}
-  _audioSettings: {fileID: 0}
 --- !u!1 &6619729562962141707
 GameObject:
   m_ObjectHideFlags: 0

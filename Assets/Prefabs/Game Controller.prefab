@@ -1886,6 +1886,7 @@ MonoBehaviour:
   FreezeTimeLeft: 0.1
   TimeLeft: 0
   GameHasStarted: 0
+  GameHasEnded: 0
   FreezeTime: 0.1
   TimePerLevel: 30
   StartLevel: 1
@@ -1922,8 +1923,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsSpawning: 0
   Target: {fileID: 0}
-  _minRadius: 30
-  _maxRadius: 40
+  _minRadius: 45
+  _maxRadius: 55
   _enemyVariants: {fileID: 11400000, guid: 9518e5eb0f4d6474f8994e11ad100c09, type: 2}
   _levelSpecificSpawns: {fileID: 11400000, guid: c63e1f2e7ff051544b08184ec094a06f,
     type: 2}
