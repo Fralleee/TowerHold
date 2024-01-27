@@ -14,6 +14,7 @@ public class Controller : MonoBehaviour
 	public PlayerControls Controls;
 	public Vector2 MousePosition => Controls.Mouse.Position.ReadValue<Vector2>();
 	public Vector2 KeyboardMovement => Controls.Keyboard.Move.ReadValue<Vector2>();
+	public bool KeyboardReset => Controls.Keyboard.Reset.inProgress;
 	public float KeyboardRotation => Controls.Keyboard.Rotation.ReadValue<float>();
 	public PlayerControls.MouseActions Mouse => Controls.Mouse;
 	public PlayerControls.KeyboardActions Keyboard => Controls.Keyboard;

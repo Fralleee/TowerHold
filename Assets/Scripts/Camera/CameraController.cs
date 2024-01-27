@@ -5,14 +5,30 @@ using UnityEngine.InputSystem;
 public class CameraController : Controller
 {
 	[SerializeField] Transform _cameraTransform;
+
+	[Header("Movement Settings")]
 	[SerializeField] float _keyboardMovementSpeed = 0.25f;
+	[SerializeField] float _mouseMovementSpeed = 0.25f;
+	[SerializeField] float _edgeTolerancePercent = 15;
+	[SerializeField] float _maxDistanceFromCenter = 120;
+
+	[Header("Zoom Settings")]
 	[SerializeField] float _zoomAmount = 10;
-	[SerializeField] float _maxZoomAmount = 100;
+	[SerializeField] float _minZoomAmount = 50;
+	[SerializeField] float _maxZoomAmount = 150;
+
+	[Header("Rotation Settings")]
+	[SerializeField] float _snapRotationDegrees = 45;
+
+	[Header("Animation Settings")]
 	[SerializeField] float _smoothingTime = 10;
+
+	[Header("Cursor Settings")]
+	[SerializeField] Texture2D _moveCursor;
+	[SerializeField] Texture2D _rotationCursor;
 
 	Camera _mainCam;
 	Transform _transform;
-
 	Vector3 _zoomVector;
 	Vector3 _newPosition;
 	Vector3 _newZoom;
@@ -20,7 +36,9 @@ public class CameraController : Controller
 	Vector3 _rotateStartPosition;
 	Vector3 _cameraLocalPosition;
 	Quaternion _newRotation;
-
+	Vector3 _startPosition;
+	Vector3 _cameraStartLocalPosition;
+	Quaternion _startRotation;
 	bool _isMouseMoving;
 	bool _isMouseRotating;
 	bool IsKeyboardMoving => KeyboardMovement.magnitude != 0;
@@ -31,8 +49,8 @@ public class CameraController : Controller
 		_transform = transform;
 		_mainCam = _cameraTransform.GetComponentInChildren<Camera>();
 
-		Controls.Mouse.PrimaryFire.started += MoveStart;
-		Controls.Mouse.PrimaryFire.canceled += MoveCanceled;
+		Controls.Mouse.PanStart.started += MoveStart;
+		Controls.Mouse.PanStart.canceled += MoveCanceled;
 		Controls.Mouse.Rotation.started += RotationStart;
 		Controls.Mouse.Rotation.canceled += RotationCanceled;
 		Controls.Mouse.Scroll.performed += Scroll;
@@ -41,28 +59,43 @@ public class CameraController : Controller
 
 		_newPosition = _transform.position;
 		_newRotation = _transform.rotation;
-
 		_cameraLocalPosition = _cameraTransform.localPosition;
+
+		_startPosition = _transform.position;
+		_startRotation = _transform.rotation;
+		_cameraStartLocalPosition = _cameraTransform.localPosition;
 	}
 
 	void LateUpdate()
 	{
 		if (_isMouseMoving)
 		{
+			Cursor.SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);
 			HandleMovement();
 		}
 		else if (IsKeyboardMoving)
 		{
 			HandleKeyboardMovement();
 		}
-
-		if (_isMouseRotating)
+		else if (_isMouseRotating)
 		{
+			Cursor.SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
 			HandleRotation();
 		}
 		else if (IsKeyboardRotating)
 		{
 			HandleKeyboardRotation();
+		}
+		else
+		{
+			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+			CheckMouseAtScreenEdge();
+			SnapRotation();
+		}
+
+		if (KeyboardReset)
+		{
+			ResetCamera();
 		}
 
 		ApplyValues();
@@ -70,12 +103,18 @@ public class CameraController : Controller
 
 	void ApplyValues()
 	{
-		_newZoom.y = Mathf.Clamp(_newZoom.y, -_maxZoomAmount, _maxZoomAmount);
-		_newZoom.z = Mathf.Clamp(_newZoom.z, -_maxZoomAmount, _maxZoomAmount);
+		_newZoom.y = Mathf.Clamp(_newZoom.y, -_minZoomAmount, _maxZoomAmount);
+		_newZoom.z = Mathf.Clamp(_newZoom.z, -_maxZoomAmount, _minZoomAmount);
+		if (Vector3.Distance(_newPosition, Vector3.zero) > _maxDistanceFromCenter)
+		{
+			_newPosition = _newPosition.normalized * _maxDistanceFromCenter;
+		}
+
 		_transform.SetPositionAndRotation(
 			Vector3.Lerp(_transform.position, _newPosition, Time.unscaledDeltaTime * _smoothingTime),
 			Quaternion.Lerp(_transform.rotation, _newRotation, Time.unscaledDeltaTime * _smoothingTime)
 		);
+
 		_cameraTransform.localPosition = Vector3.Lerp(_cameraTransform.localPosition, _cameraLocalPosition + _newZoom, Time.unscaledDeltaTime * _smoothingTime);
 	}
 
@@ -83,7 +122,7 @@ public class CameraController : Controller
 	{
 		var plane = new Plane(Vector3.up, Vector3.zero);
 		var ray = _mainCam.ScreenPointToRay(MousePosition);
-		plane.Raycast(ray, out var entry);
+		_ = plane.Raycast(ray, out var entry);
 		_newPosition = _transform.position + _dragStartPosition - ray.GetPoint(entry);
 	}
 
@@ -105,6 +144,52 @@ public class CameraController : Controller
 
 	void HandleKeyboardRotation() => _newRotation *= Quaternion.Euler(Vector3.up * KeyboardRotation);
 
+
+	void CheckMouseAtScreenEdge()
+	{
+		var mousePosition = MousePosition;
+		var screenSize = new Vector2(Screen.width, Screen.height);
+
+		// If mouse position is outside of the application window, do not move the camera
+		if (mousePosition.x < 0 || mousePosition.x > screenSize.x || mousePosition.y < 0 || mousePosition.y > screenSize.y)
+		{
+			return;
+		}
+
+		if (mousePosition.x < _edgeTolerancePercent * Screen.width / 100)
+		{
+			_newPosition -= transform.right * _mouseMovementSpeed;
+		}
+		else if (mousePosition.x > screenSize.x - (_edgeTolerancePercent * Screen.width / 100))
+		{
+			_newPosition += transform.right * _mouseMovementSpeed;
+		}
+
+		if (mousePosition.y < _edgeTolerancePercent * Screen.height / 100)
+		{
+			_newPosition -= transform.forward * _mouseMovementSpeed;
+		}
+		else if (mousePosition.y > screenSize.y - (_edgeTolerancePercent * Screen.height / 100))
+		{
+			_newPosition += transform.forward * _mouseMovementSpeed;
+		}
+	}
+
+	void SnapRotation()
+	{
+		var rotation = _newRotation.eulerAngles;
+		rotation.y = Mathf.Round(rotation.y / _snapRotationDegrees) * _snapRotationDegrees;
+		_newRotation.eulerAngles = rotation;
+	}
+
+	void ResetCamera()
+	{
+		_newPosition = _startPosition;
+		_newRotation = _startRotation;
+		_cameraLocalPosition = _cameraStartLocalPosition;
+		_newZoom = Vector3.zero;
+	}
+
 	void MoveStart(InputAction.CallbackContext context)
 	{
 		if (EventSystem.current.IsPointerOverGameObject())
@@ -114,7 +199,7 @@ public class CameraController : Controller
 		}
 		var plane = new Plane(Vector3.up, Vector3.zero);
 		var ray = _mainCam.ScreenPointToRay(MousePosition);
-		plane.Raycast(ray, out var entry);
+		_ = plane.Raycast(ray, out var entry);
 		_dragStartPosition = ray.GetPoint(entry);
 		_isMouseMoving = true;
 	}
@@ -130,6 +215,7 @@ public class CameraController : Controller
 	}
 
 	void RotationCanceled(InputAction.CallbackContext context) => _isMouseRotating = false;
+
 	void OnDestroy()
 	{
 		Controls.Mouse.PrimaryFire.started -= MoveStart;

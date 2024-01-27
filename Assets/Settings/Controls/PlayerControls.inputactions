@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Pan Start",
+                    "type": "Button",
+                    "id": "236a246a-5483-437a-bef0-6c01ac28569a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Primary Fire Tap",
                     "type": "Button",
                     "id": "a693d952-6ab1-4214-93d4-697e90a9de5b",
@@ -108,7 +117,7 @@
                 {
                     "name": "",
                     "id": "b87818c8-505a-440d-9ec3-bfd54f53f168",
-                    "path": "<Mouse>/middleButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -124,6 +133,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Primary Fire Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82c9fee0-ada9-4b7f-8698-f59a0b1263ee",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pan Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -150,6 +170,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "7d2991f0-865f-4f81-bbaa-28dbfeed1248",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -295,6 +324,17 @@
                     "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0ea2c34b-a563-43b9-bd8d-3dc9482845a1",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

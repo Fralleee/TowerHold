@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -23,13 +22,17 @@ public class ColorPaletteEditor : Editor
 		CreateColorGrid(palette);
 		EditorGUILayout.EndScrollView();
 
-		if (GUILayout.Button("Save Palette as PNG"))
+		if (GUILayout.Button("Randomize Palette"))
 		{
-			palette.SavePaletteAsPNG();
+			RandomizePalette();
 		}
 		if (GUILayout.Button("Import JSON Palette (Palettte.app format)"))
 		{
 			ImportJSONPalette();
+		}
+		if (GUILayout.Button("Save Palette as PNG"))
+		{
+			palette.SavePaletteAsPNG();
 		}
 	}
 
@@ -96,31 +99,14 @@ public class ColorPaletteEditor : Editor
 
 		EditorUtility.SetDirty(target);
 	}
-}
 
-[System.Serializable]
-public class PaletteCollection
-{
-#pragma warning disable IDE1006 // Naming Styles
-	public List<Palette> palettes;
-#pragma warning restore IDE1006 // Naming Styles
-}
-
-
-[System.Serializable]
-public class Palette
-{
-#pragma warning disable IDE1006 // Naming Styles
-	public string paletteName;
-	public List<Swatch> swatches;
-#pragma warning restore IDE1006 // Naming Styles
-}
-
-[System.Serializable]
-public class Swatch
-{
-#pragma warning disable IDE1006 // Naming Styles
-	public string name;
-	public string color;
-#pragma warning restore IDE1006 // Naming Styles
+	void RandomizePalette()
+	{
+		var paletteSO = (ColorPalette)target;
+		for (var i = 0; i < paletteSO.Colors.Length; i++)
+		{
+			paletteSO.Colors[i] = Random.ColorHSV();
+		}
+		EditorUtility.SetDirty(target);
+	}
 }

@@ -64,6 +64,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Pan Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""236a246a-5483-437a-bef0-6c01ac28569a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Primary Fire Tap"",
                     ""type"": ""Button"",
                     ""id"": ""a693d952-6ab1-4214-93d4-697e90a9de5b"",
@@ -130,7 +139,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b87818c8-505a-440d-9ec3-bfd54f53f168"",
-                    ""path"": ""<Mouse>/middleButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -146,6 +155,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Primary Fire Tap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82c9fee0-ada9-4b7f-8698-f59a0b1263ee"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pan Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -172,6 +192,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d2991f0-865f-4f81-bbaa-28dbfeed1248"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,6 +346,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ea2c34b-a563-43b9-bd8d-3dc9482845a1"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -329,12 +369,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Mouse_Scroll = m_Mouse.FindAction("Scroll", throwIfNotFound: true);
         m_Mouse_Rotation = m_Mouse.FindAction("Rotation", throwIfNotFound: true);
         m_Mouse_PrimaryFire = m_Mouse.FindAction("Primary Fire", throwIfNotFound: true);
+        m_Mouse_PanStart = m_Mouse.FindAction("Pan Start", throwIfNotFound: true);
         m_Mouse_PrimaryFireTap = m_Mouse.FindAction("Primary Fire Tap", throwIfNotFound: true);
         m_Mouse_SecondaryFire = m_Mouse.FindAction("Secondary Fire", throwIfNotFound: true);
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
         m_Keyboard_Rotation = m_Keyboard.FindAction("Rotation", throwIfNotFound: true);
+        m_Keyboard_Reset = m_Keyboard.FindAction("Reset", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -400,6 +442,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Mouse_Scroll;
     private readonly InputAction m_Mouse_Rotation;
     private readonly InputAction m_Mouse_PrimaryFire;
+    private readonly InputAction m_Mouse_PanStart;
     private readonly InputAction m_Mouse_PrimaryFireTap;
     private readonly InputAction m_Mouse_SecondaryFire;
     public struct MouseActions
@@ -410,6 +453,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Scroll => m_Wrapper.m_Mouse_Scroll;
         public InputAction @Rotation => m_Wrapper.m_Mouse_Rotation;
         public InputAction @PrimaryFire => m_Wrapper.m_Mouse_PrimaryFire;
+        public InputAction @PanStart => m_Wrapper.m_Mouse_PanStart;
         public InputAction @PrimaryFireTap => m_Wrapper.m_Mouse_PrimaryFireTap;
         public InputAction @SecondaryFire => m_Wrapper.m_Mouse_SecondaryFire;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
@@ -433,6 +477,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PrimaryFire.started += instance.OnPrimaryFire;
             @PrimaryFire.performed += instance.OnPrimaryFire;
             @PrimaryFire.canceled += instance.OnPrimaryFire;
+            @PanStart.started += instance.OnPanStart;
+            @PanStart.performed += instance.OnPanStart;
+            @PanStart.canceled += instance.OnPanStart;
             @PrimaryFireTap.started += instance.OnPrimaryFireTap;
             @PrimaryFireTap.performed += instance.OnPrimaryFireTap;
             @PrimaryFireTap.canceled += instance.OnPrimaryFireTap;
@@ -455,6 +502,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PrimaryFire.started -= instance.OnPrimaryFire;
             @PrimaryFire.performed -= instance.OnPrimaryFire;
             @PrimaryFire.canceled -= instance.OnPrimaryFire;
+            @PanStart.started -= instance.OnPanStart;
+            @PanStart.performed -= instance.OnPanStart;
+            @PanStart.canceled -= instance.OnPanStart;
             @PrimaryFireTap.started -= instance.OnPrimaryFireTap;
             @PrimaryFireTap.performed -= instance.OnPrimaryFireTap;
             @PrimaryFireTap.canceled -= instance.OnPrimaryFireTap;
@@ -484,12 +534,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
     private readonly InputAction m_Keyboard_Move;
     private readonly InputAction m_Keyboard_Rotation;
+    private readonly InputAction m_Keyboard_Reset;
     public struct KeyboardActions
     {
         private @PlayerControls m_Wrapper;
         public KeyboardActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Keyboard_Move;
         public InputAction @Rotation => m_Wrapper.m_Keyboard_Rotation;
+        public InputAction @Reset => m_Wrapper.m_Keyboard_Reset;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -505,6 +557,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Rotation.started += instance.OnRotation;
             @Rotation.performed += instance.OnRotation;
             @Rotation.canceled += instance.OnRotation;
+            @Reset.started += instance.OnReset;
+            @Reset.performed += instance.OnReset;
+            @Reset.canceled += instance.OnReset;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -515,6 +570,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Rotation.started -= instance.OnRotation;
             @Rotation.performed -= instance.OnRotation;
             @Rotation.canceled -= instance.OnRotation;
+            @Reset.started -= instance.OnReset;
+            @Reset.performed -= instance.OnReset;
+            @Reset.canceled -= instance.OnReset;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -538,6 +596,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnScroll(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnPrimaryFire(InputAction.CallbackContext context);
+        void OnPanStart(InputAction.CallbackContext context);
         void OnPrimaryFireTap(InputAction.CallbackContext context);
         void OnSecondaryFire(InputAction.CallbackContext context);
     }
@@ -545,5 +604,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
     }
 }
