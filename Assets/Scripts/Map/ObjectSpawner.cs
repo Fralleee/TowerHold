@@ -23,6 +23,15 @@ public class ObjectSpawner : MonoBehaviour
 	readonly List<GameObject> _spawnedObjects = new List<GameObject>();
 	const int ROTATIONDEGREES = 180;
 
+	void Start()
+	{
+		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+		if (_spawnOnStart && Application.isPlaying)
+		{
+			ClearObjects();
+			ExecuteSpawnProfiles();
+		}
+	}
 
 	[Button]
 	public void ClearObjects()
@@ -61,16 +70,6 @@ public class ObjectSpawner : MonoBehaviour
 		foreach (var profile in _profiles)
 		{
 			ExecuteSpawnProfile(profile);
-		}
-	}
-
-	void Start()
-	{
-		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
-		if (_spawnOnStart && Application.isPlaying)
-		{
-			ClearObjects();
-			ExecuteSpawnProfiles();
 		}
 	}
 

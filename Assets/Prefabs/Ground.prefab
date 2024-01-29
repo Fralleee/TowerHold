@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TerrainMaterial: {fileID: 2100000, guid: 7a361d789e23a6f44937aec5f8303270, type: 2}
+  _spawnOnStart: 1
   _meshSettings:
     MeshScale: 1.75
     UseFlatShading: 0
@@ -344,7 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7979480324822167872}
   m_Layer: 3
-  m_Name: Island Objects
+  m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,5 +427,5 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 1962217d42b0a724482543aad6f49555, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0

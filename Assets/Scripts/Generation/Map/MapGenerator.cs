@@ -2,10 +2,11 @@
 using Unity.AI.Navigation;
 using UnityEngine;
 
-public class MapPreview : MonoBehaviour
+public class MapGenerator : MonoBehaviour
 {
 	public Material TerrainMaterial;
 
+	[SerializeField] bool _spawnOnStart;
 	[SerializeField] MeshSettings _meshSettings;
 	[SerializeField] HeightMapSettings _heightMapSettings;
 
@@ -16,9 +17,12 @@ public class MapPreview : MonoBehaviour
 
 	void Start()
 	{
-		BuildMap();
-
-		_navMeshSurface.BuildNavMesh();
+		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+		if (_spawnOnStart && Application.isPlaying)
+		{
+			ClearMap();
+			BuildMap();
+		}
 	}
 
 	[Button]
@@ -36,10 +40,9 @@ public class MapPreview : MonoBehaviour
 	[Button]
 	public void BuildMap()
 	{
+		_randomGenerator ??= new RandomGenerator(GameController.Instance.StartSeed);
 		_meshFilter = GetComponentInChildren<MeshFilter>();
 		_meshCollider = GetComponentInChildren<MeshCollider>();
-		_navMeshSurface = GetComponentInChildren<NavMeshSurface>();
-		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
 
 		var heightMap = HeightMapGenerator.GenerateHeightMap(_meshSettings.NumVertsPerLine, _meshSettings.NumVertsPerLine, _randomGenerator, _heightMapSettings, Vector2.zero);
 		var meshData = MeshGenerator.GenerateTerrainMesh(heightMap.Values, _meshSettings, 0);
@@ -57,5 +60,8 @@ public class MapPreview : MonoBehaviour
 		{
 			Debug.LogError("MeshCollider component not found on this GameObject.");
 		}
+
+
+		_navMeshSurface.BuildNavMesh();
 	}
 }
