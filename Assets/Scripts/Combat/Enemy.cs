@@ -4,7 +4,8 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
-public partial class Enemy : Target
+[SelectionBase]
+public class Enemy : Target
 {
 	public static Action<Enemy> OnAnyDeath = delegate { };
 	public static List<Enemy> AllEnemies = new List<Enemy>();
@@ -37,7 +38,9 @@ public partial class Enemy : Target
 	Bobbing _bobbing;
 
 	float _lastAttackTime = 0f;
+	float _lastDistanceCheck = 0f;
 	float TimeBetweenAttacks => 1f / _attacksPerSecond;
+	readonly float _timeBetweenDistanceChecks = 0.5f;
 
 	protected override void Awake()
 	{
@@ -119,15 +122,12 @@ public partial class Enemy : Target
 
 	void MoveToTarget()
 	{
-		if (_agent.hasPath && _agent.remainingDistance <= _agent.stoppingDistance)
+		if (Time.time - _lastDistanceCheck > _timeBetweenDistanceChecks)
 		{
-			if (Tower.Instance != null)
+			_lastDistanceCheck = Time.time;
+			if (Tower.Instance != null && Vector3.Distance(transform.position, Tower.Instance.transform.position) <= _attackRange)
 			{
 				ChangeState(EnemyState.Attacking);
-			}
-			else
-			{
-				ChangeState(EnemyState.Idle);
 			}
 		}
 	}
@@ -201,7 +201,6 @@ public partial class Enemy : Target
 	public void StartMovement()
 	{
 		_ = _agent.SetDestination(Tower.Instance.transform.position);
-		_agent.stoppingDistance = _attackRange;
 		_agent.isStopped = false;
 		_bobbing.StartBobbing();
 	}
@@ -242,7 +241,7 @@ public partial class Enemy : Target
 		base.OnValidate();
 		if (_attackType == AttackType.MELEE)
 		{
-			_attackRange = 2f;
+			_attackRange = 4f;
 			_projectilePrefab = null;
 		}
 		else if (_attackType == AttackType.RANGED_PROJECTILE)

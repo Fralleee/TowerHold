@@ -1,9 +1,7 @@
-public partial class Enemy
+public enum AttackType
 {
-  public enum AttackType
-  {
-    MELEE,
-    RANGED_INSTANT,
-    RANGED_PROJECTILE
-  }
+	MELEE,
+	RANGED_INSTANT,
+	RANGED_PROJECTILE
 }
+

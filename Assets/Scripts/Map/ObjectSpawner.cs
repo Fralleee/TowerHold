@@ -11,12 +11,18 @@ public class ObjectSpawner : MonoBehaviour
 	[SerializeField] ObjectSpawnProfile[] _profiles;
 	[SerializeField] bool _spawnOnStart;
 
+	[Header("Validation")]
+	[SerializeField] float _heightCheckDistance = 100f;
+	[SerializeField] LayerMask _obstacleLayerMask;
+	[SerializeField] LayerMask _groundLayerMask;
+
 	[Header("Debug")]
 	[SerializeField] bool _showGizmos;
 
 	RandomGenerator _randomGenerator;
 	readonly List<GameObject> _spawnedObjects = new List<GameObject>();
 	const int ROTATIONDEGREES = 180;
+
 
 	[Button]
 	public void ClearObjects()
@@ -135,7 +141,8 @@ public class ObjectSpawner : MonoBehaviour
 			return;
 		}
 
-		if (!IsPositionObstructed(spawnPosition, profile.MinSpacing))
+		var (isObstructed, newPosition) = IsPositionObstructed(spawnPosition, profile.MinSpacing);
+		if (!isObstructed)
 		{
 			var spawnableObject = ChooseRandomObject(objects);
 			if (spawnableObject != null)
@@ -147,14 +154,14 @@ public class ObjectSpawner : MonoBehaviour
 					_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
 				);
 
-				var spawnedObject = Instantiate(spawnableObject.Prefab, spawnPosition, Quaternion.Euler(rotation), _parentObject);
+				var spawnedObject = Instantiate(spawnableObject.Prefab, newPosition ?? spawnPosition, Quaternion.Euler(rotation), _parentObject);
 				spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
 
 				if (profile.CarveNavMesh)
 				{
 					var navMeshObstacle = spawnedObject.AddComponent<NavMeshObstacle>();
 					navMeshObstacle.carving = true;
-					navMeshObstacle.size = Vector3.one * (Mathf.Max(scale, 1f) + 1f);
+					navMeshObstacle.size = new Vector3(Mathf.Max(scale, 1f) + 1f, 10f, Mathf.Max(scale, 1f) + 1f);
 				}
 
 				_spawnedObjects.Add(spawnedObject);
@@ -174,7 +181,8 @@ public class ObjectSpawner : MonoBehaviour
 			offset.y = 0;  // Keep the offset in the horizontal plane
 			var spawnPosition = clusterCenter + offset;
 
-			if (!IsPositionObstructed(spawnPosition, profile.MinSpacing))
+			var (isObstructed, newPosition) = IsPositionObstructed(spawnPosition, profile.MinSpacing);
+			if (!isObstructed)
 			{
 				var spawnableObject = ChooseRandomObject(objects);
 				if (spawnableObject != null)
@@ -186,7 +194,7 @@ public class ObjectSpawner : MonoBehaviour
 						_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
 					);
 
-					var spawnedObject = Instantiate(spawnableObject.Prefab, spawnPosition, Quaternion.Euler(rotation), _parentObject);
+					var spawnedObject = Instantiate(spawnableObject.Prefab, newPosition ?? spawnPosition, Quaternion.Euler(rotation), _parentObject);
 					spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
 
 					if (profile.CarveNavMesh)
@@ -209,16 +217,27 @@ public class ObjectSpawner : MonoBehaviour
 		return transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * distance);
 	}
 
-	bool IsPositionObstructed(Vector3 position, float minSpacing)
+	(bool, Vector3?) IsPositionObstructed(Vector3 position, float minSpacing)
 	{
 		foreach (var obj in _spawnedObjects)
 		{
 			if (Vector3.Distance(obj.transform.position, position) < minSpacing)
 			{
-				return true;
+				return (true, null);
 			}
 		}
-		return false;
+
+		var ray = new Ray(position + (Vector3.up * _heightCheckDistance), Vector3.down);
+		if (Physics.Raycast(ray, out var hit, _heightCheckDistance + 10f, _obstacleLayerMask | _groundLayerMask))
+		{
+			if ((_groundLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)
+			{
+				return (false, hit.point);
+			}
+			return (true, null);
+		}
+
+		return (false, position);
 	}
 
 	SpawnableObject ChooseRandomObject(SpawnableObject[] objects)

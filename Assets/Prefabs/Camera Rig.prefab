@@ -48,10 +48,10 @@ MonoBehaviour:
   _cameraTransform: {fileID: 766685257449881033}
   _keyboardMovementSpeed: 0.25
   _mouseMovementSpeed: 0.25
-  _edgeTolerancePercent: 15
-  _maxDistanceFromCenter: 120
+  _edgeTolerancePercent: 0
+  _maxDistanceFromCenter: 150
   _zoomAmount: 10
-  _minZoomAmount: 100
+  _minZoomAmount: 50
   _maxZoomAmount: 150
   _snapRotationDegrees: 45
   _smoothingTime: 10

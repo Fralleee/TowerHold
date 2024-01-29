@@ -105,9 +105,11 @@ public class CameraController : Controller
 	{
 		_newZoom.y = Mathf.Clamp(_newZoom.y, -_minZoomAmount, _maxZoomAmount);
 		_newZoom.z = Mathf.Clamp(_newZoom.z, -_maxZoomAmount, _minZoomAmount);
-		if (Vector3.Distance(_newPosition, Vector3.zero) > _maxDistanceFromCenter)
+
+		var maxDistanceWithZoom = _maxDistanceFromCenter - (_newZoom.y * 0.3f);
+		if (Vector3.Distance(_newPosition, Vector3.zero) > maxDistanceWithZoom)
 		{
-			_newPosition = _newPosition.normalized * _maxDistanceFromCenter;
+			_newPosition = _newPosition.normalized * maxDistanceWithZoom;
 		}
 
 		_transform.SetPositionAndRotation(
