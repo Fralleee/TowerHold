@@ -49,7 +49,7 @@ MonoBehaviour:
   _keyboardMovementSpeed: 0.25
   _mouseMovementSpeed: 0.25
   _edgeTolerancePercent: 0
-  _maxDistanceFromCenter: 150
+  _maxDistanceFromCenter: 128
   _zoomAmount: 10
   _minZoomAmount: 50
   _maxZoomAmount: 150
