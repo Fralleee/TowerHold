@@ -238,7 +238,7 @@ MonoBehaviour:
   _attackOrigin: {fileID: 4560925534984523161}
   _projectileSettings:
     Speed: 30
-    UseParabolicArc: 0
+    UseParabolicArc: 1
     MaxArcHeight: 5
   _attackSound: {fileID: 0}
 --- !u!1 &6619729562962141707
