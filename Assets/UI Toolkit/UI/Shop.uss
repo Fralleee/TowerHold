@@ -1,0 +1,57 @@
+Button#ToggleButton {
+    width: 125px;
+    height: 125px;
+    margin: 0 auto;
+    border-radius: 100%;
+	translate: 0 150px;
+}
+
+Button#ToggleButton.active {
+	translate: 0 -12px;
+    width: 75px;
+    height: 75px;
+}
+
+Button.ShopItem {
+    width: 125px;
+    height: 100px;
+	margin: 0 10px;
+}
+
+
+VisualElement#Root {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+VisualElement#Container {
+    position: relative;
+    margin: 0 auto;
+    width: 1150px;
+    display: flex;
+    justify-content: flex-end;
+	align-self: flex-end;
+
+	padding-bottom: 75px;
+}
+
+VisualElement#Inventory {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-image: url('project://database/Assets/Art/inventory.psd?fileID=21300000&guid=256c0745488cdb743bc2fd79db2bb861&type=3#inventory');
+	translate: 0 225px;
+	scale: 0.5;
+    transition: all 250ms ease-out-back;
+}
+
+VisualElement#Inventory.active {
+    translate: 0 0;
+	scale: 1;
+}

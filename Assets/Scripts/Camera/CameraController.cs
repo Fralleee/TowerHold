@@ -194,11 +194,11 @@ public class CameraController : Controller
 
 	void MoveStart(InputAction.CallbackContext context)
 	{
-		if (EventSystem.current.IsPointerOverGameObject())
-		{
-			// The mouse is over a UI element, do not move the camera
-			return;
-		}
+		// if (EventSystem.current.IsPointerOverGameObject())
+		// {
+		// 	// The mouse is over a UI element, do not move the camera
+		// 	return;
+		// }
 		var plane = new Plane(Vector3.up, Vector3.zero);
 		var ray = _mainCam.ScreenPointToRay(MousePosition);
 		_ = plane.Raycast(ray, out var entry);

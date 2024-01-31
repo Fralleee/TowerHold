@@ -51,7 +51,7 @@ MonoBehaviour:
   _edgeTolerancePercent: 0
   _maxDistanceFromCenter: 128
   _zoomAmount: 10
-  _minZoomAmount: 50
+  _minZoomAmount: 100
   _maxZoomAmount: 150
   _snapRotationDegrees: 45
   _smoothingTime: 10

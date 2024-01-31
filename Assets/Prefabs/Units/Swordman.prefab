@@ -232,7 +232,7 @@ MonoBehaviour:
   _attackType: 0
   _baseDamage: 10
   _attacksPerSecond: 1
-  _attackRange: 2
+  _attackRange: 4
   _projectilePrefab: {fileID: 0}
   _attackOrigin: {fileID: 0}
   _projectileSettings:
@@ -427,17 +427,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 178bdae24d99df74eb06ba76687b94d5, type: 2}
+      objectReference: {fileID: 2100000, guid: e43e7717c9350ed4aa8a7d1a5f04bfa8, type: 2}
     - target: {fileID: -7511558181221131132, guid: 633a9df61f1526544b57a704559c6aa3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 178bdae24d99df74eb06ba76687b94d5, type: 2}
+      objectReference: {fileID: 2100000, guid: e43e7717c9350ed4aa8a7d1a5f04bfa8, type: 2}
     - target: {fileID: -3081618329328229966, guid: 633a9df61f1526544b57a704559c6aa3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 178bdae24d99df74eb06ba76687b94d5, type: 2}
+      objectReference: {fileID: 2100000, guid: e43e7717c9350ed4aa8a7d1a5f04bfa8, type: 2}
     - target: {fileID: 919132149155446097, guid: 633a9df61f1526544b57a704559c6aa3,
         type: 3}
       propertyPath: m_Name

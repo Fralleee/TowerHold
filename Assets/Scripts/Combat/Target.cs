@@ -15,7 +15,7 @@ public class Target : MonoBehaviour
 	[ReadOnly] public bool IsDead;
 
 	[Header("Audio")]
-	[SerializeField] AudioClip _hitSound;
+	[SerializeField] AudioClip _deathSound;
 	[SerializeField] protected AudioSettings AudioSettings;
 
 	protected AudioSource AudioSource;
@@ -42,7 +42,6 @@ public class Target : MonoBehaviour
 
 		Health -= damage;
 		HealthBar.SetHealth(Health);
-		PlaySound(_hitSound);
 
 		if (Health <= 0)
 		{
@@ -70,6 +69,7 @@ public class Target : MonoBehaviour
 
 	public virtual void Die()
 	{
+		PlaySound(_deathSound);
 		OnDeath(this);
 		IsDead = true;
 	}
