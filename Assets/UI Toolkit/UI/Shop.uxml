@@ -3,14 +3,36 @@
     <Style src="project://database/Assets/UI%20Toolkit/UI/Shop.uss?fileID=7433441132597879392&amp;guid=2f31f636d331e644b944c699b4ed521c&amp;type=3#Shop" />
     <ui:VisualElement name="Root">
         <ui:VisualElement name="Container" class="Container">
-            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ToggleButton" class="ToggleButton" />
-            <ui:VisualElement name="Inventory">
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem" />
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem" />
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem" />
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem" />
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem" />
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem" />
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ToggleButton" class="ToggleButton active red">
+                <ui:Label text="T" class="Shortkey" />
+            </ui:Button>
+            <ui:VisualElement name="Inventory" class="active">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="RefreshButton" class="red">
+                    <ui:Label text="D" class="Shortkey" />
+                </ui:Button>
+                <ui:VisualElement name="Items">
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem purple">
+                        <ui:Label text="1" class="Shortkey" />
+                    </ui:Button>
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem blue">
+                        <ui:Label text="2" class="Shortkey" />
+                    </ui:Button>
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem teal">
+                        <ui:Label text="3" class="Shortkey" />
+                    </ui:Button>
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem green">
+                        <ui:Label text="4" class="Shortkey" />
+                    </ui:Button>
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem orange">
+                        <ui:Label text="5" class="Shortkey" />
+                    </ui:Button>
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem purple">
+                        <ui:Label text="6" class="Shortkey" />
+                    </ui:Button>
+                </ui:VisualElement>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="LockButton" class="red">
+                    <ui:Label text="L" class="Shortkey" />
+                </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

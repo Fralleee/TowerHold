@@ -17,7 +17,6 @@ Material:
   - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
   - _UNITYSHADOWMODE_COLOR
-  - _UNITYSHADOW_OCCLUSION
   m_InvalidKeywords:
   - _CELPRIMARYMODE_NONE
   m_LightmapFlags: 4
@@ -122,8 +121,8 @@ Material:
     - _TextureBlendingMode: 0
     - _TextureImpact: 0
     - _UnityShadowMode: 2
-    - _UnityShadowOcclusion: 1
-    - _UnityShadowPower: 1
+    - _UnityShadowOcclusion: 0
+    - _UnityShadowPower: 0.662
     - _UnityShadowSharpness: 1
     - _VertexColorsEnabled: 0
     - _VertexExtrusionSmoothNormals: 0
@@ -144,5 +143,5 @@ Material:
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _UnityShadowColor: {r: 0.72156864, g: 0.61960787, b: 0.5529412, a: 1}
+    - _UnityShadowColor: {r: 0, g: 0, b: 0, a: 0.39215687}
   m_BuildTextureStacks: []
