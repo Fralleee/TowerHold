@@ -187,6 +187,11 @@ public class Enemy : Target
 		_ = AllEnemies.Remove(this);
 		ResourceManager.Instance.AddResource(Value);
 
+		foreach (Transform child in transform)
+		{
+			child.gameObject.SetActive(false);
+		}
+
 		foreach (var component in GetComponents<MonoBehaviour>())
 		{
 			component.enabled = false;
@@ -194,8 +199,7 @@ public class Enemy : Target
 
 		var instance = Instantiate(_deathEffect, Center.position, Quaternion.LookRotation(-transform.forward));
 		Destroy(instance, 10f);
-
-		Destroy(gameObject);
+		Destroy(gameObject, 3f);
 	}
 
 	public void StartMovement()

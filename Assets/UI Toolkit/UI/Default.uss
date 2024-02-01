@@ -1,8 +1,8 @@
 Button {
 	position: relative;
     border-radius: 4px;
-	border-width: 3px;
-	border-color: #444;
+	border-width: 2px;
+	border-color: rgba(0, 0, 0, 0.75);
 	background-color: wheat;
     transition: all 250ms ease-out-back;
 	overflow: auto;
@@ -10,6 +10,10 @@ Button {
 
 Button:enabled:hover {
 	scale: 1.05;
+}
+
+Button:disabled {
+	scale: 0.9;
 }
 
 Button:active {

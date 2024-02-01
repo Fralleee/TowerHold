@@ -42,6 +42,19 @@ Button.ShopItem {
 	margin: 0 10px;
 	background-image: url("../../Art/hatchet.png");
 	background-size: 100px 100px;
+	scale: 0.9;
+}
+
+Button.ShopItem.itemized {
+	scale: 1;
+}
+
+Button.itemized:enabled:hover {
+	scale: 1.05;
+}
+
+Button.itemized:disabled {
+	scale: 0.9;
 }
 
 Label.Shortkey {
@@ -51,15 +64,15 @@ Label.Shortkey {
 
 	min-width: 24px;
 	min-height: 24px;
-	opacity: 0.9;
 
 	color: white;
 	font-size: 12px;
 	-unity-font-style: bold;
-    border-radius: 4px;
+
+    border-radius: 8px;
 	border-width: 1px;
 	border-color: #222;
-	background-color: #444;
+	background-color: rgba(50,50,50,.9);
 }
 
 Button#ToggleButton > Label.Shortkey,Button#RefreshButton > Label.Shortkey, Button#LockButton > Label.Shortkey {
@@ -67,6 +80,12 @@ Button#ToggleButton > Label.Shortkey,Button#RefreshButton > Label.Shortkey, Butt
 	left: -12px;
 }
 
+Button#ToggleButton:enabled:hover,Button#RefreshButton:enabled:hover, Button#LockButton:enabled:hover {
+	scale: 1.1;
+}
+Button#ToggleButton:enabled:active,Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
+	scale: 0.9;
+}
 
 
 VisualElement#Root {

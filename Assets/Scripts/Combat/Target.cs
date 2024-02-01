@@ -63,7 +63,7 @@ public class Target : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogWarning("Projectile: No audio source or attack sound assigned to projectile.", gameObject);
+			Debug.LogWarning("Target: No audio source or death sound assigned.", gameObject);
 		}
 	}
 

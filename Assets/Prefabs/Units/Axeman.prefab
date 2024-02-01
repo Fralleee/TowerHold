@@ -222,7 +222,7 @@ MonoBehaviour:
     type: 3}
   _healthBarOffset: 0
   IsDead: 0
-  _hitSound: {fileID: 8300000, guid: 4873a99fcfa4bf4498ce683d0f0594e7, type: 3}
+  _deathSound: {fileID: 8300000, guid: 9b50fce87f197464c872748be6bdefe3, type: 3}
   AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   Attackers: 0
   _currentState: 0

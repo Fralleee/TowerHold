@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,6 +21,7 @@ public class ShopUI : MonoBehaviour
 	readonly int _shopTypeCount = System.Enum.GetValues(typeof(ShopType)).Length;
 
 	RandomGenerator _randomGenerator;
+	readonly WaitForSeconds _nextFrame = new WaitForSeconds(0.1f);
 
 	void Awake()
 	{
@@ -53,8 +55,20 @@ public class ShopUI : MonoBehaviour
 		_shopItems.Clear();
 		foreach (var slot in _shopSlots)
 		{
+			slot.RemoveFromClassList("itemized");
 			var item = GetRandomItem(GameController.Instance.CurrentLevel);
 			SetupSlot(slot, item);
+		}
+
+		StartCoroutine(PerformRefresh());
+	}
+
+	IEnumerator PerformRefresh()
+	{
+		yield return _nextFrame;
+		foreach (var slot in _shopSlots)
+		{
+			slot.AddToClassList("itemized");
 		}
 	}
 
@@ -74,10 +88,7 @@ public class ShopUI : MonoBehaviour
 
 	void PurchaseItem(ClickEvent clickEvent)
 	{
-		// Find the index of the clicked slot
 		var clickedSlotIndex = _shopSlots.FindIndex(slot => slot == clickEvent.target);
-
-		// Find the item in the shopslots
 		var item = _shopItems[clickedSlotIndex];
 
 		if (ResourceManager.Instance.SpendResources(item.Cost))
