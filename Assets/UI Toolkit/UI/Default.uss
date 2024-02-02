@@ -5,7 +5,13 @@ Button {
 	border-color: rgba(0, 0, 0, 0.75);
 	background-color: wheat;
     transition: all 250ms ease-out-back;
-	overflow: auto;
+	overflow: visible;
+}
+
+Button:focus {
+	scale: 1.05 !important;
+	border-width: 4px;
+	border-color: rgba(0, 0, 0, 0.85);
 }
 
 Button:enabled:hover {

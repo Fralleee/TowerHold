@@ -49,8 +49,18 @@ Button.ShopItem.itemized {
 	scale: 1;
 }
 
+Button.ShopItem.itemized:focus {
+	scale: 1.05 !important;
+	border-width: 4px;
+	border-color: rgba(0, 0, 0, 0.85);
+}
+
 Button.itemized:enabled:hover {
 	scale: 1.05;
+}
+
+Button.itemized:enabled:active {
+	scale: 0.9;
 }
 
 Button.itemized:disabled {
@@ -59,8 +69,9 @@ Button.itemized:disabled {
 
 Label.Shortkey {
 	position: absolute;
-	top: 0;
+	/* top: 0; */
 	left: 0;
+	bottom: 0;
 
 	min-width: 24px;
 	min-height: 24px;
@@ -72,12 +83,12 @@ Label.Shortkey {
     border-radius: 8px;
 	border-width: 1px;
 	border-color: #222;
-	background-color: rgba(50,50,50,.9);
+	background-color: rgba(50,50,50,.95);
 }
 
 Button#ToggleButton > Label.Shortkey,Button#RefreshButton > Label.Shortkey, Button#LockButton > Label.Shortkey {
-	top: -12px;
-	left: -12px;
+	bottom: -8px;
+	left: -8px;
 }
 
 Button#ToggleButton:enabled:hover,Button#RefreshButton:enabled:hover, Button#LockButton:enabled:hover {
@@ -132,4 +143,32 @@ VisualElement#Items {
     justify-content: center;
     align-items: center;
 	margin: 0 36px;
+}
+
+
+#Timer {
+	width: 100px;
+	height: 100px;
+	position: relative;
+	background-color: #222;
+}
+
+#TimerFillableCircle {
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	width: 90px;
+	height: 90px;
+	background-color: #a00;
+	border-radius: 50%;
+}
+
+#TimerFillableCircleOverlay {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background-color: #222;
 }

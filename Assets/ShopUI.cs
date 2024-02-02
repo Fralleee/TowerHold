@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ShopUI : MonoBehaviour
+public class ShopUI : Controller
 {
 	[SerializeField] ShopInventory _inventory;
 
@@ -18,16 +19,20 @@ public class ShopUI : MonoBehaviour
 	bool _lockInventory;
 
 	int _refreshCost = 50;
-	readonly int _shopTypeCount = System.Enum.GetValues(typeof(ShopType)).Length;
+	readonly int _refreshCostIncrement = 50;
+	readonly int _shopTypeCount = Enum.GetValues(typeof(ShopType)).Length;
 
 	RandomGenerator _randomGenerator;
 	readonly WaitForSeconds _nextFrame = new WaitForSeconds(0.1f);
 
-	void Awake()
-	{
-		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+	readonly Dictionary<Button, Action> _buttonActions = new Dictionary<Button, Action>();
 
-		GameController.OnLevelChanged += RefreshShop;
+
+	protected override void Awake()
+	{
+		base.Awake();
+
+		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
 	}
 
 	void OnEnable()
@@ -35,19 +40,34 @@ public class ShopUI : MonoBehaviour
 		var uiDocument = GetComponent<UIDocument>();
 
 		_toggleButton = uiDocument.rootVisualElement.Q("ToggleButton") as Button;
-		_toggleButton.RegisterCallback<ClickEvent>(ToggleShop);
-
 		_refreshButton = uiDocument.rootVisualElement.Q("RefreshButton") as Button;
-		_refreshButton.RegisterCallback<ClickEvent>(ManualRefresh);
-
 		_lockButton = uiDocument.rootVisualElement.Q("LockButton") as Button;
-		_lockButton.RegisterCallback<ClickEvent>(ToggleLock);
 
 		_inventoryContainer = uiDocument.rootVisualElement.Q("Inventory");
-
 		_shopSlots = _inventoryContainer.Query<Button>(className: "ShopItem").ToList();
-
 		_shopItems = new List<ShopItem>();
+
+		_toggleButton.clicked += ToggleShop;
+		_refreshButton.clicked += ManualRefresh;
+		_lockButton.clicked += ToggleLock;
+
+		for (var i = 0; i < _shopSlots.Count; i++)
+		{
+			var index = i;
+			var slot = _shopSlots[index];
+			void action()
+			{ PurchaseItem(index); }
+
+			slot.clicked += action;
+			_buttonActions[slot] = action;
+		}
+
+		Controls.Keyboard.ToggleShop.performed += ctx => ButtonClicked(_toggleButton);
+		Controls.Keyboard.RefreshShop.performed += ctx => ButtonClicked(_refreshButton);
+		Controls.Keyboard.LockShop.performed += ctx => ButtonClicked(_lockButton);
+		Controls.Keyboard.PurchaseItem.performed += ctx => PurchaseItemKey(ctx.control.name);
+
+		GameController.OnLevelChanged += RefreshShop;
 	}
 
 	void RefreshShop()
@@ -55,9 +75,11 @@ public class ShopUI : MonoBehaviour
 		_shopItems.Clear();
 		foreach (var slot in _shopSlots)
 		{
-			slot.RemoveFromClassList("itemized");
 			var item = GetRandomItem(GameController.Instance.CurrentLevel);
+			slot.SetEnabled(false);
+			slot.RemoveFromClassList("itemized");
 			SetupSlot(slot, item);
+			_shopItems.Add(item);
 		}
 
 		StartCoroutine(PerformRefresh());
@@ -69,32 +91,26 @@ public class ShopUI : MonoBehaviour
 		foreach (var slot in _shopSlots)
 		{
 			slot.AddToClassList("itemized");
+			slot.SetEnabled(true);
 		}
 	}
 
 	void SetupSlot(Button slot, ShopItem item)
 	{
-		slot.UnregisterCallback<ClickEvent>(PurchaseItem);
-
-		var color = UIManager.Instance.GetShopItemColor(item);
 		slot.style.backgroundImage = item.Image.texture;
-		slot.style.backgroundColor = color;
-
-		slot.RegisterCallback<ClickEvent>(PurchaseItem);
+		slot.style.backgroundColor = UIManager.Instance.GetShopItemColor(item);
 		slot.SetEnabled(true);
-
-		_shopItems.Add(item);
 	}
 
-	void PurchaseItem(ClickEvent clickEvent)
+	void PurchaseItem(int index)
 	{
-		var clickedSlotIndex = _shopSlots.FindIndex(slot => slot == clickEvent.target);
-		var item = _shopItems[clickedSlotIndex];
+		var button = _shopSlots[index];
+		var item = _shopItems[index];
 
 		if (ResourceManager.Instance.SpendResources(item.Cost))
 		{
 			item.OnPurchase();
-			(clickEvent.target as Button).SetEnabled(false);
+			button.SetEnabled(false);
 		}
 	}
 
@@ -133,16 +149,16 @@ public class ShopUI : MonoBehaviour
 		return itemsInCategory[randomIndex];
 	}
 
-	void ManualRefresh(ClickEvent clickEvent)
+	void ManualRefresh()
 	{
 		if (ResourceManager.Instance.SpendResources(_refreshCost))
 		{
 			RefreshShop();
-			_refreshCost += 50;
+			_refreshCost += _refreshCostIncrement;
 		}
 	}
 
-	void ToggleShop(ClickEvent clickEvent)
+	void ToggleShop()
 	{
 		_showInventory = !_showInventory;
 
@@ -158,7 +174,7 @@ public class ShopUI : MonoBehaviour
 		}
 	}
 
-	void ToggleLock(ClickEvent clickEvent)
+	void ToggleLock()
 	{
 		_lockInventory = !_lockInventory;
 
@@ -172,8 +188,42 @@ public class ShopUI : MonoBehaviour
 		}
 	}
 
+	void ButtonClicked(Button target)
+	{
+		using var navigationSubmitEvent = new NavigationSubmitEvent() { target = target };
+		target.SendEvent(navigationSubmitEvent);
+	}
+
+
+	void PurchaseItemKey(string itemString)
+	{
+		if (int.TryParse(itemString, out var itemKey))
+		{
+			itemKey -= 1;
+			if (itemKey >= 0 && itemKey < _shopSlots.Count)
+			{
+				ButtonClicked(_shopSlots[itemKey]);
+			}
+		}
+	}
+
 	void OnDisable()
 	{
-		_toggleButton.UnregisterCallback<ClickEvent>(ToggleShop);
+		_toggleButton.clicked -= ToggleShop;
+		_refreshButton.clicked -= ManualRefresh;
+		_lockButton.clicked -= ToggleLock;
+
+		foreach (var kvp in _buttonActions)
+		{
+			kvp.Key.clicked -= kvp.Value;
+		}
+		_buttonActions.Clear();
+
+		Controls.Keyboard.ToggleShop.performed -= ctx => ButtonClicked(_toggleButton);
+		Controls.Keyboard.RefreshShop.performed -= ctx => ButtonClicked(_refreshButton);
+		Controls.Keyboard.LockShop.performed -= ctx => ButtonClicked(_lockButton);
+		Controls.Keyboard.PurchaseItem.performed -= ctx => PurchaseItemKey(ctx.control.name);
+
+		GameController.OnLevelChanged -= RefreshShop;
 	}
 }

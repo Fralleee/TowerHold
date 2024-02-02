@@ -6,6 +6,7 @@
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ToggleButton" class="ToggleButton active red">
                 <ui:Label text="T" class="Shortkey" />
             </ui:Button>
+
             <ui:VisualElement name="Inventory" class="active">
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="RefreshButton" class="red">
                     <ui:Label text="D" class="Shortkey" />

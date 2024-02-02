@@ -24,7 +24,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 9212724085591995478, guid: ae3cff54fd2ef1042a7ec4520c94d5ca,
     type: 3}
   _projectileSettings:
-    Speed: 50
+    Speed: 30
     UseParabolicArc: 1
     MaxArcHeight: 5
   _attackSound: {fileID: 0}

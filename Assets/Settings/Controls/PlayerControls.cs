@@ -201,6 +201,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleShop"",
+                    ""type"": ""Button"",
+                    ""id"": ""835b5304-b591-476e-af09-c566c9b14402"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RefreshShop"",
+                    ""type"": ""Button"",
+                    ""id"": ""4dd377da-f0c0-4978-978f-7e25422cec72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LockShop"",
+                    ""type"": ""Button"",
+                    ""id"": ""09bb5869-860f-4bef-a2e1-3a8538b5956f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PurchaseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""0150f6c8-38c4-4803-bea3-bcc4e37e2146"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -357,6 +393,105 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Reset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e991bad8-2462-485e-b1fa-578615bb3991"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleShop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6bb9df3-fcd6-4979-b45e-25936a2e8ae6"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RefreshShop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""052868b3-bc5b-4146-a2f3-77ef01b2b2c2"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LockShop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a20f31bb-0668-4e4f-acbf-7ea71a17c9d1"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PurchaseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54ed521b-1480-4caf-a8c6-e2a44275d2ec"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PurchaseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f22a8613-bee5-4fb2-8051-b216e6d30b80"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PurchaseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c68d6123-8efe-4625-a4e3-e93342104b93"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PurchaseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd803db0-1236-42cf-926e-a4decd429540"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PurchaseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e313dc1-0a29-4acd-b3bc-bcdc0d9beadb"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PurchaseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -377,6 +512,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
         m_Keyboard_Rotation = m_Keyboard.FindAction("Rotation", throwIfNotFound: true);
         m_Keyboard_Reset = m_Keyboard.FindAction("Reset", throwIfNotFound: true);
+        m_Keyboard_ToggleShop = m_Keyboard.FindAction("ToggleShop", throwIfNotFound: true);
+        m_Keyboard_RefreshShop = m_Keyboard.FindAction("RefreshShop", throwIfNotFound: true);
+        m_Keyboard_LockShop = m_Keyboard.FindAction("LockShop", throwIfNotFound: true);
+        m_Keyboard_PurchaseItem = m_Keyboard.FindAction("PurchaseItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -535,6 +674,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Move;
     private readonly InputAction m_Keyboard_Rotation;
     private readonly InputAction m_Keyboard_Reset;
+    private readonly InputAction m_Keyboard_ToggleShop;
+    private readonly InputAction m_Keyboard_RefreshShop;
+    private readonly InputAction m_Keyboard_LockShop;
+    private readonly InputAction m_Keyboard_PurchaseItem;
     public struct KeyboardActions
     {
         private @PlayerControls m_Wrapper;
@@ -542,6 +685,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Keyboard_Move;
         public InputAction @Rotation => m_Wrapper.m_Keyboard_Rotation;
         public InputAction @Reset => m_Wrapper.m_Keyboard_Reset;
+        public InputAction @ToggleShop => m_Wrapper.m_Keyboard_ToggleShop;
+        public InputAction @RefreshShop => m_Wrapper.m_Keyboard_RefreshShop;
+        public InputAction @LockShop => m_Wrapper.m_Keyboard_LockShop;
+        public InputAction @PurchaseItem => m_Wrapper.m_Keyboard_PurchaseItem;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -560,6 +707,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Reset.started += instance.OnReset;
             @Reset.performed += instance.OnReset;
             @Reset.canceled += instance.OnReset;
+            @ToggleShop.started += instance.OnToggleShop;
+            @ToggleShop.performed += instance.OnToggleShop;
+            @ToggleShop.canceled += instance.OnToggleShop;
+            @RefreshShop.started += instance.OnRefreshShop;
+            @RefreshShop.performed += instance.OnRefreshShop;
+            @RefreshShop.canceled += instance.OnRefreshShop;
+            @LockShop.started += instance.OnLockShop;
+            @LockShop.performed += instance.OnLockShop;
+            @LockShop.canceled += instance.OnLockShop;
+            @PurchaseItem.started += instance.OnPurchaseItem;
+            @PurchaseItem.performed += instance.OnPurchaseItem;
+            @PurchaseItem.canceled += instance.OnPurchaseItem;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -573,6 +732,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Reset.started -= instance.OnReset;
             @Reset.performed -= instance.OnReset;
             @Reset.canceled -= instance.OnReset;
+            @ToggleShop.started -= instance.OnToggleShop;
+            @ToggleShop.performed -= instance.OnToggleShop;
+            @ToggleShop.canceled -= instance.OnToggleShop;
+            @RefreshShop.started -= instance.OnRefreshShop;
+            @RefreshShop.performed -= instance.OnRefreshShop;
+            @RefreshShop.canceled -= instance.OnRefreshShop;
+            @LockShop.started -= instance.OnLockShop;
+            @LockShop.performed -= instance.OnLockShop;
+            @LockShop.canceled -= instance.OnLockShop;
+            @PurchaseItem.started -= instance.OnPurchaseItem;
+            @PurchaseItem.performed -= instance.OnPurchaseItem;
+            @PurchaseItem.canceled -= instance.OnPurchaseItem;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -605,5 +776,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
+        void OnToggleShop(InputAction.CallbackContext context);
+        void OnRefreshShop(InputAction.CallbackContext context);
+        void OnLockShop(InputAction.CallbackContext context);
+        void OnPurchaseItem(InputAction.CallbackContext context);
     }
 }
