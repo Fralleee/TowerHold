@@ -177,13 +177,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Center: {fileID: 4051799459260263527}
-  MaxHealth: 2000
-  Health: 2000
+  MaxHealth: 3000
+  Health: 3000
   HealthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
     type: 3}
   _healthBarOffset: 6
   IsDead: 0
-  _hitSound: {fileID: 8300000, guid: aaa2e807c1a417c47b8728f403f3eaa2, type: 3}
+  _deathSound: {fileID: 0}
   AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   HealthRegenerationRate: 5
   Turrets: []
