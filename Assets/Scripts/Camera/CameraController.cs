@@ -42,6 +42,7 @@ public class CameraController : Controller
 	bool _isMouseRotating;
 	bool IsKeyboardMoving => KeyboardMovement.magnitude != 0;
 	bool IsKeyboardRotating => KeyboardRotation != 0;
+	bool InputActive => IsKeyboardMoving || IsKeyboardRotating || _isMouseMoving || _isMouseRotating;
 
 	void Start()
 	{
@@ -76,7 +77,8 @@ public class CameraController : Controller
 		{
 			HandleKeyboardMovement();
 		}
-		else if (_isMouseRotating)
+
+		if (_isMouseRotating)
 		{
 			Cursor.SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
 			HandleRotation();
@@ -85,7 +87,8 @@ public class CameraController : Controller
 		{
 			HandleKeyboardRotation();
 		}
-		else
+
+		if (!InputActive)
 		{
 			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 			CheckMouseAtScreenEdge();

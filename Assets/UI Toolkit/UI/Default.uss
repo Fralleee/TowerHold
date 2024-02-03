@@ -8,22 +8,12 @@ Button {
 	overflow: visible;
 }
 
-Button:focus {
-	scale: 1.05 !important;
-	border-width: 4px;
-	border-color: rgba(0, 0, 0, 0.85);
+Button:focus, Button:enabled:hover, Button.ShopItem:enabled:hover, Button.ShopItem:enabled:focus {
+    scale: 1.05 !important;
 }
 
-Button:enabled:hover {
-	scale: 1.05;
-}
-
-Button:disabled {
-	scale: 0.9;
-}
-
-Button:active {
-	scale: 0.9;
+Button:disabled, Button:active, Button.ShopItem:enabled:active, Button.ShopItem.itemized:disabled {
+    scale: 0.9;
 }
 
 .red {

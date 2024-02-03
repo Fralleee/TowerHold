@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class ShopUI : Controller
@@ -68,6 +69,8 @@ public class ShopUI : Controller
 		Controls.Keyboard.PurchaseItem.performed += ctx => PurchaseItemKey(ctx.control.name);
 
 		GameController.OnLevelChanged += RefreshShop;
+
+		SetShortcutLabels();
 	}
 
 	void RefreshShop()
@@ -82,7 +85,7 @@ public class ShopUI : Controller
 			_shopItems.Add(item);
 		}
 
-		StartCoroutine(PerformRefresh());
+		_ = StartCoroutine(PerformRefresh());
 	}
 
 	IEnumerator PerformRefresh()
@@ -100,6 +103,26 @@ public class ShopUI : Controller
 		slot.style.backgroundImage = item.Image.texture;
 		slot.style.backgroundColor = UIManager.Instance.GetShopItemColor(item);
 		slot.SetEnabled(true);
+
+		// Setup hover menu
+		var hoverMenu = slot.Q(className: "HoverMenu");
+		hoverMenu.Q<Label>("Name").text = item.name;
+		hoverMenu.Q<Label>("Cost").text = item.Cost.ToString();
+		hoverMenu.Q<Label>("DamageType").text = $"Type: {item.ShopType}";
+
+		if (item is Turret turret)
+		{
+			var (baseDamage, attackRange, timeBetweenAttacks) = turret.GetHoverData();
+			hoverMenu.Q<Label>("Type").text = "Weapon";
+			hoverMenu.Q<Label>("Damage").text = $"Damage: {baseDamage}";
+			hoverMenu.Q<Label>("DPS").text = $"DPS: {baseDamage / timeBetweenAttacks}";
+			hoverMenu.Q<Label>("Attack Cooldown").text = $"Attack Cooldown: {timeBetweenAttacks}";
+			hoverMenu.Q<Label>("Range").text = $"Range: {attackRange}";
+		}
+		else
+		{
+			hoverMenu.Q<Label>("Type").text = "Upgrade";
+		}
 	}
 
 	void PurchaseItem(int index)
@@ -194,6 +217,17 @@ public class ShopUI : Controller
 		target.SendEvent(navigationSubmitEvent);
 	}
 
+	void SetShortcutLabels()
+	{
+		_toggleButton.Q<Label>().text = Controls.Keyboard.ToggleShop.GetBindingDisplayString();
+		_refreshButton.Q<Label>().text = Controls.Keyboard.RefreshShop.GetBindingDisplayString();
+		_lockButton.Q<Label>().text = Controls.Keyboard.LockShop.GetBindingDisplayString();
+
+		for (var i = 0; i < _shopSlots.Count; i++)
+		{
+			_shopSlots[i].Q<Label>().text = Controls.Keyboard.PurchaseItem.GetBindingDisplayString(i);
+		}
+	}
 
 	void PurchaseItemKey(string itemString)
 	{

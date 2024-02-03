@@ -49,27 +49,8 @@ Button.ShopItem.itemized {
 	scale: 1;
 }
 
-Button.ShopItem.itemized:focus {
-	scale: 1.05 !important;
-	border-width: 4px;
-	border-color: rgba(0, 0, 0, 0.85);
-}
-
-Button.itemized:enabled:hover {
-	scale: 1.05;
-}
-
-Button.itemized:enabled:active {
-	scale: 0.9;
-}
-
-Button.itemized:disabled {
-	scale: 0.9;
-}
-
 Label.Shortkey {
 	position: absolute;
-	/* top: 0; */
 	left: 0;
 	bottom: 0;
 
@@ -145,30 +126,21 @@ VisualElement#Items {
 	margin: 0 36px;
 }
 
-
-#Timer {
-	width: 100px;
-	height: 100px;
-	position: relative;
-	background-color: #222;
+Label.Tooltip {
+    display: none;
+    position: absolute;
+	bottom: 80px;
+	left: -20px;
+    padding: 10px;
+	min-width: 100px;
+	height: 32px;
+	color: black;
+	-unity-font-style: bold;
+    background-color: rgba(255,255,255,.85);
+	border-color: #444;
+    border-radius: 5px;
 }
 
-#TimerFillableCircle {
-	position: absolute;
-	left: 5px;
-	top: 5px;
-	width: 90px;
-	height: 90px;
-	background-color: #a00;
-	border-radius: 50%;
-}
-
-#TimerFillableCircleOverlay {
-	position: absolute;
-	left: 10px;
-	top: 10px;
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	background-color: #222;
+Button:enabled:hover > Label.Tooltip {
+	display: flex;
 }

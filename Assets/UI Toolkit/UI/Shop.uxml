@@ -1,38 +1,47 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="HoverMenu" src="project://database/Assets/UI%20Toolkit/UI/HoverMenu.uxml?fileID=9197481963319205126&amp;guid=3466c68659231fc48a484d5c06dd8be6&amp;type=3#HoverMenu" />
     <Style src="project://database/Assets/UI%20Toolkit/UI/Default.uss?fileID=7433441132597879392&amp;guid=c955849d668e1574f8b7fbe66d896b05&amp;type=3#Default" />
     <Style src="project://database/Assets/UI%20Toolkit/UI/Shop.uss?fileID=7433441132597879392&amp;guid=2f31f636d331e644b944c699b4ed521c&amp;type=3#Shop" />
     <ui:VisualElement name="Root">
         <ui:VisualElement name="Container" class="Container">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="ToggleButton" class="ToggleButton active red">
                 <ui:Label text="T" class="Shortkey" />
+                <ui:Label text="Toggle" class="Tooltip" />
             </ui:Button>
-
             <ui:VisualElement name="Inventory" class="active">
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="RefreshButton" class="red">
                     <ui:Label text="D" class="Shortkey" />
+                    <ui:Label text="Refresh" class="Tooltip" />
                 </ui:Button>
                 <ui:VisualElement name="Items">
                     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem purple">
                         <ui:Label text="1" class="Shortkey" />
+						<ui:Instance template="HoverMenu" class="HoverMenu" />
                     </ui:Button>
                     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem blue">
                         <ui:Label text="2" class="Shortkey" />
+                        <ui:Instance template="HoverMenu" class="HoverMenu" />
                     </ui:Button>
                     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem teal">
                         <ui:Label text="3" class="Shortkey" />
+                        <ui:Instance template="HoverMenu" class="HoverMenu" />
                     </ui:Button>
                     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem green">
                         <ui:Label text="4" class="Shortkey" />
+                        <ui:Instance template="HoverMenu" class="HoverMenu" />
                     </ui:Button>
                     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem orange">
                         <ui:Label text="5" class="Shortkey" />
+                        <ui:Instance template="HoverMenu" class="HoverMenu" />
                     </ui:Button>
                     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="ShopItem purple">
                         <ui:Label text="6" class="Shortkey" />
+                        <ui:Instance template="HoverMenu" class="HoverMenu" />
                     </ui:Button>
                 </ui:VisualElement>
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="LockButton" class="red">
                     <ui:Label text="L" class="Shortkey" />
+                    <ui:Label text="Lock" class="Tooltip" />
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>

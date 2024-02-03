@@ -245,7 +245,7 @@ public class Enemy : Target
 		base.OnValidate();
 		if (_attackType == AttackType.MELEE)
 		{
-			_attackRange = 4f;
+			_attackRange = 6f;
 			_projectilePrefab = null;
 		}
 		else if (_attackType == AttackType.RANGED_PROJECTILE)

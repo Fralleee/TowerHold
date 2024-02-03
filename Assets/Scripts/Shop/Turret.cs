@@ -51,6 +51,8 @@ public class Turret : DamageShopItem
 		ScoreManager.Instance.Turrets += 1;
 	}
 
+	public (float, float, float) GetHoverData() => (_baseDamage, _attackRange, _timeBetweenAttacks);
+
 	void Shoot()
 	{
 		if (_projectilePrefab == null)
