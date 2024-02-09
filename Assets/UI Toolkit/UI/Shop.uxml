@@ -9,7 +9,7 @@
         </ui:Button>
         <ui:VisualElement name="Progress" class="active">
 			<CustomProgressBar value="1" title="Health" name="HealthBar" />
-			<CustomProgressBar value="0" title="Level" name="LevelBar" />
+			<CustomProgressBar value="1" title="Level" name="LevelBar" />
         </ui:VisualElement>
         <ui:VisualElement name="Inventory" class="active">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="RefreshButton" class="red">

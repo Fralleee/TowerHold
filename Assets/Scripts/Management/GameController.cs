@@ -24,7 +24,7 @@ public class GameController : Singleton<GameController>
 
 	EnemySpawner _enemySpawner;
 
-	public float LevelProgress => GameHasStarted ? 1 - (TimeLeft / TimePerLevel) : 1 - (FreezeTimeLeft / FreezeTime);
+	public float LevelProgress => GameHasStarted ? (TimeLeft / TimePerLevel) : (FreezeTimeLeft / FreezeTime);
 
 	protected override void Awake()
 	{
