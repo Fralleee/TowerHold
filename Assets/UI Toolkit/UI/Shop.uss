@@ -38,18 +38,15 @@ VisualElement#Progress {
 	display: flex;
 	flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-	padding: 0 150px;
-	margin-bottom: 10px;
-	translate: 0 165px;
+	padding: 0 130px;
+	margin-bottom: 8px;
+	translate: 0 185px;
     transition: all 250ms ease-out-back;
 }
 
 VisualElement#Progress.active {
     translate: 0 0;
 }
-
-
 
 #HealthBar, #LevelBar {
 	width: 49%;
@@ -79,7 +76,7 @@ Button#ToggleButton {
 }
 
 Button#ToggleButton.active {
-	translate: 0 -12px;
+	translate: 0 -16px;
     width: 75px;
     height: 75px;
 	background-image: url("../../Art/shop-close.png");
@@ -110,9 +107,8 @@ Button.ShopItem {
     width: 125px;
     height: 125px;
 	margin: 0 10px;
-	background-image: url("../../Art/hatchet.png");
 	background-size: 100px 100px;
-	scale: 0.9;
+	scale: 0;
 }
 
 Button.ShopItem.itemized {
