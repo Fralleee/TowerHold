@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 public class CustomProgressBar : VisualElement
 {
 	readonly VisualElement _progressBar;
+	readonly VisualElement _progressBarContainer;
 	readonly VisualElement _progressBarChange;
 
 	public new class UxmlFactory : UxmlFactory<CustomProgressBar, UxmlTraits> { }
@@ -44,12 +45,16 @@ public class CustomProgressBar : VisualElement
 	{
 		AddToClassList("ProgressBar");
 
+		_progressBarContainer = new VisualElement();
+		_progressBarContainer.AddToClassList("ProgressBar__container");
+		Add(_progressBarContainer);
+
 		_progressBarChange = new VisualElement();
 		_progressBarChange.AddToClassList("ProgressBar__progress-change");
-		Add(_progressBarChange);
+		_progressBarContainer.Add(_progressBarChange);
 
 		_progressBar = new VisualElement();
 		_progressBar.AddToClassList("ProgressBar__progress");
-		Add(_progressBar);
+		_progressBarContainer.Add(_progressBar);
 	}
 }

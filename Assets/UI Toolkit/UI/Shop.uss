@@ -53,7 +53,7 @@ VisualElement#Progress.active {
 }
 
 #HealthBar .ProgressBar__progress {
-	background-color: #25eb2c;
+	background-color: #1ca30d;
 }
 
 #LevelBar .ProgressBar__progress {
