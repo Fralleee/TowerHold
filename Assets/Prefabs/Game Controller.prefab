@@ -547,8 +547,11 @@ MonoBehaviour:
   _musicSource: {fileID: 7818233753972848621}
   _effectSource: {fileID: 7092029708942314798}
   _playList:
-  - {fileID: 8300000, guid: 4b56a07190dac614dba02b0bdef79649, type: 3}
-  - {fileID: 8300000, guid: 5d73b690789c85c42a78bf3326418304, type: 3}
+  - {fileID: 8300000, guid: d3042923a09074e449b1f47adf28fedf, type: 3}
+  - {fileID: 8300000, guid: 124ed181bf386884088b6f9d7d170424, type: 3}
+  - {fileID: 8300000, guid: 5d5d9631ce8c60344bdf9b41770e8c45, type: 3}
+  - {fileID: 8300000, guid: 1dcdc0a6d2f916f44b76c7576abd37ef, type: 3}
+  - {fileID: 8300000, guid: 6a47c24eb7a17994eaea2a3640f63e0d, type: 3}
 --- !u!82 &7818233753972848621
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1103,13 +1106,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.495283
+      Data: 0.145098045
     - Name: 
       Entry: 4
-      Data: 0.7372546
+      Data: 0.3882353
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.921568632
     - Name: 
       Entry: 4
       Data: 1
@@ -1130,13 +1133,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.0509803928
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.5803922
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.533333361
     - Name: 
       Entry: 4
       Data: 1
@@ -1883,11 +1886,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FreezeTimeLeft: 0.1
+  FreezeTimeLeft: 2
   TimeLeft: 0
   GameHasStarted: 0
   GameHasEnded: 0
-  FreezeTime: 0.1
+  FreezeTime: 2
   TimePerLevel: 30
   StartLevel: 1
   CurrentLevel: 1
@@ -1928,4 +1931,4 @@ MonoBehaviour:
   _enemyVariants: {fileID: 11400000, guid: 9518e5eb0f4d6474f8994e11ad100c09, type: 2}
   _levelSpecificSpawns: {fileID: 11400000, guid: c63e1f2e7ff051544b08184ec094a06f,
     type: 2}
-  _showGizmos: 0
+  _showGizmos: 1

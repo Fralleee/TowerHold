@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 6968498760919862443}
   - component: {fileID: 7634988441715190626}
   - component: {fileID: 4814542400900873202}
-  - component: {fileID: 4846508249342481479}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -177,32 +176,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Center: {fileID: 4051799459260263527}
-  MaxHealth: 3000
-  Health: 3000
+  MaxHealth: 2386
+  Health: 2386
   HealthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
     type: 3}
-  _healthBarOffset: 6
+  _healthBarOffset: 8
   IsDead: 0
   _deathSound: {fileID: 0}
   AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   HealthRegenerationRate: 5
   Turrets: []
---- !u!208 &4846508249342481479
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7943569025180232256}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1001 &2768778147646213959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,7 +202,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f605f5cb004c7ce42aeb7de2aed3f665,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f605f5cb004c7ce42aeb7de2aed3f665,
         type: 3}
@@ -306,6 +289,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 178bdae24d99df74eb06ba76687b94d5, type: 2}
+    - target: {fileID: 8632055958874330854, guid: f605f5cb004c7ce42aeb7de2aed3f665,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632055958874330854, guid: f605f5cb004c7ce42aeb7de2aed3f665,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.125
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -5,15 +5,16 @@ using Random = UnityEngine.Random;
 
 public class GameController : Singleton<GameController>
 {
+	public static Action OnGameStart = delegate { };
+	public static Action OnLevelChanged = delegate { };
+	public static Action OnGameEnd = delegate { };
+
 	[HideInInspector] public RandomGenerator RandomGenerator;
 	[HideInInspector] public float FreezeTimeLeft;
 	[HideInInspector] public float TimeLeft;
 	[HideInInspector] public bool GameHasStarted = false;
 	[HideInInspector] public bool GameHasEnded = false;
 
-	public static Action OnGameStart = delegate { };
-	public static Action OnLevelChanged = delegate { };
-	public static Action OnGameEnd = delegate { };
 	public float FreezeTime = 5f;
 	public float TimePerLevel = 10f;
 	public int StartLevel = 1;
@@ -22,6 +23,8 @@ public class GameController : Singleton<GameController>
 	public int StartSeed;
 
 	EnemySpawner _enemySpawner;
+
+	public float LevelProgress => GameHasStarted ? 1 - (TimeLeft / TimePerLevel) : 1 - (FreezeTimeLeft / FreezeTime);
 
 	protected override void Awake()
 	{

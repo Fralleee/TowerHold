@@ -7,7 +7,8 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	const int PointLevelScaling = 5;
 	const int StartMinPoints = 20;
 	const int StartMaxPoints = 20;
-	const int TotalSpawnsPerLevel = 5;
+	const int TotalMinSpawnsPerLevel = 10;
+	const int TotalMaxSpawnsPerLevel = 15;
 	const int GroupOffsetDistanceMax = 3;
 
 	[HideInInspector] public bool IsSpawning;
@@ -26,6 +27,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	float _timePerSpawn;
 	int _spawnedWavesCurrentLevel;
 	int _pointsRemainingFromLastSpawn;
+	int _spawnsPerLevel;
 	Dictionary<int, LevelSpawnConfiguration> _levelSpawnConfigurations;
 
 	RandomGenerator _randomGenerator;
@@ -66,7 +68,8 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
 	void InitializeForLevel()
 	{
-		_timePerSpawn = GameController.Instance.TimePerLevel / TotalSpawnsPerLevel;
+		_spawnsPerLevel = _randomGenerator.Next(TotalMinSpawnsPerLevel, TotalMaxSpawnsPerLevel + 1);
+		_timePerSpawn = GameController.Instance.TimePerLevel / _spawnsPerLevel;
 		_nextSpawnTime = Time.time;
 		IsSpawning = true;
 		_spawnedWavesCurrentLevel = 0;
@@ -74,7 +77,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
 	void TrySpawn()
 	{
-		if (_spawnedWavesCurrentLevel == TotalSpawnsPerLevel)
+		if (_spawnedWavesCurrentLevel == _spawnsPerLevel)
 		{
 			return;
 		}

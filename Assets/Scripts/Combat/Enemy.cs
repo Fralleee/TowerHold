@@ -38,9 +38,9 @@ public class Enemy : Target
 	Bobbing _bobbing;
 
 	float _lastAttackTime = 0f;
-	float _lastDistanceCheck = 0f;
+	float _nextDistanceCheck = 0f;
 	float TimeBetweenAttacks => 1f / _attacksPerSecond;
-	readonly float _timeBetweenDistanceChecks = 0.5f;
+	readonly float _minTimeBetweenDistanceChecks = 0.5f;
 
 	protected override void Awake()
 	{
@@ -122,12 +122,16 @@ public class Enemy : Target
 
 	void MoveToTarget()
 	{
-		if (Time.time - _lastDistanceCheck > _timeBetweenDistanceChecks)
+		if (Time.time >= _nextDistanceCheck)
 		{
-			_lastDistanceCheck = Time.time;
-			if (Tower.Instance != null && Vector3.Distance(transform.position, Tower.Instance.transform.position) <= _attackRange)
+			var distance = Vector3.Distance(transform.position, Tower.Instance.transform.position);
+			if (distance <= _attackRange)
 			{
 				ChangeState(EnemyState.Attacking);
+			}
+			else
+			{
+				_nextDistanceCheck = GetNextDistanceCheckTime(distance);
 			}
 		}
 	}
@@ -205,6 +209,8 @@ public class Enemy : Target
 	public void StartMovement()
 	{
 		_ = _agent.SetDestination(Tower.Instance.transform.position);
+		var distance = Vector2.Distance(transform.position, Tower.Instance.transform.position);
+		_nextDistanceCheck = GetNextDistanceCheckTime(distance);
 		_agent.isStopped = false;
 		_bobbing.StartBobbing();
 	}
@@ -238,6 +244,11 @@ public class Enemy : Target
 		base.Die();
 
 		OnAnyDeath(this);
+	}
+
+	float GetNextDistanceCheckTime(float distance)
+	{
+		return Time.time + Mathf.Max((distance - _attackRange) / _agent.speed, _minTimeBetweenDistanceChecks);
 	}
 
 	protected override void OnValidate()

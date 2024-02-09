@@ -12,9 +12,15 @@ public class ShopUI : Controller
 	Button _toggleButton;
 	Button _refreshButton;
 	Button _lockButton;
+
 	List<Button> _shopSlots;
 	List<ShopItem> _shopItems;
+
+	VisualElement _progressContainer;
 	VisualElement _inventoryContainer;
+
+	CustomProgressBar _healthBar;
+	CustomProgressBar _levelBar;
 
 	bool _showInventory;
 	bool _lockInventory;
@@ -34,6 +40,19 @@ public class ShopUI : Controller
 		base.Awake();
 
 		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+
+	}
+	void Start()
+	{
+		_healthBar.UseChangeBar = true;
+		_levelBar.UseChangeBar = false;
+		InvokeRepeating(nameof(UpdateLevelProgress), 1f, 1f);
+	}
+
+	void UpdateLevelProgress()
+	{
+		var value = Mathf.Round(GameController.Instance.LevelProgress * GameController.Instance.TimePerLevel) / GameController.Instance.TimePerLevel;
+		_levelBar.Value = value;
 	}
 
 	void OnEnable()
@@ -43,6 +62,10 @@ public class ShopUI : Controller
 		_toggleButton = uiDocument.rootVisualElement.Q("ToggleButton") as Button;
 		_refreshButton = uiDocument.rootVisualElement.Q("RefreshButton") as Button;
 		_lockButton = uiDocument.rootVisualElement.Q("LockButton") as Button;
+
+		_progressContainer = uiDocument.rootVisualElement.Q("Progress");
+		_healthBar = _progressContainer.Q<CustomProgressBar>("HealthBar");
+		_levelBar = _progressContainer.Q<CustomProgressBar>("LevelBar");
 
 		_inventoryContainer = uiDocument.rootVisualElement.Q("Inventory");
 		_shopSlots = _inventoryContainer.Query<Button>(className: "ShopItem").ToList();
@@ -67,11 +90,16 @@ public class ShopUI : Controller
 		Controls.Keyboard.RefreshShop.performed += ctx => ButtonClicked(_refreshButton);
 		Controls.Keyboard.LockShop.performed += ctx => ButtonClicked(_lockButton);
 		Controls.Keyboard.PurchaseItem.performed += ctx => PurchaseItemKey(ctx.control.name);
+		SetShortcutLabels();
 
 		GameController.OnLevelChanged += RefreshShop;
-
-		SetShortcutLabels();
+		GameController.OnGameStart += OnGameStart;
+		Tower.OnHealthRatioChanged += OnHealthRatioChanged;
 	}
+
+
+	void OnGameStart() => _levelBar.AddToClassList("active");
+	void OnHealthRatioChanged(float ratio) => _healthBar.Value = ratio;
 
 	void RefreshShop()
 	{
@@ -187,11 +215,13 @@ public class ShopUI : Controller
 
 		if (_showInventory)
 		{
+			_progressContainer.AddToClassList("active");
 			_inventoryContainer.AddToClassList("active");
 			_toggleButton.AddToClassList("active");
 		}
 		else
 		{
+			_progressContainer.RemoveFromClassList("active");
 			_inventoryContainer.RemoveFromClassList("active");
 			_toggleButton.RemoveFromClassList("active");
 		}
@@ -259,5 +289,7 @@ public class ShopUI : Controller
 		Controls.Keyboard.PurchaseItem.performed -= ctx => PurchaseItemKey(ctx.control.name);
 
 		GameController.OnLevelChanged -= RefreshShop;
+		GameController.OnGameStart -= OnGameStart;
+		Tower.OnHealthRatioChanged -= OnHealthRatioChanged;
 	}
 }
