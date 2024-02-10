@@ -71,7 +71,7 @@ Button#ToggleButton {
     margin: 0 auto;
     border-radius: 12px;
 	translate: 0 150px;
-	background-image: url("../../Art/shop-open.png");
+	background-image: url("../../Art/Textures/Icons/shop-open.png");
 	background-size: 100px 100px;
 }
 
@@ -79,7 +79,7 @@ Button#ToggleButton.active {
 	translate: 0 -16px;
     width: 75px;
     height: 75px;
-	background-image: url("../../Art/shop-close.png");
+	background-image: url("../../Art/Textures/Icons/shop-close.png");
 	background-size: 50px 50px;
 }
 
@@ -91,16 +91,16 @@ Button#RefreshButton, Button#LockButton {
 }
 
 Button#RefreshButton {
-	background-image: url("../../Art/refresh.png");
+	background-image: url("../../Art/Textures/Icons/refresh.png");
 }
 
 Button#LockButton {
-	background-image: url("../../Art/lock-open.png");
+	background-image: url("../../Art/Textures/Icons/lock-open.png");
 }
 
 Button#LockButton.active {
 	background-color: #444;
-	background-image: url("../../Art/lock-closed.png");
+	background-image: url("../../Art/Textures/Icons/lock-closed.png");
 }
 
 Button.ShopItem {

@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.UI;
 using UnityEngine.UIElements;
 
 public class ShopUI : Controller
@@ -20,20 +20,26 @@ public class ShopUI : Controller
 	VisualElement _progressContainer;
 	VisualElement _inventoryContainer;
 
+	ItemInformation _itemInformation;
+
 	CustomProgressBar _healthBar;
 	CustomProgressBar _levelBar;
 
 	bool _showInventory = true;
 	bool _lockInventory;
 
-	int _refreshCost = 50;
-	readonly int _refreshCostIncrement = 50;
+	int _refreshCost = 5;
+	readonly int _refreshCostIncrement = 1;
 	readonly int _shopTypeCount = Enum.GetValues(typeof(ShopType)).Length;
+	int? _currentlyHoveredItemIndex = null;
+
 
 	RandomGenerator _randomGenerator;
 	readonly WaitForSeconds _nextFrame = new WaitForSeconds(0.1f);
 
 	readonly Dictionary<Button, Action> _buttonActions = new Dictionary<Button, Action>();
+
+	readonly List<(VisualElement element, EventCallback<MouseEnterEvent> enterCallback, EventCallback<MouseLeaveEvent> leaveCallback)> _informationTargets = new List<(VisualElement, EventCallback<MouseEnterEvent>, EventCallback<MouseLeaveEvent>)>();
 
 
 	protected override void Awake()
@@ -44,9 +50,11 @@ public class ShopUI : Controller
 
 		var uiDocument = GetComponent<UIDocument>();
 
-		_toggleButton = uiDocument.rootVisualElement.Q("ToggleButton") as Button;
-		_refreshButton = uiDocument.rootVisualElement.Q("RefreshButton") as Button;
-		_lockButton = uiDocument.rootVisualElement.Q("LockButton") as Button;
+		_toggleButton = uiDocument.rootVisualElement.Q<Button>("ToggleButton");
+		_refreshButton = uiDocument.rootVisualElement.Q<Button>("RefreshButton");
+		_lockButton = uiDocument.rootVisualElement.Q<Button>("LockButton");
+
+		_itemInformation = uiDocument.rootVisualElement.Q<ItemInformation>("ItemInformation");
 
 		_progressContainer = uiDocument.rootVisualElement.Q("Progress");
 		_healthBar = _progressContainer.Q<CustomProgressBar>("HealthBar");
@@ -54,6 +62,19 @@ public class ShopUI : Controller
 
 		_inventoryContainer = uiDocument.rootVisualElement.Q("Inventory");
 		_shopSlots = _inventoryContainer.Query<Button>(className: "ShopItem").ToList();
+		for (var i = 0; i < _shopSlots.Count; i++)
+		{
+			var index = i;
+			var slot = _shopSlots[index];
+			EventCallback<MouseEnterEvent> enterCallback = e => OnMouseEnter(index);
+			EventCallback<MouseLeaveEvent> leaveCallback = e => OnMouseLeave();
+			slot.RegisterCallback(enterCallback);
+			slot.RegisterCallback(leaveCallback);
+
+			// Store the slot and its callbacks for later removal
+			_informationTargets.Add((slot, enterCallback, leaveCallback));
+		}
+
 		_shopItems = new List<ShopItem>();
 
 		_toggleButton.clicked += ToggleShop;
@@ -83,6 +104,22 @@ public class ShopUI : Controller
 		Tower.OnHealthChanged += OnHealthChanged;
 
 	}
+
+	void OnMouseEnter(int index)
+	{
+		_currentlyHoveredItemIndex = index;
+		_itemInformation.AddToClassList("active");
+
+		var item = _shopItems[index];
+		_itemInformation.UpdateItemInformation(item);
+	}
+
+	void OnMouseLeave()
+	{
+		_currentlyHoveredItemIndex = null;
+		_itemInformation.RemoveFromClassList("active");
+	}
+
 	void Start()
 	{
 		_healthBar.UseChangeBar = true;
@@ -130,6 +167,11 @@ public class ShopUI : Controller
 		}
 
 		_ = StartCoroutine(PerformRefresh());
+		if (_currentlyHoveredItemIndex.HasValue && _currentlyHoveredItemIndex.Value < _shopItems.Count)
+		{
+			var item = _shopItems[_currentlyHoveredItemIndex.Value];
+			_itemInformation.UpdateItemInformation(item);
+		}
 	}
 
 	IEnumerator PerformRefresh()
@@ -142,31 +184,32 @@ public class ShopUI : Controller
 		}
 	}
 
+	string RarityToColorClass(RarityType rarity)
+	{
+		return rarity switch
+		{
+			RarityType.Common => "gray",
+			RarityType.Uncommon => "green",
+			RarityType.Rare => "blue",
+			RarityType.Epic => "purple",
+			RarityType.Legendary => "orange",
+			_ => "red",
+		};
+	}
+
 	void SetupSlot(Button slot, ShopItem item)
 	{
 		slot.style.backgroundImage = item.Image.texture;
-		slot.style.backgroundColor = UIManager.Instance.GetShopItemColor(item);
+
+		var rarityClasses = new List<string> { "gray", "green", "blue", "purple", "orange" };
+		foreach (var rarityClass in rarityClasses)
+		{
+			slot.RemoveFromClassList(rarityClass);
+		}
+
+		slot.AddToClassList(RarityToColorClass(item.Rarity));
+
 		slot.SetEnabled(true);
-
-		// Setup hover menu
-		var hoverMenu = slot.Q(className: "HoverMenu");
-		hoverMenu.Q<Label>("Name").text = item.name;
-		hoverMenu.Q<Label>("Cost").text = item.Cost.ToString();
-		hoverMenu.Q<Label>("DamageType").text = $"Type: {item.ShopType}";
-
-		if (item is Turret turret)
-		{
-			var (baseDamage, attackRange, timeBetweenAttacks) = turret.GetHoverData();
-			hoverMenu.Q<Label>("Type").text = "Weapon";
-			hoverMenu.Q<Label>("Damage").text = $"Damage: {baseDamage}";
-			hoverMenu.Q<Label>("DPS").text = $"DPS: {baseDamage / timeBetweenAttacks}";
-			hoverMenu.Q<Label>("Attack Cooldown").text = $"Attack Cooldown: {timeBetweenAttacks}";
-			hoverMenu.Q<Label>("Range").text = $"Range: {attackRange}";
-		}
-		else
-		{
-			hoverMenu.Q<Label>("Type").text = "Upgrade";
-		}
 	}
 
 	void PurchaseItem(int index)
@@ -183,37 +226,50 @@ public class ShopUI : Controller
 
 	ShopItem GetRandomItem(int currentLevel)
 	{
-		// Step 1: Group items by broader categories
 		var groupedItems = new Dictionary<ShopType, List<ShopItem>>();
 		foreach (var item in _inventory.Items)
 		{
-			if (item.MinLevel <= currentLevel)
+			if (!groupedItems.ContainsKey(item.ShopType))
 			{
-				if (!groupedItems.ContainsKey(item.ShopType))
-				{
-					groupedItems[item.ShopType] = new List<ShopItem>();
-				}
-				groupedItems[item.ShopType].Add(item);
+				groupedItems[item.ShopType] = new List<ShopItem>();
 			}
+			groupedItems[item.ShopType].Add(item);
 		}
 
-		// Step 2: Check if there are eligible items
 		if (groupedItems.Count == 0)
 		{
-			return null;
+			return null;  // No items available at all
 		}
 
-		// Step 3: Randomly select a category
-		var randomCategory = (ShopType)_randomGenerator.Next(0, _shopTypeCount);
-		while (!groupedItems.ContainsKey(randomCategory) || groupedItems[randomCategory].Count == 0)
+		var maxAttempts = 15;  // Set a maximum number of attempts to prevent infinite loops
+		var attempts = 0;
+
+		while (attempts < maxAttempts)
 		{
-			randomCategory = (ShopType)_randomGenerator.Next(0, _shopTypeCount);
+			var availableCategories = groupedItems.Keys.ToArray();
+			var randomCategory = availableCategories[_randomGenerator.Next(0, availableCategories.Length)];
+			var itemsInCategory = groupedItems[randomCategory];
+
+			var selectedRarity = Rarity.SelectRarityBasedOnLevel(currentLevel, GameController.Instance.MaxLevel, _randomGenerator);
+			var eligibleItems = itemsInCategory.Where(item => item.Rarity == selectedRarity).ToList();
+
+			if (eligibleItems.Count > 0)
+			{
+				return eligibleItems[_randomGenerator.Next(0, eligibleItems.Count)];
+			}
+
+			attempts++;
 		}
 
-		// Step 4: Choose a random item from the selected category
-		var itemsInCategory = groupedItems[randomCategory];
-		var randomIndex = _randomGenerator.Next(0, itemsInCategory.Count);
-		return itemsInCategory[randomIndex];
+		// If the loop exits due to reaching the maximum number of attempts,
+		// return a random item from all available items or null if none are available
+		var allItems = groupedItems.Values.SelectMany(x => x).ToList();
+		if (allItems.Count > 0)
+		{
+			return allItems[_randomGenerator.Next(0, allItems.Count)];
+		}
+
+		return null;  // Return null if there are no items at all
 	}
 
 	void ManualRefresh()

@@ -14,7 +14,7 @@ public class DamageShopItem : ShopItem
 			DamageType.Technology => ShopType.Technology,
 			DamageType.Arcane => ShopType.Arcane,
 			DamageType.Void => ShopType.Void,
-			_ => ShopType.Unspecified,
+			_ => throw new System.NotImplementedException()
 		};
 	}
 }

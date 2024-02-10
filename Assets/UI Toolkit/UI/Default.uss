@@ -40,6 +40,10 @@ Button:disabled, Button:active, Button.ShopItem:enabled:active, Button.ShopItem.
 	background-color: #ea580c;
 }
 
+.gray {
+	background-color: #64748b;
+}
+
 .ProgressBar {
 	position: relative;
 	width: 100%;
@@ -79,7 +83,7 @@ Button:disabled, Button:active, Button.ShopItem:enabled:active, Button.ShopItem.
 	align-self: center;
 
 	-unity-font-style: bold;
-	text-align: center;
+	-unity-text-align: center;
 }
 
 .ProgressBar__progress-change, .ProgressBar__progress {
@@ -99,4 +103,39 @@ Button:disabled, Button:active, Button.ShopItem:enabled:active, Button.ShopItem.
 	height: 100%;
 	width: 50%;
 	transition: all 100ms ease-out;
+}
+
+
+VisualElement.divider {
+	height: 1px;
+	background-color: #444;
+	margin: 5px 0;
+}
+
+ItemInformation {
+	width: 480px;
+	border-width: 2px;
+	border-color: #444;
+	background-color: rgba(255,255,255,.5);
+	align-self: center;
+	padding: 12px;
+	margin-bottom: 36px;
+	scale: 0.8;
+	opacity: 0;
+    transition: all 250ms 50ms ease-out;
+}
+
+ItemInformation.active {
+	scale: 1;
+	opacity: 1;
+    transition: all 250ms 0 ease-out;
+}
+
+ItemInformation Label {
+	margin: 0;
+	padding: 0;
+}
+
+ItemInformation Label.name {
+	-unity-font-style: bold;
 }
