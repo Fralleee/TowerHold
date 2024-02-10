@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.UI;
 using UnityEngine.UIElements;
 
 public class ShopUI : Controller
@@ -22,7 +23,7 @@ public class ShopUI : Controller
 	CustomProgressBar _healthBar;
 	CustomProgressBar _levelBar;
 
-	bool _showInventory;
+	bool _showInventory = true;
 	bool _lockInventory;
 
 	int _refreshCost = 50;
@@ -41,22 +42,6 @@ public class ShopUI : Controller
 
 		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
 
-	}
-	void Start()
-	{
-		_healthBar.UseChangeBar = true;
-		_levelBar.UseChangeBar = false;
-		InvokeRepeating(nameof(UpdateLevelProgress), 1f, 1f);
-	}
-
-	void UpdateLevelProgress()
-	{
-		var value = Mathf.Round(GameController.Instance.LevelProgress * GameController.Instance.TimePerLevel) / GameController.Instance.TimePerLevel;
-		_levelBar.Value = value;
-	}
-
-	void OnEnable()
-	{
 		var uiDocument = GetComponent<UIDocument>();
 
 		_toggleButton = uiDocument.rootVisualElement.Q("ToggleButton") as Button;
@@ -74,6 +59,7 @@ public class ShopUI : Controller
 		_toggleButton.clicked += ToggleShop;
 		_refreshButton.clicked += ManualRefresh;
 		_lockButton.clicked += ToggleLock;
+		_lockButton.SetEnabled(false);
 
 		for (var i = 0; i < _shopSlots.Count; i++)
 		{
@@ -94,15 +80,45 @@ public class ShopUI : Controller
 
 		GameController.OnLevelChanged += RefreshShop;
 		GameController.OnGameStart += OnGameStart;
-		Tower.OnHealthRatioChanged += OnHealthRatioChanged;
+		Tower.OnHealthChanged += OnHealthChanged;
+
+	}
+	void Start()
+	{
+		_healthBar.UseChangeBar = true;
+		_levelBar.UseChangeBar = false;
+		InvokeRepeating(nameof(UpdateLevelProgress), 0, 1f);
 	}
 
+	void UpdateLevelProgress()
+	{
+		_levelBar.MinMaxValue = GameController.Instance.GameHasStarted
+		? (Mathf.CeilToInt(GameController.Instance.TimeLeft), Mathf.CeilToInt(GameController.Instance.TimePerLevel))
+		: (Mathf.CeilToInt(GameController.Instance.FreezeTimeLeft), Mathf.CeilToInt(GameController.Instance.FreezeTime));
 
-	void OnGameStart() => _levelBar.AddToClassList("active");
-	void OnHealthRatioChanged(float ratio) => _healthBar.Value = ratio;
+		var value = Mathf.Round(GameController.Instance.LevelProgress * GameController.Instance.TimePerLevel) / GameController.Instance.TimePerLevel;
+		_levelBar.Value = value;
+	}
+
+	void OnGameStart()
+	{
+		_levelBar.AddToClassList("active");
+		_lockButton.SetEnabled(true);
+	}
+
+	void OnHealthChanged(int currentHealth, int maxHealth)
+	{
+		_healthBar.MinMaxValue = (currentHealth, maxHealth);
+		_healthBar.Value = currentHealth / (float)maxHealth;
+	}
 
 	void RefreshShop()
 	{
+		if (_lockInventory)
+		{
+			return;
+		}
+
 		_shopItems.Clear();
 		foreach (var slot in _shopSlots)
 		{
@@ -202,6 +218,11 @@ public class ShopUI : Controller
 
 	void ManualRefresh()
 	{
+		if (_lockInventory)
+		{
+			ToggleLock();
+		}
+
 		if (ResourceManager.Instance.SpendResources(_refreshCost))
 		{
 			RefreshShop();
@@ -230,7 +251,6 @@ public class ShopUI : Controller
 	void ToggleLock()
 	{
 		_lockInventory = !_lockInventory;
-
 		if (_lockInventory)
 		{
 			_lockButton.AddToClassList("active");
@@ -271,7 +291,7 @@ public class ShopUI : Controller
 		}
 	}
 
-	void OnDisable()
+	void OnDestroy()
 	{
 		_toggleButton.clicked -= ToggleShop;
 		_refreshButton.clicked -= ManualRefresh;
@@ -290,6 +310,6 @@ public class ShopUI : Controller
 
 		GameController.OnLevelChanged -= RefreshShop;
 		GameController.OnGameStart -= OnGameStart;
-		Tower.OnHealthRatioChanged -= OnHealthRatioChanged;
+		Tower.OnHealthChanged -= OnHealthChanged;
 	}
 }

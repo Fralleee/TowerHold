@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class Tower : Target
 {
-	public static Action<float> OnHealthRatioChanged = delegate { };
+	public static Action<int, int> OnHealthChanged = delegate { };
 
 	public int HealthRegenerationRate = 5;
-
-	public float HealthRatio => Health / (float)MaxHealth;
 
 	public static Tower Instance;
 	public List<Turret> Turrets;
@@ -26,7 +24,8 @@ public class Tower : Target
 		base.Awake();
 
 		Instance = this;
-		OnHealthRatioChanged(HealthRatio);
+		OnHealthChanged(Health, MaxHealth);
+		OnDamageTaken += HandleDamageTaken;
 	}
 
 	protected override void Start()
@@ -57,7 +56,7 @@ public class Tower : Target
 			// Increment health, ensuring that it doesn't exceed the maximum
 			Health = Mathf.Min(Health + HealthRegenerationRate, MaxHealth);
 			HealthBar.SetHealth(Health, true);
-			OnHealthRatioChanged(HealthRatio);
+			OnHealthChanged(Health, MaxHealth);
 
 			// You may want to add a callback or event when the health changes, for UI updates or other game logic.
 
@@ -87,12 +86,13 @@ public class Tower : Target
 	void HandleDamageTaken(int damage)
 	{
 		ScoreManager.Instance.DamageTaken += damage;
-		OnHealthRatioChanged(HealthRatio);
+		OnHealthChanged(Health, MaxHealth);
 	}
 
-	void OnEnable() => OnDamageTaken += HandleDamageTaken;
-
-	void OnDestroy() => OnDamageTaken -= HandleDamageTaken;
+	void OnDestroy()
+	{
+		OnDamageTaken -= HandleDamageTaken;
+	}
 
 	public static void ResetGameState() => Instance = null;
 }

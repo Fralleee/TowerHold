@@ -6,21 +6,23 @@ public class ScoreManager : Singleton<ScoreManager>
 	[SerializeField] ScoreUI _scoreUI;
 
 	[Header("Scores")]
-	public float DamageDone = 0; // Done
-	public float DamageTaken = 0; // Done
-	public int EnemiesKilled = 0; // Done
+	public float DamageDone = 0;
+	public float DamageTaken = 0;
+	public int EnemiesKilled = 0;
 
-	public int ResourcesSpent = 0; // Done
-	public int ResourcesEarned = 0; // Done
+	public int ResourcesSpent = 0;
+	public int ResourcesEarned = 0;
 
-	public int Turrets = 0; // Done
-	public int Upgrades = 0; // Done
+	public int Turrets = 0;
+	public int Upgrades = 0;
 
 	protected override void Awake()
 	{
 		base.Awake();
 
 		_scoreUI.gameObject.SetActive(false);
+		Enemy.OnAnyDeath += HandleEnemyDeath;
+		GameController.OnGameEnd += HandleGameEnd;
 	}
 
 	void HandleEnemyDeath(Target enemy) => EnemiesKilled += 1;
@@ -41,12 +43,6 @@ public class ScoreManager : Singleton<ScoreManager>
 	{
 		_scoreUI.gameObject.SetActive(true);
 		_scoreUI.SetScores(GetScoresAsText());
-	}
-
-	void OnEnable()
-	{
-		Enemy.OnAnyDeath += HandleEnemyDeath;
-		GameController.OnGameEnd += HandleGameEnd;
 	}
 
 	protected override void OnDestroy()

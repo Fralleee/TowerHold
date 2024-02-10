@@ -3,9 +3,11 @@ using UnityEngine.UIElements;
 
 public class CustomProgressBar : VisualElement
 {
-	readonly VisualElement _progressBar;
-	readonly VisualElement _progressBarContainer;
-	readonly VisualElement _progressBarChange;
+	readonly VisualElement _container;
+	readonly VisualElement _progress;
+	readonly VisualElement _change;
+
+	readonly Label _label;
 
 	public new class UxmlFactory : UxmlFactory<CustomProgressBar, UxmlTraits> { }
 
@@ -24,7 +26,7 @@ public class CustomProgressBar : VisualElement
 	{
 		set
 		{
-			_progressBarChange.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
+			_change.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
 		}
 	}
 
@@ -36,8 +38,15 @@ public class CustomProgressBar : VisualElement
 		{
 			_value = Mathf.Clamp01(value);
 			var widthPercentage = _value * 100;
-			_progressBar.style.width = new StyleLength(Length.Percent(widthPercentage));
-			_progressBarChange.style.width = new StyleLength(Length.Percent(widthPercentage));
+			_progress.style.width = new StyleLength(Length.Percent(widthPercentage));
+			_change.style.width = new StyleLength(Length.Percent(widthPercentage));
+		}
+	}
+	public (int, int) MinMaxValue
+	{
+		set
+		{
+			_label.text = $"{value.Item1} / {value.Item2}";
 		}
 	}
 
@@ -45,16 +54,20 @@ public class CustomProgressBar : VisualElement
 	{
 		AddToClassList("ProgressBar");
 
-		_progressBarContainer = new VisualElement();
-		_progressBarContainer.AddToClassList("ProgressBar__container");
-		Add(_progressBarContainer);
+		_container = new VisualElement();
+		_container.AddToClassList("ProgressBar__container");
+		Add(_container);
 
-		_progressBarChange = new VisualElement();
-		_progressBarChange.AddToClassList("ProgressBar__progress-change");
-		_progressBarContainer.Add(_progressBarChange);
+		_change = new VisualElement();
+		_change.AddToClassList("ProgressBar__progress-change");
+		_container.Add(_change);
 
-		_progressBar = new VisualElement();
-		_progressBar.AddToClassList("ProgressBar__progress");
-		_progressBarContainer.Add(_progressBar);
+		_progress = new VisualElement();
+		_progress.AddToClassList("ProgressBar__progress");
+		_container.Add(_progress);
+
+		_label = new Label();
+		_label.AddToClassList("ProgressBar__label");
+		_container.Add(_label);
 	}
 }

@@ -53,16 +53,16 @@ VisualElement#Progress.active {
 }
 
 #HealthBar .ProgressBar__progress {
-	background-color: #1ca30d;
+	background-color: #77B032;
 }
 
 #LevelBar .ProgressBar__progress {
 	transition: all 250ms ease-out;
-	background-color: #ea580c;
+	background-color: #C64283;
 }
 
 #LevelBar.active .ProgressBar__progress {
-	background-color: #2563eb;
+	background-color: #479DC9;
 }
 
 Button#ToggleButton {
@@ -143,23 +143,4 @@ Button#ToggleButton:enabled:hover,Button#RefreshButton:enabled:hover, Button#Loc
 }
 Button#ToggleButton:enabled:active,Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
 	scale: 0.9;
-}
-
-Label.Tooltip {
-    display: none;
-    position: absolute;
-	bottom: 80px;
-	left: -20px;
-    padding: 10px;
-	min-width: 100px;
-	height: 32px;
-	color: black;
-	-unity-font-style: bold;
-    background-color: rgba(255,255,255,.85);
-	border-color: #444;
-    border-radius: 5px;
-}
-
-Button:enabled:hover > Label.Tooltip {
-	display: flex;
 }

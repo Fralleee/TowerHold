@@ -8,4 +8,5 @@
         <ui:Instance template="Shop" />
         <ui:Instance template="Vitals" />
     </ui:VisualElement>
+	<ui:Label text="" name="ToolTipLabel" />
 </ui:UXML>
