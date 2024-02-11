@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopType: 6
   Image: {fileID: 21300000, guid: 8f710f6cdeb2dda41a58d50ebe95fa94, type: 3}
-  Rarity: 3
+  RarityType: 3
   Category: 3
   _baseDamage: 25
   _attackRange: 45

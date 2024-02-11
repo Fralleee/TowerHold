@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShopType: 2
   Image: {fileID: 21300000, guid: e36bcf9506b607b4f908fbfddd7b59e8, type: 3}
-  Rarity: 0
+  RarityType: 1
   Category: 0
   HealthRegenerationIncrease: 10
