@@ -66,6 +66,14 @@ public class CameraController : Controller
 		_cameraStartLocalPosition = _cameraTransform.localPosition;
 	}
 
+	void FixedUpdate()
+	{
+		if (Physics.Raycast(_mainCam.ScreenPointToRay(MousePosition), out var hit, 1000, LayerMask.GetMask("Ground")))
+		{
+			Debug.Log(hit.distance);
+		}
+	}
+
 	void LateUpdate()
 	{
 		if (_isMouseMoving)
