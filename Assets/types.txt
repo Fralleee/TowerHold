@@ -1,5 +1,0 @@
-Normal (bullet, sniper, rocket, acid)
-Siege (stone, grenade, missile, nuke)
-Technology (laser, antimatter, proton, black hole)
-Arcane (magic arrow, ice lance, fireball, lightning)
-Void (bone, plasma, black hole, antimatter)

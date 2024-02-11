@@ -14,7 +14,7 @@ VisualElement#Inventory {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-image: url('project://database/Assets/Art/inventory.psd?fileID=21300000&guid=256c0745488cdb743bc2fd79db2bb861&type=3#inventory');
+    background-image: url('../../Art/Textures/inventory.psd');
 	translate: 0 225px;
 	scale: 0.5;
     transition: all 250ms ease-out-back;

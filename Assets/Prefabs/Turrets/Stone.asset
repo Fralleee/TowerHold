@@ -12,20 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
+  ShopType: 4
   Image: {fileID: 21300000, guid: 5269b35c99326c84abd6419564a3281f, type: 3}
-  Cost: 100
-  MinLevel: 0
+  Rarity: 4
   Category: 1
-  ProjectilePrefab: {fileID: -2343517627577055232, guid: 7f31285d8aa91b74d8597ac26e4af1e2,
-    type: 3}
-  BaseDamage: 40
-  AttackRange: 50
-  TimeBetweenAttacks: 1
-  TimeBetweenFindTarget: 1
+  _baseDamage: 10
+  _attackRange: 2
+  _timeBetweenAttacks: 1
+  _timeBetweenFindTarget: 1
+  _projectilePrefab: {fileID: 0}
   _projectileSettings:
     Speed: 30
-    RotateTowardsTarget: 1
-    IsSpinning: 0
-    SpinAxis: {x: 0, y: 1, z: 0}
-    SpinSpeed: 360
-    UseGravity: 1
+    UseParabolicArc: 0
+    MaxArcHeight: 5
+  _attackSound: {fileID: 0}
+  _audioSettings: {fileID: 0}

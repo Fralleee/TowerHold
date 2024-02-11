@@ -61,4 +61,17 @@ public static class Rarity
 
 		return RarityType.Common; // Default return in case no rarity is selected
 	}
+
+	public static string AsColorClass(RarityType rarity)
+	{
+		return rarity switch
+		{
+			RarityType.Common => "gray",
+			RarityType.Uncommon => "green",
+			RarityType.Rare => "blue",
+			RarityType.Epic => "purple",
+			RarityType.Legendary => "orange",
+			_ => "red",
+		};
+	}
 }

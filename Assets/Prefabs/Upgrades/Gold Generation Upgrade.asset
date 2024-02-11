@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552ab3ba8f1152648bedf74114a81086, type: 3}
   m_Name: Gold Generation Upgrade
   m_EditorClassIdentifier: 
-  ItemName: Income
-  Image: {fileID: 21300000, guid: b4ee288a573349947b5932afd6f13eef, type: 3}
+  ShopType: 1
+  Image: {fileID: 21300000, guid: 2ace353d57a2ece43928ffda00515997, type: 3}
+  Rarity: 1
   Category: 0
-  Cost: 100
-  MinLevel: 0
-  GoldGenerationIncrease: 10
+  ResourceGenerationIncrease: 10

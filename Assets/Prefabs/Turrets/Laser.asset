@@ -12,21 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
   m_Name: Laser
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: bb2511573b6c5ff48b2bd0ed3840ea8a, type: 3}
-  Cost: 100
-  MinLevel: 0
   ShopType: 5
+  Image: {fileID: 21300000, guid: bb2511573b6c5ff48b2bd0ed3840ea8a, type: 3}
+  Rarity: 2
   Category: 2
-  ProjectilePrefab: {fileID: -3391340143233232684, guid: 946306c0f87529646aee695f8697a111,
-    type: 3}
-  BaseDamage: 40
-  AttackRange: 50
-  TimeBetweenAttacks: 1
-  TimeBetweenFindTarget: 1
+  _baseDamage: 10
+  _attackRange: 2
+  _timeBetweenAttacks: 1
+  _timeBetweenFindTarget: 1
+  _projectilePrefab: {fileID: 0}
   _projectileSettings:
     Speed: 60
-    IsSpinning: 0
-    SpinAxis: {x: 0, y: 1, z: 0}
-    SpinSpeed: 360
     UseParabolicArc: 0
     MaxArcHeight: 5
+  _attackSound: {fileID: 0}
+  _audioSettings: {fileID: 0}
