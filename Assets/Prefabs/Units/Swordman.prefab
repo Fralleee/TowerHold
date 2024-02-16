@@ -232,7 +232,7 @@ MonoBehaviour:
   _attackType: 0
   _baseDamage: 10
   _attacksPerSecond: 1
-  _attackRange: 4
+  _attackRange: 6
   _projectilePrefab: {fileID: 0}
   _attackOrigin: {fileID: 0}
   _projectileSettings:

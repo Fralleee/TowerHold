@@ -4,14 +4,16 @@
     <Style src="project://database/Assets/UI%20Toolkit/UI/Shop.uss?fileID=7433441132597879392&amp;guid=2f31f636d331e644b944c699b4ed521c&amp;type=3#Shop" />
     <ui:VisualElement name="ShopContainer">
 		<ItemInformation name="ItemInformation" />
-        <ui:Button name="ToggleButton" class="ToggleButton active red" tooltip="Toogle shop">
-            <ui:Label text="T" class="Shortkey" />
-        </ui:Button>
-        <ui:VisualElement name="Progress" class="active">
+		<ui:VisualElement name="GameInfo">
+			<ui:Label name="LevelLabel" text="Level: 0" />
+			<ui:Label name="GoldLabel" text="Gold: 0" />
+			<ui:Label name="IncomeLabel" text="Income: 0" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Progress">
 			<CustomProgressBar value="1" tooltip="Health" name="HealthBar" />
 			<CustomProgressBar value="1" tooltip="Time left on level" name="LevelBar" />
         </ui:VisualElement>
-        <ui:VisualElement name="Inventory" class="active">
+        <ui:VisualElement name="Inventory">
             <ui:Button name="RefreshButton" class="red" tooltip="Refresh items">
                 <ui:Label text="D" class="Shortkey" />
             </ui:Button>

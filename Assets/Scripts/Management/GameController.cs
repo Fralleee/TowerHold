@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class GameController : Singleton<GameController>
 {
 	public static Action OnGameStart = delegate { };
-	public static Action OnLevelChanged = delegate { };
+	public static Action<int> OnLevelChanged = delegate { };
 	public static Action OnGameEnd = delegate { };
 
 	[HideInInspector] public RandomGenerator RandomGenerator;
@@ -81,7 +81,7 @@ public class GameController : Singleton<GameController>
 		CurrentLevel = level;
 		TimeLeft += TimePerLevel;
 
-		OnLevelChanged();
+		OnLevelChanged(CurrentLevel);
 	}
 
 	void StartGame()

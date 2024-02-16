@@ -203,7 +203,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		GizmosExtras.Draw2dCircle(transform.position, _maxRadius);
 	}
 
-	void OnLevelChanged()
+	void OnLevelChanged(int level)
 	{
 		InitializeForLevel();
 	}

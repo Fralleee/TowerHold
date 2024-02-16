@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -10,7 +9,6 @@ public class ShopUI : Controller
 {
 	[SerializeField] ShopInventory _inventory;
 
-	Button _toggleButton;
 	Button _refreshButton;
 	Button _lockButton;
 
@@ -20,12 +18,15 @@ public class ShopUI : Controller
 	VisualElement _progressContainer;
 	VisualElement _inventoryContainer;
 
+	Label _levelLabel;
+	Label _goldLabel;
+	Label _incomeLabel;
+
 	ItemInformation _itemInformation;
 
 	CustomProgressBar _healthBar;
 	CustomProgressBar _levelBar;
 
-	bool _showInventory = true;
 	bool _lockInventory;
 
 	int _refreshCost = 5;
@@ -50,9 +51,12 @@ public class ShopUI : Controller
 
 		var uiDocument = GetComponent<UIDocument>();
 
-		_toggleButton = uiDocument.rootVisualElement.Q<Button>("ToggleButton");
 		_refreshButton = uiDocument.rootVisualElement.Q<Button>("RefreshButton");
 		_lockButton = uiDocument.rootVisualElement.Q<Button>("LockButton");
+
+		_levelLabel = uiDocument.rootVisualElement.Q<Label>("LevelLabel");
+		_goldLabel = uiDocument.rootVisualElement.Q<Label>("GoldLabel");
+		_incomeLabel = uiDocument.rootVisualElement.Q<Label>("IncomeLabel");
 
 		_itemInformation = uiDocument.rootVisualElement.Q<ItemInformation>("ItemInformation");
 
@@ -77,7 +81,6 @@ public class ShopUI : Controller
 
 		_shopItems = new List<ShopItem>();
 
-		_toggleButton.clicked += ToggleShop;
 		_refreshButton.clicked += ManualRefresh;
 		_lockButton.clicked += ToggleLock;
 		_lockButton.SetEnabled(false);
@@ -93,16 +96,16 @@ public class ShopUI : Controller
 			_buttonActions[slot] = action;
 		}
 
-		Controls.Keyboard.ToggleShop.performed += ctx => ButtonClicked(_toggleButton);
 		Controls.Keyboard.RefreshShop.performed += ctx => ButtonClicked(_refreshButton);
 		Controls.Keyboard.LockShop.performed += ctx => ButtonClicked(_lockButton);
 		Controls.Keyboard.PurchaseItem.performed += ctx => PurchaseItemKey(ctx.control.name);
 		SetShortcutLabels();
 
-		GameController.OnLevelChanged += RefreshShop;
+		GameController.OnLevelChanged += OnLevelChanged;
 		GameController.OnGameStart += OnGameStart;
 		Tower.OnHealthChanged += OnHealthChanged;
-
+		ResourceManager.OnResourceChange += OnResourceChanged;
+		ResourceManager.OnIncomeChange += OnIncomeChanged;
 	}
 
 	void OnMouseEnter(int index)
@@ -147,6 +150,22 @@ public class ShopUI : Controller
 	{
 		_healthBar.MinMaxValue = (currentHealth, maxHealth);
 		_healthBar.Value = currentHealth / (float)maxHealth;
+	}
+
+	void OnLevelChanged(int level)
+	{
+		_levelLabel.text = $"Level: {level}";
+		RefreshShop();
+	}
+
+	void OnResourceChanged(int gold)
+	{
+		_goldLabel.text = $"Gold: {gold}";
+	}
+
+	void OnIncomeChanged(int income)
+	{
+		_incomeLabel.text = $"Income: {income}";
 	}
 
 	void RefreshShop()
@@ -225,24 +244,6 @@ public class ShopUI : Controller
 		}
 	}
 
-	void ToggleShop()
-	{
-		_showInventory = !_showInventory;
-
-		if (_showInventory)
-		{
-			_progressContainer.AddToClassList("active");
-			_inventoryContainer.AddToClassList("active");
-			_toggleButton.AddToClassList("active");
-		}
-		else
-		{
-			_progressContainer.RemoveFromClassList("active");
-			_inventoryContainer.RemoveFromClassList("active");
-			_toggleButton.RemoveFromClassList("active");
-		}
-	}
-
 	void ToggleLock()
 	{
 		_lockInventory = !_lockInventory;
@@ -264,7 +265,6 @@ public class ShopUI : Controller
 
 	void SetShortcutLabels()
 	{
-		_toggleButton.Q<Label>().text = Controls.Keyboard.ToggleShop.GetBindingDisplayString();
 		_refreshButton.Q<Label>().text = Controls.Keyboard.RefreshShop.GetBindingDisplayString();
 		_lockButton.Q<Label>().text = Controls.Keyboard.LockShop.GetBindingDisplayString();
 
@@ -288,7 +288,6 @@ public class ShopUI : Controller
 
 	void OnDestroy()
 	{
-		_toggleButton.clicked -= ToggleShop;
 		_refreshButton.clicked -= ManualRefresh;
 		_lockButton.clicked -= ToggleLock;
 
@@ -298,13 +297,13 @@ public class ShopUI : Controller
 		}
 		_buttonActions.Clear();
 
-		Controls.Keyboard.ToggleShop.performed -= ctx => ButtonClicked(_toggleButton);
 		Controls.Keyboard.RefreshShop.performed -= ctx => ButtonClicked(_refreshButton);
 		Controls.Keyboard.LockShop.performed -= ctx => ButtonClicked(_lockButton);
 		Controls.Keyboard.PurchaseItem.performed -= ctx => PurchaseItemKey(ctx.control.name);
 
-		GameController.OnLevelChanged -= RefreshShop;
+		GameController.OnLevelChanged -= OnLevelChanged;
 		GameController.OnGameStart -= OnGameStart;
 		Tower.OnHealthChanged -= OnHealthChanged;
+		ResourceManager.OnResourceChange -= OnResourceChanged;
 	}
 }

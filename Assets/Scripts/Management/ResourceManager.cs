@@ -5,10 +5,13 @@ using UnityEngine;
 public class ResourceManager : Singleton<ResourceManager>
 {
 	public static Action<int> OnResourceChange = delegate { };
-	public int Resources = 0;
-	public int IncomeRate = 0;
+	public static Action<int> OnIncomeChange = delegate { };
+
 	public int StartingResources = 500;
-	public float PassiveIncomeRate = 50f;
+	public int StartingIncome = 50;
+
+	public int Resources = 0;
+	public int Income = 0;
 
 	[SerializeField] FloatingText _floatingText;
 
@@ -19,7 +22,8 @@ public class ResourceManager : Singleton<ResourceManager>
 	{
 		_incomeCoroutine = StartCoroutine(ActivateIncomeAfterDelay(GameController.Instance.FreezeTime));
 		_defaultTextSpawnPosition = Tower.Instance.transform.position + (Vector3.up * 6);
-		AddResource(StartingResources);
+		AddResource(StartingResources, _defaultTextSpawnPosition);
+		AddIncome(StartingIncome);
 	}
 
 	IEnumerator ActivateIncomeAfterDelay(float delay)
@@ -33,20 +37,30 @@ public class ResourceManager : Singleton<ResourceManager>
 		while (true)
 		{
 			yield return new WaitForSeconds(1f);
-			AddResource(Mathf.FloorToInt(PassiveIncomeRate + IncomeRate));
+			AddResourceSilent(Mathf.FloorToInt(Income));
 		}
 	}
 
-	public void AddIncome(float amount) => PassiveIncomeRate += amount;
+	public void AddIncome(int amount)
+	{
+		Income += amount;
+		OnIncomeChange(Mathf.FloorToInt(Income));
+	}
 
-	public void AddResource(int amount, Vector3? spawnPosition = null)
+	public void AddResourceSilent(int amount)
+	{
+		Resources += amount;
+		OnResourceChange(Resources);
+		ScoreManager.Instance.ResourcesEarned += amount;
+	}
+
+	public void AddResource(int amount, Vector3 spawnPosition)
 	{
 		Resources += amount;
 		OnResourceChange(Resources);
 		ScoreManager.Instance.ResourcesEarned += amount;
 
-		var position_ = spawnPosition ?? _defaultTextSpawnPosition;
-		_ = _floatingText.Spawn(position_, $"+{amount}");
+		_ = _floatingText.Spawn(spawnPosition, $"+{amount}");
 	}
 
 	public bool SpendResources(int amount)

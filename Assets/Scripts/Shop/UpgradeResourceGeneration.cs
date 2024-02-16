@@ -8,7 +8,7 @@ public class UpgradeResourceGeneration : ResourceShopItem
 
 	public override void OnPurchase()
 	{
-		ResourceManager.Instance.IncomeRate += ResourceGenerationIncrease;
+		ResourceManager.Instance.AddIncome(ResourceGenerationIncrease);
 		ScoreManager.Instance.Upgrades += 1;
 	}
 }

@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 43c564f733b00834c9f8c341224c39a9, type: 3}
-  Cost: 100
-  MinLevel: 0
   ShopType: 3
+  Image: {fileID: 21300000, guid: 43c564f733b00834c9f8c341224c39a9, type: 3}
+  RarityType: 0
   Category: 0
-  _baseDamage: 25
+  _baseDamage: 35
   _attackRange: 45
   _timeBetweenAttacks: 1
   _timeBetweenFindTarget: 1

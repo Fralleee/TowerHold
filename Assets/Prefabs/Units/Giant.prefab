@@ -226,13 +226,13 @@ MonoBehaviour:
   AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   Attackers: 0
   _currentState: 0
-  Value: 25
+  Value: 45
   _deathEffect: {fileID: 1186030354075607, guid: 74a22e399f24c974da3d44b1b4247b28,
     type: 3}
   _attackType: 0
   _baseDamage: 10
   _attacksPerSecond: 0.5
-  _attackRange: 4
+  _attackRange: 6
   _projectilePrefab: {fileID: 0}
   _attackOrigin: {fileID: 0}
   _projectileSettings:

@@ -7,6 +7,13 @@ VisualElement#ShopContainer {
 	align-self: flex-end;
 }
 
+VisualElement#GameInfo {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
 VisualElement#Inventory {
     width: 100%;
     height: 150px;
@@ -15,16 +22,7 @@ VisualElement#Inventory {
     justify-content: center;
     align-items: center;
     background-image: url('../../Art/Textures/inventory.psd');
-	translate: 0 225px;
-	scale: 0.5;
-    transition: all 250ms ease-out-back;
 }
-
-VisualElement#Inventory.active {
-    translate: 0 0;
-	scale: 1;
-}
-
 
 VisualElement#Items {
     display: flex;
@@ -40,12 +38,15 @@ VisualElement#Progress {
     justify-content: space-between;
 	padding: 0 130px;
 	margin-bottom: 8px;
-	translate: 0 185px;
-    transition: all 250ms ease-out-back;
 }
 
-VisualElement#Progress.active {
-    translate: 0 0;
+VisualElement#GameInfo > Label {
+	margin: 12px;
+	background-color: rgba(0,0,0,.9);
+	color: goldenrod;
+	padding: 6px 12px;
+	border-radius: 12px;
+	-unity-font-style: bold;
 }
 
 #HealthBar, #LevelBar {
@@ -63,24 +64,6 @@ VisualElement#Progress.active {
 
 #LevelBar.active .ProgressBar__progress {
 	background-color: #479DC9;
-}
-
-Button#ToggleButton {
-    width: 125px;
-    height: 125px;
-    margin: 0 auto;
-    border-radius: 12px;
-	translate: 0 150px;
-	background-image: url("../../Art/Textures/Icons/shop-open.png");
-	background-size: 100px 100px;
-}
-
-Button#ToggleButton.active {
-	translate: 0 -16px;
-    width: 75px;
-    height: 75px;
-	background-image: url("../../Art/Textures/Icons/shop-close.png");
-	background-size: 50px 50px;
 }
 
 Button#RefreshButton, Button#LockButton {
@@ -133,14 +116,14 @@ Label.Shortkey {
 	background-color: rgba(50,50,50,.95);
 }
 
-Button#ToggleButton > Label.Shortkey,Button#RefreshButton > Label.Shortkey, Button#LockButton > Label.Shortkey {
+Button#RefreshButton > Label.Shortkey, Button#LockButton > Label.Shortkey {
 	bottom: -8px;
 	left: -8px;
 }
 
-Button#ToggleButton:enabled:hover,Button#RefreshButton:enabled:hover, Button#LockButton:enabled:hover {
+Button#RefreshButton:enabled:hover, Button#LockButton:enabled:hover {
 	scale: 1.1;
 }
-Button#ToggleButton:enabled:active,Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
+Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
 	scale: 0.9;
 }
