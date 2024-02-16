@@ -59,6 +59,18 @@ public class ItemInformation : VisualElement
 		Add(_rangeLabel);
 	}
 
+	public void UpdateItemInformation(string name, int cost, string type) {
+		_nameLabel.text = name;
+		_costLabel.text = cost.ToString();
+		_typeLabel.text = type;
+
+		_typeLabel.style.display = DisplayStyle.None;
+		_damageLabel.style.display = DisplayStyle.None;
+		_dpsLabel.style.display = DisplayStyle.None;
+		_attackCooldownLabel.style.display = DisplayStyle.None;
+		_rangeLabel.style.display = DisplayStyle.None;
+	}
+
 	public void UpdateItemInformation(ShopItem item)
 	{
 		_nameLabel.text = item.name;
