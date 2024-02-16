@@ -83,4 +83,10 @@ public class Turret : DamageShopItem
 			Debug.LogWarning("EnemyAttack: No audio source or attack sound assigned to enemy.");
 		}
 	}
+
+    public TooltipData Tooltip() {
+		var tooltip = new TurretTooltipData();
+		tooltip.UpdateInformation(this);
+		return tooltip;
+	}
 }

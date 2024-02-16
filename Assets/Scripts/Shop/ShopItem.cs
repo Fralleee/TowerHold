@@ -74,5 +74,7 @@ public class ShopItem : ScriptableObject
 		return null;  // Return null if there are no items at all
 	}
 
+    public abstract TooltipData Tooltip();
+
 	public virtual void OnPurchase() => throw new NotImplementedException();
 }
