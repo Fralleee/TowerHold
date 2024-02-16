@@ -993,10 +993,10 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.7921569
     - Name: 
       Entry: 4
-      Data: 0.921568632
+      Data: 0.5411765
     - Name: 
       Entry: 4
       Data: 0.0156862754
@@ -1036,13 +1036,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.5
+      Data: 0.4433962
     - Name: 
       Entry: 4
-      Data: 0.5
+      Data: 0.224319711
     - Name: 
       Entry: 4
-      Data: 0.5
+      Data: 0
     - Name: 
       Entry: 4
       Data: 1
@@ -1063,13 +1063,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.08627451
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 0.396078438
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 0.203921571
     - Name: 
       Entry: 4
       Data: 1
@@ -1133,6 +1133,60 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
+      Data: 0.917647064
+    - Name: 
+      Entry: 4
+      Data: 0.345098048
+    - Name: 
+      Entry: 4
+      Data: 0.0470588244
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.339622617
+    - Name: 
+      Entry: 4
+      Data: 0.339622617
+    - Name: 
+      Entry: 4
+      Data: 0.339622617
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
       Data: 0.0509803928
     - Name: 
       Entry: 4
@@ -1154,73 +1208,19 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 7
-      Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 4
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 2
-    - Name: $v
-      Entry: 7
-      Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 4
-      Data: 1
-    - Name: 
-      Entry: 4
-      Data: 1
-    - Name: 
-      Entry: 4
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
       Data: 4
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.5764706
     - Name: 
       Entry: 4
-      Data: 0
+      Data: 0.2
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.917647064
     - Name: 
       Entry: 4
       Data: 1
@@ -1886,11 +1886,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FreezeTimeLeft: 2
+  FreezeTimeLeft: 0
   TimeLeft: 0
   GameHasStarted: 0
   GameHasEnded: 0
-  FreezeTime: 2
+  FreezeTime: 0
   TimePerLevel: 30
   StartLevel: 1
   CurrentLevel: 1
@@ -1910,8 +1910,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resources: 0
   IncomeRate: 0
-  StartingResources: 500
+  StartingResources: 5000
   PassiveIncomeRate: 50
+  _floatingText: {fileID: 6394366105475633179, guid: 2b0dab58c0313a24792d5982a77bd500,
+    type: 3}
 --- !u!114 &3837510598274050313
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,11 +10,15 @@ public class ResourceManager : Singleton<ResourceManager>
 	public int StartingResources = 500;
 	public float PassiveIncomeRate = 50f;
 
+	[SerializeField] FloatingText _floatingText;
+
 	Coroutine _incomeCoroutine;
+	Vector3 _defaultTextSpawnPosition;
 
 	void Start()
 	{
 		_incomeCoroutine = StartCoroutine(ActivateIncomeAfterDelay(GameController.Instance.FreezeTime));
+		_defaultTextSpawnPosition = Tower.Instance.transform.position + (Vector3.up * 6);
 		AddResource(StartingResources);
 	}
 
@@ -35,11 +39,14 @@ public class ResourceManager : Singleton<ResourceManager>
 
 	public void AddIncome(float amount) => PassiveIncomeRate += amount;
 
-	public void AddResource(int amount)
+	public void AddResource(int amount, Vector3? spawnPosition = null)
 	{
 		Resources += amount;
 		OnResourceChange(Resources);
 		ScoreManager.Instance.ResourcesEarned += amount;
+
+		var position_ = spawnPosition ?? _defaultTextSpawnPosition;
+		_ = _floatingText.Spawn(position_, $"+{amount}");
 	}
 
 	public bool SpendResources(int amount)

@@ -189,7 +189,7 @@ public class Enemy : Target
 		StopMovement();
 
 		_ = AllEnemies.Remove(this);
-		ResourceManager.Instance.AddResource(Value);
+		ResourceManager.Instance.AddResource(Value, target.transform.position + (Vector3.up * 2));
 
 		foreach (Transform child in transform)
 		{
