@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using TMPro;
+using Random = UnityEngine.Random;
 
 public class FloatingText : MonoBehaviour
 {
 	TextMeshPro _textMeshPro;
 
-	public float ScaleUpTime = 0.5f;
-	public float FadeOutTime = 1f;
-	public float Lifetime = 2f;
+	public float ScaleUpTime = 0.07f;
+	public float FadeOutTime = 0.5f;
+	public float Lifetime = 1.5f;
 	public float AnimateDistance = 4f;
+	public bool UseConsistentScale;
 
 	public AnimationCurve FadeInCurve;
-	public AnimationCurve FadeOutCurve;
 
 	static int _sortingOrderCounter = 0;
 
@@ -38,8 +39,7 @@ public class FloatingText : MonoBehaviour
 	{
 		_textMeshPro = GetComponent<TextMeshPro>();
 		_textMeshPro.text = value;
-
-		// Set the sorting order based on the static counter and then increment the counter
+		_textMeshPro.fontSize *= Random.Range(0.9f, 1.1f);
 		_textMeshPro.sortingOrder = _sortingOrderCounter++;
 	}
 
@@ -47,7 +47,9 @@ public class FloatingText : MonoBehaviour
 	{
 		_camera = Camera.main;
 		_initialPosition = transform.localPosition;
-		_targetPosition = _initialPosition + (transform.up * AnimateDistance);
+
+		var randomDirection = new Vector3(Random.Range(-0.75f, 0.75f), 1, Random.Range(-0.75f, 0.75f));
+		_targetPosition = _initialPosition + (randomDirection * AnimateDistance);
 	}
 
 	void Update()
@@ -63,7 +65,15 @@ public class FloatingText : MonoBehaviour
 
 	void LateUpdate()
 	{
-		AdjustScale();
+		if (UseConsistentScale)
+		{
+			AdjustScaleConsistent();
+		}
+		else
+		{
+			AdjustScale();
+		}
+
 		FaceCamera();
 	}
 
@@ -75,37 +85,50 @@ public class FloatingText : MonoBehaviour
 		{
 			_scaleMultiplier = Mathf.Lerp(0, 1, _elapsedTime / ScaleUpTime);
 		}
+		else if (_elapsedTime > (Lifetime - FadeOutTime))
+		{
+			time = _elapsedTime - (Lifetime - FadeOutTime);
+			_scaleMultiplier = Mathf.Lerp(1, 0, time / FadeOutTime);
+		}
 		else
 		{
 			_scaleMultiplier = 1;
 		}
-
-		if (_elapsedTime > Lifetime - FadeOutTime)
-		{
-			_textMeshPro.alpha = FadeOutCurve.Evaluate(time);
-		}
 	}
 
 	// Scale based on camera distance to maintain consistent size
+	void AdjustScaleConsistent()
+	{
+		var distance = Vector3.Distance(transform.position, _camera.transform.position);
+		var scale = _scaleMultiplier * (1 + (distance * 0.1f)) * _baseScale;
+
+		transform.localScale = scale;
+	}
+
+	// Scale based on camera distance
+	// The text will appear larger when closer to the camera
+	// The text will appear smaller when further from the camera
 	void AdjustScale()
 	{
 		var distance = Vector3.Distance(transform.position, _camera.transform.position);
-		transform.localScale = _scaleMultiplier * (1 + (distance * 0.1f)) * _baseScale; // Apply scaling on base scale
+		var scale = _scaleMultiplier * (1 + (distance * 0.1f)) * _baseScale;
+
+		var minDistance = 60f;
+		var maxDistance = 420f;
+		var scaleMultiplier = Mathf.InverseLerp(minDistance, maxDistance, distance);
+		scale *= Mathf.Lerp(1.3f, 0.7f, scaleMultiplier);
+
+		transform.localScale = scale;
 	}
 
 	void FaceCamera()
 	{
 		var toCamera = _camera.transform.position - transform.position;
 		var forward = -toCamera; // Make the text face away from the camera by inverting the direction
-
-		// Keep the text upright by using the global up vector
 		forward.y = 0; // Remove any vertical component to keep the text upright
 
 		var targetRotation = Quaternion.LookRotation(forward, Vector3.up);
-
-		// Preserve the original Z rotation
 		targetRotation.eulerAngles = new Vector3(targetRotation.eulerAngles.x, targetRotation.eulerAngles.y, transform.eulerAngles.z);
-
 		transform.rotation = targetRotation;
 	}
 

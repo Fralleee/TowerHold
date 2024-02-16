@@ -216,7 +216,7 @@ public class ObjectSpawner : MonoBehaviour
 		return transform.position + (new Vector3(randomDirection.x, 0, randomDirection.y) * distance);
 	}
 
-	(bool, Vector3?) IsPositionObstructed(Vector3 position, float minSpacing)
+	(bool isObstructed, Vector3? newPosition) IsPositionObstructed(Vector3 position, float minSpacing)
 	{
 		foreach (var obj in _spawnedObjects)
 		{

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6394366105475633179}
   - component: {fileID: 4366001857021681190}
   - component: {fileID: 4988137651219054798}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FloatingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,9 +51,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleUpTime: 0.07
-  FadeOutTime: 0.5
-  Lifetime: 1.5
+  FadeOutTime: 0.1
+  Lifetime: 1
   AnimateDistance: 4
+  UseConsistentScale: 1
   FadeInCurve:
     serializedVersion: 2
     m_Curve:
@@ -67,46 +68,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.03333333
     - serializedVersion: 3
-      time: 0.33759347
-      value: 0.83276534
-      inSlope: 0.09239387
-      outSlope: 0.09239387
+      time: 0.2
+      value: 0.85
+      inSlope: 0.3120936
+      outSlope: 0.3120936
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.2738215
+      outWeight: 0.23237766
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.035525426
-      outSlope: 0.035525426
+      inSlope: 0.12631232
+      outSlope: 0.12631232
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.27020597
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  FadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.008384705
-      value: 0.9929199
-      inSlope: 3.0784612
-      outSlope: 3.0784612
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.041666657
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 3.0394368
-      outSlope: 3.0394368
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.037499975
+      inWeight: 0.23339868
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -131,7 +108,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4365041663181278532, guid: 1e171bce7ac348c4aa788b33ba00cd8f, type: 2}
+  - {fileID: 2100000, guid: aa0d81b37176eed4a9237fbdb8a993cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -176,15 +153,14 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1e171bce7ac348c4aa788b33ba00cd8f, type: 2}
-  m_sharedMaterial: {fileID: 4365041663181278532, guid: 1e171bce7ac348c4aa788b33ba00cd8f,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: aa0d81b37176eed4a9237fbdb8a993cc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278255591
-  m_fontColor: {r: 0.90465856, g: 1, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -201,8 +177,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.75
-  m_fontSizeBase: 0.75
+  m_fontSize: 1
+  m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
