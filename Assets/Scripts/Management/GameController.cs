@@ -5,40 +5,38 @@ using Random = UnityEngine.Random;
 
 public class GameController : Singleton<GameController>
 {
+	public static GameSettings GameSettings => Instance.Settings;
+
 	public static Action OnGameStart = delegate { };
 	public static Action<int> OnLevelChanged = delegate { };
 	public static Action OnGameEnd = delegate { };
 
 	[HideInInspector] public RandomGenerator RandomGenerator;
+	[HideInInspector] public int CurrentLevel = 1;
 	[HideInInspector] public float FreezeTimeLeft;
 	[HideInInspector] public float TimeLeft;
 	[HideInInspector] public bool GameHasStarted = false;
 	[HideInInspector] public bool GameHasEnded = false;
 
-	public float FreezeTime = 5f;
-	public float TimePerLevel = 10f;
-	public int StartLevel = 1;
-	public int CurrentLevel = 1;
-	public int MaxLevel = 100;
-	public int StartSeed;
+	public GameSettings Settings;
 
 	EnemySpawner _enemySpawner;
 
-	public float LevelProgress => GameHasStarted ? (TimeLeft / TimePerLevel) : (FreezeTimeLeft / FreezeTime);
+	public float LevelProgress => GameHasStarted ? (TimeLeft / Settings.TimePerLevel) : (FreezeTimeLeft / Settings.FreezeTime);
 
 	protected override void Awake()
 	{
 		base.Awake();
 
-		if (StartSeed == 0)
+		if (Settings.StartSeed == 0)
 		{
-			StartSeed = Random.Range(0, int.MaxValue);
+			Settings.StartSeed = Random.Range(0, int.MaxValue);
 		}
 
 		_enemySpawner = GetComponentInChildren<EnemySpawner>();
-		RandomGenerator = new RandomGenerator(StartSeed);
+		RandomGenerator = new RandomGenerator(Settings.StartSeed);
 
-		Debug.Log($"Starting game in {FreezeTime} seconds | Seed: {StartSeed} | Level: {StartLevel} | Map: {NameGeneration.GenerateLevelName(StartSeed)}");
+		Debug.Log($"Starting game in {Settings.FreezeTime} seconds | Seed: {Settings.StartSeed} | Level: {Settings.StartLevel} | Map: {NameGeneration.GenerateLevelName(Settings.StartSeed)}");
 	}
 
 	void Start()
@@ -72,21 +70,21 @@ public class GameController : Singleton<GameController>
 
 	void RunLevel(int level)
 	{
-		if (level > MaxLevel)
+		if (level > Settings.MaxLevel)
 		{
 			EndGame();
 			return;
 		}
 
 		CurrentLevel = level;
-		TimeLeft += TimePerLevel;
+		TimeLeft += Settings.TimePerLevel;
 
 		OnLevelChanged(CurrentLevel);
 	}
 
 	void StartGame()
 	{
-		RunLevel(StartLevel);
+		RunLevel(Settings.StartLevel);
 
 		_enemySpawner.Target = Tower.Instance;
 		_enemySpawner.IsSpawning = true;
@@ -131,7 +129,7 @@ public class GameController : Singleton<GameController>
 
 	void OnValidate()
 	{
-		FreezeTimeLeft = FreezeTime;
+		FreezeTimeLeft = Settings.FreezeTime;
 		TimeLeft = 0;
 	}
 

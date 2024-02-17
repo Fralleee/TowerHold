@@ -19,5 +19,5 @@ MonoBehaviour:
   EndRadius: 53
   MinSpacing: 1
   Intensity: 5
-  CarveNavMesh: 1
+  CarveNavMesh: 0
   NoiseScale: 1

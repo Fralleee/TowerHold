@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ResourceManager : Singleton<ResourceManager>
@@ -7,11 +8,8 @@ public class ResourceManager : Singleton<ResourceManager>
 	public static Action<int> OnResourceChange = delegate { };
 	public static Action<int> OnIncomeChange = delegate { };
 
-	public int StartingResources = 500;
-	public int StartingIncome = 50;
-
-	public int Resources = 0;
-	public int Income = 0;
+	[ReadOnly] public int Resources = 0;
+	[ReadOnly] public int Income = 0;
 
 	[SerializeField] FloatingText _floatingText;
 
@@ -20,10 +18,10 @@ public class ResourceManager : Singleton<ResourceManager>
 
 	void Start()
 	{
-		_incomeCoroutine = StartCoroutine(ActivateIncomeAfterDelay(GameController.Instance.FreezeTime));
+		_incomeCoroutine = StartCoroutine(ActivateIncomeAfterDelay(GameController.GameSettings.FreezeTime));
 		_defaultTextSpawnPosition = Tower.Instance.transform.position + (Vector3.up * 6);
-		AddResource(StartingResources, _defaultTextSpawnPosition);
-		AddIncome(StartingIncome);
+		AddResource(GameController.GameSettings.StartingResources, _defaultTextSpawnPosition);
+		AddIncome(GameController.GameSettings.StartingIncome);
 	}
 
 	IEnumerator ActivateIncomeAfterDelay(float delay)

@@ -25,7 +25,7 @@ public class ObjectSpawner : MonoBehaviour
 
 	void Start()
 	{
-		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 		if (_spawnOnStart && Application.isPlaying)
 		{
 			ClearObjects();
@@ -60,7 +60,7 @@ public class ObjectSpawner : MonoBehaviour
 	[Button]
 	public void ExecuteSpawnProfiles()
 	{
-		_randomGenerator ??= new RandomGenerator(GameController.Instance.StartSeed);
+		_randomGenerator ??= new RandomGenerator(GameController.GameSettings.StartSeed);
 
 		if (!ValidateSettings())
 		{

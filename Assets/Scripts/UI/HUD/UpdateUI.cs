@@ -49,10 +49,10 @@ public class UpdateUI : MonoBehaviour
 	void UpdateLevelProgress()
 	{
 		_levelBar.MinMaxValue = GameController.Instance.GameHasStarted
-		? (Mathf.CeilToInt(GameController.Instance.TimeLeft), Mathf.CeilToInt(GameController.Instance.TimePerLevel))
-		: (Mathf.CeilToInt(GameController.Instance.FreezeTimeLeft), Mathf.CeilToInt(GameController.Instance.FreezeTime));
+		? (Mathf.CeilToInt(GameController.Instance.TimeLeft), Mathf.CeilToInt(GameController.GameSettings.TimePerLevel))
+		: (Mathf.CeilToInt(GameController.Instance.FreezeTimeLeft), Mathf.CeilToInt(GameController.GameSettings.FreezeTime));
 
-		var value = Mathf.Round(GameController.Instance.LevelProgress * GameController.Instance.TimePerLevel) / GameController.Instance.TimePerLevel;
+		var value = Mathf.Round(GameController.Instance.LevelProgress * GameController.GameSettings.TimePerLevel) / GameController.GameSettings.TimePerLevel;
 		_levelBar.Value = value;
 	}
 

@@ -17,7 +17,7 @@ public class MapGenerator : MonoBehaviour
 
 	void Start()
 	{
-		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 		if (_spawnOnStart && Application.isPlaying)
 		{
 			ClearMap();
@@ -40,7 +40,7 @@ public class MapGenerator : MonoBehaviour
 	[Button]
 	public void BuildMap()
 	{
-		_randomGenerator ??= new RandomGenerator(GameController.Instance.StartSeed);
+		_randomGenerator ??= new RandomGenerator(GameController.GameSettings.StartSeed);
 		_meshFilter = GetComponentInChildren<MeshFilter>();
 		_meshCollider = GetComponentInChildren<MeshCollider>();
 

@@ -52,7 +52,7 @@ public class ShopItem : ScriptableObject
 			var randomCategory = availableCategories[randomGenerator.Next(0, availableCategories.Length)];
 			var itemsInCategory = groupedItems[randomCategory];
 
-			var selectedRarity = Rarity.SelectRarityBasedOnLevel(currentLevel, GameController.Instance.MaxLevel, randomGenerator);
+			var selectedRarity = Rarity.SelectRarityBasedOnLevel(currentLevel, GameController.GameSettings.MaxLevel, randomGenerator);
 			var eligibleItems = itemsInCategory.Where(item => item.RarityType == selectedRarity).ToList();
 
 			if (eligibleItems.Count > 0)

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using System.Collections;
 
 public class EnemySpawner : Singleton<EnemySpawner>
 {
@@ -19,9 +21,6 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	[SerializeField] int _maxRadius = 40;
 	[SerializeField] EnemyVariants _enemyVariants;
 	[SerializeField] LevelSpecificSpawns _levelSpecificSpawns;
-
-	[Header("Debug")]
-	[SerializeField] bool _showGizmos;
 
 	float _nextSpawnTime;
 	float _timePerSpawn;
@@ -43,7 +42,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
 	void Start()
 	{
-		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 
 		_nextSpawnTime = Time.time + 0.1f;
 	}
@@ -69,7 +68,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	void InitializeForLevel()
 	{
 		_spawnsPerLevel = _randomGenerator.Next(TotalMinSpawnsPerLevel, TotalMaxSpawnsPerLevel + 1);
-		_timePerSpawn = GameController.Instance.TimePerLevel / _spawnsPerLevel;
+		_timePerSpawn = GameController.GameSettings.TimePerLevel / _spawnsPerLevel;
 		_nextSpawnTime = Time.time;
 		IsSpawning = true;
 		_spawnedWavesCurrentLevel = 0;
@@ -184,10 +183,29 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		return (minPoints, maxPoints);
 	}
 
+
+	IEnumerable<Enemy> GetEnemyTypes()
+	{
+		return _enemyVariants.Enemies;
+	}
+
+	void OnLevelChanged(int level)
+	{
+		InitializeForLevel();
+	}
+
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
 		GameController.OnLevelChanged -= OnLevelChanged;
+	}
+
+	void OnValidate()
+	{
+		if (_enemyVariants.Enemies.Length > 0 && _debugEnemyType == null)
+		{
+			_debugEnemyType = _enemyVariants.Enemies[0];
+		}
 	}
 
 	void OnDrawGizmos()
@@ -203,8 +221,33 @@ public class EnemySpawner : Singleton<EnemySpawner>
 		GizmosExtras.Draw2dCircle(transform.position, _maxRadius);
 	}
 
-	void OnLevelChanged(int level)
+	#region Debug
+	[Header("Debug")]
+	[SerializeField] bool _showGizmos;
+	[FoldoutGroup("Custom Spawn", expanded: false)]
+	[ShowInInspector, LabelText("Number of Enemies"), Range(1, 100)]
+	readonly int _debugSpawnCount = 1;
+
+	[FoldoutGroup("Custom Spawn")]
+	[ShowInInspector, LabelText("Enemy Type"), ValueDropdown(nameof(GetEnemyTypes))]
+	Enemy _debugEnemyType;
+
+
+	[FoldoutGroup("Custom Spawn")]
+	[Button("Spawn Enemies")]
+	void DebugSpawnEnemies()
 	{
-		InitializeForLevel();
+		StartCoroutine(DebugSpawnStaggered(_debugSpawnCount));
 	}
+
+	IEnumerator DebugSpawnStaggered(int count)
+	{
+		for (var i = 0; i < count; i++)
+		{
+			var spawnPosition = GetRandomSpawnPosition();
+			SpawnEnemy(_debugEnemyType.gameObject, spawnPosition);
+			yield return new WaitForSeconds(0.1f);
+		}
+	}
+	#endregion
 }

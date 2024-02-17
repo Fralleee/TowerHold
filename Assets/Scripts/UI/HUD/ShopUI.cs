@@ -34,7 +34,7 @@ public class ShopUI : Controller
 	{
 		base.Awake();
 
-		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
+		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 		_shopItems = new List<ShopItem>();
 
 		var uiDocument = GetComponent<UIDocument>();

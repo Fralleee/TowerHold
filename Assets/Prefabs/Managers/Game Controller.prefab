@@ -1886,16 +1886,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FreezeTimeLeft: 0
+  CurrentLevel: 1
+  FreezeTimeLeft: 1
   TimeLeft: 0
   GameHasStarted: 0
   GameHasEnded: 0
-  FreezeTime: 0
-  TimePerLevel: 20
-  StartLevel: 1
-  CurrentLevel: 1
-  MaxLevel: 100
-  StartSeed: 32
+  Settings: {fileID: 11400000, guid: a7f3c7ead1c2f3e4898754fd7d4c45a7, type: 2}
 --- !u!114 &5997500516575327268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,8 +1904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde69a74bf27149478d4eb00329a1772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingResources: 5000
-  StartingIncome: 50
   Resources: 0
   Income: 0
   _floatingText: {fileID: 6394366105475633179, guid: 2b0dab58c0313a24792d5982a77bd500,
