@@ -1,51 +1,64 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using System;
 using System.Collections.Generic;
 
 public class TooltipController : MonoBehaviour
 {
-    private VisualElement hoverMenu;
-    private Label tooltipContent;
+	VisualElement _tooltip;
+	VisualElement _activeElement;
 
-    // Store references to elements and their callbacks for cleanup
-    private List<(VisualElement element, EventCallback<MouseEnterEvent> enterCallback, EventCallback<MouseLeaveEvent> leaveCallback)> eventRegistrations = new List<(VisualElement, EventCallback<MouseEnterEvent>, EventCallback<MouseLeaveEvent>)>();
+	readonly List<(VisualElement element, EventCallback<MouseEnterEvent> enterCallback, EventCallback<MouseLeaveEvent> leaveCallback)> _eventRegistrations = new List<(VisualElement, EventCallback<MouseEnterEvent>, EventCallback<MouseLeaveEvent>)>();
 
-    void Awake()
-    {
-        var uiDocument = GetComponent<UIDocument>();
-        hoverMenu = uiDocument.rootVisualElement.Q<VisualElement>("HoverMenu");
-        tooltipContent = hoverMenu.Q<Label>("TooltipContent");
-    }
+	readonly Dictionary<VisualElement, TooltipContent> _tooltipContents = new Dictionary<VisualElement, TooltipContent>();
 
-    public void SetupHoverMenuForElement(VisualElement targetElement, string tooltipText)
-    {
-        EventCallback<MouseEnterEvent> enterCallback = evt =>
-        {
-            tooltipContent.text = tooltipText;
-            hoverMenu.style.display = DisplayStyle.Flex;
-            hoverMenu.style.left = evt.localMousePosition.x + 10;
-            hoverMenu.style.top = evt.localMousePosition.y + 10;
-        };
+	void Awake()
+	{
+		var uiDocument = GetComponent<UIDocument>();
+		_tooltip = uiDocument.rootVisualElement.Q<Tooltip>();
+	}
 
-        EventCallback<MouseLeaveEvent> leaveCallback = evt => { hoverMenu.style.display = DisplayStyle.None; };
+	public void RegisterTooltip(VisualElement element, TooltipContent tooltipContent)
+	{
+		_tooltipContents[element] = tooltipContent;
+		var enterCallback = new EventCallback<MouseEnterEvent>(evt => ShowTooltip(element));
+		var leaveCallback = new EventCallback<MouseLeaveEvent>(evt => HideTooltip());
 
-        targetElement.RegisterCallback(enterCallback);
-        targetElement.RegisterCallback(leaveCallback);
+		element.RegisterCallback(enterCallback);
+		element.RegisterCallback(leaveCallback);
 
-        // Store the callbacks for cleanup
-        eventRegistrations.Add((targetElement, enterCallback, leaveCallback));
-    }
+		_eventRegistrations.Add((element, enterCallback, leaveCallback));
+	}
 
-    // Method for dynamic content remains similar, not shown for brevity
+	public void UpdateTooltip(VisualElement element, TooltipContent newContent)
+	{
+		_tooltipContents[element] = newContent;
+		if (_activeElement == element)
+		{
+			ShowTooltip(element);
+		}
+	}
 
-    void OnDestroy()
-    {
-        // Unregister callbacks
-        foreach (var registration in eventRegistrations)
-        {
-            registration.element.UnregisterCallback(registration.enterCallback);
-            registration.element.UnregisterCallback(registration.leaveCallback);
-        }
-    }
+	void ShowTooltip(VisualElement element)
+	{
+		_activeElement = element;
+		var tooltipContent = _tooltipContents[element];
+		_tooltip.Clear();
+		_tooltip.AddToClassList("active");
+		_tooltip.Add(tooltipContent);
+	}
+
+	void HideTooltip()
+	{
+		_activeElement = null;
+		_tooltip.RemoveFromClassList("active");
+	}
+
+	void OnDestroy()
+	{
+		foreach (var (element, enterCallback, leaveCallback) in _eventRegistrations)
+		{
+			element.UnregisterCallback(enterCallback);
+			element.UnregisterCallback(leaveCallback);
+		}
+	}
 }

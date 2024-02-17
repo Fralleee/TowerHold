@@ -5,5 +5,4 @@
     <ui:VisualElement name="Root" style="background-color: rgba(84, 255, 0, 0);">
         <ui:Instance template="Shop" />
     </ui:VisualElement>
-	<ui:Label text="" name="ToolTipLabel" />
 </ui:UXML>

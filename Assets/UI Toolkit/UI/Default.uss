@@ -112,7 +112,7 @@ VisualElement.divider {
 	margin: 5px 0;
 }
 
-ItemInformation {
+Tooltip {
 	width: 480px;
 	border-width: 2px;
 	border-color: #444;
@@ -125,17 +125,17 @@ ItemInformation {
     transition: all 250ms 50ms ease-out;
 }
 
-ItemInformation.active {
+Tooltip.active {
 	scale: 1;
 	opacity: 1;
     transition: all 250ms 0 ease-out;
 }
 
-ItemInformation Label {
+Tooltip Label {
 	margin: 0;
 	padding: 0;
 }
 
-ItemInformation Label.name {
+Tooltip Label.name {
 	-unity-font-style: bold;
 }

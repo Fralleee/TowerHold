@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 552ab3ba8f1152648bedf74114a81086, type: 3}
-  m_Name: Gold Generation Upgrade
+  m_Name: Gold Generation Upgrade Large
   m_EditorClassIdentifier: 
   ShopType: 1
   Image: {fileID: 21300000, guid: 2ace353d57a2ece43928ffda00515997, type: 3}
-  RarityType: 0
+  RarityType: 1
   Category: 0
-  ResourceGenerationIncrease: 5
+  ResourceGenerationIncrease: 25

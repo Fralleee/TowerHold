@@ -573,8 +573,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 60
+  MaxDistance: 420
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -669,8 +669,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 60
+  MaxDistance: 420
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1891,7 +1891,7 @@ MonoBehaviour:
   GameHasStarted: 0
   GameHasEnded: 0
   FreezeTime: 0
-  TimePerLevel: 30
+  TimePerLevel: 20
   StartLevel: 1
   CurrentLevel: 1
   MaxLevel: 100
@@ -1908,10 +1908,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde69a74bf27149478d4eb00329a1772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Resources: 0
-  IncomeRate: 0
   StartingResources: 5000
-  PassiveIncomeRate: 50
+  StartingIncome: 50
+  Resources: 0
+  Income: 0
   _floatingText: {fileID: 6394366105475633179, guid: 2b0dab58c0313a24792d5982a77bd500,
     type: 3}
 --- !u!114 &3837510598274050313

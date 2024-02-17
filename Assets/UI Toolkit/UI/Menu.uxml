@@ -11,5 +11,4 @@
             <ui:Button name="QuitButton" text="Quit" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:Label name="ToolTipLabel" />
 </ui:UXML>

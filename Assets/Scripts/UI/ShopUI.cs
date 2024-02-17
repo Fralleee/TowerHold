@@ -9,6 +9,10 @@ public class ShopUI : Controller
 {
 	[SerializeField] ShopInventory _inventory;
 
+	Tooltip _tooltip;
+	TooltipController _tooltipController;
+	TooltipContent _refreshTooltipContent;
+
 	Button _refreshButton;
 	Button _lockButton;
 
@@ -19,10 +23,8 @@ public class ShopUI : Controller
 	VisualElement _inventoryContainer;
 
 	Label _levelLabel;
-	Label _goldLabel;
+	Label _coinLabel;
 	Label _incomeLabel;
-
-	ItemInformation _itemInformation;
 
 	CustomProgressBar _healthBar;
 	CustomProgressBar _levelBar;
@@ -32,16 +34,11 @@ public class ShopUI : Controller
 	int _refreshCost = 5;
 	readonly int _refreshCostIncrement = 1;
 	readonly int _shopTypeCount = Enum.GetValues(typeof(ShopType)).Length;
-	int? _currentlyHoveredItemIndex = null;
-
 
 	RandomGenerator _randomGenerator;
 	readonly WaitForSeconds _nextFrame = new WaitForSeconds(0.1f);
 
 	readonly Dictionary<Button, Action> _buttonActions = new Dictionary<Button, Action>();
-
-	readonly List<(VisualElement element, EventCallback<MouseEnterEvent> enterCallback, EventCallback<MouseLeaveEvent> leaveCallback)> _informationTargets = new List<(VisualElement, EventCallback<MouseEnterEvent>, EventCallback<MouseLeaveEvent>)>();
-
 
 	protected override void Awake()
 	{
@@ -50,15 +47,16 @@ public class ShopUI : Controller
 		_randomGenerator = new RandomGenerator(GameController.Instance.StartSeed);
 
 		var uiDocument = GetComponent<UIDocument>();
+		_tooltipController = GetComponent<TooltipController>();
 
 		_refreshButton = uiDocument.rootVisualElement.Q<Button>("RefreshButton");
 		_lockButton = uiDocument.rootVisualElement.Q<Button>("LockButton");
 
 		_levelLabel = uiDocument.rootVisualElement.Q<Label>("LevelLabel");
-		_goldLabel = uiDocument.rootVisualElement.Q<Label>("GoldLabel");
+		_coinLabel = uiDocument.rootVisualElement.Q<Label>("CoinLabel");
 		_incomeLabel = uiDocument.rootVisualElement.Q<Label>("IncomeLabel");
 
-		_itemInformation = uiDocument.rootVisualElement.Q<ItemInformation>("ItemInformation");
+		_tooltip = uiDocument.rootVisualElement.Q<Tooltip>();
 
 		_progressContainer = uiDocument.rootVisualElement.Q("Progress");
 		_healthBar = _progressContainer.Q<CustomProgressBar>("HealthBar");
@@ -66,18 +64,11 @@ public class ShopUI : Controller
 
 		_inventoryContainer = uiDocument.rootVisualElement.Q("Inventory");
 		_shopSlots = _inventoryContainer.Query<Button>(className: "ShopItem").ToList();
-		for (var i = 0; i < _shopSlots.Count; i++)
-		{
-			var index = i;
-			var slot = _shopSlots[index];
-			EventCallback<MouseEnterEvent> enterCallback = e => OnMouseEnter(index);
-			EventCallback<MouseLeaveEvent> leaveCallback = e => OnMouseLeave();
-			slot.RegisterCallback(enterCallback);
-			slot.RegisterCallback(leaveCallback);
 
-			// Store the slot and its callbacks for later removal
-			_informationTargets.Add((slot, enterCallback, leaveCallback));
-		}
+		_refreshTooltipContent = new TooltipContent("Refresh", $"Cost: {_refreshCost}", "Refresh the shop to get new items");
+
+		_tooltipController.RegisterTooltip(_refreshButton, _refreshTooltipContent);
+
 
 		_shopItems = new List<ShopItem>();
 
@@ -96,6 +87,13 @@ public class ShopUI : Controller
 			_buttonActions[slot] = action;
 		}
 
+		for (var i = 0; i < _shopSlots.Count; i++)
+		{
+			var index = i;
+			var slot = _shopSlots[index];
+			_tooltipController.RegisterTooltip(slot, new TooltipContent());
+		}
+
 		Controls.Keyboard.RefreshShop.performed += ctx => ButtonClicked(_refreshButton);
 		Controls.Keyboard.LockShop.performed += ctx => ButtonClicked(_lockButton);
 		Controls.Keyboard.PurchaseItem.performed += ctx => PurchaseItemKey(ctx.control.name);
@@ -108,19 +106,10 @@ public class ShopUI : Controller
 		ResourceManager.OnIncomeChange += OnIncomeChanged;
 	}
 
-	void OnMouseEnter(int index)
+	TooltipContent GetSlotItem(int index)
 	{
-		_currentlyHoveredItemIndex = index;
-		_itemInformation.AddToClassList("active");
-
 		var item = _shopItems[index];
-		_itemInformation.UpdateItemInformation(item);
-	}
-
-	void OnMouseLeave()
-	{
-		_currentlyHoveredItemIndex = null;
-		_itemInformation.RemoveFromClassList("active");
+		return item.Tooltip();
 	}
 
 	void Start()
@@ -158,9 +147,9 @@ public class ShopUI : Controller
 		RefreshShop();
 	}
 
-	void OnResourceChanged(int gold)
+	void OnResourceChanged(int coin)
 	{
-		_goldLabel.text = $"Gold: {gold}";
+		_coinLabel.text = $"Coin: {coin}";
 	}
 
 	void OnIncomeChanged(int income)
@@ -185,12 +174,13 @@ public class ShopUI : Controller
 			_shopItems.Add(item);
 		}
 
-		_ = StartCoroutine(PerformRefresh());
-		if (_currentlyHoveredItemIndex.HasValue && _currentlyHoveredItemIndex.Value < _shopItems.Count)
+		for (var i = 0; i < _shopSlots.Count; i++)
 		{
-			var item = _shopItems[_currentlyHoveredItemIndex.Value];
-			_itemInformation.UpdateItemInformation(item);
+			var item = _shopItems[i];
+			_tooltipController.UpdateTooltip(_shopSlots[i], GetSlotItem(i));
 		}
+
+		_ = StartCoroutine(PerformRefresh());
 	}
 
 	IEnumerator PerformRefresh()
@@ -241,6 +231,7 @@ public class ShopUI : Controller
 		{
 			RefreshShop();
 			_refreshCost += _refreshCostIncrement;
+			_refreshTooltipContent.CostLabel.text = $"Cost: {_refreshCost}";
 		}
 	}
 

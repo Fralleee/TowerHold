@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cd8aff675aa0a43bb35338b8e6b994, type: 3}
   m_Name: SFX Settings
   m_EditorClassIdentifier: 
-  MinDistance: 100
-  MaxDistance: 300
+  MinDistance: 60
+  MaxDistance: 420
   SpatialBlend: 1
   DopplerLevel: 0
   OutputAudioMixerGroup: {fileID: -520496798812680158, guid: 633887cea0f42fa42bebbe9cb94522af,
