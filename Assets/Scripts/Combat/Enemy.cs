@@ -217,11 +217,7 @@ public class Enemy : Target
 		_ = _agent.SetDestination(Tower.Instance.transform.position);
 		DistanceToTower = Vector3.Distance(transform.position, Tower.Instance.transform.position);
 		(CurrentZone, _distanceToNextZone) = EnemyManager.SpatialPartitionManager.UpdateZone(this);
-
-		// Approximate how long it will take for us to reach the next zone
 		_nextDistanceCheck = GetNextDistanceCheckTime();
-
-		// _nextDistanceCheck = GetNextDistanceCheckTime(DistanceToTower);
 		_agent.isStopped = false;
 		_bobbing.StartBobbing();
 	}
@@ -229,7 +225,7 @@ public class Enemy : Target
 	float GetNextDistanceCheckTime()
 	{
 		var timeToNextZone = _distanceToNextZone / _agent.speed;
-		var nextDistanceCheck = Time.time + timeToNextZone;
+		var nextDistanceCheck = Time.time + timeToNextZone + GameController.Instance.RandomGenerator.Variance(_minTimeBetweenDistanceChecks);
 
 		return nextDistanceCheck;
 	}
