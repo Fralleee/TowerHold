@@ -10,6 +10,8 @@ public class Enemy : Target
 	public static Action<Enemy> OnAnyDeath = delegate { };
 	public static List<Enemy> AllEnemies = new List<Enemy>();
 
+	[HideInInspector] public SpatialZone CurrentZone = SpatialZone.OutOfRange;
+	[HideInInspector] public float DistanceToTower = 0;
 	[HideInInspector] public int Attackers = 0;
 	[HideInInspector] public bool HasAttackers => Attackers > 0;
 
@@ -24,7 +26,7 @@ public class Enemy : Target
 	[SerializeField] AttackType _attackType;
 	[SerializeField] float _baseDamage = 10f;
 	[SerializeField] float _attacksPerSecond = 1f;
-	[HideIf("_attackType", AttackType.MELEE), SerializeField] float _attackRange = 4f;
+	[HideIf("_attackType", AttackType.MELEE), SerializeField] AttackRange _attackRange = AttackRange.Melee;
 
 	[Space(10)]
 	[ShowIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField] Projectile _projectilePrefab;
@@ -39,8 +41,11 @@ public class Enemy : Target
 
 	float _lastAttackTime = 0f;
 	float _nextDistanceCheck = 0f;
-	float TimeBetweenAttacks => 1f / _attacksPerSecond;
+	float _distanceToNextZone;
 	readonly float _minTimeBetweenDistanceChecks = 0.5f;
+
+	public float DistanceCoveredBeforeNextCheck => _agent.speed * _minTimeBetweenDistanceChecks;
+	float TimeBetweenAttacks => 1f / _attacksPerSecond;
 
 	protected override void Awake()
 	{
@@ -124,14 +129,15 @@ public class Enemy : Target
 	{
 		if (Time.time >= _nextDistanceCheck)
 		{
-			var distance = Vector3.Distance(transform.position, Tower.Instance.transform.position);
-			if (distance <= _attackRange)
+			DistanceToTower = Vector3.Distance(transform.position, Tower.Instance.transform.position);
+			(CurrentZone, _distanceToNextZone) = EnemyManager.SpatialPartitionManager.UpdateZone(this);
+			if (CurrentZone == _attackRange.ToZone())
 			{
 				ChangeState(EnemyState.Attacking);
 			}
 			else
 			{
-				_nextDistanceCheck = GetNextDistanceCheckTime(distance);
+				_nextDistanceCheck = GetNextDistanceCheckTime();
 			}
 		}
 	}
@@ -209,10 +215,23 @@ public class Enemy : Target
 	public void StartMovement()
 	{
 		_ = _agent.SetDestination(Tower.Instance.transform.position);
-		var distance = Vector2.Distance(transform.position, Tower.Instance.transform.position);
-		_nextDistanceCheck = GetNextDistanceCheckTime(distance);
+		DistanceToTower = Vector3.Distance(transform.position, Tower.Instance.transform.position);
+		(CurrentZone, _distanceToNextZone) = EnemyManager.SpatialPartitionManager.UpdateZone(this);
+
+		// Approximate how long it will take for us to reach the next zone
+		_nextDistanceCheck = GetNextDistanceCheckTime();
+
+		// _nextDistanceCheck = GetNextDistanceCheckTime(DistanceToTower);
 		_agent.isStopped = false;
 		_bobbing.StartBobbing();
+	}
+
+	float GetNextDistanceCheckTime()
+	{
+		var timeToNextZone = _distanceToNextZone / _agent.speed;
+		var nextDistanceCheck = Time.time + timeToNextZone;
+
+		return nextDistanceCheck;
 	}
 
 	public void StopMovement()
@@ -243,12 +262,8 @@ public class Enemy : Target
 	{
 		base.Die();
 
+		EnemyManager.SpatialPartitionManager.RemoveEnemy(this);
 		OnAnyDeath(this);
-	}
-
-	float GetNextDistanceCheckTime(float distance)
-	{
-		return Time.time + Mathf.Max((distance - _attackRange) / _agent.speed, _minTimeBetweenDistanceChecks);
 	}
 
 	protected override void OnValidate()
@@ -256,7 +271,7 @@ public class Enemy : Target
 		base.OnValidate();
 		if (_attackType == AttackType.MELEE)
 		{
-			_attackRange = 6f;
+			_attackRange = AttackRange.Melee;
 			_projectilePrefab = null;
 		}
 		else if (_attackType == AttackType.RANGED_PROJECTILE)

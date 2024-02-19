@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Tower : Target
@@ -95,4 +96,16 @@ public class Tower : Target
 	}
 
 	public static void ResetGameState() => Instance = null;
+
+	void OnDrawGizmosSelected()
+	{
+		var position = transform.position + (Vector3.up * 5f);
+		var zoneColors = new Color[] { Color.green, Color.cyan, Color.blue, Color.yellow, Color.red };
+		var zoneRanges = SpatialPartition.Zones.Values.ToArray();
+		for (var i = 0; i < zoneRanges.Length; i++)
+		{
+			Gizmos.color = zoneColors[i % zoneColors.Length];
+			GizmosExtras.Draw2dCircle(position, zoneRanges[i]);
+		}
+	}
 }

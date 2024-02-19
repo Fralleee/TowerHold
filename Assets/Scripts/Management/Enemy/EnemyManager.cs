@@ -4,8 +4,10 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections;
 
-public class EnemySpawner : Singleton<EnemySpawner>
+public class EnemyManager : Singleton<EnemyManager>
 {
+	public static SpatialPartitionManager SpatialPartitionManager => Instance._spatialPartitionManager;
+
 	const int PointLevelScaling = 5;
 	const int StartMinPoints = 20;
 	const int StartMaxPoints = 20;
@@ -30,6 +32,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	Dictionary<int, LevelSpawnConfiguration> _levelSpawnConfigurations;
 
 	RandomGenerator _randomGenerator;
+	SpatialPartitionManager _spatialPartitionManager;
 
 	protected override void Awake()
 	{
@@ -43,6 +46,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 	void Start()
 	{
 		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
+		_spatialPartitionManager = new SpatialPartitionManager();
 
 		_nextSpawnTime = Time.time + 0.1f;
 	}
@@ -215,8 +219,6 @@ public class EnemySpawner : Singleton<EnemySpawner>
 			return;
 		}
 		Gizmos.color = Color.red;
-
-		// Draw circles for min and max radius, not spheres
 		GizmosExtras.Draw2dCircle(transform.position, _minRadius);
 		GizmosExtras.Draw2dCircle(transform.position, _maxRadius);
 	}

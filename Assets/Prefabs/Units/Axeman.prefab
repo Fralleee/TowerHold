@@ -224,6 +224,8 @@ MonoBehaviour:
   IsDead: 0
   _deathSound: {fileID: 8300000, guid: 9b50fce87f197464c872748be6bdefe3, type: 3}
   AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
+  CurrentZone: 0
+  DistanceToTower: 0
   Attackers: 0
   _currentState: 0
   Value: 15
@@ -232,7 +234,7 @@ MonoBehaviour:
   _attackType: 2
   _baseDamage: 10
   _attacksPerSecond: 2
-  _attackRange: 15
+  _attackRange: 2
   _projectilePrefab: {fileID: 9212724085591995478, guid: ae3cff54fd2ef1042a7ec4520c94d5ca,
     type: 3}
   _attackOrigin: {fileID: 4560925534984523161}

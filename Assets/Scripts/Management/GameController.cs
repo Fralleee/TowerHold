@@ -20,7 +20,7 @@ public class GameController : Singleton<GameController>
 
 	public GameSettings Settings;
 
-	EnemySpawner _enemySpawner;
+	EnemyManager _enemyManager;
 
 	public float LevelProgress => GameHasStarted ? (TimeLeft / Settings.TimePerLevel) : (FreezeTimeLeft / Settings.FreezeTime);
 
@@ -33,7 +33,7 @@ public class GameController : Singleton<GameController>
 			Settings.StartSeed = Random.Range(0, int.MaxValue);
 		}
 
-		_enemySpawner = GetComponentInChildren<EnemySpawner>();
+		_enemyManager = GetComponentInChildren<EnemyManager>();
 		RandomGenerator = new RandomGenerator(Settings.StartSeed);
 
 		Debug.Log($"Starting game in {Settings.FreezeTime} seconds | Seed: {Settings.StartSeed} | Level: {Settings.StartLevel} | Map: {NameGeneration.GenerateLevelName(Settings.StartSeed)}");
@@ -86,8 +86,8 @@ public class GameController : Singleton<GameController>
 	{
 		RunLevel(Settings.StartLevel);
 
-		_enemySpawner.Target = Tower.Instance;
-		_enemySpawner.IsSpawning = true;
+		_enemyManager.Target = Tower.Instance;
+		_enemyManager.IsSpawning = true;
 
 		GameHasStarted = true;
 		OnGameStart();
@@ -102,7 +102,7 @@ public class GameController : Singleton<GameController>
 
 		GameHasEnded = true;
 
-		_enemySpawner.IsSpawning = false;
+		_enemyManager.IsSpawning = false;
 		Enemy.GameOver();
 		OnGameEnd();
 	}

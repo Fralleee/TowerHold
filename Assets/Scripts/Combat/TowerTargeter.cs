@@ -1,34 +1,23 @@
-using UnityEngine;
-
 public static class TowerTargeter
 {
-	public static Enemy GetEnemyTarget(Transform turret, float range)
+	public static Enemy GetEnemyTarget(AttackRange attackRange)
 	{
 		Enemy selectedTarget = null;
 		var closestDistance = float.MaxValue;
-		var fewestAttackers = int.MaxValue; // This holds the smallest number of attackers found
-
-		// Loop through all enemies to find the one with fewest attackers and within the closest distance
-		foreach (var enemy in Enemy.AllEnemies)
+		var fewestAttackers = int.MaxValue;
+		var enemies = EnemyManager.SpatialPartitionManager.GetEnemiesWithinZone(attackRange.ToZone());
+		foreach (var enemy in enemies)
 		{
-			/* For the enemy to be a valid target it has to be within the range
-               We want to prioritize targets in the following order:
-
-               - By number of attackers (fewer, the better)
-               - By distance (closest to the tower)
-            */
-			var distanceToEnemy = Vector3.Distance(turret.position, enemy.transform.position);
-			if (distanceToEnemy > range)
-			{
-				continue;
-			}
-
+			// For the enemy to be a valid target it has to be within the range
+			// We want to prioritize targets in the following order:
+			// - By number of attackers (fewer, the better)
+			// - By distance (closest to the tower)
 			// Check if this enemy has fewer attackers or is closer while having the same number of attackers
-			if (enemy.Attackers < fewestAttackers || (enemy.Attackers == fewestAttackers && distanceToEnemy < closestDistance))
+			if (enemy.Attackers < fewestAttackers || (enemy.Attackers == fewestAttackers && enemy.DistanceToTower < closestDistance))
 			{
 				selectedTarget = enemy;
 				fewestAttackers = enemy.Attackers;
-				closestDistance = distanceToEnemy;
+				closestDistance = enemy.DistanceToTower;
 			}
 		}
 		// Increment the attackers count for the selected target

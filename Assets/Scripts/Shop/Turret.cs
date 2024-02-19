@@ -6,7 +6,7 @@ public class Turret : DamageShopItem
 {
 	[Header("Turret Settings")]
 	[SerializeField] float _baseDamage = 10f;
-	[SerializeField] float _attackRange = 2f;
+	[SerializeField] AttackRange _attackRange = AttackRange.Short;
 	[SerializeField] float _timeBetweenAttacks = 1f;
 	[SerializeField] float _timeBetweenFindTarget = 1f;
 
@@ -33,7 +33,7 @@ public class Turret : DamageShopItem
 	{
 		if (Time.time - _lastTargetSearch > _timeBetweenFindTarget)
 		{
-			_target = TowerTargeter.GetEnemyTarget(_tower.Center, _attackRange);
+			_target = TowerTargeter.GetEnemyTarget(_attackRange);
 			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenFindTarget); // Add some variance to the search timing
 		}
 
@@ -51,7 +51,7 @@ public class Turret : DamageShopItem
 		ScoreManager.Instance.Turrets += 1;
 	}
 
-	public (float baseDamage, float attackRange, float timeBetweenAttacks) GetHoverData() => (_baseDamage, _attackRange, _timeBetweenAttacks);
+	public (float baseDamage, float attackRange, float timeBetweenAttacks) GetHoverData() => (_baseDamage, _attackRange.GetRange(), _timeBetweenAttacks);
 
 	void Shoot()
 	{
