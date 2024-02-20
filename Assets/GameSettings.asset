@@ -17,5 +17,5 @@ MonoBehaviour:
   StartLevel: 1
   MaxLevel: 30
   StartSeed: 32
-  StartingResources: 5000
-  StartingIncome: 50
+  StartingResources: 15000
+  StartingIncome: 100
