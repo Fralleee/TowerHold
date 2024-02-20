@@ -4898,7 +4898,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: -8287839383430266118, guid: ebe029a3428e51f42803e32b33de75bb, type: 3}
+  m_Mesh: {fileID: -5495902117074765545, guid: 9d124b00907b9c7468ea64f254fbfa3d, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

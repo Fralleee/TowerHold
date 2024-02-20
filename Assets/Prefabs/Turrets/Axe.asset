@@ -17,7 +17,7 @@ MonoBehaviour:
   RarityType: 0
   Category: 0
   _baseDamage: 35
-  _attackRange: 45
+  _attackRange: 3
   _timeBetweenAttacks: 1
   _timeBetweenFindTarget: 1
   _projectilePrefab: {fileID: 9212724085591995478, guid: ae3cff54fd2ef1042a7ec4520c94d5ca,

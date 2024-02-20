@@ -13,32 +13,15 @@ public static class SpatialPartition
 
 	public static SpatialZone DetermineZone(float distance)
 	{
-		if (distance <= Zones[SpatialZone.Melee])
+		return distance switch
 		{
-			return SpatialZone.Melee;
-		}
-
-		if (distance <= Zones[SpatialZone.Short])
-		{
-			return SpatialZone.Short;
-		}
-
-		if (distance <= Zones[SpatialZone.Medium])
-		{
-			return SpatialZone.Medium;
-		}
-
-		if (distance <= Zones[SpatialZone.Long])
-		{
-			return SpatialZone.Long;
-		}
-
-		if (distance <= Zones[SpatialZone.VeryLong])
-		{
-			return SpatialZone.VeryLong;
-		}
-
-		return SpatialZone.OutOfRange;
+			_ when distance <= Zones[SpatialZone.Melee] => SpatialZone.Melee,
+			_ when distance <= Zones[SpatialZone.Short] => SpatialZone.Short,
+			_ when distance <= Zones[SpatialZone.Medium] => SpatialZone.Medium,
+			_ when distance <= Zones[SpatialZone.Long] => SpatialZone.Long,
+			_ when distance <= Zones[SpatialZone.VeryLong] => SpatialZone.VeryLong,
+			_ => SpatialZone.OutOfRange,
+		};
 	}
 
 	public static float GetRange(this AttackRange attackRange) => Zones.TryGetValue(attackRange.ToZone(), out var range) ? range : 0f;

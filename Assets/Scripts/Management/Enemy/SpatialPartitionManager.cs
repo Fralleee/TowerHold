@@ -14,7 +14,7 @@ public class SpatialPartitionManager
 
 	public void RemoveEnemy(Enemy enemy)
 	{
-		_enemyZones[enemy.CurrentZone].Remove(enemy);
+		_ = _enemyZones[enemy.CurrentZone].Remove(enemy);
 	}
 
 	public (SpatialZone currentZone, float distanceToNextZone) UpdateZone(Enemy enemy)
@@ -30,7 +30,6 @@ public class SpatialPartitionManager
 
 		return (zone, SpatialPartition.DistanceToNextZone(zone, enemy.DistanceToTower));
 	}
-
 
 	public List<Enemy> GetEnemiesWithinZone(SpatialZone attackZone)
 	{
