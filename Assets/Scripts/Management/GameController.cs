@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -12,99 +13,97 @@ public class GameController : Singleton<GameController>
 	public static Action OnGameEnd = delegate { };
 
 	[HideInInspector] public RandomGenerator RandomGenerator;
-	[HideInInspector] public int CurrentLevel = 1;
-	[HideInInspector] public float FreezeTimeLeft;
-	[HideInInspector] public float TimeLeft;
-	[HideInInspector] public bool GameHasStarted = false;
-	[HideInInspector] public bool GameHasEnded = false;
 
+	[ReadOnly] public GameState CurrentState;
+	public GameState StartState = GameState.Idle;
 	public GameSettings Settings;
 
 	EnemyManager _enemyManager;
+	StateMachine<GameState> _stateMachine;
 
-	public float LevelProgress => GameHasStarted ? (TimeLeft / Settings.TimePerLevel) : (FreezeTimeLeft / Settings.FreezeTime);
+	IdleState _idleState;
+	PreparationState _preparationState;
+	LiveState _liveState;
+	ConclusionState _conclusionState;
+
+	public int CurrentLevel => _stateMachine.CurrentState is ILevelProgress stateWithProgress ? stateWithProgress.CurrentLevel : 0;
+
+	public (float timeLeft, float totalTime, float progress) Progress
+	{
+		get
+		{
+			if (_stateMachine.CurrentState is ILevelProgress stateWithProgress)
+			{
+				return (stateWithProgress.TimeLeft, stateWithProgress.TotalTime, stateWithProgress.LevelProgress);
+			}
+			return (0f, 0f, 0f);
+		}
+	}
 
 	protected override void Awake()
 	{
 		base.Awake();
 
-		if (Settings.StartSeed == 0)
-		{
-			Settings.StartSeed = Random.Range(0, int.MaxValue);
-		}
-
 		_enemyManager = GetComponentInChildren<EnemyManager>();
 		RandomGenerator = new RandomGenerator(Settings.StartSeed);
+
+		Tower.OnTowerDeath += OnTowerDeath;
+
+		InitializeStateMachine();
+		InitializeGameSettings();
 
 		Debug.Log($"Starting game in {Settings.FreezeTime} seconds | Seed: {Settings.StartSeed} | Level: {Settings.StartLevel} | Map: {NameGeneration.GenerateLevelName(Settings.StartSeed)}");
 	}
 
-	void Start()
-	{
-		Tower.Instance.OnDeath += OnTowerDeath;
-	}
-
 	void FixedUpdate()
 	{
-		if (GameHasEnded)
-		{
-			return;
-		}
+		_stateMachine.OnLogic();
+	}
 
-		if (!GameHasStarted)
-		{
-			FreezeTimeLeft -= Time.deltaTime;
-			if (FreezeTimeLeft <= 0)
-			{
-				StartGame();
-			}
-			return;
-		}
+	void InitializeStateMachine()
+	{
+		_stateMachine = new StateMachine<GameState>();
+		_stateMachine.OnTransition += OnTransition;
 
-		TimeLeft -= Time.deltaTime;
-		if (TimeLeft <= 0)
+		_idleState = new IdleState();
+		_preparationState = new PreparationState();
+		_liveState = new LiveState(_enemyManager);
+		_conclusionState = new ConclusionState(_enemyManager);
+
+		_preparationState.OnPreparationComplete += () => _stateMachine.SetState(_liveState);
+		_liveState.OnMaxLevelReached += () => _stateMachine.SetState(_conclusionState);
+
+		switch (StartState)
 		{
-			RunLevel(CurrentLevel + 1);
+			case GameState.Idle:
+				_stateMachine.SetState(_idleState);
+				break;
+			case GameState.Preparation:
+				_stateMachine.SetState(_preparationState);
+				break;
+			case GameState.Live:
+				_stateMachine.SetState(_liveState);
+				break;
+			case GameState.Conclusion:
+				_stateMachine.SetState(_conclusionState);
+				break;
+			default:
+				throw new ArgumentOutOfRangeException();
 		}
 	}
 
-	void RunLevel(int level)
+	void InitializeGameSettings()
 	{
-		if (level > Settings.MaxLevel)
+		if (Settings.StartSeed == 0)
 		{
-			EndGame();
-			return;
+			Settings.StartSeed = Random.Range(0, int.MaxValue);
 		}
-
-		CurrentLevel = level;
-		TimeLeft += Settings.TimePerLevel;
-
-		OnLevelChanged(CurrentLevel);
 	}
 
-	void StartGame()
+
+	void OnTransition(IState<GameState> newState)
 	{
-		RunLevel(Settings.StartLevel);
-
-		_enemyManager.Target = Tower.Instance;
-		_enemyManager.IsSpawning = true;
-
-		GameHasStarted = true;
-		OnGameStart();
-	}
-
-	void EndGame()
-	{
-		if (GameHasEnded)
-		{
-			return;
-		}
-
-		GameHasEnded = true;
-
-		_enemyManager.IsSpawning = false;
-		Enemy.GameOver();
-		OnGameEnd();
+		CurrentState = newState.Identifier;
 	}
 
 	public void ReplayGame() => SceneManager.LoadScene("Game");
@@ -115,26 +114,22 @@ public class GameController : Singleton<GameController>
 	{
 		base.OnDestroy();
 
+		OnGameStart = delegate
+		{ };
 		OnLevelChanged = delegate
 		{ };
 		OnGameEnd = delegate
 		{ };
 
 		Time.timeScale = 1;
-		GameHasEnded = false;
 
+		Tower.OnTowerDeath -= OnTowerDeath;
 		Tower.ResetGameState();
 		Enemy.ResetGameState();
 	}
 
-	void OnValidate()
+	void OnTowerDeath()
 	{
-		FreezeTimeLeft = Settings.FreezeTime;
-		TimeLeft = 0;
-	}
-
-	void OnTowerDeath(Target target)
-	{
-		EndGame();
+		_stateMachine.SetState(_conclusionState);
 	}
 }

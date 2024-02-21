@@ -7,6 +7,7 @@ using UnityEngine;
 public class Tower : Target
 {
 	public static Action<int, int> OnHealthChanged = delegate { };
+	public static Action OnTowerDeath = delegate { };
 
 	public int HealthRegenerationRate = 5;
 
@@ -39,11 +40,6 @@ public class Tower : Target
 
 	void FixedUpdate()
 	{
-		if (GameController.Instance.GameHasEnded)
-		{
-			return;
-		}
-
 		foreach (var turret in Turrets)
 		{
 			turret.FixedUpdate();
@@ -92,6 +88,7 @@ public class Tower : Target
 
 	void OnDestroy()
 	{
+		OnTowerDeath();
 		OnDamageTaken -= HandleDamageTaken;
 	}
 

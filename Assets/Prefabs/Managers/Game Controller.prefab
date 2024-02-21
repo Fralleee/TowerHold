@@ -1886,11 +1886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ebd1bf851c7f44ca49aa2c9afe1720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLevel: 1
-  FreezeTimeLeft: 1
-  TimeLeft: 0
-  GameHasStarted: 0
-  GameHasEnded: 0
+  CurrentState: 0
+  StartState: 1
   Settings: {fileID: 11400000, guid: a7f3c7ead1c2f3e4898754fd7d4c45a7, type: 2}
 --- !u!114 &5997500516575327268
 MonoBehaviour:

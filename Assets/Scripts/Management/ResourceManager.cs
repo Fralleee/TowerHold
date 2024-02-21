@@ -16,18 +16,34 @@ public class ResourceManager : Singleton<ResourceManager>
 	Coroutine _incomeCoroutine;
 	Vector3 _defaultTextSpawnPosition;
 
-	void Start()
+	protected override void Awake()
 	{
-		_incomeCoroutine = StartCoroutine(ActivateIncomeAfterDelay(GameController.GameSettings.FreezeTime));
-		_defaultTextSpawnPosition = Tower.Instance.transform.position + (Vector3.up * 6);
-		AddResource(GameController.GameSettings.StartingResources, _defaultTextSpawnPosition);
-		AddIncome(GameController.GameSettings.StartingIncome);
+		base.Awake();
+
+		GameController.OnGameStart += OnGameStart;
+		GameController.OnGameEnd += OnGameEnd;
 	}
 
-	IEnumerator ActivateIncomeAfterDelay(float delay)
+	void Start()
 	{
-		yield return new WaitForSeconds(delay);
+		_defaultTextSpawnPosition = Tower.Instance.transform.position + (Vector3.up * 6);
+	}
+
+	void OnGameStart()
+	{
+		AddResource(GameController.GameSettings.StartingResources, _defaultTextSpawnPosition);
+		AddIncome(GameController.GameSettings.StartingIncome);
 		_incomeCoroutine = StartCoroutine(PassiveIncomeCoroutine());
+	}
+
+
+	void OnGameEnd()
+	{
+		if (_incomeCoroutine != null)
+		{
+			StopCoroutine(_incomeCoroutine);
+			_incomeCoroutine = null;
+		}
 	}
 
 	IEnumerator PassiveIncomeCoroutine()
@@ -54,10 +70,7 @@ public class ResourceManager : Singleton<ResourceManager>
 
 	public void AddResource(int amount, Vector3 spawnPosition)
 	{
-		Resources += amount;
-		OnResourceChange(Resources);
-		ScoreManager.Instance.ResourcesEarned += amount;
-
+		AddResourceSilent(amount);
 		_ = _floatingText.Spawn(spawnPosition, $"+{amount}");
 	}
 
@@ -74,20 +87,17 @@ public class ResourceManager : Singleton<ResourceManager>
 		return false;
 	}
 
-	public void StopIncome()
-	{
-		if (_incomeCoroutine != null)
-		{
-			StopCoroutine(_incomeCoroutine);
-			_incomeCoroutine = null;
-		}
-	}
-
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
 
 		OnResourceChange = delegate
 		{ };
+
+		OnIncomeChange = delegate
+		{ };
+
+		GameController.OnGameStart -= OnGameStart;
+		GameController.OnGameEnd -= OnGameEnd;
 	}
 }
