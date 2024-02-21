@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bobbing : MonoBehaviour
 {
+	[SerializeField] bool _playOnAwake;
 	[SerializeField]
 	float _bobbingAmount = 0.125f;
 	[SerializeField]
@@ -27,6 +28,11 @@ public class Bobbing : MonoBehaviour
 		var randomTimer = GameController.Instance.RandomGenerator.NextFloat(0f, 2f * Mathf.PI);
 		_bobbingTimer = randomTimer;
 		_rotationTimer = randomTimer;
+
+		if (_playOnAwake)
+		{
+			StartBobbing();
+		}
 	}
 
 	void Update()

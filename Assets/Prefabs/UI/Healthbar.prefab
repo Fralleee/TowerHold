@@ -127,7 +127,7 @@ MonoBehaviour:
   _delayDuration: 0.2
   _scaleUpFactor: 1.6
   _scaleUpDuration: 0.4
-  _isHidden: 0
+  _isHidden: 1
 --- !u!1 &1159630480817035580
 GameObject:
   m_ObjectHideFlags: 0
