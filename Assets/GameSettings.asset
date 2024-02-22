@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258ea588d79a4cd4d97d0213c4da8bf3, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  FreezeTime: 3
+  FreezeTime: 0
   TimePerLevel: 20
   StartLevel: 1
   MaxLevel: 30

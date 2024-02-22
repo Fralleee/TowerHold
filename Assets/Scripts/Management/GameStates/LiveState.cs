@@ -4,6 +4,7 @@ using UnityEngine;
 public class LiveState : IState<GameState>, ILevelProgress
 {
 	public event Action OnMaxLevelReached;
+	public event Action OnTowerDeath;
 
 	public GameState Identifier => GameState.Live;
 
@@ -24,6 +25,7 @@ public class LiveState : IState<GameState>, ILevelProgress
 		_enemyManager.Target = Tower.Instance;
 		_enemyManager.IsSpawning = true;
 		GameController.OnGameStart();
+		Tower.OnTowerDeath += OnTowerDeath;
 
 		TimeLeft = 0;
 		CurrentLevel = GameController.GameSettings.StartLevel;
@@ -41,7 +43,7 @@ public class LiveState : IState<GameState>, ILevelProgress
 
 	public void OnExit()
 	{
-
+		Tower.OnTowerDeath -= OnTowerDeath;
 	}
 
 	void RunLevel(int level)

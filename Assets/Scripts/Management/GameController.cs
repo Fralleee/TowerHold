@@ -15,20 +15,18 @@ public class GameController : Singleton<GameController>
 	[HideInInspector] public RandomGenerator RandomGenerator;
 
 	[ReadOnly] public GameState CurrentState;
-	public GameState StartState = GameState.Idle;
+	[HideInPlayMode] public GameState StartState = GameState.Idle;
 	public GameSettings Settings;
 
 	EnemyManager _enemyManager;
 	StateMachine<GameState> _stateMachine;
-
 	IdleState _idleState;
 	PreparationState _preparationState;
 	LiveState _liveState;
 	ConclusionState _conclusionState;
 
 	public int CurrentLevel => _stateMachine.CurrentState is ILevelProgress stateWithProgress ? stateWithProgress.CurrentLevel : 0;
-
-	public (float timeLeft, float totalTime, float progress) Progress
+	public (float timeLeft, float totalTime, float progress) LevelProgress
 	{
 		get
 		{
@@ -45,9 +43,6 @@ public class GameController : Singleton<GameController>
 		base.Awake();
 
 		_enemyManager = GetComponentInChildren<EnemyManager>();
-		RandomGenerator = new RandomGenerator(Settings.StartSeed);
-
-		Tower.OnTowerDeath += OnTowerDeath;
 
 		InitializeStateMachine();
 		InitializeGameSettings();
@@ -63,7 +58,7 @@ public class GameController : Singleton<GameController>
 	void InitializeStateMachine()
 	{
 		_stateMachine = new StateMachine<GameState>();
-		_stateMachine.OnTransition += OnTransition;
+		_stateMachine.OnTransition += (IState<GameState> newState) => CurrentState = newState.Identifier;
 
 		_idleState = new IdleState();
 		_preparationState = new PreparationState();
@@ -72,6 +67,7 @@ public class GameController : Singleton<GameController>
 
 		_preparationState.OnPreparationComplete += () => _stateMachine.SetState(_liveState);
 		_liveState.OnMaxLevelReached += () => _stateMachine.SetState(_conclusionState);
+		_liveState.OnTowerDeath += () => _stateMachine.SetState(_conclusionState);
 
 		switch (StartState)
 		{
@@ -98,12 +94,8 @@ public class GameController : Singleton<GameController>
 		{
 			Settings.StartSeed = Random.Range(0, int.MaxValue);
 		}
-	}
 
-
-	void OnTransition(IState<GameState> newState)
-	{
-		CurrentState = newState.Identifier;
+		RandomGenerator = new RandomGenerator(Settings.StartSeed);
 	}
 
 	public void ReplayGame() => SceneManager.LoadScene("Game");
@@ -123,13 +115,7 @@ public class GameController : Singleton<GameController>
 
 		Time.timeScale = 1;
 
-		Tower.OnTowerDeath -= OnTowerDeath;
 		Tower.ResetGameState();
 		Enemy.ResetGameState();
-	}
-
-	void OnTowerDeath()
-	{
-		_stateMachine.SetState(_conclusionState);
 	}
 }
