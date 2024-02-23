@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Profile Forest Outer Details
   m_EditorClassIdentifier: 
   Collections:
-  - {fileID: 11400000, guid: 775e8818c5cc49847bace8b4f478ed5b, type: 2}
+  - {fileID: 11400000, guid: e967aef344f679e4a98bf2e7b7451f6c, type: 2}
   StartRadius: 53
   EndRadius: 160
   MinSpacing: 1

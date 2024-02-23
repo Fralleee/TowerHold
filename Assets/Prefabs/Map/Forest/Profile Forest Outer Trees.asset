@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Profile Forest Outer Trees
   m_EditorClassIdentifier: 
   Collections:
-  - {fileID: 11400000, guid: 9dfcbeee1662ed94c964dca550a2457b, type: 2}
+  - {fileID: 11400000, guid: 8f81c7fd6eb659a44ae595f14c9b5465, type: 2}
   StartRadius: 53
   EndRadius: 160
   MinSpacing: 0.6

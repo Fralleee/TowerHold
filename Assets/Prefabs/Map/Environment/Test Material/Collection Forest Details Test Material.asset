@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796dccc2463abe74a832a8e8fa1e7f09, type: 3}
+  m_Name: Collection Forest Details Test Material
+  m_EditorClassIdentifier: 
+  Objects:
+  - Prefab: {fileID: 5406785535457140720, guid: 05a286e610ec9e94bbe4b547eea2fb2d,
+      type: 3}
+    SpawnChance: 0.05
+    MinScale: 0.6
+    MaxScale: 0.6
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 2879626140770134900, guid: 6f093cffb22cab1489f2289be5fcfce9,
+      type: 3}
+    SpawnChance: 0.05
+    MinScale: 0.6
+    MaxScale: 0.6
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 2277864461209241415, guid: c765f76bb5a113e4fb909798be4733a4,
+      type: 3}
+    SpawnChance: 0.3
+    MinScale: 0.85
+    MaxScale: 1.15
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 7254525268057987426, guid: c30216650ef84b84382f9b37eda561b0,
+      type: 3}
+    SpawnChance: 0.3
+    MinScale: 0.85
+    MaxScale: 1.15
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 625284803667358538, guid: 9efae57034ea36246bc28c3602deebba, type: 3}
+    SpawnChance: 0.3
+    MinScale: 0.85
+    MaxScale: 1.15
+    RotationAxis: {x: 0, y: 1, z: 0}
+  - Prefab: {fileID: 3995391556665566142, guid: 7cf6edc74bc039448a8a77ba714128f1,
+      type: 3}
+    SpawnChance: 0.3
+    MinScale: 0.85
+    MaxScale: 1.15
+    RotationAxis: {x: 1, y: 0, z: 1}

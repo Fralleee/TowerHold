@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d0b943a7136c145b414ecb635dcb06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playOnAwake: 0
   _bobbingAmount: 0.125
   _bobbingSpeed: 25
   _rotationAmount: 5
@@ -548,12 +549,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 29661072c48d85341873545259b20ccf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29661072c48d85341873545259b20ccf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.719
+      value: 1.418
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29661072c48d85341873545259b20ccf,
         type: 3}

@@ -1921,7 +1921,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   _minRadius: 45
   _maxRadius: 55
-  _enemyVariants: {fileID: 11400000, guid: 9518e5eb0f4d6474f8994e11ad100c09, type: 2}
+  _enemyVariants: {fileID: 11400000, guid: 2fd0666035245724e9631396d88abd41, type: 2}
   _levelSpecificSpawns: {fileID: 11400000, guid: c63e1f2e7ff051544b08184ec094a06f,
     type: 2}
   _showGizmos: 1
