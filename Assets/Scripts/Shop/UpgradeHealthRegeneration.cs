@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Shop/Upgrade/Health Regeneration")]
+[CreateAssetMenu(menuName = "VAKT/Shop/Upgrade/Health Regeneration")]
 public class UpgradeHealthRegeneration : DefenseShopItem
 {
 	[Header("Upgrade Settings")]

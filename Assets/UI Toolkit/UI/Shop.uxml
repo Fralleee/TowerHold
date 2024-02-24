@@ -14,30 +14,30 @@
         </ui:VisualElement>
         <ui:VisualElement name="Inventory">
             <ui:Button name="RefreshButton" class="red">
-                <ui:Label text="D" class="Shortkey" />
+                <ui:Label text="D" class="Hotkey" />
             </ui:Button>
             <ui:VisualElement name="Items">
                 <ui:Button class="ShopItem purple">
-                    <ui:Label text="1" class="Shortkey" />
+                    <ui:Label text="1" class="Hotkey" />
                 </ui:Button>
                 <ui:Button class="ShopItem blue">
-                    <ui:Label text="2" class="Shortkey" />
+                    <ui:Label text="2" class="Hotkey" />
                 </ui:Button>
                 <ui:Button class="ShopItem teal">
-                    <ui:Label text="3" class="Shortkey" />
+                    <ui:Label text="3" class="Hotkey" />
                 </ui:Button>
                 <ui:Button class="ShopItem green">
-                    <ui:Label text="4" class="Shortkey" />
+                    <ui:Label text="4" class="Hotkey" />
                 </ui:Button>
                 <ui:Button class="ShopItem orange">
-                    <ui:Label text="5" class="Shortkey" />
+                    <ui:Label text="5" class="Hotkey" />
                 </ui:Button>
                 <ui:Button class="ShopItem purple">
-                    <ui:Label text="6" class="Shortkey" />
+                    <ui:Label text="6" class="Hotkey" />
                 </ui:Button>
             </ui:VisualElement>
             <ui:Button name="LockButton" class="red">
-                <ui:Label text="L" class="Shortkey" />
+                <ui:Label text="L" class="Hotkey" />
             </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>

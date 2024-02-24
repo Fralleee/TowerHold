@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Environment/ObjectSpawner/Collection", fileName = "ObjectSpawnerCollection")]
+[CreateAssetMenu(fileName = "ObjectSpawnerCollection", menuName = "VAKT/Environment/ObjectSpawner/Collection")]
 public class ObjectSpawnerCollection : ScriptableObject
 {
 	public SpawnableObject[] Objects;

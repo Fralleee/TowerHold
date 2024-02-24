@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Enemy/Spawner/EnemyVariants", fileName = "EnemyVariants")]
+[CreateAssetMenu(fileName = "EnemyVariants", menuName = "VAKT/Enemy/Spawner/EnemyVariants")]
 public class EnemyVariants : ScriptableObject
 {
 	public Enemy[] Enemies;

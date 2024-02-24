@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Enemy/Spawner/LevelSpecificSpawns", fileName = "LevelSpecificSpawns")]
+[CreateAssetMenu(fileName = "LevelSpecificSpawns", menuName = "VAKT/Enemy/Spawner/LevelSpecificSpawns")]
 public class LevelSpecificSpawns : ScriptableObject, IEnumerable<LevelSpawnConfiguration>
 {
 	public LevelSpawnConfiguration[] List;

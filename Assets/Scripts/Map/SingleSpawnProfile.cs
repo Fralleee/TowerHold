@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Environment/ObjectSpawner/SingleSpawnProfile", fileName = "SingleSpawnProfile")]
+[CreateAssetMenu(fileName = "SingleSpawnProfile", menuName = "VAKT/Environment/ObjectSpawner/SingleSpawnProfile")]
 public class SingleSpawnProfile : ObjectSpawnProfile
 {
 	public float NoiseScale = 1f;

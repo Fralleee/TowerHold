@@ -8,11 +8,11 @@ Button {
 	overflow: visible;
 }
 
-Button:focus, Button:enabled:hover, Button.ShopItem:enabled:hover, Button.ShopItem:enabled:focus {
+Button:focus, Button:enabled:hover, VisualElement#Inventory.active Button.ShopItem:enabled:hover, VisualElement#Inventory.active Button.ShopItem:enabled:focus {
     scale: 1.05 !important;
 }
 
-Button:disabled, Button:active, Button.ShopItem:enabled:active, Button.ShopItem.itemized:disabled {
+Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:enabled:active, VisualElement#Inventory.active Button.ShopItem.itemized:disabled {
     scale: 0.9;
 }
 

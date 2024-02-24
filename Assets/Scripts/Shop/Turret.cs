@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tower/Turret")]
+[CreateAssetMenu(menuName = "VAKT/Shop/Turret")]
 public class Turret : DamageShopItem
 {
 	[Header("Turret Settings")]

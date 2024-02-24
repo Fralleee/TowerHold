@@ -41,6 +41,7 @@ public class ShopUI : Controller
 		_tooltipController = GetComponent<TooltipController>();
 
 		_inventoryContainer = uiDocument.rootVisualElement.Q("Inventory");
+		_inventoryContainer.AddToClassList("active");
 		_refreshButton = uiDocument.rootVisualElement.Q<Button>("RefreshButton");
 		_lockButton = uiDocument.rootVisualElement.Q<Button>("LockButton");
 		_shopSlots = _inventoryContainer.Query<Button>(className: "ShopItem").ToList();
@@ -73,7 +74,7 @@ public class ShopUI : Controller
 		Controls.Keyboard.RefreshShop.performed += ctx => ButtonClicked(_refreshButton);
 		Controls.Keyboard.LockShop.performed += ctx => ButtonClicked(_lockButton);
 		Controls.Keyboard.PurchaseItem.performed += ctx => PurchaseItemKey(ctx.control.name);
-		SetupShortcutLabels();
+		SetupHotkeyLabels();
 
 		GameController.OnGameStart += OnGameStart;
 		GameController.OnLevelChanged += OnLevelChanged;
@@ -140,7 +141,7 @@ public class ShopUI : Controller
 		}
 	}
 
-	void SetupShortcutLabels()
+	void SetupHotkeyLabels()
 	{
 		_refreshButton.Q<Label>().text = Controls.Keyboard.RefreshShop.GetBindingDisplayString();
 		_lockButton.Q<Label>().text = Controls.Keyboard.LockShop.GetBindingDisplayString();

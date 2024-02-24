@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(fileName = "ColorPalette", menuName = "Color Palette")]
+[CreateAssetMenu(fileName = "ColorPalette", menuName = "VAKT/Color Palette")]
 public class ColorPalette : ScriptableObject
 {
 	public ColorPaletteRow Environment = new ColorPaletteRow();

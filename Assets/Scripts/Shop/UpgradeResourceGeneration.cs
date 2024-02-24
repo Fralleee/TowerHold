@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Shop/Income/Resource Generation")]
+[CreateAssetMenu(menuName = "VAKT/Shop/Income/Resource Generation")]
 public class UpgradeResourceGeneration : ResourceShopItem
 {
 	[Header("Upgrade Settings")]

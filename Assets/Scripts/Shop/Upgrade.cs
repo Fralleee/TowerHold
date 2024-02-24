@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tower/Upgrade")]
+[CreateAssetMenu(menuName = "VAKT/Shop/Upgrade")]
 public class Upgrade : DamageShopItem
 {
 	[Header("Upgrade Settings")]

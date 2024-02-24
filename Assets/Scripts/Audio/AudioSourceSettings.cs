@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-[CreateAssetMenu(fileName = "AudioSettings", menuName = "Settings/Audio Settings")]
+[CreateAssetMenu(fileName = "AudioSettings", menuName = "VAKT/Settings/Audio Settings")]
 public class AudioSettings : ScriptableObject
 {
 	public float MinDistance = 100f;

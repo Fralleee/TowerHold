@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Environment/ObjectSpawner/ClusterSpawnProfile", fileName = "ClusterSpawnProfile")]
+[CreateAssetMenu(fileName = "ClusterSpawnProfile", menuName = "VAKT/Environment/ObjectSpawner/ClusterSpawnProfile")]
 public class ClusterSpawnProfile : ObjectSpawnProfile
 {
 	public int MinClusterSize = 5;

@@ -21,7 +21,7 @@ VisualElement#Inventory {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-image: url('../../Art/Textures/inventory.psd');
+    /* background-image: url('../../Art/Textures/inventory.psd'); */
 }
 
 VisualElement#Items {
@@ -91,17 +91,21 @@ Button.ShopItem {
     height: 125px;
 	margin: 0 10px;
 	background-size: 100px 100px;
-	scale: 0;
-}
-
-Button.ShopItem.itemized {
 	scale: 1;
 }
 
-Label.Shortkey {
+VisualElement#Inventory.active Button.ShopItem {
+	scale: 0;
+}
+
+VisualElement#Inventory.active Button.ShopItem.itemized {
+	scale: 1;
+}
+
+Label.Hotkey {
 	position: absolute;
-	left: 0;
-	bottom: 0;
+	left: 20px;
+	bottom: -20px;
 
 	min-width: 24px;
 	min-height: 24px;
@@ -116,9 +120,8 @@ Label.Shortkey {
 	background-color: rgba(50,50,50,.95);
 }
 
-Button#RefreshButton > Label.Shortkey, Button#LockButton > Label.Shortkey {
-	bottom: -8px;
-	left: -8px;
+.ShopItem > Label.Hotkey {
+	left: 46px;
 }
 
 Button#RefreshButton:enabled:hover, Button#LockButton:enabled:hover {

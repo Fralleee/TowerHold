@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Shop/Available Items")]
+[CreateAssetMenu(menuName = "VAKT/Shop/Available Items")]
 public class ShopInventory : ScriptableObject
 {
 	public ShopItem[] Items;

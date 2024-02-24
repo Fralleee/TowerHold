@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Spells/Wipe")]
+[CreateAssetMenu(menuName = "VAKT/Spells/Wipe")]
 public class Wipe : Spell
 {
 	public override void Perform()
