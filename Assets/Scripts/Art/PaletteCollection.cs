@@ -4,6 +4,6 @@ using System.Collections.Generic;
 public class PaletteCollection
 {
 #pragma warning disable IDE1006 // Naming Styles
-  public List<Palette> palettes;
+	public List<Palette> palettes;
 #pragma warning restore IDE1006 // Naming Styles
 }

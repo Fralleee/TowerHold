@@ -5,14 +5,10 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "ColorPalette", menuName = "Color Palette")]
 public class ColorPalette : ScriptableObject
 {
-	public ColorPaletteRow Terrain = new ColorPaletteRow();
-	public ColorPaletteRow Trees = new ColorPaletteRow();
-	public ColorPaletteRow Rocks = new ColorPaletteRow();
-	public ColorPaletteRow SkinAndHair = new ColorPaletteRow();
-	public ColorPaletteRow Cloth = new ColorPaletteRow();
-	public ColorPaletteRow Wood = new ColorPaletteRow();
-	public ColorPaletteRow Metal = new ColorPaletteRow();
-	public ColorPaletteRow Gems = new ColorPaletteRow();
+	public ColorPaletteRow Environment = new ColorPaletteRow();
+	public ColorPaletteRow Unit = new ColorPaletteRow();
+	public ColorPaletteRow Weapon = new ColorPaletteRow();
+	public ColorPaletteRow Tower = new ColorPaletteRow();
 
 	[ContextMenu("Randomize Palette")]
 	public void RandomizePalette()
@@ -43,10 +39,10 @@ public class ColorPalette : ScriptableObject
 		var texture = new Texture2D(2, 2, TextureFormat.RGB24, false);
 		if (texture.LoadImage(fileData))
 		{
-			var width = Mathf.Min(8, texture.width);
-			var height = Mathf.Min(8, texture.height);
+			var width = Mathf.Min(4, texture.width);
+			var height = Mathf.Min(4, texture.height);
 
-			ColorPaletteRow[] rows = { palette.Terrain, palette.Trees, palette.Rocks, palette.SkinAndHair, palette.Cloth, palette.Wood, palette.Metal, palette.Gems };
+			ColorPaletteRow[] rows = { palette.Environment, palette.Unit, palette.Weapon, palette.Tower };
 
 			for (var rowIndex = 0; rowIndex < height; rowIndex++)
 			{
@@ -70,11 +66,11 @@ public class ColorPalette : ScriptableObject
 	[ContextMenu("Save Palette as PNG")]
 	public void SavePaletteAsPNG()
 	{
-		var width = 8;
-		var height = 8;
+		var width = 4;
+		var height = 4;
 		var texture = new Texture2D(width, height, TextureFormat.RGB24, false);
 
-		var rows = new ColorPaletteRow[] { Terrain, Trees, Rocks, SkinAndHair, Cloth, Wood, Metal, Gems };
+		var rows = new ColorPaletteRow[] { Environment, Unit, Weapon, Tower };
 		for (var rowIndex = 0; rowIndex < rows.Length; rowIndex++)
 		{
 			var row = rows[rowIndex];
