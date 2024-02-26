@@ -23,7 +23,6 @@ public class EnemyManager : Singleton<EnemyManager>
 	[SerializeField] int _maxRadius = 40;
 	[SerializeField] EnemyVariants _enemyVariants;
 	[SerializeField] LevelSpecificSpawns _levelSpecificSpawns;
-	[SerializeField] int _maxEnemiesAlive = 60;
 
 	Transform _enemies;
 	float _nextSpawnTime;
@@ -154,7 +153,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	void SpawnEnemy(Enemy enemy, Vector3 groupSpawnPosition)
 	{
-		if (Enemy.AliveEnemies >= _maxEnemiesAlive)
+		if (Enemy.AliveEnemies >= GameController.GameSettings.MaxEnemiesAlive)
 		{
 			var damage = DamageFromValue(enemy);
 			Debug.Log($"EnemyManager: Max enemies alive, dealing {damage} damage to target.");

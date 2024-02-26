@@ -8,6 +8,7 @@ public class GameSettings : ScriptableObject
 	public float TimePerLevel = 20f;
 	public int StartLevel = 1;
 	public int MaxLevel = 30;
+	public int MaxEnemiesAlive = 60;
 	public int StartSeed;
 
 	[Header("Resources")]
