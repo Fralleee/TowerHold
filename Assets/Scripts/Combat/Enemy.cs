@@ -9,6 +9,7 @@ public class Enemy : Target
 {
 	public static Action<Enemy> OnAnyDeath = delegate { };
 	public static List<Enemy> AllEnemies = new List<Enemy>();
+	public static int AliveEnemies => AllEnemies.Count;
 
 	[HideInInspector] public SpatialZone CurrentZone = SpatialZone.OutOfRange;
 	[HideInInspector] public float DistanceToTower = 0;

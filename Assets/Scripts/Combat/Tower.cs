@@ -25,6 +25,7 @@ public class Tower : Target
 	{
 		base.Awake();
 
+		Scale = 4f;
 		Instance = this;
 		OnHealthChanged(Health, MaxHealth);
 		OnDamageTaken += HandleDamageTaken;

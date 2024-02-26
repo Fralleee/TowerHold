@@ -9,11 +9,11 @@ public class EnemyManager : Singleton<EnemyManager>
 	public static SpatialPartitionManager SpatialPartitionManager => Instance._spatialPartitionManager;
 
 	const int PointLevelScaling = 5;
-	const int StartMinPoints = 20;
-	const int StartMaxPoints = 20;
-	const int TotalMinSpawnsPerLevel = 10;
-	const int TotalMaxSpawnsPerLevel = 15;
+	const int StartPoints = 200;
+	const int TotalMinSpawnsPerLevel = 8;
+	const int TotalMaxSpawnsPerLevel = 16;
 	const int GroupOffsetDistanceMax = 3;
+	const int ValueToDamageFactor = 5;
 
 	[HideInInspector] public bool IsSpawning;
 	[HideInInspector] public Tower Target;
@@ -23,12 +23,18 @@ public class EnemyManager : Singleton<EnemyManager>
 	[SerializeField] int _maxRadius = 40;
 	[SerializeField] EnemyVariants _enemyVariants;
 	[SerializeField] LevelSpecificSpawns _levelSpecificSpawns;
+	[SerializeField] int _maxEnemiesAlive = 60;
 
+	Transform _enemies;
 	float _nextSpawnTime;
 	float _timePerSpawn;
 	int _spawnedWavesCurrentLevel;
-	int _pointsRemainingFromLastSpawn;
 	int _spawnsPerLevel;
+	int _totalPointsForCurrentLevel;
+
+	int CalculatePointsForLevel(int level) => StartPoints + (PointLevelScaling * (level - 1));
+	int DamageFromValue(Enemy enemy) => enemy.Value * ValueToDamageFactor;
+
 	Dictionary<int, LevelSpawnConfiguration> _levelSpawnConfigurations;
 
 	RandomGenerator _randomGenerator;
@@ -47,6 +53,9 @@ public class EnemyManager : Singleton<EnemyManager>
 	{
 		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 		_spatialPartitionManager = new SpatialPartitionManager();
+
+		_enemies = new GameObject("Enemies").transform;
+		_enemies.SetParent(transform);
 
 		_nextSpawnTime = Time.time + 0.1f;
 	}
@@ -76,6 +85,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		_nextSpawnTime = Time.time;
 		IsSpawning = true;
 		_spawnedWavesCurrentLevel = 0;
+		_totalPointsForCurrentLevel += CalculatePointsForLevel(GameController.Instance.CurrentLevel);
 	}
 
 	void TrySpawn()
@@ -92,7 +102,7 @@ public class EnemyManager : Singleton<EnemyManager>
 			var spawnPosition = GetRandomSpawnPosition();
 			foreach (var enemy in levelSpecificSpawn.Value.Enemies)
 			{
-				SpawnEnemy(enemy.gameObject, spawnPosition);
+				SpawnEnemy(enemy, spawnPosition);
 				if (!levelSpecificSpawn.Value.SpawnAsGroup)
 				{
 					spawnPosition = GetRandomSpawnPosition(); // Update position for next spawn
@@ -106,14 +116,14 @@ public class EnemyManager : Singleton<EnemyManager>
 
 			if (!levelSpecificSpawn.Value.ContinueDefaultSpawns)
 			{
+				// If we're not supposed to have default spawning we need to remove the points for the level
+				_totalPointsForCurrentLevel -= CalculatePointsForLevel(GameController.Instance.CurrentLevel);
 				return;
 			}
 		}
 
-		var (minPointsPerSpawn, maxPointsPerSpawn) = CalculatePointsForLevel(GameController.Instance.CurrentLevel);
-		var pointsForThisSpawn = _randomGenerator.Next(minPointsPerSpawn, maxPointsPerSpawn + 1);
-		pointsForThisSpawn += _pointsRemainingFromLastSpawn;
-		_pointsRemainingFromLastSpawn = 0;
+		var pointsForThisSpawn = Mathf.Min(_totalPointsForCurrentLevel / _spawnsPerLevel);
+		_totalPointsForCurrentLevel -= pointsForThisSpawn;
 		SpawnGroup(pointsForThisSpawn);
 	}
 
@@ -131,25 +141,33 @@ public class EnemyManager : Singleton<EnemyManager>
 			var enemyToSpawn = ChooseEnemyToSpawn(points);
 			if (enemyToSpawn != null)
 			{
-				SpawnEnemy(enemyToSpawn.gameObject, groupSpawnPosition);
+				SpawnEnemy(enemyToSpawn, groupSpawnPosition);
 				points -= enemyToSpawn.Value;
 			}
 			else
 			{
-				_pointsRemainingFromLastSpawn = points;
+				_totalPointsForCurrentLevel += points;
 				break; // No suitable enemy found within points
 			}
 		}
 	}
 
-	void SpawnEnemy(GameObject prefab, Vector3 groupSpawnPosition)
+	void SpawnEnemy(Enemy enemy, Vector3 groupSpawnPosition)
 	{
+		if (Enemy.AliveEnemies >= _maxEnemiesAlive)
+		{
+			var damage = DamageFromValue(enemy);
+			Debug.Log($"EnemyManager: Max enemies alive, dealing {damage} damage to target.");
+			_ = Target.TakeDamage(damage);
+		}
+
 		// Slight random offset from the group's central spawn position
 		var offset = new Vector3(_randomGenerator.Next(-GroupOffsetDistanceMax, GroupOffsetDistanceMax), 0, _randomGenerator.Next(-GroupOffsetDistanceMax, GroupOffsetDistanceMax)); // Offset range can be adjusted
 		var spawnPosition = groupSpawnPosition + offset;
 		var rotation = Quaternion.LookRotation(transform.position - spawnPosition, Vector3.up);
 
-		Instantiate(prefab, spawnPosition, rotation);
+		var instance = Instantiate(enemy.gameObject, spawnPosition, rotation, _enemies);
+		instance.name = enemy.name;
 	}
 
 	LevelSpawnConfiguration? GetLevelSpecificSpawn(int currentLevel)
@@ -179,14 +197,6 @@ public class EnemyManager : Singleton<EnemyManager>
 
 		return possibleEnemies[_randomGenerator.Next(0, possibleEnemies.Length)];
 	}
-
-	(int minPoints, int maxPoints) CalculatePointsForLevel(int level)
-	{
-		var minPoints = StartMinPoints + (PointLevelScaling * (level - 1));
-		var maxPoints = StartMaxPoints + (PointLevelScaling * (level - 1));
-		return (minPoints, maxPoints);
-	}
-
 
 	IEnumerable<Enemy> GetEnemyTypes()
 	{
@@ -239,7 +249,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	[Button("Spawn Enemies")]
 	void DebugSpawnEnemies()
 	{
-		StartCoroutine(DebugSpawnStaggered(_debugSpawnCount));
+		_ = StartCoroutine(DebugSpawnStaggered(_debugSpawnCount));
 	}
 
 	IEnumerator DebugSpawnStaggered(int count)
@@ -247,7 +257,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		for (var i = 0; i < count; i++)
 		{
 			var spawnPosition = GetRandomSpawnPosition();
-			SpawnEnemy(_debugEnemyType.gameObject, spawnPosition);
+			SpawnEnemy(_debugEnemyType, spawnPosition);
 			yield return new WaitForSeconds(0.1f);
 		}
 	}

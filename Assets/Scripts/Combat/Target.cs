@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
 	public Action<Target> OnDeath = delegate { };
 	public Action<int> OnDamageTaken = delegate { };
 
+	[HideInInspector] public float Scale = 1f;
 	public Transform Center;
 	public int MaxHealth = 100;
 	[ProgressBar(0, "MaxHealth", ColorGetter = "GetHealthBarColor")] public int Health;
