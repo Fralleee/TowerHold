@@ -20,9 +20,7 @@ public class SelectionController : Controller
 
 		var uiDocument = GetComponent<UIDocument>();
 		var rootElement = uiDocument.rootVisualElement;
-
-		rootElement.pickingMode = PickingMode.Ignore;
-		rootElement.Q<VisualElement>("Root").pickingMode = PickingMode.Ignore;
+		SetPickingModeRecursive(rootElement);
 
 		_container = rootElement.Q<VisualElement>("SelectionContainer");
 		_container.AddToClassList("no-target");
@@ -112,6 +110,19 @@ public class SelectionController : Controller
 				_selectionIndicator.transform.parent = null;
 				_selectionIndicator.SetActive(false);
 			}
+		}
+	}
+	void SetPickingModeRecursive(VisualElement element)
+	{
+		if (element is Button or Label or CustomProgressBar)
+		{
+			return;
+		}
+
+		element.pickingMode = PickingMode.Ignore;
+		foreach (var child in element.Children())
+		{
+			SetPickingModeRecursive(child);
 		}
 	}
 }
