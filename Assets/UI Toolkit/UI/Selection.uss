@@ -1,0 +1,18 @@
+VisualElement#SelectionContainer {
+    width: 400px;
+}
+
+VisualElement#SelectionContainer.no-target {
+    opacity: 0;
+}
+
+Label#SelectionName {
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    -unity-text-align: middle-center;
+}
+
+#SelectionHealthBar .ProgressBar__progress {
+	background-color: #e11d48;
+}

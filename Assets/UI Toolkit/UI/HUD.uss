@@ -8,16 +8,3 @@ VisualElement#Root {
 
 	padding: 50px;
 }
-
-Label#SelectedTarget {
-	font-size: 24px;
-	color: #fff;
-	text-align: center;
-
-	-unity-font-style: bold;
-	-unity-text-align: center;
-}
-
-Label#SelectedTarget.no-target {
-	opacity: 0;
-}

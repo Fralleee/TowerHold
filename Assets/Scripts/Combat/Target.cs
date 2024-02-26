@@ -6,6 +6,7 @@ public class Target : MonoBehaviour
 {
 	public Action<Target> OnDeath = delegate { };
 	public Action<int> OnDamageTaken = delegate { };
+	public Action<int, int> OnHealthChanged = delegate { };
 
 	[HideInInspector] public float Scale = 1f;
 	public Transform Center;
@@ -28,6 +29,7 @@ public class Target : MonoBehaviour
 			Center = transform;
 		}
 
+		OnHealthChanged(Health, MaxHealth);
 		AudioSource = GetComponent<AudioSource>();
 		AudioSettings.ApplySettings(AudioSource);
 	}
@@ -43,6 +45,7 @@ public class Target : MonoBehaviour
 
 		Health -= damage;
 		HealthBar.SetHealth(Health);
+		OnHealthChanged(Health, MaxHealth);
 
 		if (Health <= 0)
 		{

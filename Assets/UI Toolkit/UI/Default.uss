@@ -111,7 +111,7 @@ Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:e
 	align-self: center;
 
 	-unity-font-style: bold;
-	-unity-text-align: center;
+    -unity-text-align: middle-center;
 }
 
 .ProgressBar__progress-change, .ProgressBar__progress {

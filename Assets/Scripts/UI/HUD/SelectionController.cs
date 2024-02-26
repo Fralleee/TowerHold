@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
@@ -10,6 +11,8 @@ public class SelectionController : Controller
 	Camera _mainCamera;
 	Target _selectedTarget;
 	Label _nameLabel;
+	VisualElement _container;
+	CustomProgressBar _healthBar;
 
 	protected override void Awake()
 	{
@@ -17,8 +20,17 @@ public class SelectionController : Controller
 
 		var uiDocument = GetComponent<UIDocument>();
 		var rootElement = uiDocument.rootVisualElement;
-		_nameLabel = rootElement.Q<Label>("SelectedTarget");
-		_nameLabel.AddToClassList("no-target");
+
+		rootElement.pickingMode = PickingMode.Ignore;
+		rootElement.Q<VisualElement>("Root").pickingMode = PickingMode.Ignore;
+
+		_container = rootElement.Q<VisualElement>("SelectionContainer");
+		_container.AddToClassList("no-target");
+
+		_healthBar = _container.Q<CustomProgressBar>("SelectionHealthBar");
+		_healthBar.UseChangeBar = false;
+
+		_nameLabel = _container.Q<Label>("SelectionName");
 
 		_mainCamera = Camera.main;
 
@@ -41,8 +53,12 @@ public class SelectionController : Controller
 
 	void OnPrimaryFire(InputAction.CallbackContext context)
 	{
-		DeselectUnit(_selectedTarget);
+		if (EventSystem.current.IsPointerOverGameObject())
+		{
+			return;
+		}
 
+		DeselectUnit(_selectedTarget);
 		var ray = _mainCamera.ScreenPointToRay(MousePosition);
 		if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _selectableLayer))
 		{
@@ -55,12 +71,21 @@ public class SelectionController : Controller
 		}
 	}
 
+	void OnHealthChanged(int currentHealth, int maxHealth)
+	{
+		_healthBar.MinMaxValue = (currentHealth, maxHealth);
+		_healthBar.Value = currentHealth / (float)maxHealth;
+	}
+
 	void SelectUnit(Target target)
 	{
 		_selectedTarget = target;
+		_selectedTarget.OnHealthChanged += OnHealthChanged;
+		_selectedTarget.OnDeath += DeselectUnit;
+		OnHealthChanged(_selectedTarget.Health, _selectedTarget.MaxHealth);
 
 		_nameLabel.text = _selectedTarget.name;
-		_nameLabel.RemoveFromClassList("no-target");
+		_container.RemoveFromClassList("no-target");
 
 		if (_selectionIndicator != null)
 		{
@@ -70,18 +95,17 @@ public class SelectionController : Controller
 
 			_selectionIndicator.transform.localScale = Vector3.one * _selectedTarget.Scale;
 		}
-
-		_selectedTarget.OnDeath += DeselectUnit;
 	}
 
 	void DeselectUnit(Target _)
 	{
 		if (_selectedTarget != null)
 		{
+			_selectedTarget.OnHealthChanged -= OnHealthChanged;
 			_selectedTarget.OnDeath -= DeselectUnit;
 			_selectedTarget = null;
 
-			_nameLabel.AddToClassList("no-target");
+			_container.AddToClassList("no-target");
 
 			if (_selectionIndicator != null)
 			{

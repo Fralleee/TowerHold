@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Tower : Target
 {
-	public static Action<int, int> OnHealthChanged = delegate { };
 	public static Action OnTowerDeath = delegate { };
 
 	public int HealthRegenerationRate = 5;
@@ -27,7 +26,6 @@ public class Tower : Target
 
 		Scale = 4f;
 		Instance = this;
-		OnHealthChanged(Health, MaxHealth);
 		OnDamageTaken += HandleDamageTaken;
 	}
 
@@ -84,7 +82,6 @@ public class Tower : Target
 	void HandleDamageTaken(int damage)
 	{
 		ScoreManager.Instance.DamageTaken += damage;
-		OnHealthChanged(Health, MaxHealth);
 	}
 
 	void OnDestroy()

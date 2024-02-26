@@ -34,7 +34,7 @@ public class UpdateUI : MonoBehaviour
 
 		GameController.OnGameStart += OnGameStart;
 		GameController.OnLevelChanged += OnLevelChanged;
-		Tower.OnHealthChanged += OnHealthChanged;
+		Tower.Instance.OnHealthChanged += OnHealthChanged;
 		ResourceManager.OnResourceChange += OnResourceChanged;
 		ResourceManager.OnIncomeChange += OnIncomeChanged;
 	}
@@ -86,7 +86,7 @@ public class UpdateUI : MonoBehaviour
 	{
 		GameController.OnGameStart -= OnGameStart;
 		GameController.OnLevelChanged -= OnLevelChanged;
-		Tower.OnHealthChanged -= OnHealthChanged;
+		Tower.Instance.OnHealthChanged -= OnHealthChanged;
 		ResourceManager.OnResourceChange -= OnResourceChanged;
 		ResourceManager.OnIncomeChange -= OnIncomeChanged;
 	}

@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 9108723444849123690}
   - component: {fileID: 4981786058281005113}
   - component: {fileID: 1808802515722159910}
+  - component: {fileID: 1011302472132257915}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529103561458053021}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6116a28a35970de44a1606a9559a7b2d, type: 3}
   m_Name: 
@@ -179,6 +180,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissolveDuration: 1
+--- !u!114 &1011302472132257915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529103561458053021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fdce8b9e103264195402e106872a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectableLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _selectionIndicator: {fileID: 7835461811129811206, guid: 5114816febaa4c54dbd69b0d52935478,
+    type: 3}
 --- !u!1 &8678505928972566119
 GameObject:
   m_ObjectHideFlags: 0
