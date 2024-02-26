@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8802318767201779902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cca7768aaaea4b0081f14e7f9d4b5ad, type: 3}
-  m_Name: Outline
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  settings: {fileID: 11400000, guid: ff3dfd77429d64938a26bd54c27dacd8, type: 2}
 --- !u!114 &-5474669607108705146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 0
   settings: {fileID: 11400000, guid: c472facfb9eceae4ebca89f811c42f20, type: 2}
---- !u!114 &-392678708577236429
+--- !u!114 &-2288183243989723530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,39 +23,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Render Enemies Outlines
+  m_Script: {fileID: 11500000, guid: e32e72b6a3f58a24c9033e2b9275eea0, type: 3}
+  m_Name: ScreenSpaceShadows
   m_EditorClassIdentifier: 
-  m_Active: 0
-  settings:
-    passTag: Render Enemies Outlines
-    Event: 300
-    filterSettings:
-      RenderQueueType: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 256
-      PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: b0cda8e2e7a758245a74fcb68ad5b6b2, type: 2}
-    overrideMaterialPassIndex: 1
-    overrideShader: {fileID: 0}
-    overrideShaderPassIndex: 0
-    overrideMode: 1
-    overrideDepthState: 1
-    depthCompareFunction: 5
-    enableWrite: 0
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 0f854b35a0cf61a429bd5dcfea30eddd, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,12 +45,10 @@ MonoBehaviour:
       type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
-  - {fileID: -392678708577236429}
-  - {fileID: 6251727874749082343}
   - {fileID: -5474669607108705146}
-  - {fileID: -8802318767201779902}
   - {fileID: 130068842644446578}
-  m_RendererFeatureMap: 330a6588cbec8cfae7aad3066199c2568684a895ff1006b442ff2ec9b7e1d785721d2b5aec18ce01
+  - {fileID: -2288183243989723530}
+  m_RendererFeatureMap: 8684a895ff1006b4721d2b5aec18ce0176d6fd8076bd3ee0
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -129,7 +85,7 @@ MonoBehaviour:
     passOperation: 2
     failOperation: 0
     zFailOperation: 0
-  m_ShadowTransparentReceive: 1
+  m_ShadowTransparentReceive: 0
   m_RenderingMode: 0
   m_DepthPrimingMode: 0
   m_CopyDepthMode: 0
@@ -184,45 +140,3 @@ MonoBehaviour:
     cavityValley: 1.729
     cavitySamples: 7
   m_Material: {fileID: 0}
---- !u!114 &6251727874749082343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Render Enemies
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  settings:
-    passTag: Render Enemies
-    Event: 300
-    filterSettings:
-      RenderQueueType: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 256
-      PassNames: []
-    overrideMaterial: {fileID: 0}
-    overrideMaterialPassIndex: 0
-    overrideShader: {fileID: 0}
-    overrideShaderPassIndex: 0
-    overrideMode: 1
-    overrideDepthState: 0
-    depthCompareFunction: 4
-    enableWrite: 1
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60

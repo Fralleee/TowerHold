@@ -44,6 +44,34 @@ Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:e
 	background-color: #64748b;
 }
 
+.text-red {
+	color: #e11d48;
+}
+
+.text-purple {
+	color: #9333ea;
+}
+
+.text-blue {
+	color: #2563eb;
+}
+
+.text-teal {
+	color: #0d9488;
+}
+
+.text-green {
+	color: #65a30d;
+}
+
+.text-orange {
+	color: #ea580c;
+}
+
+.text-gray {
+	color: #64748b;
+}
+
 .ProgressBar {
 	position: relative;
 	width: 100%;
@@ -110,32 +138,4 @@ VisualElement.divider {
 	height: 1px;
 	background-color: #444;
 	margin: 5px 0;
-}
-
-Tooltip {
-	width: 480px;
-	border-width: 2px;
-	border-color: #444;
-	background-color: rgba(255,255,255,.5);
-	align-self: center;
-	padding: 12px;
-	margin-bottom: 36px;
-	scale: 0.8;
-	opacity: 0;
-    transition: all 250ms 50ms ease-out;
-}
-
-Tooltip.active {
-	scale: 1;
-	opacity: 1;
-    transition: all 250ms 0 ease-out;
-}
-
-Tooltip Label {
-	margin: 0;
-	padding: 0;
-}
-
-Tooltip Label.name {
-	-unity-font-style: bold;
 }

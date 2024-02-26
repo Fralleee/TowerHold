@@ -43,8 +43,10 @@ public class TooltipContent : VisualElement
 	public virtual void UpdateInformation(ShopItem item)
 	{
 		NameLabel.text = item.name;
-		CostLabel.text = $"Cost: {item.Cost}";
+		CostLabel.text = item.Cost.ToString();
 		DescriptionLabel.text = item.ShopType.ToString();
+
+		NameLabel.AddToClassList($"text-{item.RarityType.AsColorClass()}");
 	}
 
 	public virtual void Update(TooltipContent tooltipContent)

@@ -1,0 +1,34 @@
+Tooltip {
+	width: 480px;
+	border-width: 2px;
+	border-color: #444;
+	background-color: rgba(255,255,255,.85);
+	align-self: center;
+	padding: 12px;
+	margin-bottom: 36px;
+	scale: 0.8;
+	opacity: 0;
+    transition: all 250ms 50ms ease-out;
+}
+
+Tooltip.active {
+	scale: 1;
+	opacity: 1;
+    transition: all 250ms 0 ease-out;
+}
+
+Tooltip Label {
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+}
+
+Tooltip .item-name {
+	font-size: 24px;
+	-unity-font-style: bold;
+}
+
+Tooltip .item-cost {
+	-unity-font-style: bold;
+	color: goldenrod;
+}

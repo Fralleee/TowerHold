@@ -122,13 +122,17 @@ public class ShopUI : Controller
 			_shopItems.Add(item);
 		}
 
+		UpdateShopItemTooltips();
+		_ = StartCoroutine(PerformRefresh());
+	}
+
+	void UpdateShopItemTooltips()
+	{
 		for (var i = 0; i < _shopSlots.Count; i++)
 		{
 			var item = _shopItems[i];
 			_tooltipController.UpdateTooltip(_shopSlots[i], item.Tooltip());
 		}
-
-		_ = StartCoroutine(PerformRefresh());
 	}
 
 	IEnumerator PerformRefresh()
@@ -162,7 +166,7 @@ public class ShopUI : Controller
 			slot.RemoveFromClassList(rarityClass);
 		}
 
-		slot.AddToClassList(Rarity.AsColorClass(item.RarityType));
+		slot.AddToClassList(item.RarityType.AsColorClass());
 		slot.SetEnabled(true);
 	}
 
@@ -175,6 +179,11 @@ public class ShopUI : Controller
 		{
 			item.OnPurchase();
 			button.SetEnabled(false);
+
+			if (item is Upgrade)
+			{
+				UpdateShopItemTooltips();
+			}
 		}
 	}
 

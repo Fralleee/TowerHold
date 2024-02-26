@@ -68,6 +68,12 @@ public class CameraController : Controller
 
 	void LateUpdate()
 	{
+		// Log range
+		// if (Physics.Raycast(_mainCam.transform.position, _mainCam.transform.forward, out var hit, 1000, LayerMask.GetMask("Ground")))
+		// {
+		// 	Debug.Log(hit.distance);
+		// }
+
 		if (_isMouseMoving)
 		{
 			Cursor.SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);

@@ -62,7 +62,7 @@ public static class Rarity
 		return RarityType.Common; // Default return in case no rarity is selected
 	}
 
-	public static string AsColorClass(RarityType rarity)
+	public static string AsColorClass(this RarityType rarity)
 	{
 		return rarity switch
 		{
