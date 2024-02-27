@@ -52,6 +52,7 @@ public class ShopUI : Controller
 		_refreshButton.clicked += ManualRefresh;
 		_lockButton.clicked += ToggleLock;
 		_lockButton.SetEnabled(false);
+		_tooltipController.RegisterTooltip(_lockButton, new TooltipContent("Lock", null, "Lock the shop"));
 
 		for (var i = 0; i < _shopSlots.Count; i++)
 		{

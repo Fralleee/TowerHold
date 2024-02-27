@@ -84,9 +84,9 @@ public class UpdateUI : MonoBehaviour
 
 	void OnDestroy()
 	{
+		Tower.Instance.OnHealthChanged -= OnHealthChanged;
 		GameController.OnGameStart -= OnGameStart;
 		GameController.OnLevelChanged -= OnLevelChanged;
-		Tower.Instance.OnHealthChanged -= OnHealthChanged;
 		ResourceManager.OnResourceChange -= OnResourceChanged;
 		ResourceManager.OnIncomeChange -= OnIncomeChanged;
 	}
