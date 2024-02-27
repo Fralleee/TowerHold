@@ -18,6 +18,6 @@ MonoBehaviour:
   StartRadius: 10
   EndRadius: 53
   MinSpacing: 1
-  Intensity: 5
+  Intensity: 7
   CarveNavMesh: 0
   NoiseScale: 1

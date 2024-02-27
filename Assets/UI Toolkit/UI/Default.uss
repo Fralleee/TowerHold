@@ -51,6 +51,7 @@ Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:e
 	overflow: hidden;
 
 	background-color: rgba(0,0,0,.5);
+    border-radius: 5px;
 
     padding: 3px;
 }
@@ -101,6 +102,15 @@ Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:e
 	height: 100%;
 	width: 50%;
 	transition: all 100ms ease-out;
+}
+
+.ProgressBar__icon {
+	position: absolute;
+	left: 4px;
+	height: 24px;
+	width: 24px;
+
+	background-image: url("/Assets/Art/Textures/Item\ types/24/health.png");
 }
 
 

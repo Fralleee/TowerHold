@@ -145,7 +145,7 @@ Material:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceColor: {r: 1, g: 0.8974829, b: 0.6650944, a: 1}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _FaceUVSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _GlowColor: {r: 0.045186214, g: 0.0074990317, b: 0.11443538, a: 1}
     - _IsoPerimeter: {r: 0, g: 0, b: 0, a: 0}

@@ -16,8 +16,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8f81c7fd6eb659a44ae595f14c9b5465, type: 2}
   StartRadius: 53
   EndRadius: 120
-  MinSpacing: 0.6
+  MinSpacing: 1
   Intensity: 5
   CarveNavMesh: 0
-  MinClusterSize: 5
-  MaxClusterSize: 15
+  MinClusterSize: 8
+  MaxClusterSize: 16

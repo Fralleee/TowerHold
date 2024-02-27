@@ -6,6 +6,7 @@ public class CustomProgressBar : VisualElement
 	readonly VisualElement _container;
 	readonly VisualElement _progress;
 	readonly VisualElement _change;
+	readonly VisualElement _icon;
 
 	readonly Label _label;
 
@@ -50,6 +51,14 @@ public class CustomProgressBar : VisualElement
 		}
 	}
 
+	public Texture2D Icon
+	{
+		set
+		{
+			_icon.style.backgroundImage = value;
+		}
+	}
+
 	public CustomProgressBar()
 	{
 		AddToClassList("ProgressBar");
@@ -69,5 +78,9 @@ public class CustomProgressBar : VisualElement
 		_label = new Label();
 		_label.AddToClassList("ProgressBar__label");
 		_container.Add(_label);
+
+		_icon = new VisualElement();
+		_icon.AddToClassList("ProgressBar__icon");
+		_container.Add(_icon);
 	}
 }
