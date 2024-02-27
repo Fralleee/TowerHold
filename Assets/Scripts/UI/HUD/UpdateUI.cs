@@ -34,13 +34,13 @@ public class UpdateUI : MonoBehaviour
 
 		GameController.OnGameStart += OnGameStart;
 		GameController.OnLevelChanged += OnLevelChanged;
-		Tower.Instance.OnHealthChanged += OnHealthChanged;
 		ResourceManager.OnResourceChange += OnResourceChanged;
 		ResourceManager.OnIncomeChange += OnIncomeChanged;
 	}
 
 	void Start()
 	{
+		Tower.Instance.OnHealthChanged += OnHealthChanged;
 		_healthBar.UseChangeBar = true;
 		_levelBar.UseChangeBar = false;
 		InvokeRepeating(nameof(UpdateLevelProgress), 0, 1f);
