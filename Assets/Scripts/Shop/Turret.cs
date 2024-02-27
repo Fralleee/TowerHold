@@ -84,10 +84,10 @@ public class Turret : DamageShopItem
 		}
 	}
 
-	public override TooltipContent Tooltip()
+	public override TooltipContent Tooltip(StyleSettings styleSettings)
 	{
 		var tooltip = new TurretTooltipContent();
-		tooltip.UpdateInformation(this);
+		tooltip.UpdateInformation(this, styleSettings);
 		return tooltip;
 	}
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public enum RarityType
@@ -60,18 +61,5 @@ public static class Rarity
 		}
 
 		return RarityType.Common; // Default return in case no rarity is selected
-	}
-
-	public static string AsColorClass(this RarityType rarity)
-	{
-		return rarity switch
-		{
-			RarityType.Common => "gray",
-			RarityType.Uncommon => "green",
-			RarityType.Rare => "blue",
-			RarityType.Epic => "purple",
-			RarityType.Legendary => "orange",
-			_ => "red",
-		};
 	}
 }

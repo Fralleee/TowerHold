@@ -91,6 +91,8 @@ Button.ShopItem {
     height: 125px;
 	margin: 0 10px;
 	background-size: 100px 100px;
+	background-color: #121618;
+	border-width: 4px;
 	scale: 1;
 }
 
@@ -100,6 +102,23 @@ VisualElement#Inventory.active Button.ShopItem {
 
 VisualElement#Inventory.active Button.ShopItem.itemized {
 	scale: 1;
+}
+
+VisualElement.TypeContainer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	border-radius: 50%;
+	background-color: #121618;
+	padding: 4px;
+
+	transition: all 200ms ease-out;
+}
+
+VisualElement.TypeContainer VisualElement.Type {
+	width: 32px;
+	height: 32px;
+    border-radius: 50%;
 }
 
 Label.Hotkey {
@@ -115,13 +134,17 @@ Label.Hotkey {
 	-unity-font-style: bold;
 
     border-radius: 8px;
-	border-width: 1px;
-	border-color: #222;
-	background-color: rgba(50,50,50,.95);
+	border-width: 2px;
+	border-color: #000;
+	background-color: #121618;
 }
 
 .ShopItem > Label.Hotkey {
 	left: 46px;
+}
+
+Button.ShopItem.itemized:disabled .TypeContainer {
+	opacity: 0;
 }
 
 Button#RefreshButton:enabled:hover, Button#LockButton:enabled:hover {

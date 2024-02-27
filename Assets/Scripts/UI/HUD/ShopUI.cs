@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class ShopUI : Controller
 {
 	[SerializeField] ShopInventory _inventory;
+	[SerializeField] StyleSettings _styleSettings;
 
 	TooltipController _tooltipController;
 	TooltipContent _refreshTooltipContent;
@@ -132,7 +133,7 @@ public class ShopUI : Controller
 		for (var i = 0; i < _shopSlots.Count; i++)
 		{
 			var item = _shopItems[i];
-			_tooltipController.UpdateTooltip(_shopSlots[i], item.Tooltip());
+			_tooltipController.UpdateTooltip(_shopSlots[i], item.Tooltip(_styleSettings));
 		}
 	}
 
@@ -159,15 +160,26 @@ public class ShopUI : Controller
 
 	void SetupSlot(Button slot, ShopItem item)
 	{
+		var rarityColor = _styleSettings.RarityColors[item.RarityType];
+		var shopTypeColor = _styleSettings.ShopTypeColors[item.ShopType];
+		var shopTypeImage = _styleSettings.ShopTypeIcons[item.ShopType];
+
 		slot.style.backgroundImage = item.Image.texture;
+		slot.style.borderBottomColor = rarityColor;
+		slot.style.borderLeftColor = rarityColor;
+		slot.style.borderTopColor = rarityColor;
+		slot.style.borderRightColor = rarityColor;
 
-		var rarityClasses = new List<string> { "gray", "green", "blue", "purple", "orange" };
-		foreach (var rarityClass in rarityClasses)
-		{
-			slot.RemoveFromClassList(rarityClass);
-		}
+		var typeContainer = slot.Q<VisualElement>(null, "TypeContainer");
+		typeContainer.style.borderBottomColor = rarityColor;
+		typeContainer.style.borderLeftColor = rarityColor;
+		typeContainer.style.borderTopColor = rarityColor;
+		typeContainer.style.borderRightColor = rarityColor;
 
-		slot.AddToClassList(item.RarityType.AsColorClass());
+		var typeIcon = slot.Q<VisualElement>(null, "Type");
+		typeIcon.style.backgroundImage = shopTypeImage;
+		typeIcon.style.unityBackgroundImageTintColor = shopTypeColor;
+
 		slot.SetEnabled(true);
 	}
 

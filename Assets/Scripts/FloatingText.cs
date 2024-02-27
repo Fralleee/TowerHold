@@ -100,7 +100,7 @@ public class FloatingText : MonoBehaviour
 	void AdjustScaleConsistent()
 	{
 		var distance = Vector3.Distance(transform.position, _camera.transform.position);
-		var scale = _scaleMultiplier * (1 + (distance * 0.1f)) * _baseScale;
+		var scale = _scaleMultiplier * (1 + (distance * 0.005f)) * _baseScale;
 
 		transform.localScale = scale;
 	}

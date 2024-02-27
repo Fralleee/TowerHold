@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1995605022169943066
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -8,18 +21,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Gold Material
-  m_Shader: {fileID: 4800000, guid: dd89cf5b9246416f84610a006f916af7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 124c112a6e8f1a54e8b0870e881b56d8,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - OUTLINE_ON
   - UNDERLAY_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -41,17 +57,35 @@ Material:
           type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OutlineTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 0, y: 0}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _Ambient: 1
     - _Bevel: 0
+    - _BevelAmount: 0
     - _BevelClamp: 0
     - _BevelOffset: 0
     - _BevelRoundness: 0
+    - _BevelType: 0
     - _BevelWidth: 0
     - _BumpFace: 0
     - _BumpOutline: 0
@@ -68,14 +102,20 @@ Material:
     - _GlowPower: 1
     - _GradientScale: 10
     - _LightAngle: 0
+    - _MaskEdgeSoftness: 0.01
+    - _MaskInverse: 0
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
+    - _MaskWipeControl: 0.5
+    - _OutlineMode: 0
     - _OutlineShininess: 0
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
+    - _QueueControl: -1
+    - _QueueOffset: 0
     - _Reflectivity: 5
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 0.73125
@@ -92,24 +132,39 @@ Material:
     - _StencilWriteMask: 255
     - _TextureHeight: 1024
     - _TextureWidth: 1024
-    - _UnderlayDilate: 0.75
-    - _UnderlayOffsetX: 0.25
-    - _UnderlayOffsetY: -0.25
+    - _UnderlayDilate: 0
+    - _UnderlayOffsetX: 0.5
+    - _UnderlayOffsetY: -1
     - _UnderlaySoftness: 0
+    - _UseUIAlphaClip: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
     - _WeightBold: 0.75
     - _WeightNormal: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceColor: {r: 0.9911022, g: 0.9911022, b: 0.8069525, a: 1}
+    - _FaceColor: {r: 1, g: 0.8974829, b: 0.6650944, a: 1}
+    - _FaceUVSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _GlowColor: {r: 0.045186214, g: 0.0074990317, b: 0.11443538, a: 1}
+    - _IsoPerimeter: {r: 0, g: 0, b: 0, a: 0}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
-    - _OutlineColor: {r: 0.79910296, g: 0.27049786, b: 0.019382361, a: 1}
+    - _MaskEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor1: {r: 0.013235294, g: 0.006372549, b: 0.013235294, a: 1}
+    - _OutlineColor2: {r: 0.05448028, g: 0.004024717, b: 0.11443538, a: 1}
+    - _OutlineColor3: {r: 0.05448028, g: 0.004024717, b: 0.11443538, a: 1}
+    - _OutlineOffset1: {r: 0.5, g: -0.5, b: 0, a: 0}
+    - _OutlineOffset2: {r: 0, g: 0, b: 0, a: 0}
+    - _OutlineOffset3: {r: 0, g: 0, b: 0, a: 0}
+    - _OutlineUVSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _ReflectFaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectOutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Softness: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1790.7744, g: 1790.7744, b: 1790.7744, a: 1}
-    - _UnderlayColor: {r: 0.051886797, g: 0.008566216, b: 0.008566216, a: 1}
+    - _UnderlayColor: {r: 0.4433962, g: 0.13176396, b: 0.13176396, a: 1}
+    - _UnderlayOffset: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

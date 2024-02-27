@@ -9,7 +9,7 @@ Button {
 }
 
 Button:focus, Button:enabled:hover, VisualElement#Inventory.active Button.ShopItem:enabled:hover, VisualElement#Inventory.active Button.ShopItem:enabled:focus {
-    scale: 1.05 !important;
+    scale: 1.04 !important;
 }
 
 Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:enabled:active, VisualElement#Inventory.active Button.ShopItem.itemized:disabled {
@@ -42,34 +42,6 @@ Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:e
 
 .gray {
 	background-color: #64748b;
-}
-
-.text-red {
-	color: #e11d48;
-}
-
-.text-purple {
-	color: #9333ea;
-}
-
-.text-blue {
-	color: #2563eb;
-}
-
-.text-teal {
-	color: #0d9488;
-}
-
-.text-green {
-	color: #65a30d;
-}
-
-.text-orange {
-	color: #ea580c;
-}
-
-.text-gray {
-	color: #64748b;
 }
 
 .ProgressBar {

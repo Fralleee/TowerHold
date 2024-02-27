@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Tower : Target
 {
+	public static new Action<int, int> OnHealthChanged = delegate { };
 	public static Action OnTowerDeath = delegate { };
 
 	public int HealthRegenerationRate = 5;

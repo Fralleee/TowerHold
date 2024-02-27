@@ -36,11 +36,11 @@ public class UpdateUI : MonoBehaviour
 		GameController.OnLevelChanged += OnLevelChanged;
 		ResourceManager.OnResourceChange += OnResourceChanged;
 		ResourceManager.OnIncomeChange += OnIncomeChanged;
+		Tower.OnHealthChanged += OnHealthChanged;
 	}
 
 	void Start()
 	{
-		Tower.Instance.OnHealthChanged += OnHealthChanged;
 		_healthBar.UseChangeBar = true;
 		_levelBar.UseChangeBar = false;
 		InvokeRepeating(nameof(UpdateLevelProgress), 0, 1f);
@@ -84,10 +84,10 @@ public class UpdateUI : MonoBehaviour
 
 	void OnDestroy()
 	{
-		Tower.Instance.OnHealthChanged -= OnHealthChanged;
 		GameController.OnGameStart -= OnGameStart;
 		GameController.OnLevelChanged -= OnLevelChanged;
 		ResourceManager.OnResourceChange -= OnResourceChanged;
 		ResourceManager.OnIncomeChange -= OnIncomeChanged;
+		Tower.OnHealthChanged -= OnHealthChanged;
 	}
 }

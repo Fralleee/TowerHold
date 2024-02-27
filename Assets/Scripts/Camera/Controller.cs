@@ -4,7 +4,7 @@ public class Controller : MonoBehaviour
 {
 	public static void Toggle(bool enable)
 	{
-		var controllers = FindObjectsOfType<Controller>();
+		var controllers = FindObjectsByType<Controller>(FindObjectsSortMode.None);
 		foreach (var c in controllers)
 		{
 			c.ToggleInput(enable);

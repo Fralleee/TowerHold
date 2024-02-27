@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventory: {fileID: 11400000, guid: 4ba241c8995c94442bcf21c19229dcfd, type: 2}
+  _styleSettings: {fileID: 11400000, guid: 8c309cf45d8eb0048b7b00f2b311e395, type: 2}
 --- !u!114 &9108723444849123690
 MonoBehaviour:
   m_ObjectHideFlags: 0

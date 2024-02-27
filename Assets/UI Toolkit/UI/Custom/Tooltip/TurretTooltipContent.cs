@@ -29,9 +29,9 @@ public class TurretTooltipContent : TooltipContent
 		RangeLabel.AddToClassList("item-range");
 	}
 
-	public override void UpdateInformation(ShopItem item)
+	public override void UpdateInformation(ShopItem item, StyleSettings styleSettings)
 	{
-		base.UpdateInformation(item);
+		base.UpdateInformation(item, styleSettings);
 
 		if (item is Turret turret)
 		{

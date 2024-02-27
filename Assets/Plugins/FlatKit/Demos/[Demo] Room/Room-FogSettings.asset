@@ -143,3 +143,4 @@ Material:
     - _Near: 1
     m_Colors: []
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

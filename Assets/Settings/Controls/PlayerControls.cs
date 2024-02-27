@@ -108,7 +108,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""119f21b1-6a69-44e2-b1d4-a2d61e45adbb"",
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
-                    ""processors"": ""Scale(factor=0.008333334)"",
+                    ""processors"": ""Scale"",
                     ""groups"": """",
                     ""action"": ""Scroll"",
                     ""isComposite"": false,
