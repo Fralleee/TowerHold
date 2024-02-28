@@ -164,7 +164,8 @@ public class ShopUI : Controller
 		var shopTypeColor = _styleSettings.ShopTypeColors[item.ShopType];
 		var shopTypeImage = _styleSettings.ShopTypeIcons[item.ShopType];
 
-		slot.style.backgroundImage = item.Image.texture;
+		slot.style.backgroundImage = item.Texture;
+		slot.style.unityBackgroundImageTintColor = rarityColor;
 		slot.style.borderBottomColor = rarityColor;
 		slot.style.borderLeftColor = rarityColor;
 		slot.style.borderTopColor = rarityColor;

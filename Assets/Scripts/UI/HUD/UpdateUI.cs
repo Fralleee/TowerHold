@@ -3,7 +3,6 @@ using UnityEngine.UIElements;
 
 public class UpdateUI : MonoBehaviour
 {
-	[SerializeField] Texture2D _healthIcon;
 	[SerializeField] Texture2D _levelIcon;
 
 	TooltipController _tooltipController;
@@ -25,7 +24,6 @@ public class UpdateUI : MonoBehaviour
 
 		_progressContainer = uiDocument.rootVisualElement.Q("Progress");
 		_healthBar = _progressContainer.Q<CustomProgressBar>("HealthBar");
-		_healthBar.Icon = _healthIcon;
 		_levelBar = _progressContainer.Q<CustomProgressBar>("LevelBar");
 		_levelBar.Icon = _levelIcon;
 

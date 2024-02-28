@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: 
   ShopType: 5
-  Image: {fileID: 21300000, guid: bb2511573b6c5ff48b2bd0ed3840ea8a, type: 3}
+  Texture: {fileID: 2800000, guid: 4a93223a196927d46a78424fe8863b00, type: 3}
   RarityType: 2
   Category: 2
   _baseDamage: 10

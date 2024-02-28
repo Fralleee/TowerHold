@@ -1,7 +1,6 @@
 VisualElement#ShopContainer {
     position: relative;
     margin: 0 auto;
-    width: 1150px;
     display: flex;
     justify-content: flex-end;
 	align-self: flex-end;
@@ -16,12 +15,10 @@ VisualElement#GameInfo {
 
 VisualElement#Inventory {
     width: 100%;
-    height: 150px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* background-image: url('../../Art/Textures/inventory.psd'); */
 }
 
 VisualElement#Items {
@@ -29,14 +26,14 @@ VisualElement#Items {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-	margin: 0 36px;
+	margin: 0 16px;
 }
 
 VisualElement#Progress {
 	display: flex;
 	flex-direction: row;
     justify-content: space-between;
-	padding: 0 130px;
+	padding: 0 108px;
 	margin-bottom: 8px;
 }
 
@@ -74,25 +71,25 @@ Button#RefreshButton, Button#LockButton {
 }
 
 Button#RefreshButton {
-	background-image: url("../../Art/Textures/Icons/refresh.png");
+	background-image: url("/Assets/Art/Textures/Icons/cycle.png");
 }
 
 Button#LockButton {
-	background-image: url("../../Art/Textures/Icons/lock-open.png");
+	background-image: url("/Assets/Art/Textures/Icons/padlock-open.png");
 }
 
 Button#LockButton.active {
 	background-color: #444;
-	background-image: url("../../Art/Textures/Icons/lock-closed.png");
+	background-image: url("/Assets/Art/Textures/Icons/padlock.png");
 }
 
 Button.ShopItem {
     width: 125px;
     height: 125px;
 	margin: 0 10px;
-	background-size: 100px 100px;
+	border-width: 2px;
+	background-size: 96px 96px;
 	background-color: #121618;
-	border-width: 4px;
 	scale: 1;
 }
 
@@ -116,8 +113,8 @@ VisualElement.TypeContainer {
 }
 
 VisualElement.TypeContainer VisualElement.Type {
-	width: 32px;
-	height: 32px;
+	width: 24px;
+	height: 24px;
     border-radius: 50%;
 }
 

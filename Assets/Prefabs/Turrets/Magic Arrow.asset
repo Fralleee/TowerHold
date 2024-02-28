@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Magic Arrow
   m_EditorClassIdentifier: 
   ShopType: 6
-  Image: {fileID: 21300000, guid: 8f710f6cdeb2dda41a58d50ebe95fa94, type: 3}
+  Texture: {fileID: 2800000, guid: 8f710f6cdeb2dda41a58d50ebe95fa94, type: 3}
   RarityType: 3
   Category: 3
   _baseDamage: 25

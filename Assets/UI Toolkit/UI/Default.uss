@@ -9,7 +9,7 @@ Button {
 }
 
 Button:focus, Button:enabled:hover, VisualElement#Inventory.active Button.ShopItem:enabled:hover, VisualElement#Inventory.active Button.ShopItem:enabled:focus {
-    scale: 1.04 !important;
+    scale: 1.05 !important;
 }
 
 Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:enabled:active, VisualElement#Inventory.active Button.ShopItem.itemized:disabled {
@@ -110,7 +110,7 @@ Button:disabled, Button:active, VisualElement#Inventory.active Button.ShopItem:e
 	height: 24px;
 	width: 24px;
 
-	background-image: url("/Assets/Art/Textures/Item\ types/24/health.png");
+	background-image: url("/Assets/Art/Textures/Icons/defense.png");
 }
 
 

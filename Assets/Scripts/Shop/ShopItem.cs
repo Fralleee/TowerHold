@@ -8,7 +8,7 @@ public class ShopItem : ScriptableObject
 	[HideInInspector] public ShopType ShopType;
 
 	[Header("Shop Settings")]
-	public Sprite Image;
+	public Texture2D Texture;
 	public RarityType RarityType;
 	public int Cost
 	{

@@ -85,6 +85,7 @@ public class Enemy : Target
 				MoveToTarget();
 				break;
 			case EnemyState.Attacking:
+				TurnTowardsTarget();
 				AttackTarget();
 				break;
 			case EnemyState.Victory:
@@ -140,6 +141,17 @@ public class Enemy : Target
 			{
 				_nextDistanceCheck = GetNextDistanceCheckTime();
 			}
+		}
+	}
+
+	void TurnTowardsTarget()
+	{
+		if (_target != null)
+		{
+			var lookPos = _target.transform.position - transform.position;
+			lookPos.y = 0;
+			var rotation = Quaternion.LookRotation(lookPos);
+			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5);
 		}
 	}
 
