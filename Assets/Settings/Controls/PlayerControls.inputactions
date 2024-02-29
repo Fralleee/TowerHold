@@ -181,15 +181,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleShop",
-                    "type": "Button",
-                    "id": "835b5304-b591-476e-af09-c566c9b14402",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "RefreshShop",
                     "type": "Button",
                     "id": "4dd377da-f0c0-4978-978f-7e25422cec72",
@@ -211,6 +202,15 @@
                     "name": "PurchaseItem",
                     "type": "Button",
                     "id": "0150f6c8-38c4-4803-bea3-bcc4e37e2146",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleMenu",
+                    "type": "Button",
+                    "id": "acf407b4-8172-40f4-b4a5-f98434c87259",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -374,17 +374,6 @@
                 },
                 {
                     "name": "",
-                    "id": "e991bad8-2462-485e-b1fa-578615bb3991",
-                    "path": "<Keyboard>/t",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleShop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f6bb9df3-fcd6-4979-b45e-25936a2e8ae6",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -468,6 +457,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PurchaseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87a9d7b6-5c7a-4992-b5dd-dab0d4ed3504",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -47,6 +47,8 @@ public class GameController : Singleton<GameController>
 		InitializeStateMachine();
 		InitializeGameSettings();
 
+		FindFirstObjectByType<MenuController>().UpdateMenuContext(MenuController.MenuContext.InGameMenu);
+
 		Debug.Log($"Starting game in {Settings.FreezeTime} seconds | Seed: {Settings.StartSeed} | Level: {Settings.StartLevel} | Map: {NameGeneration.GenerateLevelName(Settings.StartSeed)}");
 	}
 

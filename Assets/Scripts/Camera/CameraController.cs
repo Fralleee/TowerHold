@@ -76,7 +76,6 @@ public class CameraController : Controller
 
 		if (_isMouseMoving)
 		{
-			Cursor.SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);
 			HandleMovement();
 		}
 		else if (IsKeyboardMoving)
@@ -86,7 +85,6 @@ public class CameraController : Controller
 
 		if (_isMouseRotating)
 		{
-			Cursor.SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
 			HandleRotation();
 		}
 		else if (IsKeyboardRotating)
@@ -96,7 +94,6 @@ public class CameraController : Controller
 
 		if (!InputActive)
 		{
-			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 			CheckMouseAtScreenEdge();
 			SnapRotation();
 		}
@@ -212,9 +209,21 @@ public class CameraController : Controller
 		_ = plane.Raycast(ray, out var entry);
 		_dragStartPosition = ray.GetPoint(entry);
 		_isMouseMoving = true;
+		Cursor.SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);
 	}
 
-	void MoveCanceled(InputAction.CallbackContext context) => _isMouseMoving = false;
+	void MoveCanceled(InputAction.CallbackContext context)
+	{
+		_isMouseMoving = false;
+		if (_isMouseRotating)
+		{
+			Cursor.SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
+		}
+		else
+		{
+			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+		}
+	}
 
 	void Scroll(InputAction.CallbackContext context) => _newZoom += context.ReadValue<float>() * _zoomVector;
 
@@ -222,14 +231,26 @@ public class CameraController : Controller
 	{
 		_rotateStartPosition = MousePosition;
 		_isMouseRotating = true;
+		Cursor.SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
 	}
 
-	void RotationCanceled(InputAction.CallbackContext context) => _isMouseRotating = false;
+	void RotationCanceled(InputAction.CallbackContext context)
+	{
+		_isMouseRotating = false;
+		if (_isMouseMoving)
+		{
+			Cursor.SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);
+		}
+		else
+		{
+			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+		}
+	}
 
 	void OnDestroy()
 	{
-		Controls.Mouse.PrimaryFire.started -= MoveStart;
-		Controls.Mouse.PrimaryFire.canceled -= MoveCanceled;
+		Controls.Mouse.PanStart.started -= MoveStart;
+		Controls.Mouse.PanStart.canceled -= MoveCanceled;
 		Controls.Mouse.Rotation.started -= RotationStart;
 		Controls.Mouse.Rotation.canceled -= RotationCanceled;
 		Controls.Mouse.Scroll.performed -= Scroll;

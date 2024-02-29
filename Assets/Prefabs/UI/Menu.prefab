@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 374472775779860019}
   - component: {fileID: 6264600011082983425}
-  - component: {fileID: 4630720605361873180}
+  - component: {fileID: 612060909276049607}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -50,7 +50,7 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: 838d514cca549f346b7344879e9dead4,
     type: 3}
   m_SortingOrder: 0
---- !u!114 &4630720605361873180
+--- !u!114 &612060909276049607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6450932868908345924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd67a25082f332540bbc87504441871c, type: 3}
+  m_Script: {fileID: 11500000, guid: 84ef34eb35a4074489335a448f41f7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentContext: 0

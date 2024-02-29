@@ -203,15 +203,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ToggleShop"",
-                    ""type"": ""Button"",
-                    ""id"": ""835b5304-b591-476e-af09-c566c9b14402"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""RefreshShop"",
                     ""type"": ""Button"",
                     ""id"": ""4dd377da-f0c0-4978-978f-7e25422cec72"",
@@ -233,6 +224,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""PurchaseItem"",
                     ""type"": ""Button"",
                     ""id"": ""0150f6c8-38c4-4803-bea3-bcc4e37e2146"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""acf407b4-8172-40f4-b4a5-f98434c87259"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -396,17 +396,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e991bad8-2462-485e-b1fa-578615bb3991"",
-                    ""path"": ""<Keyboard>/t"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ToggleShop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f6bb9df3-fcd6-4979-b45e-25936a2e8ae6"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
@@ -492,6 +481,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""PurchaseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87a9d7b6-5c7a-4992-b5dd-dab0d4ed3504"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -512,10 +512,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
         m_Keyboard_Rotation = m_Keyboard.FindAction("Rotation", throwIfNotFound: true);
         m_Keyboard_Reset = m_Keyboard.FindAction("Reset", throwIfNotFound: true);
-        m_Keyboard_ToggleShop = m_Keyboard.FindAction("ToggleShop", throwIfNotFound: true);
         m_Keyboard_RefreshShop = m_Keyboard.FindAction("RefreshShop", throwIfNotFound: true);
         m_Keyboard_LockShop = m_Keyboard.FindAction("LockShop", throwIfNotFound: true);
         m_Keyboard_PurchaseItem = m_Keyboard.FindAction("PurchaseItem", throwIfNotFound: true);
+        m_Keyboard_ToggleMenu = m_Keyboard.FindAction("ToggleMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -674,10 +674,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Move;
     private readonly InputAction m_Keyboard_Rotation;
     private readonly InputAction m_Keyboard_Reset;
-    private readonly InputAction m_Keyboard_ToggleShop;
     private readonly InputAction m_Keyboard_RefreshShop;
     private readonly InputAction m_Keyboard_LockShop;
     private readonly InputAction m_Keyboard_PurchaseItem;
+    private readonly InputAction m_Keyboard_ToggleMenu;
     public struct KeyboardActions
     {
         private @PlayerControls m_Wrapper;
@@ -685,10 +685,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Keyboard_Move;
         public InputAction @Rotation => m_Wrapper.m_Keyboard_Rotation;
         public InputAction @Reset => m_Wrapper.m_Keyboard_Reset;
-        public InputAction @ToggleShop => m_Wrapper.m_Keyboard_ToggleShop;
         public InputAction @RefreshShop => m_Wrapper.m_Keyboard_RefreshShop;
         public InputAction @LockShop => m_Wrapper.m_Keyboard_LockShop;
         public InputAction @PurchaseItem => m_Wrapper.m_Keyboard_PurchaseItem;
+        public InputAction @ToggleMenu => m_Wrapper.m_Keyboard_ToggleMenu;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -707,9 +707,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Reset.started += instance.OnReset;
             @Reset.performed += instance.OnReset;
             @Reset.canceled += instance.OnReset;
-            @ToggleShop.started += instance.OnToggleShop;
-            @ToggleShop.performed += instance.OnToggleShop;
-            @ToggleShop.canceled += instance.OnToggleShop;
             @RefreshShop.started += instance.OnRefreshShop;
             @RefreshShop.performed += instance.OnRefreshShop;
             @RefreshShop.canceled += instance.OnRefreshShop;
@@ -719,6 +716,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PurchaseItem.started += instance.OnPurchaseItem;
             @PurchaseItem.performed += instance.OnPurchaseItem;
             @PurchaseItem.canceled += instance.OnPurchaseItem;
+            @ToggleMenu.started += instance.OnToggleMenu;
+            @ToggleMenu.performed += instance.OnToggleMenu;
+            @ToggleMenu.canceled += instance.OnToggleMenu;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -732,9 +732,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Reset.started -= instance.OnReset;
             @Reset.performed -= instance.OnReset;
             @Reset.canceled -= instance.OnReset;
-            @ToggleShop.started -= instance.OnToggleShop;
-            @ToggleShop.performed -= instance.OnToggleShop;
-            @ToggleShop.canceled -= instance.OnToggleShop;
             @RefreshShop.started -= instance.OnRefreshShop;
             @RefreshShop.performed -= instance.OnRefreshShop;
             @RefreshShop.canceled -= instance.OnRefreshShop;
@@ -744,6 +741,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PurchaseItem.started -= instance.OnPurchaseItem;
             @PurchaseItem.performed -= instance.OnPurchaseItem;
             @PurchaseItem.canceled -= instance.OnPurchaseItem;
+            @ToggleMenu.started -= instance.OnToggleMenu;
+            @ToggleMenu.performed -= instance.OnToggleMenu;
+            @ToggleMenu.canceled -= instance.OnToggleMenu;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -776,9 +776,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
-        void OnToggleShop(InputAction.CallbackContext context);
         void OnRefreshShop(InputAction.CallbackContext context);
         void OnLockShop(InputAction.CallbackContext context);
         void OnPurchaseItem(InputAction.CallbackContext context);
+        void OnToggleMenu(InputAction.CallbackContext context);
     }
 }
