@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -17,10 +16,13 @@ public class MenuController : SingletonController<MenuController>
 	bool _showMenu = true;
 
 	UIDocument _uiDocument;
-	VisualElement _root;
+	VisualElement _mainPage;
+	VisualElement _optionsPage;
+	VisualElement _currentPage;
 
 	Button _playButton;
 	Button _continueButton;
+	Button _optionsButton;
 	Button _menuButton;
 	Button _quitButton;
 
@@ -31,15 +33,19 @@ public class MenuController : SingletonController<MenuController>
 		DontDestroyOnLoad(gameObject);
 
 		_uiDocument = GetComponent<UIDocument>();
-		_root = _uiDocument.rootVisualElement.Q<VisualElement>("Root");
+		_mainPage = _uiDocument.rootVisualElement.Q<VisualElement>("MainPage");
+		_optionsPage = _uiDocument.rootVisualElement.Q<VisualElement>("OptionsPage");
+		_currentPage = _mainPage;
 
-		_playButton = _root.Q<Button>("PlayButton");
-		_continueButton = _root.Q<Button>("ContinueButton");
-		_menuButton = _root.Q<Button>("MenuButton");
-		_quitButton = _root.Q<Button>("QuitButton");
+		_playButton = _mainPage.Q<Button>("PlayButton");
+		_continueButton = _mainPage.Q<Button>("ContinueButton");
+		_optionsButton = _mainPage.Q<Button>("OptionsButton");
+		_menuButton = _mainPage.Q<Button>("MenuButton");
+		_quitButton = _mainPage.Q<Button>("QuitButton");
 
 		_playButton.clicked += Play;
 		_continueButton.clicked += Continue;
+		_optionsButton.clicked += Options;
 		_menuButton.clicked += ToMainMenu;
 		_quitButton.clicked += Quit;
 
@@ -65,7 +71,7 @@ public class MenuController : SingletonController<MenuController>
 			return;
 		}
 
-		_root = _uiDocument.rootVisualElement.Q<VisualElement>("Root");
+		_mainPage = _uiDocument.rootVisualElement.Q<VisualElement>("MainPage");
 		if (_showMenu)
 		{
 			_uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;
@@ -110,17 +116,26 @@ public class MenuController : SingletonController<MenuController>
 		CurrentContext = newContext;
 		if (newContext == MenuContext.MainMenu)
 		{
-			_root.RemoveFromClassList("InGame");
+			_mainPage.RemoveFromClassList("InGame");
 		}
 		else if (newContext == MenuContext.InGameMenu)
 		{
-			_root.AddToClassList("InGame");
+			_mainPage.AddToClassList("InGame");
 			ToggleMenu(false);
 		}
 	}
 
+	void ActivatePage(VisualElement page)
+	{
+		_currentPage.style.display = DisplayStyle.None;
+
+		page.style.display = DisplayStyle.Flex;
+		_currentPage = page;
+	}
+
 	void ToggleMenuKeyboard(InputAction.CallbackContext _)
 	{
+		ActivatePage(_mainPage);
 		if (CurrentContext == MenuContext.InGameMenu)
 		{
 			ToggleMenu(!_showMenu);
@@ -131,11 +146,18 @@ public class MenuController : SingletonController<MenuController>
 	{
 		_showMenu = showMenu;
 		_uiDocument.rootVisualElement.style.display = _showMenu ? DisplayStyle.Flex : DisplayStyle.None;
+		if (CurrentContext == MenuContext.InGameMenu)
+		{
+			Time.timeScale = _showMenu ? 0 : 1;
+			FindFirstObjectByType<CameraController>().enabled = !_showMenu;
+		}
 	}
 
 	void Play() => SceneManager.LoadScene("Game");
 
 	void Continue() => ToggleMenu(false);
+
+	void Options() => ActivatePage(_optionsPage);
 
 	void ToMainMenu() => SceneManager.LoadScene("Menu");
 

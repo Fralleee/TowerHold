@@ -209,7 +209,7 @@ public class CameraController : Controller
 		_ = plane.Raycast(ray, out var entry);
 		_dragStartPosition = ray.GetPoint(entry);
 		_isMouseMoving = true;
-		Cursor.SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);
+		SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);
 	}
 
 	void MoveCanceled(InputAction.CallbackContext context)
@@ -217,11 +217,11 @@ public class CameraController : Controller
 		_isMouseMoving = false;
 		if (_isMouseRotating)
 		{
-			Cursor.SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
+			SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
 		}
 		else
 		{
-			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+			SetCursor(null, Vector2.zero, CursorMode.Auto);
 		}
 	}
 
@@ -231,7 +231,7 @@ public class CameraController : Controller
 	{
 		_rotateStartPosition = MousePosition;
 		_isMouseRotating = true;
-		Cursor.SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
+		SetCursor(_rotationCursor, new Vector2(12, 12), CursorMode.Auto);
 	}
 
 	void RotationCanceled(InputAction.CallbackContext context)
@@ -239,11 +239,19 @@ public class CameraController : Controller
 		_isMouseRotating = false;
 		if (_isMouseMoving)
 		{
-			Cursor.SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);
+			SetCursor(_moveCursor, new Vector2(12, 12), CursorMode.Auto);
 		}
 		else
 		{
-			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+			SetCursor(null, Vector2.zero, CursorMode.Auto);
+		}
+	}
+
+	void SetCursor(Texture2D texture, Vector2 hotspot, CursorMode cursorMode)
+	{
+		if (enabled)
+		{
+			Cursor.SetCursor(texture, hotspot, cursorMode);
 		}
 	}
 
