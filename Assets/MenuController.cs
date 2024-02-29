@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,8 @@ public class MenuController : SingletonController<MenuController>
 	{
 		base.Awake();
 
+		DontDestroyOnLoad(gameObject);
+
 		_uiDocument = GetComponent<UIDocument>();
 		_root = _uiDocument.rootVisualElement.Q<VisualElement>("Root");
 
@@ -41,6 +44,17 @@ public class MenuController : SingletonController<MenuController>
 		_quitButton.clicked += Quit;
 
 		Controls.Keyboard.ToggleMenu.performed += ToggleMenuKeyboard;
+
+		SceneManager.activeSceneChanged += OnSceneChanged;
+
+		if (SceneManager.GetActiveScene().name != "Menu")
+		{
+			UpdateMenuContext(MenuContext.InGameMenu);
+		}
+		else
+		{
+			UpdateMenuContext(MenuContext.MainMenu);
+		}
 	}
 
 	void OnValidate()
@@ -64,6 +78,19 @@ public class MenuController : SingletonController<MenuController>
 		UpdateMenuContext(CurrentContext);
 	}
 
+
+	void OnSceneChanged(Scene _, Scene next)
+	{
+		if (next.name != "Menu")
+		{
+			UpdateMenuContext(MenuContext.InGameMenu);
+		}
+		else
+		{
+			UpdateMenuContext(MenuContext.MainMenu);
+		}
+	}
+
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
@@ -74,6 +101,8 @@ public class MenuController : SingletonController<MenuController>
 		_quitButton.clicked -= Quit;
 
 		Controls.Keyboard.ToggleMenu.performed -= ToggleMenuKeyboard;
+
+		SceneManager.activeSceneChanged -= OnSceneChanged;
 	}
 
 	public void UpdateMenuContext(MenuContext newContext)
@@ -112,4 +141,3 @@ public class MenuController : SingletonController<MenuController>
 
 	void Quit() => Application.Quit();
 }
-

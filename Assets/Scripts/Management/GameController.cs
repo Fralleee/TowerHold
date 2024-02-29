@@ -1,7 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class GameController : Singleton<GameController>
@@ -46,8 +45,6 @@ public class GameController : Singleton<GameController>
 
 		InitializeStateMachine();
 		InitializeGameSettings();
-
-		FindFirstObjectByType<MenuController>().UpdateMenuContext(MenuController.MenuContext.InGameMenu);
 
 		Debug.Log($"Starting game in {Settings.FreezeTime} seconds | Seed: {Settings.StartSeed} | Level: {Settings.StartLevel} | Map: {NameGeneration.GenerateLevelName(Settings.StartSeed)}");
 	}
@@ -99,10 +96,6 @@ public class GameController : Singleton<GameController>
 
 		RandomGenerator = new RandomGenerator(Settings.StartSeed);
 	}
-
-	public void ReplayGame() => SceneManager.LoadScene("Game");
-
-	public void Menu() => SceneManager.LoadScene("Menu");
 
 	protected override void OnDestroy()
 	{
