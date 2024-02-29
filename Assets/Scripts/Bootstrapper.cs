@@ -15,4 +15,17 @@ public class Bootstrapper : MonoBehaviour
 			}
 		};
 	}
+
+	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+	static void LoadGraphy()
+	{
+		Addressables.LoadAssetAsync<GameObject>("Graphy").Completed += handle =>
+		{
+			if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+			{
+				var graphyPrefab = handle.Result;
+				_ = Instantiate(graphyPrefab);
+			}
+		};
+	}
 }
