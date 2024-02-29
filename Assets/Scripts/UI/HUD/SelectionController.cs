@@ -31,8 +31,6 @@ public class SelectionController : Controller
 		_nameLabel = _container.Q<Label>("SelectionName");
 
 		_mainCamera = Camera.main;
-
-		Controls.Mouse.PrimaryFireTap.performed += OnPrimaryFire;
 	}
 
 	void Start()
@@ -44,12 +42,15 @@ public class SelectionController : Controller
 		}
 	}
 
-	void OnDisable()
+	void Update()
 	{
-		Controls.Mouse.PrimaryFireTap.performed -= OnPrimaryFire;
+		if (Controls.Mouse.PrimaryFireTap.WasPerformedThisFrame())
+		{
+			OnPrimaryFire();
+		}
 	}
 
-	void OnPrimaryFire(InputAction.CallbackContext context)
+	void OnPrimaryFire()
 	{
 		if (EventSystem.current.IsPointerOverGameObject())
 		{

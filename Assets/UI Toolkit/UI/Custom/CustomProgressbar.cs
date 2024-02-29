@@ -51,14 +51,6 @@ public class CustomProgressBar : VisualElement
 		}
 	}
 
-	public Texture2D Icon
-	{
-		set
-		{
-			_icon.style.backgroundImage = value;
-		}
-	}
-
 	public CustomProgressBar()
 	{
 		AddToClassList("ProgressBar");

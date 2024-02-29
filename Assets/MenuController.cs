@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,12 +14,14 @@ public class MenuController : SingletonController<MenuController>
 
 	public MenuContext CurrentContext = MenuContext.MainMenu;
 
+	readonly Stack<UIScreen> _screenStack = new Stack<UIScreen>();
 	bool _showMenu = true;
 
 	UIDocument _uiDocument;
 	VisualElement _mainPage;
 	VisualElement _optionsPage;
-	VisualElement _currentPage;
+	UIScreen _mainScreen;
+	UIScreen _optionsScreen;
 
 	Button _playButton;
 	Button _continueButton;
@@ -35,7 +38,6 @@ public class MenuController : SingletonController<MenuController>
 		_uiDocument = GetComponent<UIDocument>();
 		_mainPage = _uiDocument.rootVisualElement.Q<VisualElement>("MainPage");
 		_optionsPage = _uiDocument.rootVisualElement.Q<VisualElement>("OptionsPage");
-		_currentPage = _mainPage;
 
 		_playButton = _mainPage.Q<Button>("PlayButton");
 		_continueButton = _mainPage.Q<Button>("ContinueButton");
@@ -52,6 +54,10 @@ public class MenuController : SingletonController<MenuController>
 		Controls.Keyboard.ToggleMenu.performed += ToggleMenuKeyboard;
 
 		SceneManager.activeSceneChanged += OnSceneChanged;
+
+		_mainScreen = new UIScreen(_mainPage, false);
+		_optionsScreen = new UIScreen(_optionsPage);
+		_screenStack.Push(_mainScreen);
 
 		if (SceneManager.GetActiveScene().name != "Menu")
 		{
@@ -125,17 +131,38 @@ public class MenuController : SingletonController<MenuController>
 		}
 	}
 
-	void ActivatePage(VisualElement page)
+	public void PushScreen(UIScreen screen)
 	{
-		_currentPage.style.display = DisplayStyle.None;
+		if (_screenStack.Count > 0)
+		{
+			_screenStack.Peek().Hide();
+		}
 
-		page.style.display = DisplayStyle.Flex;
-		_currentPage = page;
+		_screenStack.Push(screen);
+		screen.Show();
+	}
+
+	public void PopScreen()
+	{
+		if (_screenStack.Count > 0)
+		{
+			_screenStack.Pop().Hide();
+		}
+
+		if (_screenStack.Count > 0)
+		{
+			_screenStack.Peek().Show();
+		}
 	}
 
 	void ToggleMenuKeyboard(InputAction.CallbackContext _)
 	{
-		ActivatePage(_mainPage);
+		if (_showMenu && _screenStack.Count > 1)
+		{
+			PopScreen();
+			return;
+		}
+
 		if (CurrentContext == MenuContext.InGameMenu)
 		{
 			ToggleMenu(!_showMenu);
@@ -157,7 +184,7 @@ public class MenuController : SingletonController<MenuController>
 
 	void Continue() => ToggleMenu(false);
 
-	void Options() => ActivatePage(_optionsPage);
+	void Options() => PushScreen(_optionsScreen);
 
 	void ToMainMenu() => SceneManager.LoadScene("Menu");
 

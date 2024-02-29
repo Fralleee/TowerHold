@@ -25,7 +25,6 @@ public class UpdateUI : MonoBehaviour
 		_progressContainer = uiDocument.rootVisualElement.Q("Progress");
 		_healthBar = _progressContainer.Q<CustomProgressBar>("HealthBar");
 		_levelBar = _progressContainer.Q<CustomProgressBar>("LevelBar");
-		_levelBar.Icon = _levelIcon;
 
 		_tooltipController.RegisterTooltip(_levelLabel, new TooltipContent("Level", null, "This is the current level"));
 		_tooltipController.RegisterTooltip(_coinLabel, new TooltipContent("Coin", null, "This is the amount of coins you have"));
