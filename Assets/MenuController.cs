@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,12 +13,10 @@ public class MenuController : SingletonController<MenuController>
 
 	public MenuContext CurrentContext = MenuContext.MainMenu;
 
-	readonly Stack<UIScreen> _screenStack = new Stack<UIScreen>();
+	readonly ScreenStack _screenStack = new ScreenStack();
 	bool _showMenu = true;
 
 	UIDocument _uiDocument;
-	VisualElement _mainPage;
-	VisualElement _optionsPage;
 	UIScreen _mainScreen;
 	UIScreen _optionsScreen;
 
@@ -36,14 +33,15 @@ public class MenuController : SingletonController<MenuController>
 		DontDestroyOnLoad(gameObject);
 
 		_uiDocument = GetComponent<UIDocument>();
-		_mainPage = _uiDocument.rootVisualElement.Q<VisualElement>("MainPage");
-		_optionsPage = _uiDocument.rootVisualElement.Q<VisualElement>("OptionsPage");
+		_mainScreen = new UIScreen(_uiDocument.rootVisualElement.Q<VisualElement>("MainScreen"));
+		_optionsScreen = new UIScreen(_uiDocument.rootVisualElement.Q<VisualElement>("OptionsScreen"));
+		_screenStack.PushScreen(_mainScreen);
 
-		_playButton = _mainPage.Q<Button>("PlayButton");
-		_continueButton = _mainPage.Q<Button>("ContinueButton");
-		_optionsButton = _mainPage.Q<Button>("OptionsButton");
-		_menuButton = _mainPage.Q<Button>("MenuButton");
-		_quitButton = _mainPage.Q<Button>("QuitButton");
+		_playButton = _mainScreen.Root.Q<Button>("PlayButton");
+		_continueButton = _mainScreen.Root.Q<Button>("ContinueButton");
+		_optionsButton = _mainScreen.Root.Q<Button>("OptionsButton");
+		_menuButton = _mainScreen.Root.Q<Button>("MenuButton");
+		_quitButton = _mainScreen.Root.Q<Button>("QuitButton");
 
 		_playButton.clicked += Play;
 		_continueButton.clicked += Continue;
@@ -55,10 +53,6 @@ public class MenuController : SingletonController<MenuController>
 
 		SceneManager.activeSceneChanged += OnSceneChanged;
 
-		_mainScreen = new UIScreen(_mainPage, false);
-		_optionsScreen = new UIScreen(_optionsPage);
-		_screenStack.Push(_mainScreen);
-
 		if (SceneManager.GetActiveScene().name != "Menu")
 		{
 			UpdateMenuContext(MenuContext.InGameMenu);
@@ -68,28 +62,6 @@ public class MenuController : SingletonController<MenuController>
 			UpdateMenuContext(MenuContext.MainMenu);
 		}
 	}
-
-	void OnValidate()
-	{
-		_uiDocument = GetComponent<UIDocument>();
-		if (_uiDocument.rootVisualElement == null)
-		{
-			return;
-		}
-
-		_mainPage = _uiDocument.rootVisualElement.Q<VisualElement>("MainPage");
-		if (_showMenu)
-		{
-			_uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;
-		}
-		else
-		{
-			_uiDocument.rootVisualElement.style.display = DisplayStyle.None;
-		}
-
-		UpdateMenuContext(CurrentContext);
-	}
-
 
 	void OnSceneChanged(Scene _, Scene next)
 	{
@@ -120,46 +92,23 @@ public class MenuController : SingletonController<MenuController>
 	public void UpdateMenuContext(MenuContext newContext)
 	{
 		CurrentContext = newContext;
+		_screenStack.ClearStack();
 		if (newContext == MenuContext.MainMenu)
 		{
-			_mainPage.RemoveFromClassList("InGame");
+			_mainScreen.Root.RemoveFromClassList("InGame");
 		}
 		else if (newContext == MenuContext.InGameMenu)
 		{
-			_mainPage.AddToClassList("InGame");
+			_mainScreen.Root.AddToClassList("InGame");
 			ToggleMenu(false);
-		}
-	}
-
-	public void PushScreen(UIScreen screen)
-	{
-		if (_screenStack.Count > 0)
-		{
-			_screenStack.Peek().Hide();
-		}
-
-		_screenStack.Push(screen);
-		screen.Show();
-	}
-
-	public void PopScreen()
-	{
-		if (_screenStack.Count > 0)
-		{
-			_screenStack.Pop().Hide();
-		}
-
-		if (_screenStack.Count > 0)
-		{
-			_screenStack.Peek().Show();
 		}
 	}
 
 	void ToggleMenuKeyboard(InputAction.CallbackContext _)
 	{
-		if (_showMenu && _screenStack.Count > 1)
+		if (_showMenu && !_screenStack.IsEmpty)
 		{
-			PopScreen();
+			_screenStack.PopScreen();
 			return;
 		}
 
@@ -184,7 +133,7 @@ public class MenuController : SingletonController<MenuController>
 
 	void Continue() => ToggleMenu(false);
 
-	void Options() => PushScreen(_optionsScreen);
+	void Options() => _screenStack.PushScreen(_optionsScreen);
 
 	void ToMainMenu() => SceneManager.LoadScene("Menu");
 

@@ -1,0 +1,36 @@
+VisualElement#MainScreen {
+	padding-top: 120px;
+	padding-left: 80px;
+}
+
+VisualElement#MainScreen.InGame {
+	align-items: center;
+	padding-left: 0;
+}
+
+Button#ContinueButton {
+	display: none;
+}
+
+Button#MenuButton {
+	display: none;
+}
+
+.InGame Button#PlayButton {
+	display: none;
+}
+
+.InGame Button#ContinueButton {
+	display: flex;
+}
+
+.InGame Button#MenuButton {
+	display: flex;
+}
+
+VisualElement#Title {
+	width: 420px;
+	height: 150px;
+	background-image: url("/Assets/Art/Textures/text.psd");
+}
+

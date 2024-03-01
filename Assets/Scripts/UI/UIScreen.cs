@@ -3,34 +3,21 @@ using System;
 
 public class UIScreen : VisualElement
 {
-	protected bool HideOnAwake;
+	public VisualElement Root { get; }
 
-	protected VisualElement RootElement;
-
-	public VisualElement ParentElement => RootElement;
-
-	public UIScreen(VisualElement parentElement, bool hideOnAwake = true)
+	public UIScreen(VisualElement parentElement)
 	{
-		RootElement = parentElement ?? throw new ArgumentNullException(nameof(parentElement));
-		HideOnAwake = hideOnAwake;
-		Initialize();
+		Root = parentElement ?? throw new ArgumentNullException(nameof(parentElement));
+		Root.style.display = DisplayStyle.None;
 	}
 
-	public virtual void Initialize()
+	public void Show()
 	{
-		if (HideOnAwake)
-		{
-			Hide();
-		}
-	}
-
-	public virtual void Show()
-	{
-		RootElement.style.display = DisplayStyle.Flex;
+		Root.style.display = DisplayStyle.Flex;
 	}
 
 	public void Hide()
 	{
-		RootElement.style.display = DisplayStyle.None;
+		Root.style.display = DisplayStyle.None;
 	}
 }

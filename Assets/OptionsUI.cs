@@ -4,12 +4,14 @@ using UnityEngine.UIElements;
 public class OptionsUI : MonoBehaviour
 {
 	UIDocument _uiDocument;
+	VisualElement _optionsScreen;
 	DropdownField _qualityDropdown;
 
 	void Awake()
 	{
 		_uiDocument = GetComponent<UIDocument>();
-		_qualityDropdown = _uiDocument.rootVisualElement.Q<DropdownField>("QualityDropdown");
+		_optionsScreen = _uiDocument.rootVisualElement.Q<VisualElement>("OptionsScreen");
+		_qualityDropdown = _optionsScreen.Q<DropdownField>("QualityDropdown");
 
 		InitializeQualityDropdown();
 	}
