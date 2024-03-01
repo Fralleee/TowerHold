@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/UI/Menu/Options.uss" />
+    <Style src="Options.uss" />
     <ui:VisualElement name="OptionsScreen" class="screen">
         <ui:VisualElement class="container">
         	<ui:DropdownField label="Dropdown" name="QualityDropdown" />
