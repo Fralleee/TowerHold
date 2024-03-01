@@ -60,7 +60,8 @@ public class ObjectSpawner : MonoBehaviour
 	[Button]
 	public void ExecuteSpawnProfiles()
 	{
-		_randomGenerator ??= new RandomGenerator(GameController.GameSettings.StartSeed);
+		var startSeed = GameController.GameSettings != null ? GameController.GameSettings.StartSeed : 0;
+		_randomGenerator ??= new RandomGenerator(startSeed);
 
 		if (!ValidateSettings())
 		{

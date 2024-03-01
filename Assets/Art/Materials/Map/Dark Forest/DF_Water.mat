@@ -96,7 +96,7 @@ Material:
     - _Depth: 100
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FadeDistance: 0.25
+    - _FadeDistance: 0.5
     - _FoamAmount: 0.12
     - _FoamDepth: 0.25
     - _FoamDirection: -0.19
@@ -114,7 +114,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LightContribution: 0
+    - _LightContribution: 0.034
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Opaque: 0
