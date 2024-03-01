@@ -15,7 +15,7 @@ MonoBehaviour:
   Collections:
   - {fileID: 11400000, guid: e967aef344f679e4a98bf2e7b7451f6c, type: 2}
   StartRadius: 53
-  EndRadius: 120
+  EndRadius: 130
   MinSpacing: 1
   Intensity: 25
   CarveNavMesh: 0

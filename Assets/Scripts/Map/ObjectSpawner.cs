@@ -140,30 +140,37 @@ public class ObjectSpawner : MonoBehaviour
 			return;
 		}
 
-		var (isObstructed, newPosition) = IsPositionObstructed(spawnPosition, profile.MinSpacing);
-		if (!isObstructed)
+		if (NavMesh.SamplePosition(spawnPosition, out var hit, profile.MinSpacing, NavMesh.AllAreas))
 		{
-			var spawnableObject = ChooseRandomObject(objects);
-			if (spawnableObject != null)
+			if (!IsNearNavMeshEdge(hit, 3f))
 			{
-				var scale = _randomGenerator.NextFloat(spawnableObject.MinScale, spawnableObject.MaxScale);
-				var rotation = new Vector3(
-					_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.x,
-					_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.y,
-					_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
-				);
-
-				var spawnedObject = Instantiate(spawnableObject.Prefab, newPosition ?? spawnPosition, Quaternion.Euler(rotation), _parentObject);
-				spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
-
-				if (profile.CarveNavMesh)
+				spawnPosition = hit.position;
+				var (isObstructed, newPosition) = IsPositionObstructed(spawnPosition, profile.MinSpacing);
+				if (!isObstructed)
 				{
-					var navMeshObstacle = spawnedObject.AddComponent<NavMeshObstacle>();
-					navMeshObstacle.carving = true;
-					navMeshObstacle.size = new Vector3(Mathf.Max(scale, 1f) + 1f, 10f, Mathf.Max(scale, 1f) + 1f);
-				}
+					var spawnableObject = ChooseRandomObject(objects);
+					if (spawnableObject != null)
+					{
+						var scale = _randomGenerator.NextFloat(spawnableObject.MinScale, spawnableObject.MaxScale);
+						var rotation = new Vector3(
+							_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.x,
+							_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.y,
+							_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
+						);
 
-				_spawnedObjects.Add(spawnedObject);
+						var spawnedObject = Instantiate(spawnableObject.Prefab, newPosition ?? spawnPosition, Quaternion.Euler(rotation), _parentObject);
+						spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
+
+						if (profile.CarveNavMesh)
+						{
+							var navMeshObstacle = spawnedObject.AddComponent<NavMeshObstacle>();
+							navMeshObstacle.carving = true;
+							navMeshObstacle.size = new Vector3(Mathf.Max(scale, 1f) + 1f, 10f, Mathf.Max(scale, 1f) + 1f);
+						}
+
+						_spawnedObjects.Add(spawnedObject);
+					}
+				}
 			}
 		}
 	}
@@ -180,35 +187,57 @@ public class ObjectSpawner : MonoBehaviour
 			offset.y = 0;  // Keep the offset in the horizontal plane
 			var spawnPosition = clusterCenter + offset;
 
-			var (isObstructed, newPosition) = IsPositionObstructed(spawnPosition, profile.MinSpacing);
-			if (!isObstructed)
+			if (NavMesh.SamplePosition(spawnPosition, out var hit, profile.MinSpacing, NavMesh.AllAreas))
 			{
-				var spawnableObject = ChooseRandomObject(objects);
-				if (spawnableObject != null)
+				if (!IsNearNavMeshEdge(hit, 3f))
 				{
-					var scale = _randomGenerator.NextFloat(spawnableObject.MinScale, spawnableObject.MaxScale);
-					var rotation = new Vector3(
-						_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.x,
-						_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.y,
-						_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
-					);
-
-					var spawnedObject = Instantiate(spawnableObject.Prefab, newPosition ?? spawnPosition, Quaternion.Euler(rotation), _parentObject);
-					spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
-
-					if (profile.CarveNavMesh)
+					spawnPosition = hit.position;
+					var (isObstructed, newPosition) = IsPositionObstructed(spawnPosition, profile.MinSpacing);
+					if (!isObstructed)
 					{
-						var navMeshObstacle = spawnedObject.AddComponent<NavMeshObstacle>();
-						navMeshObstacle.carving = true;
-						navMeshObstacle.size = Vector3.one * (Mathf.Max(scale, 1f) + 1f);
-					}
+						var spawnableObject = ChooseRandomObject(objects);
+						if (spawnableObject != null)
+						{
+							var scale = _randomGenerator.NextFloat(spawnableObject.MinScale, spawnableObject.MaxScale);
+							var rotation = new Vector3(
+								_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.x,
+								_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.y,
+								_randomGenerator.NextFloat(-ROTATIONDEGREES, ROTATIONDEGREES) * spawnableObject.RotationAxis.z
+							);
 
-					_spawnedObjects.Add(spawnedObject);
+							var spawnedObject = Instantiate(spawnableObject.Prefab, newPosition ?? spawnPosition, Quaternion.Euler(rotation), _parentObject);
+							spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
+
+							if (profile.CarveNavMesh)
+							{
+								var navMeshObstacle = spawnedObject.AddComponent<NavMeshObstacle>();
+								navMeshObstacle.carving = true;
+								navMeshObstacle.size = Vector3.one * (Mathf.Max(scale, 1f) + 1f);
+							}
+
+							_spawnedObjects.Add(spawnedObject);
+						}
+					}
 				}
 			}
 		}
 
 	}
+
+	bool IsNearNavMeshEdge(NavMeshHit hit, float edgeThreshold)
+	{
+		Vector3[] directions = { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
+		foreach (var dir in directions)
+		{
+			var checkPosition = hit.position + (dir * edgeThreshold);
+			if (!NavMesh.SamplePosition(checkPosition, out var _, 1f, NavMesh.AllAreas))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	Vector3 GetRandomSpawnPosition(int distance)
 	{
