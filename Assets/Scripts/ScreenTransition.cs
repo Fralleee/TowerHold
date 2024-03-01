@@ -4,12 +4,11 @@ using UnityEngine.UI;
 
 public class ScreenTransition : MonoBehaviour
 {
-
-	public float dissolveDuration = 2f;
-	private float dissolveThreshold = 1f; // Start fully obscured
+	[SerializeField] float _dissolveDuration = 2f;
+	float _dissolveThreshold = 1f;
 
 	Image _image;
-	Material _material; // Assign your dissolve shader material here
+	Material _material;
 
 	void Awake()
 	{
@@ -19,21 +18,21 @@ public class ScreenTransition : MonoBehaviour
 
 	void Start()
 	{
-		StartCoroutine(StartDissolveEffect());
+		_ = StartCoroutine(StartDissolveEffect());
 	}
 
 	IEnumerator StartDissolveEffect()
 	{
 		float time = 0;
 
-		while (time < dissolveDuration)
+		while (time < _dissolveDuration)
 		{
-			dissolveThreshold = Mathf.Lerp(1f, 0f, time / dissolveDuration);
-			_material.SetFloat("_Threshold", dissolveThreshold);
+			_dissolveThreshold = Mathf.Lerp(1f, 0f, time / _dissolveDuration);
+			_material.SetFloat("_Threshold", _dissolveThreshold);
 			time += Time.deltaTime;
 			yield return null;
 		}
 
-		_material.SetFloat("_Threshold", 0f); // Ensure fully revealed
+		_material.SetFloat("_Threshold", 0f);
 	}
 }

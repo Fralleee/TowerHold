@@ -9,6 +9,7 @@ public class ShopUI : Controller
 {
 	[SerializeField] ShopInventory _inventory;
 	[SerializeField] StyleSettings _styleSettings;
+	[SerializeField] FeedbackEvent _purchaseFeedback;
 
 	TooltipController _tooltipController;
 	TooltipContent _refreshTooltipContent;
@@ -193,6 +194,7 @@ public class ShopUI : Controller
 		{
 			item.OnPurchase();
 			button.SetEnabled(false);
+			_purchaseFeedback.TriggerFeedback(Tower.Instance.transform, this);
 
 			if (item is Upgrade)
 			{
