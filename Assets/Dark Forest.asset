@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a234c5de0214be4ca12c1530b914292, type: 3}
+  m_Name: Dark Forest
+  m_EditorClassIdentifier: 
+  Material: {fileID: 2100000, guid: b7b9be442f2cbb941bb6846ff4c879ff, type: 2}
+  MountainPrefabs:
+  - {fileID: 5816775012854893719, guid: 56ec6102806075a47b6a109715b8a50c, type: 3}
+  - {fileID: 4568146250003554366, guid: 3f8745d82a351224ca9fc81f12f708a3, type: 3}
+  - {fileID: 2550374129372621029, guid: d464fcc497a18ed4d80dc38d7ba61f5a, type: 3}
+  MountainFrequency: 0.5
+  MountainNoiseScale: 0.01
+  MountainScaleRange: {x: 0.6, y: 1}
+  TreePrefabs:
+  - {fileID: 1131880212843462996, guid: 228fdc09fe3672043832a00f379afcc7, type: 3}
+  TreeScaleRange: {x: 0.8, y: 1.2}
+  ForestLengthRange: {x: 16, y: 96}
+  SeedRange: {x: 24, y: 24}
+  DistanceBetweenTrees: 2
+  TreeNoiseScale: 0.5
+  TreeNoiseThreshold: 0.5
+  DetailsPrefabs: []
+  DetailsFrequency: 0

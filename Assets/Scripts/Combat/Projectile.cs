@@ -31,7 +31,8 @@ public class Projectile : MonoBehaviour
 		_maxArcHeight = projectileSettings.MaxArcHeight;
 		_startPosition = transform.position;
 
-		var initialDistance = Vector3.Distance(_startPosition, target.Center.position);
+		// The distance is shorter if not a towerProjectile since we have to account for the towers's scale
+		var initialDistance = _towerProjectile ? Vector3.Distance(_startPosition, target.Center.position) : Vector3.Distance(_startPosition, target.Center.position) - (Tower.Instance.Scale + 1f);
 		_hitTime = initialDistance / _speed;
 		_startTime = Time.time;
 
@@ -103,7 +104,8 @@ public class Projectile : MonoBehaviour
 	{
 		if (_impactParticle)
 		{
-			_impactParticle = Instantiate(_impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, -transform.forward));
+			var position = _towerProjectile ? transform.position : transform.position - (transform.forward * (Tower.Instance.Scale + 1f));
+			_impactParticle = Instantiate(_impactParticle, position, Quaternion.FromToRotation(Vector3.up, -transform.forward));
 			Destroy(_impactParticle, 5.0f);
 		}
 
