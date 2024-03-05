@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dark Forest
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: b7b9be442f2cbb941bb6846ff4c879ff, type: 2}
+  Mountains: 1
   MountainPrefabs:
   - {fileID: 5816775012854893719, guid: 56ec6102806075a47b6a109715b8a50c, type: 3}
   - {fileID: 4568146250003554366, guid: 3f8745d82a351224ca9fc81f12f708a3, type: 3}
@@ -20,13 +21,29 @@ MonoBehaviour:
   MountainFrequency: 0.5
   MountainNoiseScale: 0.01
   MountainScaleRange: {x: 0.6, y: 1}
+  Forests: 1
   TreePrefabs:
   - {fileID: 1131880212843462996, guid: 228fdc09fe3672043832a00f379afcc7, type: 3}
   TreeScaleRange: {x: 0.8, y: 1.2}
-  ForestLengthRange: {x: 16, y: 96}
+  ForestLengthRange: {x: 24, y: 96}
   SeedRange: {x: 24, y: 24}
-  DistanceBetweenTrees: 2
+  DistanceBetweenTrees: 3
   TreeNoiseScale: 0.5
   TreeNoiseThreshold: 0.5
-  DetailsPrefabs: []
-  DetailsFrequency: 0
+  Details: 1
+  DetailsPrefabs:
+  - {fileID: 2277864461209241415, guid: c765f76bb5a113e4fb909798be4733a4, type: 3}
+  - {fileID: 7254525268057987426, guid: c30216650ef84b84382f9b37eda561b0, type: 3}
+  - {fileID: 625284803667358538, guid: 9efae57034ea36246bc28c3602deebba, type: 3}
+  - {fileID: 5406785535457140720, guid: 05a286e610ec9e94bbe4b547eea2fb2d, type: 3}
+  - {fileID: 2879626140770134900, guid: 6f093cffb22cab1489f2289be5fcfce9, type: 3}
+  DetailsInnerFrequency: 1.5
+  DetailsOuterFrequency: 3
+  DetailsNoiseScale: 0.5
+  DetailsNoiseThreshold: 0.5
+  Islands: 1
+  IslandsPrefabs:
+  - {fileID: 5219840602716025856, guid: 1ead1c11e86b79d4eb756e845880bcdc, type: 3}
+  IslandScaleRange: {x: 0.2, y: 1.4}
+  IslandsFrequency: 45
+  IslandDistanceFromOuterRadius: 25

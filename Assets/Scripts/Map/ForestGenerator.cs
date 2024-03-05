@@ -72,20 +72,18 @@ public class ForestGenerator
 		var growthPoints = new Queue<Vector3>();
 		var placedTrees = new HashSet<Vector3>();
 		growthPoints.Enqueue(seedPoint);
-		placedTrees.Add(seedPoint);
+		_ = placedTrees.Add(seedPoint);
 
 		var forestLength = Random.Range(_biome.ForestLengthRange.x, _biome.ForestLengthRange.y);
 
 		while (growthPoints.Count > 0 && placedTrees.Count < forestLength)
 		{
 			var currentPoint = growthPoints.Dequeue();
-
 			for (var i = 0; i < 8; i++)
 			{
 				var angle = i * 45;
 				var offset = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), 0, Mathf.Sin(angle * Mathf.Deg2Rad)) * _biome.DistanceBetweenTrees;
 				var nextPoint = currentPoint + offset;
-
 				if (!placedTrees.Contains(nextPoint) && IsPointValid(nextPoint))
 				{
 					PlaceTree(nextPoint);
@@ -95,7 +93,6 @@ public class ForestGenerator
 			}
 		}
 	}
-
 
 	void PlaceTree(Vector3 position)
 	{

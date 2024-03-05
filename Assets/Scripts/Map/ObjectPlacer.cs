@@ -9,21 +9,9 @@ public class ObjectPlacer : MonoBehaviour
 
 	[Header("Settings")]
 	[SerializeField] Biome _biome;
-	[SerializeField] Transform _parentObject;
 	[SerializeField] bool _spawnOnStart;
 
-	[Header("Types")]
-	[SerializeField] bool _generateMountains;
-	[SerializeField] bool _generateRoadsAndRivers;
-	[SerializeField] bool _generateForests;
-	[SerializeField] bool _generateDetails;
-	[SerializeField] bool _generateIslands;
-
-	[Header("Validation")]
-	[SerializeField] float _heightCheckDistance = 100f;
-	[SerializeField] LayerMask _obstacleLayerMask;
-	[SerializeField] LayerMask _groundLayerMask;
-
+	Transform _parentObject;
 	RandomGenerator _randomGenerator;
 
 	void Start()
@@ -87,10 +75,9 @@ public class ObjectPlacer : MonoBehaviour
 		GenerateIslands();
 	}
 
-	[Button]
 	void GenerateMountains()
 	{
-		if (!_generateMountains)
+		if (!_biome.Mountains)
 		{
 			return;
 		}
@@ -100,20 +87,14 @@ public class ObjectPlacer : MonoBehaviour
 	}
 
 
-	[Button]
 	void GenerateRoadsAndRivers()
 	{
-		if (!_generateRoadsAndRivers)
-		{
-			return;
-		}
 		// TBD
 	}
 
-	[Button]
 	void GenerateForests()
 	{
-		if (!_generateForests)
+		if (!_biome.Forests)
 		{
 			return;
 		}
@@ -122,30 +103,39 @@ public class ObjectPlacer : MonoBehaviour
 		forestGenerator.Generate();
 	}
 
-	[Button]
 	void GenerateDetails()
 	{
-		if (!_generateDetails)
+		if (!_biome.Details)
 		{
 			return;
 		}
-		// Small objects like rocks, bushes, and other details
-		// These should be placed as single objects and with much lower intensity than the other types
+
+		var detailsGenerator = new DetailsGenerator(_biome, _parentObject, transform.position, OuterRadius, InnerRadius);
+		detailsGenerator.Generate();
 	}
 
-	[Button]
 	void GenerateIslands()
 	{
-		if (!_generateIslands)
+		if (!_biome.Islands)
 		{
 			return;
 		}
-		// TBD
+
+		var islandGenerator = new IslandGenerator(_biome, _parentObject, transform.position, OuterRadius);
+		islandGenerator.Generate();
 	}
 
 	void OnEnable()
 	{
 		_biome.OnChanged += TryGenerate;
+
+		_parentObject = transform.Find("Objects");
+		if (!_parentObject)
+		{
+			var instance = Instantiate(new GameObject("Objects"), transform);
+			instance.name = "Objects";
+			_parentObject = instance.transform;
+		}
 	}
 
 	void OnDisable()
