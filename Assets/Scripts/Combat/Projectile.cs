@@ -3,9 +3,7 @@ public class Projectile : MonoBehaviour
 {
 	[Header("Graphics")]
 	[SerializeField] GameObject _impactParticle;
-	[SerializeField] GameObject _projectileParticle;
 	[SerializeField] GameObject _muzzleParticle;
-	[SerializeField] GameObject[] _trailParticles;
 
 	[Header("Audio")]
 	[SerializeField] AudioClip _attackSound;
@@ -42,9 +40,6 @@ public class Projectile : MonoBehaviour
 
 	void Start()
 	{
-		_projectileParticle = Instantiate(_projectileParticle, transform.position, transform.rotation);
-		_projectileParticle.transform.parent = transform;
-
 		if (_muzzleParticle)
 		{
 			_muzzleParticle = Instantiate(_muzzleParticle, transform.position, transform.rotation);
@@ -112,9 +107,7 @@ public class Projectile : MonoBehaviour
 			Destroy(_impactParticle, 5.0f);
 		}
 
-		Destroy(_projectileParticle, 3f);
 		Destroy(gameObject);
-
 		var trails = GetComponentsInChildren<ParticleSystem>();
 		for (var i = 1; i < trails.Length; i++)
 		{
