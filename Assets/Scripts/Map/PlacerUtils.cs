@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class PlacerUtils
@@ -46,6 +47,25 @@ public static class PlacerUtils
 			}
 		}
 		return false; // No obstructions
+	}
+
+	public static bool IsSplinePointObstructed(Vector3 point, float width, float minDistanceBetweenPoints, List<SplinePoint> allSplinePoints)
+	{
+		foreach (var splinePoint in allSplinePoints)
+		{
+			if (Vector3.Distance(point, splinePoint.Position) < width + splinePoint.Width + minDistanceBetweenPoints)
+			{
+				return true; // Found an obstruction
+			}
+		}
+		return false; // No obstructions found
+	}
+
+	public static Vector3 RandomPointWithinAnnulus(Vector3 center, float minRadius, float maxRadius)
+	{
+		var direction = Random.insideUnitCircle.normalized;
+		var distance = Random.Range(minRadius, maxRadius);
+		return new Vector3(center.x + (direction.x * distance), 0, center.z + (direction.y * distance));
 	}
 }
 

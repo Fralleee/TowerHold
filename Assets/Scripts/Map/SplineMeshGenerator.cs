@@ -13,31 +13,20 @@ public class SplineMeshGenerator : MonoBehaviour
 	}
 
 	public List<SplinePoint> SplinePoints = new List<SplinePoint>();
-	MeshFilter _meshFilter;
-
-	MeshCollider _meshCollider;
-
 	public int Subdivisions = 3;
-
 	public float VertDistance = 0.2f;
-
 	public int EndCapSubdivisions = 3;
-
 	public float WidthWhobble = 0.5f;
-
 	public float PositionWhobble = 0.5f;
-
 	public UnwrapMode UvUnwrapMode;
-
 	public float UvScale = 0.01f;
-
 	public bool TopNormalsAlwaysFaceDirectlyUp;
-
 	public Vector3 ExtrudeDownOffset;
-
 	public bool Vertical;
-
 	public bool FlipNormals;
+
+	MeshFilter _meshFilter;
+	MeshCollider _meshCollider;
 
 	public void UpdateMesh()
 	{
@@ -157,9 +146,7 @@ public class SplineMeshGenerator : MonoBehaviour
 	{
 		if (FlipNormals)
 		{
-			var num = vertA;
-			vertA = vertC;
-			vertC = num;
+			(vertC, vertA) = (vertA, vertC);
 		}
 		var normalized = Vector3.Cross(verts[vertA] - verts[vertB], verts[vertC] - verts[vertB]).normalized;
 		if (normalized.y > 0f || showFacesFacedDownwards)
@@ -250,11 +237,11 @@ public class SplineMeshGenerator : MonoBehaviour
 
 	public void WhobbleModifier(List<SplinePoint> path, float widthAmount, float posAmount)
 	{
-		UnityEngine.Random.InitState(path.Count * 7);
+		Random.InitState(path.Count * 7);
 		for (var i = 0; i < path.Count; i++)
 		{
-			path[i].Position += new Vector3(UnityEngine.Random.value - 0.5f, 0f, UnityEngine.Random.value - 0.5f) * posAmount;
-			path[i].Width *= 1f + ((UnityEngine.Random.value - 0.5f) * widthAmount);
+			path[i].Position += new Vector3(Random.value - 0.5f, 0f, Random.value - 0.5f) * posAmount;
+			path[i].Width *= 1f + ((Random.value - 0.5f) * widthAmount);
 		}
 	}
 

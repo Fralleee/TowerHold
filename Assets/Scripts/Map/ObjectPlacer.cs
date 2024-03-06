@@ -11,7 +11,7 @@ public class ObjectPlacer : MonoBehaviour
 	[SerializeField] Biome _biome;
 	[SerializeField] bool _spawnOnStart;
 
-	Transform _parentObject;
+	Transform _objectsContainer;
 	RandomGenerator _randomGenerator;
 
 	void Start()
@@ -26,21 +26,21 @@ public class ObjectPlacer : MonoBehaviour
 	[Button]
 	public void ClearObjects()
 	{
-		if (_parentObject == null)
+		if (_objectsContainer == null)
 		{
 			Debug.LogWarning("No parent object assigned. Objects will be parented to this script's GameObject.");
 			return;
 		}
 
-		if (_parentObject == transform)
+		if (_objectsContainer == transform)
 		{
 			Debug.LogWarning("Parent object is the same as this script's GameObject.");
 			return;
 		}
 
-		for (var i = _parentObject.childCount - 1; i >= 0; i--)
+		for (var i = _objectsContainer.childCount - 1; i >= 0; i--)
 		{
-			var child = _parentObject.GetChild(i);
+			var child = _objectsContainer.GetChild(i);
 			DestroyImmediate(child.gameObject);
 		}
 	}
@@ -68,8 +68,8 @@ public class ObjectPlacer : MonoBehaviour
 
 	void Generate()
 	{
-		GenerateMountains();
 		GenerateRoadsAndRivers();
+		GenerateMountains();
 		GenerateForests();
 		GenerateDetails();
 		GenerateIslands();
@@ -82,14 +82,20 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var mountainGenerator = new MountainGenerator(_biome, _parentObject, transform.position, OuterRadius, InnerRadius);
+		var mountainGenerator = new MountainGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		mountainGenerator.Generate();
 	}
 
 
 	void GenerateRoadsAndRivers()
 	{
-		// TBD
+		if (!_biome.Rivers)
+		{
+			return;
+		}
+
+		var roadsAndRiversGenerator = new RiversGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
+		roadsAndRiversGenerator.Generate();
 	}
 
 	void GenerateForests()
@@ -99,7 +105,7 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var forestGenerator = new ForestGenerator(_biome, _parentObject, transform.position, OuterRadius, InnerRadius);
+		var forestGenerator = new ForestGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		forestGenerator.Generate();
 	}
 
@@ -110,7 +116,7 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var detailsGenerator = new DetailsGenerator(_biome, _parentObject, transform.position, OuterRadius, InnerRadius);
+		var detailsGenerator = new DetailsGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		detailsGenerator.Generate();
 	}
 
@@ -121,7 +127,7 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var islandGenerator = new IslandGenerator(_biome, _parentObject, transform.position, OuterRadius);
+		var islandGenerator = new IslandGenerator(_biome, _objectsContainer, transform.position, OuterRadius);
 		islandGenerator.Generate();
 	}
 
@@ -129,17 +135,25 @@ public class ObjectPlacer : MonoBehaviour
 	{
 		_biome.OnChanged += TryGenerate;
 
-		_parentObject = transform.Find("Objects");
-		if (!_parentObject)
+		_objectsContainer = transform.Find("Objects");
+		if (!_objectsContainer)
 		{
 			var instance = Instantiate(new GameObject("Objects"), transform);
 			instance.name = "Objects";
-			_parentObject = instance.transform;
+			_objectsContainer = instance.transform;
 		}
 	}
 
 	void OnDisable()
 	{
 		_biome.OnChanged -= TryGenerate;
+	}
+
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		GizmosExtras.Draw2dCircle(transform.position, InnerRadius);
+		GizmosExtras.Draw2dCircle(transform.position, OuterRadius);
 	}
 }

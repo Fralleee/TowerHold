@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: Dark Forest
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: b7b9be442f2cbb941bb6846ff4c879ff, type: 2}
+  Rivers: 1
+  RiverPrefab: {fileID: 1165530853478116010, guid: 73f6b0a26ce587b408290a577233b153,
+    type: 3}
+  TotalRivers: 6
+  MinDistanceBetweenOtherPoints: 8
+  PointsPerRiverRange: {x: 6, y: 12}
+  DistanceBetweenPointsRange: {x: 15, y: 25}
+  RiverWidthRange: {x: 2, y: 10}
+  RiversNoiseScale: 0.5
   Mountains: 1
   MountainPrefabs:
   - {fileID: 5816775012854893719, guid: 56ec6102806075a47b6a109715b8a50c, type: 3}
   - {fileID: 4568146250003554366, guid: 3f8745d82a351224ca9fc81f12f708a3, type: 3}
   - {fileID: 2550374129372621029, guid: d464fcc497a18ed4d80dc38d7ba61f5a, type: 3}
-  MountainFrequency: 0.5
+  MountainFrequency: 2
   MountainNoiseScale: 0.01
   MountainScaleRange: {x: 0.6, y: 1}
   Forests: 1

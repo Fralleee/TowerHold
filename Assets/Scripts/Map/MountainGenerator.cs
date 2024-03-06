@@ -9,6 +9,7 @@ public class MountainGenerator
 	readonly Vector3 _centerPosition;
 	readonly float _outerRadius;
 	readonly float _innerRadius;
+	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
 
 	public MountainGenerator(Biome biome, Transform parentObject, Vector3 position, float outerRadius, float innerRadius)
 	{
@@ -45,12 +46,10 @@ public class MountainGenerator
 
 	void GenerateSingleMountain(Vector3 clusterCenter)
 	{
-		// Apply a random noise-based offset to the position within the cluster
 		var offsetX = (Mathf.PerlinNoise(clusterCenter.x * _biome.MountainNoiseScale, clusterCenter.z * _biome.MountainNoiseScale) - 0.5f) * MountainSizeOffset;
 		var offsetZ = (Mathf.PerlinNoise(clusterCenter.z * _biome.MountainNoiseScale, clusterCenter.x * _biome.MountainNoiseScale) - 0.5f) * MountainSizeOffset;
 		var mountainPosition = clusterCenter + new Vector3(offsetX, 0, offsetZ);
-
-		if (Vector3.Distance(_centerPosition, mountainPosition) <= _outerRadius && !PlacerUtils.IsNearGroundEdge(mountainPosition, MountainSizeOffset))
+		if (IsPointValid(mountainPosition))
 		{
 			InstantiateMountain(mountainPosition);
 		}
@@ -64,5 +63,28 @@ public class MountainGenerator
 
 		var mountain = Object.Instantiate(prefab, position, rotation, _parentObject);
 		mountain.transform.localScale = new Vector3(scale, scale, scale);
+	}
+
+	bool IsPointValid(Vector3 point)
+	{
+		var isWithinRange = Vector3.Distance(_centerPosition, point) <= _outerRadius;
+		if (!isWithinRange)
+		{
+			return false;
+		}
+
+		var isNotNearObstacle = !Physics.CheckSphere(point, 10f, _obstacleLayerMask);
+		if (!isNotNearObstacle)
+		{
+			return false;
+		}
+
+		var isNotNearGroundEdge = !PlacerUtils.IsNearGroundEdge(point, MountainSizeOffset);
+		if (!isNotNearGroundEdge)
+		{
+			return false;
+		}
+
+		return true;
 	}
 }

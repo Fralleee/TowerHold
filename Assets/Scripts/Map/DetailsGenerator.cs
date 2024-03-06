@@ -29,19 +29,12 @@ public class DetailsGenerator
 		var totalAttempts = Mathf.CeilToInt(radius * frequency);
 		for (var i = 0; i < totalAttempts; i++)
 		{
-			var randomPoint = RandomPointWithinAnnulus(_centerPosition, startRadius, radius);
+			var randomPoint = PlacerUtils.RandomPointWithinAnnulus(_centerPosition, startRadius, radius);
 			if (IsPointValid(randomPoint))
 			{
 				SpawnDetail(randomPoint);
 			}
 		}
-	}
-
-	Vector3 RandomPointWithinAnnulus(Vector3 center, float minRadius, float maxRadius)
-	{
-		var direction = Random.insideUnitCircle.normalized;
-		var distance = Random.Range(minRadius, maxRadius);
-		return new Vector3(center.x + (direction.x * distance), 0, center.z + (direction.y * distance));
 	}
 
 	bool IsPointValid(Vector3 point)
