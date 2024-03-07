@@ -8,8 +8,11 @@ public class ForestGenerator
 	readonly Transform _parentObject;
 	readonly Vector3 _centerPosition;
 	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
+	readonly LayerMask _mountainsLayerMask = LayerMask.GetMask("Mountains");
 	readonly float _outerRadius;
 	readonly float _innerRadius;
+
+	readonly Collider[] _collidersBuffer = new Collider[1];
 
 	public ForestGenerator(Biome biome, Transform parentObject, Vector3 centerPosition, float outerRadius, float innerRadius)
 	{
@@ -46,20 +49,31 @@ public class ForestGenerator
 			return false;
 		}
 
+		var isNoiseValid = Mathf.PerlinNoise((point.x * _biome.TreeNoiseScale) + _centerPosition.x, point.z * _biome.TreeNoiseScale + _centerPosition.z) > _biome.TreeNoiseThreshold;
+		if (!isNoiseValid)
+		{
+			return false;
+		}
+
+		var colliders = Physics.OverlapSphereNonAlloc(point, _biome.DistanceBetweenTrees / 2, _collidersBuffer, _obstacleLayerMask);
+		if (colliders > 0)
+		{
+			return false;
+		}
+
 		var isNotNearObstacle = !Physics.CheckSphere(point, _biome.DistanceBetweenTrees / 2, _obstacleLayerMask);
 		if (!isNotNearObstacle)
 		{
 			return false;
 		}
 
-		var isNotNearGroundEdge = !PlacerUtils.IsNearGroundEdge(point, _biome.DistanceBetweenTrees);
-		if (!isNotNearGroundEdge)
+		if (Physics.Raycast(point + (Vector3.up * 50f), Vector3.down, out _, Mathf.Infinity, _mountainsLayerMask))
 		{
 			return false;
 		}
 
-		var isNoiseValid = Mathf.PerlinNoise((point.x * _biome.TreeNoiseScale) + _centerPosition.x, point.z * _biome.TreeNoiseScale + _centerPosition.z) > _biome.TreeNoiseThreshold;
-		if (!isNoiseValid)
+		var isNotNearGroundEdge = !PlacerUtils.IsNearGroundEdge(point, _biome.DistanceBetweenTrees);
+		if (!isNotNearGroundEdge)
 		{
 			return false;
 		}

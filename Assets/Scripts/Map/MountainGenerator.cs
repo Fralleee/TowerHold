@@ -9,7 +9,7 @@ public class MountainGenerator
 	readonly Vector3 _centerPosition;
 	readonly float _outerRadius;
 	readonly float _innerRadius;
-	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
+	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Mountains");
 
 	public MountainGenerator(Biome biome, Transform parentObject, Vector3 position, float outerRadius, float innerRadius)
 	{

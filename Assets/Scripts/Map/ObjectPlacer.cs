@@ -69,10 +69,15 @@ public class ObjectPlacer : MonoBehaviour
 	void Generate()
 	{
 		GenerateRoadsAndRivers();
+		Physics.SyncTransforms();
 		GenerateMountains();
+		Physics.SyncTransforms();
 		GenerateForests();
+		Physics.SyncTransforms();
 		GenerateDetails();
+		Physics.SyncTransforms();
 		GenerateIslands();
+		Physics.SyncTransforms();
 	}
 
 	void GenerateMountains()
