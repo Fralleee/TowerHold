@@ -208,7 +208,7 @@ MonoBehaviour:
   _keyboardMovementSpeed: 0.25
   _mouseMovementSpeed: 0.25
   _edgeTolerancePercent: 0
-  _maxDistanceFromCenter: 64
+  _maxDistanceFromCenter: 128
   _zoomAmount: 5
   _minZoomAmount: 100
   _maxZoomAmount: 0
@@ -5223,7 +5223,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 2
+  m_Antialiasing: 3
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 1

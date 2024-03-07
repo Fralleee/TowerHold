@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class RiversGenerator
@@ -44,12 +45,48 @@ public class RiversGenerator
 				}
 			}
 		}
+
+		InstantiateSea();
+	}
+
+	void InstantiateSea()
+	{
+		var sea = GameObject.CreatePrimitive(PrimitiveType.Plane);
+		sea.transform.SetParent(_parentObject);
+		sea.transform.localScale = new Vector3(500, 1, 500);
+		sea.transform.localPosition = Vector3.down * 2;
+
+		var renderer = sea.GetComponentInChildren<Renderer>();
+		renderer.material = _biome.RiverPrefab.GetComponentInChildren<Renderer>().sharedMaterial;
+
+		var propBlock = new MaterialPropertyBlock();
+
+		renderer.GetPropertyBlock(propBlock);
+
+		propBlock.SetColor("_ColorShallow", _biome.RiverColorShallow);
+		propBlock.SetColor("_ColorDeep", _biome.RiverColorDeep);
+
+		renderer.SetPropertyBlock(propBlock);
+
 	}
 
 	GameObject InstantiateRiver(GameObject prefab, Vector3 position)
 	{
-		return Object.Instantiate(prefab, position + Vector3.up, Quaternion.identity, _parentObject);
+		var river = Object.Instantiate(prefab, position + Vector3.up, Quaternion.identity, _parentObject);
+
+		var propBlock = new MaterialPropertyBlock();
+		var renderer = river.GetComponentInChildren<Renderer>();
+
+		renderer.GetPropertyBlock(propBlock);
+
+		propBlock.SetColor("_ColorShallow", _biome.RiverColorShallow);
+		propBlock.SetColor("_ColorDeep", _biome.RiverColorDeep);
+
+		renderer.SetPropertyBlock(propBlock);
+
+		return river;
 	}
+
 
 	bool IsPointValid(Vector3 point, float width)
 	{

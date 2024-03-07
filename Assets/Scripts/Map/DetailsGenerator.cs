@@ -57,6 +57,9 @@ public class DetailsGenerator
 	{
 		var prefab = _biome.DetailsPrefabs[Random.Range(0, _biome.DetailsPrefabs.Length)];
 		var rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-		_ = Object.Instantiate(prefab, position, rotation, _parentObject);
+
+		var detail = Object.Instantiate(prefab, position, rotation, _parentObject);
+
+		detail.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 }

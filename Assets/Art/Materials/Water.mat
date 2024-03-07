@@ -26,7 +26,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _COLORMODE_LINEAR
-  - _FOAMMODE_GRADIENT_NOISE
+  - _FOAMMODE_NONE
   - _WAVEMODE_NONE
   m_InvalidKeywords:
   - _ALLOWALPHAOVERFLOW_OFF
@@ -99,12 +99,12 @@ Material:
     - _FadeDistance: 0.25
     - _FoamAmount: 0.12
     - _FoamDepth: 0.25
-    - _FoamDirection: -0.19
+    - _FoamDirection: 0
     - _FoamFromTexture: 1
-    - _FoamMode: 1
+    - _FoamMode: 0
     - _FoamNoiseAmount: 0.049
     - _FoamProcedural: 1
-    - _FoamScale: 1.5
+    - _FoamScale: 3
     - _FoamSharpness: 0.8
     - _FoamSpeed: 0.15
     - _FoamStretchX: 1

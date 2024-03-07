@@ -53,7 +53,10 @@ public class IslandGenerator
 		var prefab = _biome.IslandsPrefabs[Random.Range(0, _biome.IslandsPrefabs.Length)];
 		var rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 		var scale = Random.Range(_biome.IslandScaleRange.x, _biome.IslandScaleRange.y);
+
 		var island = Object.Instantiate(prefab, position, rotation, _parentObject);
 		island.transform.localScale = new Vector3(scale, scale, scale);
+
+		island.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 }

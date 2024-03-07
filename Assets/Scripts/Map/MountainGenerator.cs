@@ -22,7 +22,6 @@ public class MountainGenerator
 
 	public void Generate()
 	{
-		// Iterate through the number of mountain clusters determined by biome frequency and radius difference
 		for (var i = 0; i < Mathf.CeilToInt((_outerRadius - _innerRadius) * _biome.MountainFrequency); i++)
 		{
 			GenerateMountainCluster();
@@ -63,6 +62,8 @@ public class MountainGenerator
 
 		var mountain = Object.Instantiate(prefab, position, rotation, _parentObject);
 		mountain.transform.localScale = new Vector3(scale, scale, scale);
+
+		mountain.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 
 	bool IsPointValid(Vector3 point)

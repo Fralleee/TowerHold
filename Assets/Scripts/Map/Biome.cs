@@ -14,12 +14,20 @@ public class Biome : ScriptableObject
 
 	[ToggleGroup("Rivers", CollapseOthersOnExpand = false)] public bool Rivers;
 	[ToggleGroup("Rivers")] public GameObject RiverPrefab;
+	[ToggleGroup("Rivers")] public Color RiverColorShallow;
+	[ToggleGroup("Rivers")] public Color RiverColorDeep;
 	[ToggleGroup("Rivers"), MaxValue(10)] public int TotalRivers = 5;
 	[ToggleGroup("Rivers")] public float MinDistanceBetweenOtherPoints = 8f;
 	[ToggleGroup("Rivers"), MinMaxSlider(3, 25, true)] public Vector2Int PointsPerRiverRange = new Vector2Int(6, 12);
 	[ToggleGroup("Rivers"), MinMaxSlider(10, 25, true)] public Vector2 DistanceBetweenPointsRange = new Vector2(10f, 25f);
 	[ToggleGroup("Rivers"), MinMaxSlider(2, 10, true)] public Vector2 RiverWidthRange = new Vector2(4f, 8f);
 	[ToggleGroup("Rivers")] public float RiversNoiseScale = 0.5f;
+
+	[ToggleGroup("Roads", CollapseOthersOnExpand = false)] public bool Roads;
+	[ToggleGroup("Roads")] public GameObject RoadPrefab;
+	[ToggleGroup("Roads")] public Color RoadColor;
+	[ToggleGroup("Roads")] public Color GroundColor;
+	[ToggleGroup("Roads"), Range(12f, 36f)] public float RoadWidth = 24f;
 
 	[ToggleGroup("Mountains", CollapseOthersOnExpand = false)] public bool Mountains;
 	[ToggleGroup("Mountains")] public GameObject[] MountainPrefabs;

@@ -112,7 +112,10 @@ public class ForestGenerator
 		var prefab = _biome.TreePrefabs[Random.Range(0, _biome.TreePrefabs.Length)];
 		var rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 		var scale = Random.Range(_biome.TreeScaleRange.x, _biome.TreeScaleRange.y);
+
 		var tree = Object.Instantiate(prefab, position, rotation, _parentObject);
 		tree.transform.localScale = new Vector3(scale, scale, scale);
+
+		tree.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 }

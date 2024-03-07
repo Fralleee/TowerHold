@@ -68,15 +68,35 @@ public class ObjectPlacer : MonoBehaviour
 
 	void Generate()
 	{
-		GenerateRoadsAndRivers();
-		Physics.SyncTransforms();
+		GenerateRoads();
+		GenerateRivers();
 		GenerateMountains();
-		Physics.SyncTransforms();
 		GenerateForests();
-		Physics.SyncTransforms();
 		GenerateDetails();
-		Physics.SyncTransforms();
 		GenerateIslands();
+	}
+
+	void GenerateRoads()
+	{
+		if (!_biome.Roads)
+		{
+			return;
+		}
+
+		var roadsGenerator = new RoadsGenerator(_biome, gameObject, _objectsContainer, transform.position);
+		roadsGenerator.Generate();
+		Physics.SyncTransforms();
+	}
+
+	void GenerateRivers()
+	{
+		if (!_biome.Rivers)
+		{
+			return;
+		}
+
+		var riversGenerator = new RiversGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
+		riversGenerator.Generate();
 		Physics.SyncTransforms();
 	}
 
@@ -89,18 +109,7 @@ public class ObjectPlacer : MonoBehaviour
 
 		var mountainGenerator = new MountainGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		mountainGenerator.Generate();
-	}
-
-
-	void GenerateRoadsAndRivers()
-	{
-		if (!_biome.Rivers)
-		{
-			return;
-		}
-
-		var roadsAndRiversGenerator = new RiversGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
-		roadsAndRiversGenerator.Generate();
+		Physics.SyncTransforms();
 	}
 
 	void GenerateForests()
@@ -112,6 +121,7 @@ public class ObjectPlacer : MonoBehaviour
 
 		var forestGenerator = new ForestGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		forestGenerator.Generate();
+		Physics.SyncTransforms();
 	}
 
 	void GenerateDetails()
@@ -123,6 +133,7 @@ public class ObjectPlacer : MonoBehaviour
 
 		var detailsGenerator = new DetailsGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		detailsGenerator.Generate();
+		Physics.SyncTransforms();
 	}
 
 	void GenerateIslands()
@@ -134,6 +145,7 @@ public class ObjectPlacer : MonoBehaviour
 
 		var islandGenerator = new IslandGenerator(_biome, _objectsContainer, transform.position, OuterRadius);
 		islandGenerator.Generate();
+		Physics.SyncTransforms();
 	}
 
 	void OnEnable()
@@ -153,7 +165,6 @@ public class ObjectPlacer : MonoBehaviour
 	{
 		_biome.OnChanged -= TryGenerate;
 	}
-
 
 	void OnDrawGizmos()
 	{
