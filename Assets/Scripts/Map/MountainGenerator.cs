@@ -5,15 +5,17 @@ public class MountainGenerator
 	const float MountainSizeOffset = 10f;
 
 	readonly Biome _biome;
+	readonly RandomGenerator _randomGenerator;
 	readonly Transform _parentObject;
 	readonly Vector3 _centerPosition;
 	readonly float _outerRadius;
 	readonly float _innerRadius;
 	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
 
-	public MountainGenerator(Biome biome, Transform parentObject, Vector3 position, float outerRadius, float innerRadius)
+	public MountainGenerator(Biome biome, RandomGenerator randomGenerator, Transform parentObject, Vector3 position, float outerRadius, float innerRadius)
 	{
 		_biome = biome;
+		_randomGenerator = randomGenerator;
 		_parentObject = parentObject;
 		_centerPosition = position;
 		_outerRadius = outerRadius;
@@ -30,12 +32,9 @@ public class MountainGenerator
 
 	void GenerateMountainCluster()
 	{
-		// Determine a random point for the cluster center within the defined radius
-		var randomPoint = Random.insideUnitCircle.normalized * Random.Range(_innerRadius + MountainSizeOffset, _outerRadius);
+		var randomPoint = _randomGenerator.InsideUnitCircle().normalized * _randomGenerator.NextFloat(_innerRadius + MountainSizeOffset, _outerRadius);
 		var clusterCenter = new Vector3(randomPoint.x, 0, randomPoint.y) + _centerPosition;
-
-		// Randomly decide the number of mountains in this cluster
-		var mountainsInCluster = Random.Range(1, 4); // Consider making these magic numbers configurable through the Biome
+		var mountainsInCluster = _randomGenerator.Next(1, 4);
 
 		for (var j = 0; j < mountainsInCluster; j++)
 		{
@@ -56,9 +55,9 @@ public class MountainGenerator
 
 	void InstantiateMountain(Vector3 position)
 	{
-		var prefab = _biome.MountainPrefabs[Random.Range(0, _biome.MountainPrefabs.Length)];
-		var rotation = Quaternion.Euler(0, Random.Range(0, 360), 0); // Random rotation around the Y axis
-		var scale = Random.Range(_biome.MountainScaleRange.x, _biome.MountainScaleRange.y);
+		var prefab = _biome.MountainPrefabs[_randomGenerator.Next(0, _biome.MountainPrefabs.Length)];
+		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0); // Random rotation around the Y axis
+		var scale = _randomGenerator.NextFloat(_biome.MountainScaleRange.x, _biome.MountainScaleRange.y);
 
 		var mountain = Object.Instantiate(prefab, position, rotation, _parentObject);
 		mountain.transform.localScale = new Vector3(scale, scale, scale);

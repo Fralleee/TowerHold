@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a234c5de0214be4ca12c1530b914292, type: 3}
+  m_Name: Desert
+  m_EditorClassIdentifier: 
+  Material: {fileID: 2100000, guid: 9a3e684e0f34899438388020e4f7e4ea, type: 2}
+  Roads: 1
+  RoadPrefab: {fileID: 3551499252064288638, guid: e1ce90aa7abe4f6438e374f987bc596a,
+    type: 3}
+  RoadColor: {r: 0.9568628, g: 0.81568635, b: 0.5686275, a: 1}
+  GroundColor: {r: 0.90196085, g: 0.5568628, b: 0.23529413, a: 1}
+  RoadWidth: 24
+  Rivers: 1
+  RiverPrefab: {fileID: 1165530853478116010, guid: 73f6b0a26ce587b408290a577233b153,
+    type: 3}
+  RiverColorShallow: {r: 0.6185475, g: 0.92433053, b: 0.9433962, a: 1}
+  RiverColorDeep: {r: 0.23843002, g: 0.66651917, b: 0.8867924, a: 1}
+  TotalRivers: 2
+  MinDistanceBetweenOtherPoints: 8
+  PointsPerRiverRange: {x: 6, y: 12}
+  DistanceBetweenPointsRange: {x: 15, y: 25}
+  RiverWidthRange: {x: 2, y: 10}
+  RiversNoiseScale: 0.5
+  Mountains: 1
+  MountainPrefabs:
+  - {fileID: 5851204286249436283, guid: 296051b29d587814ab07bbb0ae75605f, type: 3}
+  MountainFrequency: 3
+  MountainNoiseScale: 0.01
+  MountainScaleRange: {x: 3, y: 5}
+  Forests: 0
+  TreePrefabs:
+  - {fileID: 1131880212843462996, guid: 228fdc09fe3672043832a00f379afcc7, type: 3}
+  TreeScaleRange: {x: 0.8, y: 1.2}
+  ForestLengthRange: {x: 24, y: 96}
+  SeedRange: {x: 24, y: 24}
+  DistanceBetweenTrees: 3
+  TreeNoiseScale: 0.5
+  TreeNoiseThreshold: 0.5
+  Details: 1
+  DetailsPrefabs:
+  - {fileID: 919132149155446097, guid: c2c4e40fb3803784c91a4b6c6b1686f2, type: 3}
+  - {fileID: 919132149155446097, guid: 2c0a804df6b50a14691a72c9236a5b70, type: 3}
+  - {fileID: 919132149155446097, guid: 558d45e7df48c2c42a613a70dfc29c4d, type: 3}
+  - {fileID: 919132149155446097, guid: 90c2938a43572b14da932fc238712e88, type: 3}
+  - {fileID: 919132149155446097, guid: 1a50ae19144bad24f87f1ddf0fc03cd7, type: 3}
+  DetailsInnerFrequency: 1
+  DetailsOuterFrequency: 2
+  DetailsNoiseScale: 0.5
+  DetailsNoiseThreshold: 0.5
+  Islands: 1
+  IslandsPrefabs:
+  - {fileID: 5851204286249436283, guid: 296051b29d587814ab07bbb0ae75605f, type: 3}
+  IslandScaleRange: {x: 0.90585494, y: 5}
+  IslandsFrequency: 45
+  IslandDistanceFromOuterRadius: 25
+  Effects: 1
+  EffectsPrefabs:
+  - {fileID: 5420982290084194499, guid: 087a9bb552b55b642880ce7de04a7ee9, type: 3}
+  - {fileID: 5420982290084194499, guid: 02234901fc0ef0f409e34eefe0ccb112, type: 3}

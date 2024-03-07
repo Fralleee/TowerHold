@@ -16,7 +16,6 @@ public class ObjectPlacer : MonoBehaviour
 
 	void Start()
 	{
-		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 		if (_spawnOnStart && Application.isPlaying)
 		{
 			TryGenerate();
@@ -49,7 +48,7 @@ public class ObjectPlacer : MonoBehaviour
 	public void TryGenerate()
 	{
 		var startSeed = GameController.GameSettings != null ? GameController.GameSettings.StartSeed : 0;
-		_randomGenerator ??= new RandomGenerator(startSeed);
+		_randomGenerator = new RandomGenerator(startSeed);
 
 		ClearObjects();
 		if (!ValidateSettings())
@@ -74,6 +73,7 @@ public class ObjectPlacer : MonoBehaviour
 		GenerateForests();
 		GenerateDetails();
 		GenerateIslands();
+		GenerateEffects();
 	}
 
 	void GenerateRoads()
@@ -95,7 +95,7 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var riversGenerator = new RiversGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
+		var riversGenerator = new RiversGenerator(_biome, _randomGenerator, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		riversGenerator.Generate();
 		Physics.SyncTransforms();
 	}
@@ -107,7 +107,7 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var mountainGenerator = new MountainGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
+		var mountainGenerator = new MountainGenerator(_biome, _randomGenerator, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		mountainGenerator.Generate();
 		Physics.SyncTransforms();
 	}
@@ -119,7 +119,7 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var forestGenerator = new ForestGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
+		var forestGenerator = new ForestGenerator(_biome, _randomGenerator, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		forestGenerator.Generate();
 		Physics.SyncTransforms();
 	}
@@ -131,7 +131,7 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var detailsGenerator = new DetailsGenerator(_biome, _objectsContainer, transform.position, OuterRadius, InnerRadius);
+		var detailsGenerator = new DetailsGenerator(_biome, _randomGenerator, _objectsContainer, transform.position, OuterRadius, InnerRadius);
 		detailsGenerator.Generate();
 		Physics.SyncTransforms();
 	}
@@ -143,15 +143,38 @@ public class ObjectPlacer : MonoBehaviour
 			return;
 		}
 
-		var islandGenerator = new IslandGenerator(_biome, _objectsContainer, transform.position, OuterRadius);
+		var islandGenerator = new IslandGenerator(_biome, _randomGenerator, _objectsContainer, transform.position, OuterRadius);
 		islandGenerator.Generate();
 		Physics.SyncTransforms();
+	}
+
+	void GenerateEffects()
+	{
+		if (!_biome.Effects)
+		{
+			return;
+		}
+
+		foreach (var effect in _biome.EffectsPrefabs)
+		{
+			_ = Instantiate(effect, _objectsContainer);
+		}
+	}
+
+	public void SetBiome(Biome biome)
+	{
+		if (_biome != biome)
+		{
+			_biome.OnChanged -= TryGenerate;
+		}
+
+		_biome = biome;
+		_biome.OnChanged += TryGenerate;
 	}
 
 	void OnEnable()
 	{
 		_biome.OnChanged += TryGenerate;
-
 		_objectsContainer = transform.Find("Objects");
 		if (!_objectsContainer)
 		{
@@ -166,8 +189,14 @@ public class ObjectPlacer : MonoBehaviour
 		_biome.OnChanged -= TryGenerate;
 	}
 
+	[SerializeField] bool _showGizmos;
 	void OnDrawGizmos()
 	{
+		if (!_showGizmos)
+		{
+			return;
+		}
+
 		Gizmos.color = Color.red;
 		GizmosExtras.Draw2dCircle(transform.position, InnerRadius);
 		GizmosExtras.Draw2dCircle(transform.position, OuterRadius);

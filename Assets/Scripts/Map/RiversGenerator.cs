@@ -1,19 +1,20 @@
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class RiversGenerator
 {
 	readonly Biome _biome;
+	readonly RandomGenerator _randomGenerator;
 	readonly Transform _parentObject;
 	readonly Vector3 _centerPosition;
 	readonly List<SplinePoint> _allSplinePoints = new List<SplinePoint>();
 	readonly float _outerRadius;
 	readonly float _innerRadius;
 
-	public RiversGenerator(Biome biome, Transform parentObject, Vector3 centerPosition, float outerRadius, float innerRadius)
+	public RiversGenerator(Biome biome, RandomGenerator randomGenerator, Transform parentObject, Vector3 centerPosition, float outerRadius, float innerRadius)
 	{
 		_biome = biome;
+		_randomGenerator = randomGenerator;
 		_parentObject = parentObject;
 		_centerPosition = centerPosition;
 		_outerRadius = outerRadius;
@@ -28,7 +29,7 @@ public class RiversGenerator
 		var maxAttemptsPerRiver = 10;
 		while (riversCreated < _biome.TotalRivers && maxAttemptsPerRiver > 0)
 		{
-			var spawnPoint = PlacerUtils.RandomPointWithinAnnulus(_centerPosition, _innerRadius, _outerRadius);
+			var spawnPoint = PlacerUtils.RandomPointWithinAnnulus(_randomGenerator, _centerPosition, _innerRadius, _outerRadius);
 			if (IsPointValid(spawnPoint, _biome.RiverWidthRange.y))
 			{
 				var river = InstantiateRiver(_biome.RiverPrefab, spawnPoint);
@@ -72,7 +73,7 @@ public class RiversGenerator
 
 	GameObject InstantiateRiver(GameObject prefab, Vector3 position)
 	{
-		var river = Object.Instantiate(prefab, position + Vector3.up, Quaternion.identity, _parentObject);
+		var river = Object.Instantiate(prefab, position + (Vector3.up * 0.1f), Quaternion.identity, _parentObject);
 
 		var propBlock = new MaterialPropertyBlock();
 		var renderer = river.GetComponentInChildren<Renderer>();
@@ -120,7 +121,7 @@ public class RiversGenerator
 
 	void AddFirstPoint(SplineMeshGenerator splineMeshGenerator, Vector3 riverPosition)
 	{
-		var width = Random.Range(_biome.RiverWidthRange.x, _biome.RiverWidthRange.y);
+		var width = _randomGenerator.NextFloat(_biome.RiverWidthRange.x, _biome.RiverWidthRange.y);
 
 		var splinePoint = new SplinePoint(Vector3.zero, width);
 		splineMeshGenerator.SplinePoints.Add(splinePoint);
@@ -135,13 +136,13 @@ public class RiversGenerator
 		{
 			splineMeshGenerator.SplinePoints.Clear();
 
-			var pointsCount = Random.Range(_biome.PointsPerRiverRange.x, _biome.PointsPerRiverRange.y + 1);
+			var pointsCount = _randomGenerator.NextFloat(_biome.PointsPerRiverRange.x, _biome.PointsPerRiverRange.y + 1);
 			var lastPoint = Vector3.zero;
 
 			AddFirstPoint(splineMeshGenerator, river.transform.position);
 			pointsCount--;
 
-			var noiseOffset = Random.Range(0f, 100f);
+			var noiseOffset = _randomGenerator.NextFloat(0f, 100f);
 
 			for (var i = 0; i < pointsCount; i++)
 			{
@@ -149,10 +150,10 @@ public class RiversGenerator
 				var direction = Quaternion.Euler(0, angle, 0) * Vector3.forward;
 				direction.Normalize();
 
-				var distance = Random.Range(_biome.DistanceBetweenPointsRange.x, _biome.DistanceBetweenPointsRange.y);
+				var distance = _randomGenerator.NextFloat(_biome.DistanceBetweenPointsRange.x, _biome.DistanceBetweenPointsRange.y);
 				var nextPoint = lastPoint + (direction * distance);
 				var globalPoint = nextPoint + river.transform.position;
-				var width = Random.Range(_biome.RiverWidthRange.x, _biome.RiverWidthRange.y);
+				var width = _randomGenerator.NextFloat(_biome.RiverWidthRange.x, _biome.RiverWidthRange.y);
 				if (!IsPointValid(globalPoint, width))
 				{
 					continue;

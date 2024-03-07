@@ -8,9 +8,13 @@ public class Biome : ScriptableObject
 	public Action OnChanged = delegate { };
 
 	[Header("Settings")]
-	// All the prefabs will be using this material
-	// Apply this to every prefab in the biome
 	public Material Material;
+
+	[ToggleGroup("Roads", CollapseOthersOnExpand = false)] public bool Roads;
+	[ToggleGroup("Roads")] public GameObject RoadPrefab;
+	[ToggleGroup("Roads")] public Color RoadColor;
+	[ToggleGroup("Roads")] public Color GroundColor;
+	[ToggleGroup("Roads"), Range(12f, 36f)] public float RoadWidth = 24f;
 
 	[ToggleGroup("Rivers", CollapseOthersOnExpand = false)] public bool Rivers;
 	[ToggleGroup("Rivers")] public GameObject RiverPrefab;
@@ -22,12 +26,6 @@ public class Biome : ScriptableObject
 	[ToggleGroup("Rivers"), MinMaxSlider(10, 25, true)] public Vector2 DistanceBetweenPointsRange = new Vector2(10f, 25f);
 	[ToggleGroup("Rivers"), MinMaxSlider(2, 10, true)] public Vector2 RiverWidthRange = new Vector2(4f, 8f);
 	[ToggleGroup("Rivers")] public float RiversNoiseScale = 0.5f;
-
-	[ToggleGroup("Roads", CollapseOthersOnExpand = false)] public bool Roads;
-	[ToggleGroup("Roads")] public GameObject RoadPrefab;
-	[ToggleGroup("Roads")] public Color RoadColor;
-	[ToggleGroup("Roads")] public Color GroundColor;
-	[ToggleGroup("Roads"), Range(12f, 36f)] public float RoadWidth = 24f;
 
 	[ToggleGroup("Mountains", CollapseOthersOnExpand = false)] public bool Mountains;
 	[ToggleGroup("Mountains")] public GameObject[] MountainPrefabs;
@@ -58,16 +56,13 @@ public class Biome : ScriptableObject
 	[ToggleGroup("Islands")] public float IslandDistanceFromOuterRadius = 20f;
 
 
-	// [Header("Environmental Conditions")]
-	// public Color AmbientLightColor;
-	// public float FogDensity;
-
-	// Add more settings for weather, wind, etc.
-	// Instantiate effects based on these settings
+	[ToggleGroup("Effects", CollapseOthersOnExpand = false)] public bool Effects;
+	[ToggleGroup("Effects")] public GameObject[] EffectsPrefabs;
 
 	[Button(buttonSize: (int)ButtonSizes.Large)]
 	public void Generate()
 	{
+		FindFirstObjectByType<ObjectPlacer>().SetBiome(this);
 		OnChanged();
 	}
 

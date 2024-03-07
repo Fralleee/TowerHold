@@ -61,10 +61,10 @@ public static class PlacerUtils
 		return false; // No obstructions found
 	}
 
-	public static Vector3 RandomPointWithinAnnulus(Vector3 center, float minRadius, float maxRadius)
+	public static Vector3 RandomPointWithinAnnulus(RandomGenerator randomGenerator, Vector3 center, float minRadius, float maxRadius)
 	{
-		var direction = Random.insideUnitCircle.normalized;
-		var distance = Random.Range(minRadius, maxRadius);
+		var direction = randomGenerator.InsideUnitCircle().normalized;
+		var distance = randomGenerator.NextFloat(minRadius, maxRadius);
 		return new Vector3(center.x + (direction.x * distance), 0, center.z + (direction.y * distance));
 	}
 }

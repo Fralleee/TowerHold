@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class ForestGenerator
 {
 	readonly Biome _biome;
+	readonly RandomGenerator _randomGenerator;
 	readonly Transform _parentObject;
 	readonly Vector3 _centerPosition;
 	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
@@ -13,9 +13,10 @@ public class ForestGenerator
 
 	readonly Collider[] _collidersBuffer = new Collider[1];
 
-	public ForestGenerator(Biome biome, Transform parentObject, Vector3 centerPosition, float outerRadius, float innerRadius)
+	public ForestGenerator(Biome biome, RandomGenerator randomGenerator, Transform parentObject, Vector3 centerPosition, float outerRadius, float innerRadius)
 	{
 		_biome = biome;
+		_randomGenerator = randomGenerator;
 		_parentObject = parentObject;
 		_centerPosition = centerPosition;
 		_outerRadius = outerRadius;
@@ -24,12 +25,12 @@ public class ForestGenerator
 
 	public void Generate()
 	{
-		var totalSeeds = Mathf.CeilToInt(Random.Range(_biome.SeedRange.x, _biome.SeedRange.y));
+		var totalSeeds = Mathf.CeilToInt(_randomGenerator.NextFloat(_biome.SeedRange.x, _biome.SeedRange.y));
 
 		while (totalSeeds > 0)
 		{
-			var randomDirection = Random.insideUnitCircle.normalized;
-			var randomDistance = Random.Range(_innerRadius, _outerRadius);
+			var randomDirection = _randomGenerator.InsideUnitCircle().normalized;
+			var randomDistance = _randomGenerator.NextFloat(_innerRadius, _outerRadius);
 			var seedPoint = _centerPosition + new Vector3(randomDirection.x, 0, randomDirection.y) * randomDistance;
 
 			if (IsPointValid(seedPoint))
@@ -87,7 +88,7 @@ public class ForestGenerator
 		growthPoints.Enqueue(seedPoint);
 		_ = placedTrees.Add(seedPoint);
 
-		var forestLength = Random.Range(_biome.ForestLengthRange.x, _biome.ForestLengthRange.y);
+		var forestLength = _randomGenerator.NextFloat(_biome.ForestLengthRange.x, _biome.ForestLengthRange.y);
 
 		while (growthPoints.Count > 0 && placedTrees.Count < forestLength)
 		{
@@ -109,9 +110,9 @@ public class ForestGenerator
 
 	void PlaceTree(Vector3 position)
 	{
-		var prefab = _biome.TreePrefabs[Random.Range(0, _biome.TreePrefabs.Length)];
-		var rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-		var scale = Random.Range(_biome.TreeScaleRange.x, _biome.TreeScaleRange.y);
+		var prefab = _biome.TreePrefabs[_randomGenerator.Next(0, _biome.TreePrefabs.Length)];
+		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0);
+		var scale = _randomGenerator.NextFloat(_biome.TreeScaleRange.x, _biome.TreeScaleRange.y);
 
 		var tree = Object.Instantiate(prefab, position, rotation, _parentObject);
 		tree.transform.localScale = new Vector3(scale, scale, scale);
