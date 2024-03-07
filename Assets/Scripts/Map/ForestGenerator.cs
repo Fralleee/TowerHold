@@ -8,7 +8,6 @@ public class ForestGenerator
 	readonly Transform _parentObject;
 	readonly Vector3 _centerPosition;
 	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
-	readonly LayerMask _mountainsLayerMask = LayerMask.GetMask("Mountains");
 	readonly float _outerRadius;
 	readonly float _innerRadius;
 
@@ -67,7 +66,7 @@ public class ForestGenerator
 			return false;
 		}
 
-		if (Physics.Raycast(point + (Vector3.up * 50f), Vector3.down, out _, Mathf.Infinity, _mountainsLayerMask))
+		if (Physics.Raycast(point + (Vector3.up * 50f), Vector3.down, out _, Mathf.Infinity, _obstacleLayerMask))
 		{
 			return false;
 		}
