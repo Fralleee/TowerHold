@@ -170,6 +170,7 @@ public class ObjectPlacer : MonoBehaviour
 
 		_biome = biome;
 		_biome.OnChanged += TryGenerate;
+		TryGenerate();
 	}
 
 	void OnEnable()

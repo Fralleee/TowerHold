@@ -63,7 +63,6 @@ public class Biome : ScriptableObject
 	public void Generate()
 	{
 		FindFirstObjectByType<ObjectPlacer>().SetBiome(this);
-		OnChanged();
 	}
 
 	void OnValidate()
