@@ -9,9 +9,9 @@ public class ObjectPlacer : MonoBehaviour
 
 	[Header("Settings")]
 	[SerializeField] Biome _biome;
+	[SerializeField] Transform _objectsContainer;
 	[SerializeField] bool _spawnOnStart;
 
-	Transform _objectsContainer;
 	RandomGenerator _randomGenerator;
 
 	public static LayerMask GroundLayerMask => LayerMask.GetMask("Ground");
@@ -51,6 +51,7 @@ public class ObjectPlacer : MonoBehaviour
 	[Button]
 	public void TryGenerate()
 	{
+		Debug.Log("Generating map objects");
 		var startSeed = GameController.GameSettings != null ? GameController.GameSettings.StartSeed : 0;
 		_randomGenerator = new RandomGenerator(startSeed);
 
@@ -175,23 +176,6 @@ public class ObjectPlacer : MonoBehaviour
 		_biome = biome;
 		_biome.OnChanged += TryGenerate;
 		TryGenerate();
-	}
-
-	void OnEnable()
-	{
-		_biome.OnChanged += TryGenerate;
-		_objectsContainer = transform.Find("Objects");
-		if (!_objectsContainer)
-		{
-			var instance = Instantiate(new GameObject("Objects"), transform);
-			instance.name = "Objects";
-			_objectsContainer = instance.transform;
-		}
-	}
-
-	void OnDisable()
-	{
-		_biome.OnChanged -= TryGenerate;
 	}
 
 	[SerializeField] bool _showGizmos;

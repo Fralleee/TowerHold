@@ -50,10 +50,10 @@ public class ColorPaletteEditor : Editor
 			{
 				var row = (ColorPaletteRow)field.GetValue(palette);
 				EditorGUILayout.LabelField(field.Name);
-				EditorGUILayout.BeginHorizontal();
+				_ = EditorGUILayout.BeginHorizontal();
 				for (var i = 0; i < row.Colors.Length; i++)
 				{
-					EditorGUILayout.BeginVertical(GUILayout.MaxWidth(70));
+					_ = EditorGUILayout.BeginVertical(GUILayout.MaxWidth(70));
 					row.Colors[i] = EditorGUILayout.ColorField(GUIContent.none, row.Colors[i], false, false, false, GUILayout.Width(64), GUILayout.Height(64));
 					EditorGUILayout.LabelField(_labels[j][i], GUILayout.Width(64)); // Label below color field
 					EditorGUILayout.EndVertical(); // End vertical group

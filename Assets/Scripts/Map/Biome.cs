@@ -9,6 +9,7 @@ public class Biome : ScriptableObject
 
 	[Header("Settings")]
 	public Material Material;
+	public Texture2D Texture;
 
 	[ToggleGroup("Roads", CollapseOthersOnExpand = false)] public bool Roads;
 	[ToggleGroup("Roads")] public GameObject RoadPrefab;
@@ -29,12 +30,14 @@ public class Biome : ScriptableObject
 
 	[ToggleGroup("Mountains", CollapseOthersOnExpand = false)] public bool Mountains;
 	[ToggleGroup("Mountains")] public GameObject[] MountainPrefabs;
+	[ToggleGroup("Mountains")] public Color MountainColor;
 	[ToggleGroup("Mountains")] public float MountainFrequency = 0.5f;
 	[ToggleGroup("Mountains")] public float MountainNoiseScale = 0.01f;
 	[ToggleGroup("Mountains"), MinMaxSlider(0.1f, 5f, true)] public Vector2 MountainScaleRange = new Vector2(0.6f, 1.2f);
 
 	[ToggleGroup("Forests", CollapseOthersOnExpand = false)] public bool Forests;
 	[ToggleGroup("Forests")] public GameObject[] TreePrefabs;
+	[ToggleGroup("Forests")] public Color TreeColor;
 	[ToggleGroup("Forests"), MinMaxSlider(0.1f, 5f, true)] public Vector2 TreeScaleRange = new Vector2(0.8f, 1.2f);
 	[ToggleGroup("Forests"), MinMaxSlider(3, 128, true)] public Vector2Int ForestLengthRange = new Vector2Int(32, 96);
 	[ToggleGroup("Forests"), MinMaxSlider(1, 32, true)] public Vector2Int SeedRange = new Vector2Int(16, 24);
@@ -62,11 +65,30 @@ public class Biome : ScriptableObject
 	[Button(buttonSize: (int)ButtonSizes.Large)]
 	public void Generate()
 	{
+		UpdateColorPaletteTexture();
 		FindFirstObjectByType<ObjectPlacer>().SetBiome(this);
 	}
 
 	void OnValidate()
 	{
+		UpdateColorPaletteTexture();
 		OnChanged();
+	}
+
+	void UpdateColorPaletteTexture()
+	{
+		if (Texture == null)
+		{
+			Debug.LogWarning("Biome: Texture is null.");
+			return;
+		}
+
+		Texture.SetPixel(0, 0, MountainColor);
+		Texture.SetPixel(1, 0, TreeColor);
+		Texture.SetPixel(2, 0, Color.black);
+		Texture.SetPixel(3, 0, Color.black);
+		Texture.Apply();
+
+		Material.SetTexture("_BaseMap", Texture);
 	}
 }

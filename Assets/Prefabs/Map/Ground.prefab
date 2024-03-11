@@ -243,7 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a474fced53ba7048a6e9b2d986ad955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _biome: {fileID: 11400000, guid: 24c7b80f69b6aeb469c6c3c5e754ce00, type: 2}
+  _biome: {fileID: 11400000, guid: 4c77e4eaf889e8341b5f927f2269f0fe, type: 2}
+  _objectsContainer: {fileID: 7979480324822167872}
   _spawnOnStart: 0
   _showGizmos: 0
 --- !u!4 &5392442582784681347 stripped

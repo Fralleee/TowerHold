@@ -76,11 +76,11 @@ public class MountainGenerator
 	void Spawn(Vector3 position)
 	{
 		var prefab = _biome.MountainPrefabs[_randomGenerator.Next(0, _biome.MountainPrefabs.Length)];
-		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0); // Random rotation around the Y axis
+		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0);
 		var scale = _randomGenerator.NextFloat(_biome.MountainScaleRange.x, _biome.MountainScaleRange.y);
 		var mountain = Object.Instantiate(prefab, position, rotation, _parentObject);
 		mountain.transform.localScale = new Vector3(scale, scale, scale);
 		mountain.layer = ObjectPlacer.ObstacleLayer;
-		mountain.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
+		PlacerUtils.SetColor(mountain, _biome.Material);
 	}
 }

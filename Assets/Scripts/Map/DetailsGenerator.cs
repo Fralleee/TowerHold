@@ -60,6 +60,5 @@ public class DetailsGenerator
 		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0);
 		var detail = Object.Instantiate(prefab, position, rotation, _parentObject);
 		detail.layer = ObjectPlacer.ObstacleLayer;
-		detail.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 }

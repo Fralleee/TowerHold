@@ -67,6 +67,11 @@ public static class PlacerUtils
 		var distance = randomGenerator.NextFloat(minRadius, maxRadius);
 		return new Vector3(center.x + (direction.x * distance), 0, center.z + (direction.y * distance));
 	}
+
+	public static void SetColor(GameObject gameObject, Material material)
+	{
+		gameObject.GetComponentInChildren<Renderer>().sharedMaterial = material;
+	}
 }
 
 

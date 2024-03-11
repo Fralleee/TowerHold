@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a234c5de0214be4ca12c1530b914292, type: 3}
   m_Name: Mountains
   m_EditorClassIdentifier: 
-  Material: {fileID: 2100000, guid: 2580cfd856f10924e85d4e01f1ad4f57, type: 2}
+  Material: {fileID: 2100000, guid: 204d0ef2806ead64288aee2ff83650d1, type: 2}
   Roads: 1
   RoadPrefab: {fileID: 3551499252064288638, guid: e1ce90aa7abe4f6438e374f987bc596a,
     type: 3}
@@ -33,19 +33,21 @@ MonoBehaviour:
   Mountains: 1
   MountainPrefabs:
   - {fileID: 5851204286249436283, guid: 296051b29d587814ab07bbb0ae75605f, type: 3}
+  MountainColor: {r: 0.26610893, g: 0.43445173, b: 0.49056602, a: 0}
   MountainFrequency: 32
   MountainNoiseScale: 0.01
   MountainScaleRange: {x: 4.5, y: 5}
   Forests: 1
   TreePrefabs:
   - {fileID: 1131880212843462996, guid: 228fdc09fe3672043832a00f379afcc7, type: 3}
+  TreeColor: {r: 0.009782467, g: 0.6037736, b: 0, a: 0}
   TreeScaleRange: {x: 0.8, y: 1.2}
   ForestLengthRange: {x: 3, y: 24}
   SeedRange: {x: 8, y: 12}
   DistanceBetweenTrees: 4
   TreeNoiseScale: 0.5
   TreeNoiseThreshold: 0.5
-  Details: 1
+  Details: 0
   DetailsPrefabs:
   - {fileID: 919132149155446097, guid: c2c4e40fb3803784c91a4b6c6b1686f2, type: 3}
   - {fileID: 919132149155446097, guid: 2c0a804df6b50a14691a72c9236a5b70, type: 3}
