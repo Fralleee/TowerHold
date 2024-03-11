@@ -29,10 +29,10 @@ public class RiversGenerator
 		var maxAttemptsPerRiver = 10;
 		while (riversCreated < _biome.TotalRivers && maxAttemptsPerRiver > 0)
 		{
-			var spawnPoint = PlacerUtils.RandomPointWithinAnnulus(_randomGenerator, _centerPosition, _innerRadius, _outerRadius);
-			if (IsPointValid(spawnPoint, _biome.RiverWidthRange.y))
+			var randomPoint = PlacerUtils.RandomPointWithinAnnulus(_randomGenerator, _centerPosition, _innerRadius, _outerRadius);
+			if (IsPointValid(randomPoint, _biome.RiverWidthRange.y))
 			{
-				var river = InstantiateRiver(_biome.RiverPrefab, spawnPoint);
+				var river = Spawn(_biome.RiverPrefab, randomPoint);
 				var successful = SetupSplineMeshGenerator(river);
 				if (successful)
 				{
@@ -70,24 +70,6 @@ public class RiversGenerator
 		renderer.SetPropertyBlock(propBlock);
 
 	}
-
-	GameObject InstantiateRiver(GameObject prefab, Vector3 position)
-	{
-		var river = Object.Instantiate(prefab, position + (Vector3.up * 0.1f), Quaternion.identity, _parentObject);
-
-		var propBlock = new MaterialPropertyBlock();
-		var renderer = river.GetComponentInChildren<Renderer>();
-
-		renderer.GetPropertyBlock(propBlock);
-
-		propBlock.SetColor("_ColorShallow", _biome.RiverColorShallow);
-		propBlock.SetColor("_ColorDeep", _biome.RiverColorDeep);
-
-		renderer.SetPropertyBlock(propBlock);
-
-		return river;
-	}
-
 
 	bool IsPointValid(Vector3 point, float width)
 	{
@@ -180,4 +162,21 @@ public class RiversGenerator
 		return false;
 	}
 
+	GameObject Spawn(GameObject prefab, Vector3 position)
+	{
+		var river = Object.Instantiate(prefab, position + (Vector3.up * 0.1f), Quaternion.identity, _parentObject);
+		river.layer = ObjectPlacer.ObstacleLayer;
+
+		var propBlock = new MaterialPropertyBlock();
+		var renderer = river.GetComponentInChildren<Renderer>();
+
+		renderer.GetPropertyBlock(propBlock);
+
+		propBlock.SetColor("_ColorShallow", _biome.RiverColorShallow);
+		propBlock.SetColor("_ColorDeep", _biome.RiverColorDeep);
+
+		renderer.SetPropertyBlock(propBlock);
+
+		return river;
+	}
 }

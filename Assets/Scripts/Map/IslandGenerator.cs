@@ -29,7 +29,7 @@ public class IslandGenerator
 		for (var i = 0; i < totalIslands; i++)
 		{
 			var randomPoint = PlacerUtils.RandomPointWithinAnnulus(_randomGenerator, _centerPosition, _outerRadius, _islandSpawnRadius);
-			if (!Physics.CheckSphere(randomPoint, IslandSizeOffset, ObjectPlacer.ObstacleLayer | ObjectPlacer.GroundLayer))
+			if (!Physics.CheckSphere(randomPoint, IslandSizeOffset, ObjectPlacer.ObstacleLayerMask | ObjectPlacer.GroundLayerMask))
 			{
 				Spawn(randomPoint);
 			}

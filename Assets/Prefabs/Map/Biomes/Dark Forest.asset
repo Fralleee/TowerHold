@@ -41,7 +41,7 @@ MonoBehaviour:
   - {fileID: 1131880212843462996, guid: 228fdc09fe3672043832a00f379afcc7, type: 3}
   TreeScaleRange: {x: 0.8, y: 1.2}
   ForestLengthRange: {x: 24, y: 96}
-  SeedRange: {x: 24, y: 24}
+  SeedRange: {x: 24, y: 32}
   DistanceBetweenTrees: 3
   TreeNoiseScale: 0.5
   TreeNoiseThreshold: 0.5

@@ -7,7 +7,6 @@ public class ForestGenerator
 	readonly RandomGenerator _randomGenerator;
 	readonly Transform _parentObject;
 	readonly Vector3 _centerPosition;
-	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
 	readonly float _outerRadius;
 	readonly float _innerRadius;
 
@@ -26,17 +25,18 @@ public class ForestGenerator
 	public void Generate()
 	{
 		var totalSeeds = Mathf.CeilToInt(_randomGenerator.NextFloat(_biome.SeedRange.x, _biome.SeedRange.y));
-
-		while (totalSeeds > 0)
+		var maxAttempts = 1000;
+		while (totalSeeds > 0 && maxAttempts > 0)
 		{
-			var randomDirection = _randomGenerator.InsideUnitCircle().normalized;
-			var randomDistance = _randomGenerator.NextFloat(_innerRadius, _outerRadius);
-			var seedPoint = _centerPosition + new Vector3(randomDirection.x, 0, randomDirection.y) * randomDistance;
-
-			if (IsPointValid(seedPoint))
+			var randomPoint = PlacerUtils.RandomPointWithinAnnulus(_randomGenerator, _centerPosition, _innerRadius, _outerRadius);
+			if (IsPointValid(randomPoint))
 			{
-				GrowForestFromSeed(seedPoint);
+				GrowForestFromSeed(randomPoint);
 				totalSeeds--;
+			}
+			else
+			{
+				maxAttempts--;
 			}
 		}
 	}
@@ -55,19 +55,19 @@ public class ForestGenerator
 			return false;
 		}
 
-		var colliders = Physics.OverlapSphereNonAlloc(point, _biome.DistanceBetweenTrees / 2, _collidersBuffer, _obstacleLayerMask);
+		var colliders = Physics.OverlapSphereNonAlloc(point, _biome.DistanceBetweenTrees / 2, _collidersBuffer, ObjectPlacer.ObstacleLayerMask);
 		if (colliders > 0)
 		{
 			return false;
 		}
 
-		var isNotNearObstacle = !Physics.CheckSphere(point, _biome.DistanceBetweenTrees / 2, _obstacleLayerMask);
+		var isNotNearObstacle = !Physics.CheckSphere(point, _biome.DistanceBetweenTrees / 2, ObjectPlacer.ObstacleLayerMask);
 		if (!isNotNearObstacle)
 		{
 			return false;
 		}
 
-		if (Physics.Raycast(point + (Vector3.up * 50f), Vector3.down, out _, Mathf.Infinity, _obstacleLayerMask))
+		if (Physics.Raycast(point + (Vector3.up * 50f), Vector3.down, out _, Mathf.Infinity, ObjectPlacer.ObstacleLayerMask))
 		{
 			return false;
 		}
@@ -89,8 +89,8 @@ public class ForestGenerator
 		_ = placedTrees.Add(seedPoint);
 
 		var forestLength = _randomGenerator.NextFloat(_biome.ForestLengthRange.x, _biome.ForestLengthRange.y);
-
-		while (growthPoints.Count > 0 && placedTrees.Count < forestLength)
+		var maxAttempts = 10000;
+		while (growthPoints.Count > 0 && placedTrees.Count < forestLength && maxAttempts > 0)
 		{
 			var currentPoint = growthPoints.Dequeue();
 			for (var i = 0; i < 8; i++)
@@ -100,15 +100,19 @@ public class ForestGenerator
 				var nextPoint = currentPoint + offset;
 				if (!placedTrees.Contains(nextPoint) && IsPointValid(nextPoint))
 				{
-					PlaceTree(nextPoint);
+					Spawn(nextPoint);
 					growthPoints.Enqueue(nextPoint);
 					_ = placedTrees.Add(nextPoint);
+				}
+				else
+				{
+					maxAttempts--;
 				}
 			}
 		}
 	}
 
-	void PlaceTree(Vector3 position)
+	void Spawn(Vector3 position)
 	{
 		var prefab = _biome.TreePrefabs[_randomGenerator.Next(0, _biome.TreePrefabs.Length)];
 		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0);
@@ -116,7 +120,7 @@ public class ForestGenerator
 
 		var tree = Object.Instantiate(prefab, position, rotation, _parentObject);
 		tree.transform.localScale = new Vector3(scale, scale, scale);
-
+		tree.layer = ObjectPlacer.ObstacleLayer;
 		tree.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 }

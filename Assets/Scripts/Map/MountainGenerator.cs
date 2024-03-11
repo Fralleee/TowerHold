@@ -10,7 +10,6 @@ public class MountainGenerator
 	readonly Vector3 _centerPosition;
 	readonly float _outerRadius;
 	readonly float _innerRadius;
-	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
 
 	public MountainGenerator(Biome biome, RandomGenerator randomGenerator, Transform parentObject, Vector3 position, float outerRadius, float innerRadius)
 	{
@@ -32,13 +31,11 @@ public class MountainGenerator
 
 	void GenerateMountainCluster()
 	{
-		var randomPoint = _randomGenerator.InsideUnitCircle().normalized * _randomGenerator.NextFloat(_innerRadius + MountainSizeOffset, _outerRadius);
-		var clusterCenter = new Vector3(randomPoint.x, 0, randomPoint.y) + _centerPosition;
+		var randomPoint = PlacerUtils.RandomPointWithinAnnulus(_randomGenerator, _centerPosition, _innerRadius + MountainSizeOffset, _outerRadius);
 		var mountainsInCluster = _randomGenerator.Next(1, 4);
-
 		for (var j = 0; j < mountainsInCluster; j++)
 		{
-			GenerateSingleMountain(clusterCenter);
+			GenerateSingleMountain(randomPoint);
 		}
 	}
 
@@ -49,20 +46,8 @@ public class MountainGenerator
 		var mountainPosition = clusterCenter + new Vector3(offsetX, 0, offsetZ);
 		if (IsPointValid(mountainPosition))
 		{
-			InstantiateMountain(mountainPosition);
+			Spawn(mountainPosition);
 		}
-	}
-
-	void InstantiateMountain(Vector3 position)
-	{
-		var prefab = _biome.MountainPrefabs[_randomGenerator.Next(0, _biome.MountainPrefabs.Length)];
-		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0); // Random rotation around the Y axis
-		var scale = _randomGenerator.NextFloat(_biome.MountainScaleRange.x, _biome.MountainScaleRange.y);
-
-		var mountain = Object.Instantiate(prefab, position, rotation, _parentObject);
-		mountain.transform.localScale = new Vector3(scale, scale, scale);
-
-		mountain.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 
 	bool IsPointValid(Vector3 point)
@@ -73,7 +58,7 @@ public class MountainGenerator
 			return false;
 		}
 
-		var isNotNearObstacle = !Physics.CheckSphere(point, 10f, _obstacleLayerMask);
+		var isNotNearObstacle = !Physics.CheckSphere(point, 10f, ObjectPlacer.ObstacleLayerMask);
 		if (!isNotNearObstacle)
 		{
 			return false;
@@ -86,5 +71,16 @@ public class MountainGenerator
 		}
 
 		return true;
+	}
+
+	void Spawn(Vector3 position)
+	{
+		var prefab = _biome.MountainPrefabs[_randomGenerator.Next(0, _biome.MountainPrefabs.Length)];
+		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0); // Random rotation around the Y axis
+		var scale = _randomGenerator.NextFloat(_biome.MountainScaleRange.x, _biome.MountainScaleRange.y);
+		var mountain = Object.Instantiate(prefab, position, rotation, _parentObject);
+		mountain.transform.localScale = new Vector3(scale, scale, scale);
+		mountain.layer = ObjectPlacer.ObstacleLayer;
+		mountain.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 }

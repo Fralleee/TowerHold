@@ -40,7 +40,7 @@ public class DetailsGenerator
 
 	bool IsPointValid(Vector3 point)
 	{
-		if (Physics.CheckSphere(point, 0.5f, ObjectPlacer.ObstacleLayer))
+		if (Physics.CheckSphere(point, 0.5f, ObjectPlacer.ObstacleLayerMask))
 		{
 			return false;
 		}
