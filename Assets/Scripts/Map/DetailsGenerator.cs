@@ -6,7 +6,6 @@ public class DetailsGenerator
 	readonly RandomGenerator _randomGenerator;
 	readonly Transform _parentObject;
 	readonly Vector3 _centerPosition;
-	readonly LayerMask _obstacleLayerMask = LayerMask.GetMask("Obstacle");
 	readonly float _outerRadius;
 	readonly float _innerRadius;
 
@@ -41,7 +40,7 @@ public class DetailsGenerator
 
 	bool IsPointValid(Vector3 point)
 	{
-		if (Physics.CheckSphere(point, 0.5f, _obstacleLayerMask))
+		if (Physics.CheckSphere(point, 0.5f, ObjectPlacer.ObstacleLayer))
 		{
 			return false;
 		}
@@ -59,9 +58,8 @@ public class DetailsGenerator
 	{
 		var prefab = _biome.DetailsPrefabs[_randomGenerator.Next(0, _biome.DetailsPrefabs.Length)];
 		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0);
-
 		var detail = Object.Instantiate(prefab, position, rotation, _parentObject);
-
+		detail.layer = ObjectPlacer.ObstacleLayer;
 		detail.GetComponentInChildren<Renderer>().sharedMaterial = _biome.Material;
 	}
 }

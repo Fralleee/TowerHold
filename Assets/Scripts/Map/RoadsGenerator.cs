@@ -29,27 +29,11 @@ public class RoadsGenerator
 		renderer.SetPropertyBlock(propBlock);
 	}
 
-	GameObject InstantiateRoad()
-	{
-		var road = Object.Instantiate(_biome.RoadPrefab, _centerPosition + (Vector3.up * 0.01f), Quaternion.identity, _parentObject);
-
-		var propBlock = new MaterialPropertyBlock();
-		var renderer = road.GetComponentInChildren<Renderer>();
-
-		renderer.GetPropertyBlock(propBlock);
-
-		propBlock.SetColor("_BaseColor", _biome.RoadColor);
-
-		renderer.SetPropertyBlock(propBlock);
-
-		return road;
-	}
-
 	public void Generate()
 	{
 		_allSplinePoints.Clear();
 		SetGroundColor();
-		var road = InstantiateRoad();
+		var road = Spawn();
 		SetupSplineMeshGenerator(road);
 	}
 
@@ -71,5 +55,21 @@ public class RoadsGenerator
 
 			splineMeshGenerator.UpdateMesh();
 		}
+	}
+
+	GameObject Spawn()
+	{
+		var road = Object.Instantiate(_biome.RoadPrefab, _centerPosition + (Vector3.up * 0.01f), Quaternion.identity, _parentObject);
+
+		var propBlock = new MaterialPropertyBlock();
+		var renderer = road.GetComponentInChildren<Renderer>();
+
+		renderer.GetPropertyBlock(propBlock);
+
+		propBlock.SetColor("_BaseColor", _biome.RoadColor);
+
+		renderer.SetPropertyBlock(propBlock);
+
+		return road;
 	}
 }
