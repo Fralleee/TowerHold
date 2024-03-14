@@ -80,7 +80,7 @@ public class MountainGenerator
 		var scale = _randomGenerator.NextFloat(_biome.MountainScaleRange.x, _biome.MountainScaleRange.y);
 		var mountain = Object.Instantiate(prefab, position, rotation, _parentObject);
 		mountain.transform.localScale = new Vector3(scale, scale, scale);
-		mountain.layer = ObjectPlacer.ObstacleLayer;
+		mountain.SetLayerRecursively(ObjectPlacer.ObstacleLayer);
 		PlacerUtils.SetColor(mountain, _biome.Material);
 	}
 }

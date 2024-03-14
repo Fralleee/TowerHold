@@ -1,13 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="Main.uss" />
+    <Style src="project://database/Assets/UI%20Toolkit/UI/Menu/Screens/Main.uss?fileID=7433441132597879392&amp;guid=fc9cc38bed5075f41a5449ad800a8e26&amp;type=3#Main" />
     <ui:VisualElement name="MainScreen" class="screen">
-        <ui:VisualElement name="Title" />
-        <ui:VisualElement class="container">
-            <ui:Button name="PlayButton" text="New game" />
-            <ui:Button name="ContinueButton" text="Continue game" />
-            <ui:Button name="OptionsButton" text="Options" />
-            <ui:Button name="MenuButton" text="Quit to menu" />
-            <ui:Button name="QuitButton" text="Quit" />
+        <ui:VisualElement class="side-overlay" />
+        <ui:VisualElement class="content">
+            <ui:VisualElement class="top-overlay" />
+            <ui:VisualElement class="container red">
+                <ui:Label text="VAKT" class="title" />
+                <ShadowButton name="PlayButton" buttonText="Play" buttonClass="teal" />
+                <ShadowButton name="ContinueButton" buttonText="Resume" buttonClass="green" />
+                <ShadowButton name="OptionsButton" buttonText="Options" buttonClass="teal" />
+                <ShadowButton name="MenuButton" buttonText="Quit to menu" buttonClass="orange" />
+                <ShadowButton name="QuitButton" buttonText="Quit" buttonClass="orange" />
+            </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement class="side-overlay" />
     </ui:VisualElement>
 </ui:UXML>

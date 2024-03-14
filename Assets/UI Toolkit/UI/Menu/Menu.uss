@@ -1,27 +1,31 @@
 VisualElement.screen {
-	position: absolute;
-	display: flex;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0,0,0,.75);
-	padding-top: 120px;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -unity-font-definition: url("/Assets/Art/Fonts/CanvasBags.otf");
 }
 
-VisualElement.container {
-	max-width: 480px;
-	padding: 48px 0;
-	display: flex;
-	justify-content: center;
+ShadowButton {
+    min-width: 220px;
+    height: 60px;
+    padding: 2px;
+    padding-bottom: 10px;
+    background-color: rgb(17, 17, 17);
+    transition: all 150ms ease-out;
 }
 
-.InGame VisualElement.container {
-	align-items: center;
+ShadowButton > Button {
+    height: 100%;
+    border-width: 0;
+    font-size: 36px;
+    transition: all 150ms ease-out;
 }
 
-VisualElement.container Button {
-	width: 320px;
-	height: 64px;
-	margin: 24px;
-	font-size: 32px;
-	-unity-font-style: bold;
+ShadowButton:hover {
+    scale: 1.05;
+}
+
+ShadowButton:hover > Button {
+    background-color: whitesmoke;
 }

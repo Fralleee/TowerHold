@@ -120,7 +120,7 @@ public class ForestGenerator
 
 		var tree = Object.Instantiate(prefab, position, rotation, _parentObject);
 		tree.transform.localScale = new Vector3(scale, scale, scale);
-		tree.layer = ObjectPlacer.ObstacleLayer;
+		tree.SetLayerRecursively(ObjectPlacer.ObstacleLayer);
 		PlacerUtils.SetColor(tree, _biome.Material);
 	}
 }

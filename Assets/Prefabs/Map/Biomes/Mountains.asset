@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a234c5de0214be4ca12c1530b914292, type: 3}
   m_Name: Mountains
   m_EditorClassIdentifier: 
-  Material: {fileID: 2100000, guid: 204d0ef2806ead64288aee2ff83650d1, type: 2}
+  Material: {fileID: 2100000, guid: 9781c4f8e31fd984298253016fbb44ac, type: 2}
+  Texture: {fileID: 2800000, guid: 28bb64ffd613e4d4bab67d79282b835a, type: 3}
   Roads: 1
   RoadPrefab: {fileID: 3551499252064288638, guid: e1ce90aa7abe4f6438e374f987bc596a,
     type: 3}

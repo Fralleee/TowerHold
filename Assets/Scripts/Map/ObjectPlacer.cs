@@ -178,6 +178,16 @@ public class ObjectPlacer : MonoBehaviour
 		TryGenerate();
 	}
 
+	void OnEnable()
+	{
+		_biome.OnChanged += TryGenerate;
+	}
+
+	void OnDisable()
+	{
+		_biome.OnChanged -= TryGenerate;
+	}
+
 	[SerializeField] bool _showGizmos;
 	void OnDrawGizmos()
 	{

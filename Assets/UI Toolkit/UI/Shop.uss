@@ -154,3 +154,124 @@ Button#RefreshButton:enabled:hover, Button#LockButton:enabled:hover {
 Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
 	scale: 0.9;
 }
+
+.TEST-CONTAINER {
+	display: flex;
+	flex-direction: row;
+}
+
+.TEST-CONTAINER > * {
+	margin: 8px;
+}
+
+.TESTBUTTON {
+	position: relative;
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.TESTBUTTON:hover {
+	scale: 1;
+}
+
+.TESTBUTTON:hover > .TEST {
+	rotate: -45deg;
+	scale: 1;
+}
+
+.TEST {
+	width: 120px;
+	height: 120px;
+	background-color: #F7C94B;
+	border-width: 4px;
+	border-color: #111;
+	rotate: 0deg;
+	scale: 1.2;
+	border-radius: 24px;
+	transition: all 200ms ease-out-back;
+}
+
+/* .TESTBUTTON.turret > .TEST, .TESTBUTTON.turret > .TEST-CHILD {
+	border-radius: 0;
+} */
+
+.TEST-CHILD {
+	position: absolute;
+	left: 7px;
+	top: 5px;
+	width: 130px;
+	height: 130px;
+	background-color: #222;
+	border-width: 4px;
+	border-color: #111;
+	border-radius: 24px;
+	background-image: url("/Assets/Art/Textures/Icons/hatchet.png");
+	background-size: 80% 80%;
+	transition: all 200ms ease-out-back;
+}
+
+.TEST-TYPECONTAINER {
+	position: absolute;
+	left: 14px;
+	right: 14px;
+	top: 12px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+
+.TEST-TYPE {
+	width: 28px;
+	height: 28px;
+	background-color: #222;
+    border-radius: 50%;
+	background-image: url("/Assets/Art/Textures/Icons/normal.png");
+	background-size: 20px;
+}
+
+.TEST-UPGRADE {
+	width: 28px;
+	height: 28px;
+	background-color: #222;
+    border-radius: 50%;
+	background-image: url("/Assets/Art/Textures/Icons/plus.png");
+	background-size: 16px;
+}
+
+.TESTBUTTON.turret .TEST-UPGRADE {
+	display: none;
+}
+
+.TESTBUTTON.common > .TEST { background-color: #D1D1D1; }
+.TESTBUTTON.common .TEST-UPGRADE { -unity-background-image-tint-color: #D1D1D1; }
+.TESTBUTTON.common > .TEST-CHILD { -unity-background-image-tint-color: #D1D1D1; }
+
+.TESTBUTTON.uncommon > .TEST { background-color: #B6FF4E; }
+.TESTBUTTON.uncommon .TEST-UPGRADE { -unity-background-image-tint-color: #B6FF4E; }
+.TESTBUTTON.uncommon > .TEST-CHILD {
+	-unity-background-image-tint-color: #B6FF4E;
+	background-image: url("/Assets/Art/Textures/Icons/spine-arrow.png");
+}
+
+.TESTBUTTON.rare > .TEST { background-color: #457FFF; }
+.TESTBUTTON.rare .TEST-UPGRADE { -unity-background-image-tint-color: #457FFF; }
+.TESTBUTTON.rare > .TEST-CHILD {
+	 -unity-background-image-tint-color: #457FFF;
+	background-image: url("/Assets/Art/Textures/Icons/laser-gun.png");
+ }
+
+.TESTBUTTON.epic > .TEST { background-color: #BA6DFF; }
+.TESTBUTTON.epic .TEST-UPGRADE { -unity-background-image-tint-color: #BA6DFF; }
+.TESTBUTTON.epic > .TEST-CHILD {
+	-unity-background-image-tint-color: #BA6DFF;
+	background-image: url("/Assets/Art/Textures/Icons/pocket-bow.png");
+}
+
+.TESTBUTTON.legendary > .TEST { background-color: #FF752D; }
+.TESTBUTTON.legendary .TEST-UPGRADE { -unity-background-image-tint-color: #FF752D; }
+.TESTBUTTON.legendary > .TEST-CHILD {
+	-unity-background-image-tint-color: #FF752D;
+	background-image: url("/Assets/Art/Textures/Icons/stone-sphere.png");
+}

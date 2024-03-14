@@ -44,7 +44,7 @@ public class IslandGenerator
 
 		var island = Object.Instantiate(prefab, position, rotation, _parentObject);
 		island.transform.localScale = new Vector3(scale, scale, scale);
-		island.layer = ObjectPlacer.ObstacleLayer;
+		island.SetLayerRecursively(ObjectPlacer.ObstacleLayer);
 		PlacerUtils.SetColor(island, _biome.Material);
 	}
 }

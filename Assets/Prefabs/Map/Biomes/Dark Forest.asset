@@ -40,7 +40,7 @@ MonoBehaviour:
   MountainScaleRange: {x: 3, y: 5}
   Forests: 1
   TreePrefabs:
-  - {fileID: 1131880212843462996, guid: 228fdc09fe3672043832a00f379afcc7, type: 3}
+  - {fileID: 1131880212843462996, guid: 29c0e50e95527de42a76d03a7b5348df, type: 3}
   TreeColor: {r: 0.6627451, g: 0.72156864, b: 0.19607845, a: 1}
   TreeScaleRange: {x: 0.8, y: 1.2}
   ForestLengthRange: {x: 24, y: 96}

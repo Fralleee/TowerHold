@@ -165,7 +165,7 @@ public class RiversGenerator
 	GameObject Spawn(GameObject prefab, Vector3 position)
 	{
 		var river = Object.Instantiate(prefab, position + (Vector3.up * 0.1f), Quaternion.identity, _parentObject);
-		river.layer = ObjectPlacer.ObstacleLayer;
+		river.SetLayerRecursively(ObjectPlacer.ObstacleLayer);
 
 		var propBlock = new MaterialPropertyBlock();
 		var renderer = river.GetComponentInChildren<Renderer>();

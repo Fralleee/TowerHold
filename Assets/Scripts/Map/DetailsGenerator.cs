@@ -59,6 +59,6 @@ public class DetailsGenerator
 		var prefab = _biome.DetailsPrefabs[_randomGenerator.Next(0, _biome.DetailsPrefabs.Length)];
 		var rotation = Quaternion.Euler(0, _randomGenerator.NextFloat(0, 360), 0);
 		var detail = Object.Instantiate(prefab, position, rotation, _parentObject);
-		detail.layer = ObjectPlacer.ObstacleLayer;
+		detail.SetLayerRecursively(ObjectPlacer.ObstacleLayer);
 	}
 }

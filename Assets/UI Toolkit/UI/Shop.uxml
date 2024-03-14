@@ -4,6 +4,63 @@
     <Style src="project://database/Assets/UI%20Toolkit/UI/Shop.uss" />
     <ui:VisualElement name="ShopContainer">
 		<Tooltip />
+
+                    <ui:VisualElement class="TEST-CONTAINER">
+						<ui:Button class="TESTBUTTON common">
+							<ui:VisualElement class="TEST" />
+							<ui:VisualElement class="TEST-CHILD"/>
+							<ui:VisualElement class="TEST-TYPECONTAINER">
+								<ui:VisualElement class="TEST-TYPE"/>
+								<ui:VisualElement class="TEST-UPGRADE"/>
+							</ui:VisualElement>
+						</ui:Button>
+
+						<ui:Button class="TESTBUTTON uncommon">
+							<ui:VisualElement class="TEST" />
+							<ui:VisualElement class="TEST-CHILD"/>
+							<ui:VisualElement class="TEST-TYPECONTAINER">
+								<ui:VisualElement class="TEST-TYPE"/>
+								<ui:VisualElement class="TEST-UPGRADE"/>
+							</ui:VisualElement>
+						</ui:Button>
+
+						<ui:Button class="TESTBUTTON rare turret">
+							<ui:VisualElement class="TEST" />
+							<ui:VisualElement class="TEST-CHILD"/>
+							<ui:VisualElement class="TEST-TYPECONTAINER">
+								<ui:VisualElement class="TEST-TYPE"/>
+								<ui:VisualElement class="TEST-UPGRADE"/>
+							</ui:VisualElement>
+						</ui:Button>
+
+						<ui:Button class="TESTBUTTON epic turret">
+							<ui:VisualElement class="TEST" />
+							<ui:VisualElement class="TEST-CHILD"/>
+							<ui:VisualElement class="TEST-TYPECONTAINER">
+								<ui:VisualElement class="TEST-TYPE"/>
+								<ui:VisualElement class="TEST-UPGRADE"/>
+							</ui:VisualElement>
+						</ui:Button>
+
+						<ui:Button class="TESTBUTTON legendary">
+							<ui:VisualElement class="TEST" />
+							<ui:VisualElement class="TEST-CHILD"/>
+							<ui:VisualElement class="TEST-TYPECONTAINER">
+								<ui:VisualElement class="TEST-TYPE"/>
+								<ui:VisualElement class="TEST-UPGRADE"/>
+							</ui:VisualElement>
+						</ui:Button>
+
+						<ui:Button class="TESTBUTTON common">
+							<ui:VisualElement class="TEST" />
+							<ui:VisualElement class="TEST-CHILD"/>
+							<ui:VisualElement class="TEST-TYPECONTAINER">
+								<ui:VisualElement class="TEST-TYPE"/>
+								<ui:VisualElement class="TEST-UPGRADE"/>
+							</ui:VisualElement>
+						</ui:Button>
+					</ui:VisualElement>
+
 		<ui:VisualElement name="GameInfo">
 			<ui:Label name="LevelLabel" text="Level: 0" />
 			<ui:Label name="CoinLabel" text="Coin: 0" />
