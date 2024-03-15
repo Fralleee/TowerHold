@@ -17,13 +17,13 @@ VisualElement.container {
 
 Label.title {
 	position: absolute;
-	top: -140px;
+	top: -180px;
     font-size: 240px;
     color: white;
     -unity-font-style: bold;
     -unity-text-outline-width: 6px;
     -unity-text-outline-color: rgb(17, 17, 17);
-    -unity-font-definition: url("/Assets/Art/Fonts/CanvasBags.otf");
+    -unity-font-definition: url("/Assets/Art/Fonts/Cute.ttf");
 }
 
 VisualElement.button-container {

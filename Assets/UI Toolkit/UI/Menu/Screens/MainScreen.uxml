@@ -6,11 +6,11 @@
             <ui:VisualElement class="top-overlay" />
             <ui:VisualElement class="container red">
                 <ui:Label text="VAKT" class="title" />
-                <ShadowButton name="PlayButton" buttonText="Play" buttonClass="teal" />
-                <ShadowButton name="ContinueButton" buttonText="Resume" buttonClass="green" />
-                <ShadowButton name="OptionsButton" buttonText="Options" buttonClass="teal" />
-                <ShadowButton name="MenuButton" buttonText="Quit to menu" buttonClass="orange" />
-                <ShadowButton name="QuitButton" buttonText="Quit" buttonClass="orange" />
+                <ShadowButton name="PlayButton" buttonText="Play" class="teal" />
+                <ShadowButton name="ContinueButton" buttonText="Resume" class="green" />
+                <ShadowButton name="OptionsButton" buttonText="Options" class="teal" />
+                <ShadowButton name="MenuButton" buttonText="Quit to menu" class="orange" />
+                <ShadowButton name="QuitButton" buttonText="Quit" class="orange" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement class="side-overlay" />

@@ -1,21 +1,21 @@
 ShadowButton {
+	position: relative;
     min-width: 220px;
     min-height: 60px;
     padding: 2px;
     padding-bottom: 10px;
 	border-radius: 14px;
     background-color: rgb(17, 17, 17);
+
+	border-width: 4px;
+	border-bottom-width: 8px;
+	border-radius: 14px;
+	border-color: #111;
+
     transition: all 200ms ease-out-back;
 }
 
-ShadowButton > Button {
-	position: relative;
-    border-width: 0;
-	border-radius: 14px;
-    transition: all 200ms ease-out;
-}
-
-ShadowButton Button Label {
+ShadowButton Label {
     font-size: 36px;
 	height: 36px;
 }
@@ -33,9 +33,6 @@ ShadowButton .shadow {
 
 ShadowButton:enabled:hover {
     scale: 1.1;
-}
-
-ShadowButton:enabled:hover > Button {
     background-color: whitesmoke;
 }
 

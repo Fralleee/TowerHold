@@ -13,7 +13,7 @@ public class PlayUI : MonoBehaviour
 		_uiDocument = GetComponent<UIDocument>();
 		_playScreen = _uiDocument.rootVisualElement.Q<VisualElement>("PlayScreen");
 
-		_quickGameButton = _playScreen.Q<Button>("QuickButton_Button");
+		_quickGameButton = _playScreen.Q<Button>("QuickButton");
 
 		_quickGameButton.clicked += Play;
 	}

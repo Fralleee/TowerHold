@@ -1,25 +1,21 @@
 ShadowContainer {
-    padding: 2px;
-    padding-bottom: 10px;
-    background-color: rgb(17, 17, 17);
-	border-radius: 14px;
-    transition: all 200ms ease-out-back;
-}
-
-ShadowContainer Button {
 	position: relative;
 	width: 260px;
 	height: 360px;
-	border-width: 0;
-	border-radius: 14px;
-	font-size: 36px;
-	padding: 18px;
+
     transition: all 200ms ease-out;
+	background-color: teal;
+
+	border-width: 6px;
+	border-bottom-width: 12px;
+	border-radius: 14px;
+	border-color: #111;
+
 	background-position: 50% 50%;
 	background-size: 180px 180px;
 	background-position: 50% 80%;
+
 	overflow: hidden;
-	-unity-text-align: middle-left;
 }
 
 ShadowContainer Label.shadow-title {
@@ -33,7 +29,7 @@ ShadowContainer Label.shadow-description {
 	white-space: normal;
 }
 
-ShadowContainer Button .shadow {
+ShadowContainer .shadow {
 	position: absolute;
 	left: -50%;
 	top: -50%;
@@ -44,13 +40,13 @@ ShadowContainer Button .shadow {
     transition: all 200ms ease-out;
 }
 
-ShadowContainer.enabled:hover {
+ShadowContainer:enabled:hover {
     scale: 1.1;
 }
-ShadowContainer.enabled:hover Button {
+ShadowContainer:enabled:hover {
 	background-color: whitesmoke;
 }
 
-ShadowContainer.enabled:hover Button .shadow {
+ShadowContainer:enabled:hover Button .shadow {
 	background-color: transparent;
 }

@@ -39,11 +39,11 @@ public class MenuController : SingletonController<MenuController>
 		_optionsScreen = new UIScreen(_uiDocument.rootVisualElement.Q<VisualElement>("OptionsScreen"));
 		_screenStack.PushScreen(_mainScreen);
 
-		_playButton = _mainScreen.Root.Q<Button>("PlayButton_Button");
-		_continueButton = _mainScreen.Root.Q<Button>("ContinueButton_Button");
-		_optionsButton = _mainScreen.Root.Q<Button>("OptionsButton_Button");
-		_menuButton = _mainScreen.Root.Q<Button>("MenuButton_Button");
-		_quitButton = _mainScreen.Root.Q<Button>("QuitButton_Button");
+		_playButton = _mainScreen.Root.Q<Button>("PlayButton");
+		_continueButton = _mainScreen.Root.Q<Button>("ContinueButton");
+		_optionsButton = _mainScreen.Root.Q<Button>("OptionsButton");
+		_menuButton = _mainScreen.Root.Q<Button>("MenuButton");
+		_quitButton = _mainScreen.Root.Q<Button>("QuitButton");
 
 		_playButton.clicked += Play;
 		_continueButton.clicked += Continue;
