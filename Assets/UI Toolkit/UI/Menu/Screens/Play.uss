@@ -8,7 +8,7 @@ VisualElement#PlayScreen {
 VisualElement.container {
     position: relative;
 	width: 100%;
-    background-color: rgba(216, 23, 25, 0.96);
+    background-color: #d81719;
     display: flex;
     flex-direction: column;
     align-items: center;

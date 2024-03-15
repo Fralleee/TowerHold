@@ -1,7 +1,7 @@
 ShadowContainer {
 	position: relative;
-	width: 260px;
-	height: 360px;
+	width: 330px;
+	height: 480px;
 
     transition: all 200ms ease-out;
 	background-color: teal;
@@ -27,6 +27,7 @@ ShadowContainer Label.shadow-description {
 	font-size: 16px;
 	max-width: 320px;
 	white-space: normal;
+	-unity-text-align: middle-left;
 }
 
 ShadowContainer .shadow {
@@ -43,6 +44,7 @@ ShadowContainer .shadow {
 ShadowContainer:enabled:hover {
     scale: 1.1;
 }
+
 ShadowContainer:enabled:hover {
 	background-color: whitesmoke;
 }
