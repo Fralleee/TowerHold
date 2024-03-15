@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 3129057378705022998}
   - component: {fileID: 7968482255819381450}
   - component: {fileID: 1035760656611226112}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Swordman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1844471586531011950}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,6 +289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Selection
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737807313378830047, guid: e1ae97c3b44ff584ea7afc513372f4cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8786812839573330971, guid: e1ae97c3b44ff584ea7afc513372f4cf,
         type: 3}

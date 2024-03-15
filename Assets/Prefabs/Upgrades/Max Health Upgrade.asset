@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Max Health Upgrade
   m_EditorClassIdentifier: 
   ShopType: 2
-  Texture: {fileID: 2800000, guid: ae7f74c7f05ccd240930c98a3d75bd64, type: 3}
+  Texture: {fileID: 2800000, guid: c826545a8afc71f4a9281978d7ad1a3f, type: 3}
   RarityType: 0
   Category: 0
   HealthIncrease: 500

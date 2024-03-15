@@ -11,13 +11,7 @@ public class UIScreen : VisualElement
 		Root.style.display = DisplayStyle.None;
 	}
 
-	public void Show()
-	{
-		Root.style.display = DisplayStyle.Flex;
-	}
+	public void Show() => Root.style.display = DisplayStyle.Flex;
 
-	public void Hide()
-	{
-		Root.style.display = DisplayStyle.None;
-	}
+	public void Hide() => Root.style.display = DisplayStyle.None;
 }

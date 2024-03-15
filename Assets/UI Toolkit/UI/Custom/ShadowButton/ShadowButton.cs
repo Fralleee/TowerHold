@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 public class ShadowButton : VisualElement
 {
 	readonly Button _button;
+	readonly Label _label;
 
 	public new class UxmlFactory : UxmlFactory<ShadowButton, UxmlTraits> { }
 
@@ -22,8 +23,9 @@ public class ShadowButton : VisualElement
 
 			var shadowButtonButton = ve.Q<Button>();
 			shadowButtonButton.name = $"{name}_Button";
-			shadowButtonButton.text = _text.GetValueFromBag(bag, cc);
 			shadowButtonButton.AddToClassList(_class.GetValueFromBag(bag, cc));
+
+			shadowButtonButton.Q<Label>().text = _text.GetValueFromBag(bag, cc);
 		}
 	}
 
@@ -31,5 +33,12 @@ public class ShadowButton : VisualElement
 	{
 		_button = new Button();
 		Add(_button);
+
+		var shadowElement = new VisualElement();
+		shadowElement.AddToClassList("shadow");
+		_button.Add(shadowElement);
+
+		_label = new Label();
+		_button.Add(_label);
 	}
 }

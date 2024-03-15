@@ -1,0 +1,38 @@
+VisualElement#PlayScreen {
+    display: flex;
+    flex-direction: row;
+	align-items: center;
+	background-color: #222;
+}
+
+VisualElement.container {
+    position: relative;
+	width: 100%;
+    background-color: rgba(216, 23, 25, 0.96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	padding: 140px 0 60px 0;
+}
+
+Label.title {
+	position: absolute;
+	top: -140px;
+    font-size: 240px;
+    color: white;
+    -unity-font-style: bold;
+    -unity-text-outline-width: 6px;
+    -unity-text-outline-color: rgb(17, 17, 17);
+    -unity-font-definition: url("/Assets/Art/Fonts/CanvasBags.otf");
+}
+
+VisualElement.button-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+VisualElement.button-container > * {
+	margin: 0 20px;
+}

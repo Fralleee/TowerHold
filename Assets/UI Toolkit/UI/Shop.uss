@@ -37,7 +37,7 @@ VisualElement#Progress {
 	margin-bottom: 8px;
 }
 
-VisualElement#GameInfo > Label {
+VisualElement#GameInfo Label {
 	margin: 12px;
 	background-color: rgba(0,0,0,.9);
 	color: goldenrod;
@@ -140,7 +140,7 @@ Label.Hotkey {
 	background-color: #121618;
 }
 
-.ShopItem > Label.Hotkey {
+.ShopItem Label.Hotkey {
 	left: 46px;
 }
 
@@ -160,7 +160,7 @@ Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
 	flex-direction: row;
 }
 
-.TEST-CONTAINER > * {
+.TEST-CONTAINER * {
 	margin: 8px;
 }
 
@@ -174,12 +174,12 @@ Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
 	scale: 1;
 }
 
-.TESTBUTTON:hover > .TEST {
+.TESTBUTTON:hover .BORDER {
 	rotate: -45deg;
 	scale: 1;
 }
 
-.TEST {
+.BORDER {
 	width: 120px;
 	height: 120px;
 	background-color: #F7C94B;
@@ -191,11 +191,17 @@ Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
 	transition: all 200ms ease-out-back;
 }
 
-/* .TESTBUTTON.turret > .TEST, .TESTBUTTON.turret > .TEST-CHILD {
-	border-radius: 0;
-} */
+.SHADOW {
+	position: absolute;
+	left: -28px;
+	top: -48px;
+	width: 160px;
+	height: 130px;
+	background-color: #2a2a2a;
+	border-radius: 50%;
+}
 
-.TEST-CHILD {
+.CONTENT {
 	position: absolute;
 	left: 7px;
 	top: 5px;
@@ -205,16 +211,24 @@ Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
 	border-width: 4px;
 	border-color: #111;
 	border-radius: 24px;
-	background-image: url("/Assets/Art/Textures/Icons/hatchet.png");
-	background-size: 80% 80%;
+	overflow: hidden;
 	transition: all 200ms ease-out-back;
 }
 
-.TEST-TYPECONTAINER {
+.IMAGE {
 	position: absolute;
-	left: 14px;
-	right: 14px;
-	top: 12px;
+	left: -8px;
+	top: -8px;
+	width: 100%;
+	height: 100%;
+	background-size: 80% 80%;
+}
+
+.TYPECONTAINER {
+	position: absolute;
+	left: -12px;
+	right: -12px;
+	top: -14px;
 
 	display: flex;
 	flex-direction: row;
@@ -222,56 +236,59 @@ Button#RefreshButton:enabled:active, Button#LockButton:enabled:active {
 }
 
 
-.TEST-TYPE {
+.CATEGORY {
 	width: 28px;
 	height: 28px;
-	background-color: #222;
+	background-color: #2a2a2a;
     border-radius: 50%;
 	background-image: url("/Assets/Art/Textures/Icons/normal.png");
 	background-size: 20px;
 }
 
-.TEST-UPGRADE {
+.UPGRADE {
 	width: 28px;
 	height: 28px;
-	background-color: #222;
+	background-color: #2a2a2a;
     border-radius: 50%;
 	background-image: url("/Assets/Art/Textures/Icons/plus.png");
 	background-size: 16px;
 }
 
-.TESTBUTTON.turret .TEST-UPGRADE {
+.TESTBUTTON.turret .UPGRADE {
 	display: none;
 }
 
-.TESTBUTTON.common > .TEST { background-color: #D1D1D1; }
-.TESTBUTTON.common .TEST-UPGRADE { -unity-background-image-tint-color: #D1D1D1; }
-.TESTBUTTON.common > .TEST-CHILD { -unity-background-image-tint-color: #D1D1D1; }
+.TESTBUTTON.common .BORDER { background-color: #D1D1D1; }
+.TESTBUTTON.common .UPGRADE { -unity-background-image-tint-color: #D1D1D1; }
+.TESTBUTTON.common .IMAGE {
+	background-image: url("/Assets/Art/Textures/Icons/hatchet.png");
+	-unity-background-image-tint-color: #D1D1D1;
+}
 
-.TESTBUTTON.uncommon > .TEST { background-color: #B6FF4E; }
-.TESTBUTTON.uncommon .TEST-UPGRADE { -unity-background-image-tint-color: #B6FF4E; }
-.TESTBUTTON.uncommon > .TEST-CHILD {
+.TESTBUTTON.uncommon > .BORDER { background-color: #B6FF4E; }
+.TESTBUTTON.uncommon .UPGRADE { -unity-background-image-tint-color: #B6FF4E; }
+.TESTBUTTON.uncommon .IMAGE {
 	-unity-background-image-tint-color: #B6FF4E;
 	background-image: url("/Assets/Art/Textures/Icons/spine-arrow.png");
 }
 
-.TESTBUTTON.rare > .TEST { background-color: #457FFF; }
-.TESTBUTTON.rare .TEST-UPGRADE { -unity-background-image-tint-color: #457FFF; }
-.TESTBUTTON.rare > .TEST-CHILD {
+.TESTBUTTON.rare .BORDER { background-color: #457FFF; }
+.TESTBUTTON.rare .UPGRADE { -unity-background-image-tint-color: #457FFF; }
+.TESTBUTTON.rare .IMAGE {
 	 -unity-background-image-tint-color: #457FFF;
 	background-image: url("/Assets/Art/Textures/Icons/laser-gun.png");
  }
 
-.TESTBUTTON.epic > .TEST { background-color: #BA6DFF; }
-.TESTBUTTON.epic .TEST-UPGRADE { -unity-background-image-tint-color: #BA6DFF; }
-.TESTBUTTON.epic > .TEST-CHILD {
+.TESTBUTTON.epic .BORDER { background-color: #BA6DFF; }
+.TESTBUTTON.epic .UPGRADE { -unity-background-image-tint-color: #BA6DFF; }
+.TESTBUTTON.epic .IMAGE {
 	-unity-background-image-tint-color: #BA6DFF;
 	background-image: url("/Assets/Art/Textures/Icons/pocket-bow.png");
 }
 
-.TESTBUTTON.legendary > .TEST { background-color: #FF752D; }
-.TESTBUTTON.legendary .TEST-UPGRADE { -unity-background-image-tint-color: #FF752D; }
-.TESTBUTTON.legendary > .TEST-CHILD {
+.TESTBUTTON.legendary .BORDER { background-color: #FF752D; }
+.TESTBUTTON.legendary .UPGRADE { -unity-background-image-tint-color: #FF752D; }
+.TESTBUTTON.legendary .IMAGE {
 	-unity-background-image-tint-color: #FF752D;
 	background-image: url("/Assets/Art/Textures/Icons/stone-sphere.png");
 }

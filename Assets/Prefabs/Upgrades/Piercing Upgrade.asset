@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Piercing Upgrade
   m_EditorClassIdentifier: 
   ShopType: 5
-  Texture: {fileID: 2800000, guid: c4141351042c87744b3c41a00ea2ba89, type: 3}
+  Texture: {fileID: 2800000, guid: 618c3decda70bbb41bec57f7984ac22f, type: 3}
   RarityType: 0
   Category: 2

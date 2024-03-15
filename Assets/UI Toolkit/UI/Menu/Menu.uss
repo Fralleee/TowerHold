@@ -5,27 +5,3 @@ VisualElement.screen {
     height: 100%;
     -unity-font-definition: url("/Assets/Art/Fonts/CanvasBags.otf");
 }
-
-ShadowButton {
-    min-width: 220px;
-    height: 60px;
-    padding: 2px;
-    padding-bottom: 10px;
-    background-color: rgb(17, 17, 17);
-    transition: all 150ms ease-out;
-}
-
-ShadowButton > Button {
-    height: 100%;
-    border-width: 0;
-    font-size: 36px;
-    transition: all 150ms ease-out;
-}
-
-ShadowButton:hover {
-    scale: 1.05;
-}
-
-ShadowButton:hover > Button {
-    background-color: whitesmoke;
-}

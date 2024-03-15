@@ -36,5 +36,7 @@ public class ScreenStack
 		{
 			_screenStack.Pop().Hide();
 		}
+
+		_screenStack.Peek().Show();
 	}
 }

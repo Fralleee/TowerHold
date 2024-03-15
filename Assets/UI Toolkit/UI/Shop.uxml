@@ -1,116 +1,30 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/UI/Default.uss" />
-    <Style src="project://database/Assets/UI%20Toolkit/UI/Tooltip.uss" />
-    <Style src="project://database/Assets/UI%20Toolkit/UI/Shop.uss" />
+    <Style src="project://database/Assets/UI%20Toolkit/UI/Default.uss?fileID=7433441132597879392&amp;guid=c955849d668e1574f8b7fbe66d896b05&amp;type=3#Default" />
+    <Style src="project://database/Assets/UI%20Toolkit/UI/Tooltip.uss?fileID=7433441132597879392&amp;guid=70f27519a0f2a664a8186cec92b8f4ef&amp;type=3#Tooltip" />
+    <Style src="project://database/Assets/UI%20Toolkit/UI/Shop.uss?fileID=7433441132597879392&amp;guid=2f31f636d331e644b944c699b4ed521c&amp;type=3#Shop" />
+    <Style src="project://database/Assets/UI%20Toolkit/UI/Custom/ShopItemButton/ShopItemButton.uss?fileID=7433441132597879392&amp;guid=ccd5bc36516325e4faccb394bf3af6bd&amp;type=3#ShopItemButton" />
     <ui:VisualElement name="ShopContainer">
-		<Tooltip />
-
-                    <ui:VisualElement class="TEST-CONTAINER">
-						<ui:Button class="TESTBUTTON common">
-							<ui:VisualElement class="TEST" />
-							<ui:VisualElement class="TEST-CHILD"/>
-							<ui:VisualElement class="TEST-TYPECONTAINER">
-								<ui:VisualElement class="TEST-TYPE"/>
-								<ui:VisualElement class="TEST-UPGRADE"/>
-							</ui:VisualElement>
-						</ui:Button>
-
-						<ui:Button class="TESTBUTTON uncommon">
-							<ui:VisualElement class="TEST" />
-							<ui:VisualElement class="TEST-CHILD"/>
-							<ui:VisualElement class="TEST-TYPECONTAINER">
-								<ui:VisualElement class="TEST-TYPE"/>
-								<ui:VisualElement class="TEST-UPGRADE"/>
-							</ui:VisualElement>
-						</ui:Button>
-
-						<ui:Button class="TESTBUTTON rare turret">
-							<ui:VisualElement class="TEST" />
-							<ui:VisualElement class="TEST-CHILD"/>
-							<ui:VisualElement class="TEST-TYPECONTAINER">
-								<ui:VisualElement class="TEST-TYPE"/>
-								<ui:VisualElement class="TEST-UPGRADE"/>
-							</ui:VisualElement>
-						</ui:Button>
-
-						<ui:Button class="TESTBUTTON epic turret">
-							<ui:VisualElement class="TEST" />
-							<ui:VisualElement class="TEST-CHILD"/>
-							<ui:VisualElement class="TEST-TYPECONTAINER">
-								<ui:VisualElement class="TEST-TYPE"/>
-								<ui:VisualElement class="TEST-UPGRADE"/>
-							</ui:VisualElement>
-						</ui:Button>
-
-						<ui:Button class="TESTBUTTON legendary">
-							<ui:VisualElement class="TEST" />
-							<ui:VisualElement class="TEST-CHILD"/>
-							<ui:VisualElement class="TEST-TYPECONTAINER">
-								<ui:VisualElement class="TEST-TYPE"/>
-								<ui:VisualElement class="TEST-UPGRADE"/>
-							</ui:VisualElement>
-						</ui:Button>
-
-						<ui:Button class="TESTBUTTON common">
-							<ui:VisualElement class="TEST" />
-							<ui:VisualElement class="TEST-CHILD"/>
-							<ui:VisualElement class="TEST-TYPECONTAINER">
-								<ui:VisualElement class="TEST-TYPE"/>
-								<ui:VisualElement class="TEST-UPGRADE"/>
-							</ui:VisualElement>
-						</ui:Button>
-					</ui:VisualElement>
-
-		<ui:VisualElement name="GameInfo">
-			<ui:Label name="LevelLabel" text="Level: 0" />
-			<ui:Label name="CoinLabel" text="Coin: 0" />
-			<ui:Label name="IncomeLabel" text="Income: 0" />
+        <Tooltip />
+        <ui:VisualElement name="GameInfo">
+            <ui:Label name="LevelLabel" text="Level: 0" />
+            <ui:Label name="CoinLabel" text="Coin: 0" />
+            <ui:Label name="IncomeLabel" text="Income: 0" />
         </ui:VisualElement>
         <ui:VisualElement name="Progress">
-			<CustomProgressBar value="1" name="HealthBar" />
-			<CustomProgressBar value="1" name="LevelBar" />
+            <CustomProgressBar value="1" name="HealthBar" />
+            <CustomProgressBar value="1" name="LevelBar" />
         </ui:VisualElement>
         <ui:VisualElement name="Inventory">
             <ui:Button name="RefreshButton" class="red">
                 <ui:Label text="D" class="Hotkey" />
             </ui:Button>
             <ui:VisualElement name="Items">
-                <ui:Button class="ShopItem">
-                    <ui:VisualElement class="TypeContainer">
-						<ui:VisualElement class="Type"/>
-        			</ui:VisualElement>
-                    <ui:Label text="1" class="Hotkey" />
-                </ui:Button>
-                <ui:Button class="ShopItem">
-                    <ui:VisualElement class="TypeContainer">
-						<ui:VisualElement class="Type"/>
-        			</ui:VisualElement>
-                    <ui:Label text="2" class="Hotkey" />
-                </ui:Button>
-                <ui:Button class="ShopItem">
-                    <ui:VisualElement class="TypeContainer">
-						<ui:VisualElement class="Type"/>
-        			</ui:VisualElement>
-                    <ui:Label text="3" class="Hotkey" />
-                </ui:Button>
-                <ui:Button class="ShopItem">
-                    <ui:VisualElement class="TypeContainer">
-						<ui:VisualElement class="Type"/>
-        			</ui:VisualElement>
-                    <ui:Label text="4" class="Hotkey" />
-                </ui:Button>
-                <ui:Button class="ShopItem">
-                    <ui:VisualElement class="TypeContainer">
-						<ui:VisualElement class="Type"/>
-        			</ui:VisualElement>
-                    <ui:Label text="5" class="Hotkey" />
-                </ui:Button>
-                <ui:Button class="ShopItem">
-                    <ui:VisualElement class="TypeContainer">
-						<ui:VisualElement class="Type"/>
-        			</ui:VisualElement>
-                    <ui:Label text="6" class="Hotkey" />
-                </ui:Button>
+                <ShopItemButton />
+                <ShopItemButton />
+                <ShopItemButton />
+                <ShopItemButton />
+                <ShopItemButton />
+                <ShopItemButton />
             </ui:VisualElement>
             <ui:Button name="LockButton" class="red">
                 <ui:Label text="L" class="Hotkey" />

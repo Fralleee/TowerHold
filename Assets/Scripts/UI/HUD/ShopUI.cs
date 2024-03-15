@@ -17,7 +17,7 @@ public class ShopUI : Controller
 	Button _refreshButton;
 	Button _lockButton;
 
-	List<Button> _shopSlots;
+	List<ShopItemButton> _shopSlots;
 	List<ShopItem> _shopItems;
 
 	VisualElement _inventoryContainer;
@@ -46,7 +46,7 @@ public class ShopUI : Controller
 		_inventoryContainer.AddToClassList("active");
 		_refreshButton = uiDocument.rootVisualElement.Q<Button>("RefreshButton");
 		_lockButton = uiDocument.rootVisualElement.Q<Button>("LockButton");
-		_shopSlots = _inventoryContainer.Query<Button>(className: "ShopItem").ToList();
+		_shopSlots = _inventoryContainer.Query<ShopItemButton>().ToList();
 
 		_refreshTooltipContent = new TooltipContent("Refresh", $"Cost: {_refreshCost}", "Refresh the shop to get new items");
 		_tooltipController.RegisterTooltip(_refreshButton, _refreshTooltipContent);
@@ -83,15 +83,9 @@ public class ShopUI : Controller
 		GameController.OnLevelChanged += OnLevelChanged;
 	}
 
-	void OnGameStart()
-	{
-		_lockButton.SetEnabled(true);
-	}
+	void OnGameStart() => _lockButton.SetEnabled(true);
 
-	void OnLevelChanged(int level)
-	{
-		RefreshShop();
-	}
+	void OnLevelChanged(int level) => RefreshShop();
 
 	void ManualRefresh()
 	{
@@ -121,7 +115,7 @@ public class ShopUI : Controller
 			var item = ShopItem.GetRandomItem(GameController.Instance.CurrentLevel, _inventory.Items, _randomGenerator);
 			slot.SetEnabled(false);
 			slot.RemoveFromClassList("itemized");
-			SetupSlot(slot, item);
+			slot.Setup(item, _styleSettings);
 			_shopItems.Add(item);
 		}
 
@@ -155,34 +149,8 @@ public class ShopUI : Controller
 
 		for (var i = 0; i < _shopSlots.Count; i++)
 		{
-			_shopSlots[i].Q<Label>().text = Controls.Keyboard.PurchaseItem.GetBindingDisplayString(i);
+			_shopSlots[i].SetHotkey(Controls.Keyboard.PurchaseItem.GetBindingDisplayString(i));
 		}
-	}
-
-	void SetupSlot(Button slot, ShopItem item)
-	{
-		var rarityColor = _styleSettings.RarityColors[item.RarityType];
-		var shopTypeColor = _styleSettings.ShopTypeColors[item.ShopType];
-		var shopTypeImage = _styleSettings.ShopTypeIcons[item.ShopType];
-
-		slot.style.backgroundImage = item.Texture;
-		slot.style.unityBackgroundImageTintColor = rarityColor;
-		slot.style.borderBottomColor = rarityColor;
-		slot.style.borderLeftColor = rarityColor;
-		slot.style.borderTopColor = rarityColor;
-		slot.style.borderRightColor = rarityColor;
-
-		var typeContainer = slot.Q<VisualElement>(null, "TypeContainer");
-		typeContainer.style.borderBottomColor = rarityColor;
-		typeContainer.style.borderLeftColor = rarityColor;
-		typeContainer.style.borderTopColor = rarityColor;
-		typeContainer.style.borderRightColor = rarityColor;
-
-		var typeIcon = slot.Q<VisualElement>(null, "Type");
-		typeIcon.style.backgroundImage = shopTypeImage;
-		typeIcon.style.unityBackgroundImageTintColor = shopTypeColor;
-
-		slot.SetEnabled(true);
 	}
 
 	void PurchaseItem(int index)

@@ -1,0 +1,44 @@
+ShadowButton {
+    min-width: 220px;
+    min-height: 60px;
+    padding: 2px;
+    padding-bottom: 10px;
+	border-radius: 14px;
+    background-color: rgb(17, 17, 17);
+    transition: all 200ms ease-out-back;
+}
+
+ShadowButton > Button {
+	position: relative;
+    border-width: 0;
+	border-radius: 14px;
+    transition: all 200ms ease-out;
+}
+
+ShadowButton Button Label {
+    font-size: 36px;
+	height: 36px;
+}
+
+ShadowButton .shadow {
+	position: absolute;
+	left: -50%;
+	top: -50%;
+	width: 150%;
+	height: 100%;
+	background-color: rgba(255,255,255,.05);
+	border-radius: 50%;
+    transition: all 200ms ease-out;
+}
+
+ShadowButton:enabled:hover {
+    scale: 1.1;
+}
+
+ShadowButton:enabled:hover > Button {
+    background-color: whitesmoke;
+}
+
+ShadowButton:enabled:hover .shadow {
+	background-color: transparent;
+}

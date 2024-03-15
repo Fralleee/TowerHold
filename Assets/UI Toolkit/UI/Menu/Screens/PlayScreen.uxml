@@ -1,0 +1,33 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="Play.uss" />
+    <ui:VisualElement name="PlayScreen" class="screen">
+		<ui:VisualElement class="container red">
+			<ui:Label text="PLAY" class="title" />
+			<ui:VisualElement class="button-container">
+				<ShadowContainer
+					name="CampaignButton"
+					title="Campaign"
+					description="Set out on your own and explore the vast mysterious realm of Vakt"
+					image="UI/campaign"
+					buttonClass="green"
+					disabled="true"
+					/>
+				<ShadowContainer
+					name="QuickButton"
+					title="Quick Game"
+					description="Jump into a quick game with a random character and map"
+					image="UI/campaign"
+					buttonClass="blue"
+					/>
+				<ShadowContainer
+					name="CustomButton"
+					title="Custom Game"
+					description="Create a custom game with your own rules and settings"
+					image="UI/campaign"
+					buttonClass="teal"
+					disabled="true"
+					/>
+			</ui:VisualElement>
+		</ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -34,7 +34,6 @@ public static class Rarity
 
 	public static RarityType SelectRarityBasedOnLevel(int currentLevel, int maxLevel, RandomGenerator randomGenerator)
 	{
-		// Calculate the interpolated chance for each rarity based on the current level
 		var currentChances = BaseChances.ToDictionary(
 			rarity => rarity.Key,
 			rarity => Mathf.Lerp(
@@ -44,12 +43,10 @@ public static class Rarity
 			)
 		);
 
-		// Normalize the current chances
 		var totalChance = currentChances.Values.Sum();
 		var randomChance = randomGenerator.NextFloat(0, totalChance);
 		var cumulativeChance = 0f;
 
-		// Determine the rarity based on the interpolated and normalized chances
 		foreach (var rarity in currentChances)
 		{
 			cumulativeChance += rarity.Value;
@@ -59,6 +56,6 @@ public static class Rarity
 			}
 		}
 
-		return RarityType.Common; // Default return in case no rarity is selected
+		return RarityType.Common;
 	}
 }

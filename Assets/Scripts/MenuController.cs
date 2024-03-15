@@ -18,6 +18,7 @@ public class MenuController : SingletonController<MenuController>
 
 	UIDocument _uiDocument;
 	UIScreen _mainScreen;
+	UIScreen _playScreen;
 	UIScreen _optionsScreen;
 
 	Button _playButton;
@@ -34,6 +35,7 @@ public class MenuController : SingletonController<MenuController>
 
 		_uiDocument = GetComponent<UIDocument>();
 		_mainScreen = new UIScreen(_uiDocument.rootVisualElement.Q<VisualElement>("MainScreen"));
+		_playScreen = new UIScreen(_uiDocument.rootVisualElement.Q<VisualElement>("PlayScreen"));
 		_optionsScreen = new UIScreen(_uiDocument.rootVisualElement.Q<VisualElement>("OptionsScreen"));
 		_screenStack.PushScreen(_mainScreen);
 
@@ -120,6 +122,7 @@ public class MenuController : SingletonController<MenuController>
 
 	void ToggleMenu(bool showMenu)
 	{
+		_screenStack.ClearStack();
 		_showMenu = showMenu;
 		_uiDocument.rootVisualElement.style.display = _showMenu ? DisplayStyle.Flex : DisplayStyle.None;
 		if (CurrentContext == MenuContext.InGameMenu)
@@ -129,7 +132,7 @@ public class MenuController : SingletonController<MenuController>
 		}
 	}
 
-	void Play() => SceneManager.LoadScene("Game");
+	void Play() => _screenStack.PushScreen(_playScreen);
 
 	void Continue() => ToggleMenu(false);
 

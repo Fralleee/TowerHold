@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Health Regeneration Upgrade
   m_EditorClassIdentifier: 
   ShopType: 2
-  Texture: {fileID: 2800000, guid: e36bcf9506b607b4f908fbfddd7b59e8, type: 3}
+  Texture: {fileID: 2800000, guid: cd11ebad04e13ff47928177cb096c9ce, type: 3}
   RarityType: 1
   Category: 0
   HealthRegenerationIncrease: 10
