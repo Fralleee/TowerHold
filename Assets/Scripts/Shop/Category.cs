@@ -21,7 +21,7 @@ public enum DamageType
 public enum ShopType
 {
 	Unspecified,
-	Resource,
+	Income,
 	Defense,
 	Normal,
 	Siege,

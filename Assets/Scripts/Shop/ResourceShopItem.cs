@@ -4,6 +4,6 @@ public class ResourceShopItem : ShopItem
 
 	void OnValidate()
 	{
-		ShopType = ShopType.Resource;
+		ShopType = ShopType.Income;
 	}
 }

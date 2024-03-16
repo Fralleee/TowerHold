@@ -8,6 +8,7 @@ public class Tower : Target
 {
 	public static new Action<int, int> OnHealthChanged = delegate { };
 	public static Action OnTowerDeath = delegate { };
+	public static Action<ShopItem> OnUpgrade = delegate { };
 
 	public int HealthRegenerationRate = 5;
 
@@ -80,10 +81,7 @@ public class Tower : Target
 		HealthBar.SetHealth(Health, true);
 	}
 
-	void HandleDamageTaken(int damage)
-	{
-		ScoreManager.Instance.DamageTaken += damage;
-	}
+	void HandleDamageTaken(int damage) => ScoreManager.Instance.DamageTaken += damage;
 
 	void OnDestroy()
 	{

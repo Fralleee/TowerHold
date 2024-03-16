@@ -60,6 +60,7 @@ public class RoadsGenerator
 	GameObject Spawn()
 	{
 		var road = Object.Instantiate(_biome.RoadPrefab, _centerPosition + (Vector3.up * 0.01f), Quaternion.identity, _parentObject);
+		road.SetLayerRecursively(ObjectPlacer.GroundLayer);
 
 		var propBlock = new MaterialPropertyBlock();
 		var renderer = road.GetComponentInChildren<Renderer>();

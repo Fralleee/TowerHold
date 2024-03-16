@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+	<ui:Template name="Selection" src="Selection.uxml" />
+	<ui:Template name="Upgrades" src="Upgrades.uxml" />
+    <ui:Template name="Shop" src="Shop.uxml" />
+    <Style src="../Default.uss" />
+	<Style src="HUD.uss" />
+    <ui:VisualElement name="Root">
+        <ui:Instance name="Selection" template="Selection" />
+		<ui:Instance name="Upgrades" template="Upgrades" />
+        <ui:Instance name="Shop" template="Shop" />
+    </ui:VisualElement>
+</ui:UXML>

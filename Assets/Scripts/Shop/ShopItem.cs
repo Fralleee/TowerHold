@@ -81,5 +81,5 @@ public class ShopItem : ScriptableObject
 		return tooltip;
 	}
 
-	public virtual void OnPurchase() => throw new NotImplementedException();
+	public virtual void OnPurchase() => Tower.OnUpgrade(this);
 }

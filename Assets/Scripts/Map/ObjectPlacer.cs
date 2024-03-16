@@ -15,8 +15,9 @@ public class ObjectPlacer : MonoBehaviour
 	RandomGenerator _randomGenerator;
 
 	public static LayerMask GroundLayerMask => LayerMask.GetMask("Ground");
-	public static int ObstacleLayer => LayerMask.NameToLayer("Obstacle");
 	public static LayerMask ObstacleLayerMask => LayerMask.GetMask("Obstacle");
+	public static int ObstacleLayer => LayerMask.NameToLayer("Obstacle");
+	public static int GroundLayer => LayerMask.NameToLayer("Ground");
 
 	void Start()
 	{

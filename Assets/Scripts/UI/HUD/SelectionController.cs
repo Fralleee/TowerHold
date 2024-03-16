@@ -114,7 +114,7 @@ public class SelectionController : Controller
 	}
 	void SetPickingModeRecursive(VisualElement element)
 	{
-		if (element is Button or Label or CustomProgressBar)
+		if (element is Box or Button or Label or CustomProgressBar)
 		{
 			return;
 		}

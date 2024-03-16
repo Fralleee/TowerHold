@@ -47,6 +47,8 @@ public class Turret : DamageShopItem
 
 	public override void OnPurchase()
 	{
+		base.OnPurchase();
+
 		Tower.Instance.AddTurret(this);
 		ScoreManager.Instance.Turrets += 1;
 	}

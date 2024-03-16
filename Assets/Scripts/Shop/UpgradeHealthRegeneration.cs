@@ -8,6 +8,8 @@ public class UpgradeHealthRegeneration : DefenseShopItem
 
 	public override void OnPurchase()
 	{
+		base.OnPurchase();
+
 		Tower.Instance.HealthRegenerationRate += HealthRegenerationIncrease;
 		ScoreManager.Instance.Upgrades += 1;
 	}

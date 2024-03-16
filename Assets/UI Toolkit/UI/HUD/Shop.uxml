@@ -1,8 +1,8 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/UI/Default.uss?fileID=7433441132597879392&amp;guid=c955849d668e1574f8b7fbe66d896b05&amp;type=3#Default" />
-    <Style src="project://database/Assets/UI%20Toolkit/UI/Tooltip.uss?fileID=7433441132597879392&amp;guid=70f27519a0f2a664a8186cec92b8f4ef&amp;type=3#Tooltip" />
-    <Style src="project://database/Assets/UI%20Toolkit/UI/Shop.uss?fileID=7433441132597879392&amp;guid=2f31f636d331e644b944c699b4ed521c&amp;type=3#Shop" />
-    <Style src="project://database/Assets/UI%20Toolkit/UI/Custom/ShopItemButton/ShopItemButton.uss?fileID=7433441132597879392&amp;guid=ccd5bc36516325e4faccb394bf3af6bd&amp;type=3#ShopItemButton" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="../Default.uss" />
+    <Style src="../Custom/ShopItemButton/ShopItemButton.uss" />
+    <Style src="Tooltip.uss" />
+    <Style src="Shop.uss" />
     <ui:VisualElement name="ShopContainer">
         <Tooltip />
         <ui:VisualElement name="GameInfo">

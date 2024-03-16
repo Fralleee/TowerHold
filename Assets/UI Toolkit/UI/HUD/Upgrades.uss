@@ -1,0 +1,83 @@
+#Upgrades {
+    position: absolute;
+	top: 50%;
+	left: 0;
+	margin: -200px 0;
+
+    display: flex;
+}
+
+#AttackTypesList {
+	background-color: transparent;
+	border-width: 0;
+	transition: all 200ms ease-out;
+}
+
+.attack-type {
+	flex-direction: row;
+	align-items: center;
+	flex-shrink: 1;
+	flex-grow: 0;
+
+	border-top-right-radius: 14px;
+	border-bottom-right-radius: 14px;
+	margin-bottom: 12px;
+
+	background-color: #222;
+	height: 48px;
+	width: auto;
+	overflow: hidden;
+	align-self: flex-start;
+}
+
+.attack-type-icon {
+	width: 48px;
+	height: 48px;
+	border-width: 6px;
+	background-color: #222;
+}
+
+
+.attack-type-information {
+	flex-direction: row;
+	padding-left: 4px;
+}
+
+.attack-type-name {
+	font-size: 16px;
+	width: 128px;
+	-unity-font-style: bold;
+	-unity-text-align: middle-center;
+	color: white;
+	padding: 0;
+	max-width: 0px;
+	overflow: hidden;
+	transition: all 250ms ease-out-back;
+}
+
+
+.upgrade-icon-and-text {
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.upgrade-icon-and-text > Image {
+	width: 16px;
+}
+
+.upgrade-icon-and-text > Label {
+	font-size: 16px;
+	width: 32px;
+	margin: 0;
+	margin-left: 10px;
+	-unity-font-style: bold;
+    -unity-text-align: middle-left;
+	color: white;
+}
+
+
+#AttackTypesList:hover .attack-type-name {
+	max-width: 128px;
+}

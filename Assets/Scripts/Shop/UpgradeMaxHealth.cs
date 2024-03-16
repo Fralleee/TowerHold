@@ -8,6 +8,8 @@ public class UpgradeMaxHealth : DefenseShopItem
 
 	public override void OnPurchase()
 	{
+		base.OnPurchase();
+
 		Tower.Instance.UpgradeHealth(HealthIncrease);
 		ScoreManager.Instance.Upgrades += 1;
 	}

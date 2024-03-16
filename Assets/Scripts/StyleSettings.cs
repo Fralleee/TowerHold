@@ -14,7 +14,7 @@ public class StyleSettings : SerializedScriptableObject
 	};
 
 	public Dictionary<ShopType, Color> ShopTypeColors = new Dictionary<ShopType, Color> {
-		{ ShopType.Resource, new Color(0.8f, 0.8f, 0.8f) },
+		{ ShopType.Income, new Color(0.8f, 0.8f, 0.8f) },
 		{ ShopType.Defense, new Color(0.2f, 0.8f, 0.2f) },
 		{ ShopType.Arcane, new Color(0.2f, 0.2f, 0.8f) },
 		{ ShopType.Normal, new Color(0.8f, 0.2f, 0.8f) },
@@ -24,7 +24,7 @@ public class StyleSettings : SerializedScriptableObject
 	};
 
 	public Dictionary<ShopType, Texture2D> ShopTypeIcons = new Dictionary<ShopType, Texture2D> {
-		{ ShopType.Resource, null },
+		{ ShopType.Income, null },
 		{ ShopType.Defense, null },
 		{ ShopType.Arcane, null },
 		{ ShopType.Normal, null },

@@ -12,6 +12,8 @@ public class Upgrade : DamageShopItem
 
 	public override void OnPurchase()
 	{
+		base.OnPurchase();
+
 		Tower.Instance.AddUppgrade(Category);
 		ScoreManager.Instance.Upgrades += 1;
 	}
