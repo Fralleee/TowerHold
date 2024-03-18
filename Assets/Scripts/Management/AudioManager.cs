@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SoundManager : SerializedSingleton<SoundManager>
+public class AudioManager : SerializedSingleton<AudioManager>
 {
+	public GameContext CurrentContext = GameContext.MainMenu;
+
 	[SerializeField] AudioSource _musicSource;
 	[SerializeField] AudioSource _effectSource;
-	[SerializeField] List<AudioClip> _playList;
+	[SerializeField] List<AudioClip> _menuPlayList;
+	[SerializeField] List<AudioClip> _gamePlayList;
 
 	List<AudioClip> _currentPlaylist;
 	int _currentTrackIndex = 0;
@@ -15,11 +19,27 @@ public class SoundManager : SerializedSingleton<SoundManager>
 	readonly float _fadeDuration = 1.5f;
 	float _musicVolume;
 
+	protected override void Awake()
+	{
+		base.Awake();
+
+		DontDestroyOnLoad(gameObject);
+
+		SceneManager.activeSceneChanged += OnSceneChanged;
+	}
+
 	void Start()
 	{
 		_musicVolume = _musicSource.volume;
-		_currentPlaylist = _playList;
-		PlayMusic();
+
+		if (SceneManager.GetActiveScene().name != "Menu")
+		{
+			UpdateMenuContext(GameContext.InGameMenu);
+		}
+		else
+		{
+			UpdateMenuContext(GameContext.MainMenu);
+		}
 	}
 
 	void Update()
@@ -28,6 +48,33 @@ public class SoundManager : SerializedSingleton<SoundManager>
 		{
 			PlayRandomTrack();
 		}
+	}
+
+	void OnSceneChanged(Scene _, Scene next)
+	{
+		if (next.name != "Menu")
+		{
+			UpdateMenuContext(GameContext.InGameMenu);
+		}
+		else
+		{
+			UpdateMenuContext(GameContext.MainMenu);
+		}
+	}
+
+	public void UpdateMenuContext(GameContext newContext)
+	{
+		CurrentContext = newContext;
+		if (newContext == GameContext.MainMenu)
+		{
+			_currentPlaylist = _menuPlayList;
+		}
+		else if (newContext == GameContext.InGameMenu)
+		{
+			_currentPlaylist = _gamePlayList;
+		}
+
+		PlayMusic();
 	}
 
 	public void PlayEffect(AudioClip clip)
@@ -93,5 +140,7 @@ public class SoundManager : SerializedSingleton<SoundManager>
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
+
+		SceneManager.activeSceneChanged -= OnSceneChanged;
 	}
 }

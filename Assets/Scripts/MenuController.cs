@@ -5,13 +5,7 @@ using UnityEngine.UIElements;
 
 public class MenuController : SingletonController<MenuController>
 {
-	public enum MenuContext
-	{
-		MainMenu,
-		InGameMenu
-	}
-
-	public MenuContext CurrentContext = MenuContext.MainMenu;
+	public GameContext CurrentContext = GameContext.MainMenu;
 
 	readonly ScreenStack _screenStack = new ScreenStack();
 	bool _showMenu = true;
@@ -57,11 +51,11 @@ public class MenuController : SingletonController<MenuController>
 
 		if (SceneManager.GetActiveScene().name != "Menu")
 		{
-			UpdateMenuContext(MenuContext.InGameMenu);
+			UpdateMenuContext(GameContext.InGameMenu);
 		}
 		else
 		{
-			UpdateMenuContext(MenuContext.MainMenu);
+			UpdateMenuContext(GameContext.MainMenu);
 		}
 	}
 
@@ -69,11 +63,11 @@ public class MenuController : SingletonController<MenuController>
 	{
 		if (next.name != "Menu")
 		{
-			UpdateMenuContext(MenuContext.InGameMenu);
+			UpdateMenuContext(GameContext.InGameMenu);
 		}
 		else
 		{
-			UpdateMenuContext(MenuContext.MainMenu);
+			UpdateMenuContext(GameContext.MainMenu);
 		}
 	}
 
@@ -91,15 +85,15 @@ public class MenuController : SingletonController<MenuController>
 		SceneManager.activeSceneChanged -= OnSceneChanged;
 	}
 
-	public void UpdateMenuContext(MenuContext newContext)
+	public void UpdateMenuContext(GameContext newContext)
 	{
 		CurrentContext = newContext;
 		_screenStack.ClearStack();
-		if (newContext == MenuContext.MainMenu)
+		if (newContext == GameContext.MainMenu)
 		{
 			_mainScreen.Root.RemoveFromClassList("InGame");
 		}
-		else if (newContext == MenuContext.InGameMenu)
+		else if (newContext == GameContext.InGameMenu)
 		{
 			_mainScreen.Root.AddToClassList("InGame");
 			ToggleMenu(false);
@@ -114,7 +108,7 @@ public class MenuController : SingletonController<MenuController>
 			return;
 		}
 
-		if (CurrentContext == MenuContext.InGameMenu)
+		if (CurrentContext == GameContext.InGameMenu)
 		{
 			ToggleMenu(!_showMenu);
 		}
@@ -125,7 +119,7 @@ public class MenuController : SingletonController<MenuController>
 		_screenStack.ClearStack();
 		_showMenu = showMenu;
 		_uiDocument.rootVisualElement.style.display = _showMenu ? DisplayStyle.Flex : DisplayStyle.None;
-		if (CurrentContext == MenuContext.InGameMenu)
+		if (CurrentContext == GameContext.InGameMenu)
 		{
 			Time.timeScale = _showMenu ? 0 : 1;
 			FindFirstObjectByType<CameraController>().enabled = !_showMenu;
