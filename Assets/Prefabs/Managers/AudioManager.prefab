@@ -59,13 +59,9 @@ MonoBehaviour:
   _musicSource: {fileID: 6214230971490080007}
   _effectSource: {fileID: 4577550864117788696}
   _menuPlayList:
-  - {fileID: 8300000, guid: 0230348fb4152dd4eb9a50b0f08d0fca, type: 3}
+  - {fileID: 8300000, guid: f9ee752307455b64e973b131125010cc, type: 3}
   _gamePlayList:
-  - {fileID: 8300000, guid: d3042923a09074e449b1f47adf28fedf, type: 3}
-  - {fileID: 8300000, guid: 124ed181bf386884088b6f9d7d170424, type: 3}
-  - {fileID: 8300000, guid: 5d5d9631ce8c60344bdf9b41770e8c45, type: 3}
-  - {fileID: 8300000, guid: 1dcdc0a6d2f916f44b76c7576abd37ef, type: 3}
-  - {fileID: 8300000, guid: 6a47c24eb7a17994eaea2a3640f63e0d, type: 3}
+  - {fileID: 8300000, guid: f9ee752307455b64e973b131125010cc, type: 3}
 --- !u!82 &6214230971490080007
 AudioSource:
   m_ObjectHideFlags: 0

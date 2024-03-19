@@ -100,10 +100,3 @@
 
 	background-image: url("/Assets/Art/Textures/Icons/defense.png");
 }
-
-
-VisualElement.divider {
-	height: 1px;
-	background-color: #444;
-	margin: 5px 0;
-}

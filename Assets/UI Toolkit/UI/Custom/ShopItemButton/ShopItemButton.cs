@@ -55,10 +55,10 @@ public class ShopItemButton : Button
 
 	public void Setup(ShopItem item, StyleSettings styleSettings)
 	{
-		var rarityColor = styleSettings.RarityColors[item.RarityType];
+		var rarityColor = styleSettings.GetRarityColor(item.RarityType);
 		var rarityTintColor = Color.Lerp(rarityColor, Color.white, 0.5f);
-		var shopTypeColor = styleSettings.ShopTypeColors[item.ShopType];
-		var shopTypeImage = styleSettings.ShopTypeIcons[item.ShopType];
+		var shopTypeColor = styleSettings.GetShopTypeColor(item.ShopType);
+		var shopTypeImage = styleSettings.GetShopTypeIcon(item.ShopType);
 
 		Image.style.backgroundImage = item.Texture;
 		Image.style.unityBackgroundImageTintColor = rarityTintColor;
@@ -70,5 +70,8 @@ public class ShopItemButton : Button
 		SetEnabled(true);
 	}
 
-	public void SetHotkey(string hotkey) => Hotkey.text = hotkey;
+	public void SetHotkey(string hotkey)
+	{
+		Hotkey.text = hotkey;
+	}
 }

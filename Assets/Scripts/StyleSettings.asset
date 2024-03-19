@@ -11,10 +11,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45a50301c3a2cef47a5609ce2e49eed1, type: 3}
   m_Name: StyleSettings
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   serializationData:
     SerializedFormat: 2
-    SerializedBytes: 
+    SerializedBytes:
     ReferencedUnityObjects:
     - {fileID: 2800000, guid: f2f177fa4d3c00045aa5e3ec311eba65, type: 3}
     - {fileID: 2800000, guid: 0bef7502200c07a4bbddf9e8628d8d56, type: 3}
@@ -23,12 +23,13 @@ MonoBehaviour:
     - {fileID: 2800000, guid: bc22a1a3899c93c46a4fd641c5f2b443, type: 3}
     - {fileID: 2800000, guid: 65d5ece974aa5b04eafd17019e92657f, type: 3}
     - {fileID: 2800000, guid: 47047acd378f03c44a89ef96b100733c, type: 3}
-    SerializedBytesString: 
+    - {fileID: 2800000, guid: 89f17a204f0c84c46a16a97540e7d78b, type: 3}
+    SerializedBytesString:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: RarityColors
+    - Name: _rarityColors
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[RarityType, Assembly-CSharp],[UnityEngine.Color,
         UnityEngine.CoreModule]], mscorlib
@@ -36,160 +37,160 @@ MonoBehaviour:
       Entry: 7
       Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[RarityType, Assembly-CSharp]],
         mscorlib
-    - Name: 
+    - Name:
       Entry: 12
       Data: 0
-    - Name: 
+    - Name:
       Entry: 13
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 12
       Data: 5
-    - Name: 
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 0
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.8207547
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.8207547
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.8207547
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 1
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.7129489
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.3066038
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 2
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.2688679
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.497808278
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 3
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.7286575
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.4292453
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 4
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.4571222
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.1745283
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 13
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: ShopTypeColors
+      Data:
+    - Name: _shopTypeColors
       Entry: 7
       Data: 2|System.Collections.Generic.Dictionary`2[[ShopType, Assembly-CSharp],[UnityEngine.Color,
         UnityEngine.CoreModule]], mscorlib
@@ -197,310 +198,360 @@ MonoBehaviour:
       Entry: 7
       Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[ShopType, Assembly-CSharp]],
         mscorlib
-    - Name: 
+    - Name:
       Entry: 12
       Data: 0
-    - Name: 
+    - Name:
       Entry: 13
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 12
       Data: 7
-    - Name: 
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 1
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.967318356
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.4575472
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 2
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.565647
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.5330188
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 6
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.5424528
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.6516403
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 3
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.9150943
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.9150943
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.9150943
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 4
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.7747503
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.5330188
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 5
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.5518868
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.9770199
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 7
     - Name: $v
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.539465368
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 4
       Data: 0.5235849
-    - Name: 
+    - Name:
       Entry: 4
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 13
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
-    - Name: ShopTypeIcons
+      Data:
+    - Name: _shopTypeIcons
       Entry: 7
       Data: 4|System.Collections.Generic.Dictionary`2[[ShopType, Assembly-CSharp],[UnityEngine.Texture2D,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 9
       Data: 3
-    - Name: 
+    - Name:
       Entry: 12
       Data: 7
-    - Name: 
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 1
     - Name: $v
       Entry: 10
       Data: 0
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 2
     - Name: $v
       Entry: 10
       Data: 1
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 6
     - Name: $v
       Entry: 10
       Data: 2
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 3
     - Name: $v
       Entry: 10
       Data: 3
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 4
     - Name: $v
       Entry: 10
       Data: 4
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 5
     - Name: $v
       Entry: 10
       Data: 5
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 7
-      Data: 
+      Data:
     - Name: $k
       Entry: 3
       Data: 7
     - Name: $v
       Entry: 10
       Data: 6
-    - Name: 
+    - Name:
       Entry: 8
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 13
-      Data: 
-    - Name: 
+      Data:
+    - Name:
       Entry: 8
-      Data: 
+      Data:
+    - Name: _icons
+      Entry: 7
+      Data: 5|System.Collections.Generic.Dictionary`2[[RegularIcons, Assembly-CSharp],[UnityEngine.Texture2D,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 6|System.Collections.Generic.EnumEqualityComparer`1[[RegularIcons, Assembly-CSharp]],
+        mscorlib
+    - Name:
+      Entry: 12
+      Data: 0
+    - Name:
+      Entry: 13
+      Data:
+    - Name:
+      Entry: 8
+      Data:
+    - Name:
+      Entry: 12
+      Data: 2
+    - Name:
+      Entry: 7
+      Data:
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 7
+    - Name:
+      Entry: 8
+      Data:
+    - Name:
+      Entry: 7
+      Data:
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name:
+      Entry: 8
+      Data:
+    - Name:
+      Entry: 13
+      Data:
+    - Name:
+      Entry: 8
+      Data:

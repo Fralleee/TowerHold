@@ -31,8 +31,15 @@ public class EnemyManager : Singleton<EnemyManager>
 	int _spawnsPerLevel;
 	int _totalPointsForCurrentLevel;
 
-	int CalculatePointsForLevel(int level) => StartPoints + (PointLevelScaling * (level - 1));
-	int DamageFromValue(Enemy enemy) => enemy.Value * ValueToDamageFactor;
+	int CalculatePointsForLevel(int level)
+	{
+		return StartPoints + (PointLevelScaling * (level - 1));
+	}
+
+	int DamageFromValue(Enemy enemy)
+	{
+		return enemy.Value * ValueToDamageFactor;
+	}
 
 	Dictionary<int, LevelSpawnConfiguration> _levelSpawnConfigurations;
 

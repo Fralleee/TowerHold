@@ -18,7 +18,13 @@ public class PlayUI : MonoBehaviour
 		_quickGameButton.clicked += Play;
 	}
 
-	void Play() => SceneManager.LoadScene("Game");
+	void Play()
+	{
+		SceneManager.LoadScene("Game");
+	}
 
-	void OnDestroy() => _quickGameButton.clicked -= Play;
+	void OnDestroy()
+	{
+		_quickGameButton.clicked -= Play;
+	}
 }

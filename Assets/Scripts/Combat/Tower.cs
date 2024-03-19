@@ -69,9 +69,15 @@ public class Tower : Target
 		Turrets.Add(instance);
 	}
 
-	public void AddUppgrade(DamageType damageType) => DamageMultipliers[damageType] += 0.1f;
+	public void AddUppgrade(DamageType damageType)
+	{
+		DamageMultipliers[damageType] += 0.1f;
+	}
 
-	public float GetDamage(DamageType damageType, float damage) => damage * DamageMultipliers[damageType];
+	public float GetDamage(DamageType damageType, float damage)
+	{
+		return damage * DamageMultipliers[damageType];
+	}
 
 	public void UpgradeHealth(int amount)
 	{
@@ -81,7 +87,10 @@ public class Tower : Target
 		HealthBar.SetHealth(Health, true);
 	}
 
-	void HandleDamageTaken(int damage) => ScoreManager.Instance.DamageTaken += damage;
+	void HandleDamageTaken(int damage)
+	{
+		ScoreManager.Instance.DamageTaken += damage;
+	}
 
 	void OnDestroy()
 	{
@@ -89,7 +98,10 @@ public class Tower : Target
 		OnDamageTaken -= HandleDamageTaken;
 	}
 
-	public static void ResetGameState() => Instance = null;
+	public static void ResetGameState()
+	{
+		Instance = null;
+	}
 
 	void OnDrawGizmosSelected()
 	{

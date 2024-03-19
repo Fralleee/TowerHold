@@ -57,7 +57,10 @@ public class StateMachine<T>
 	}
 
 
-	public void At(IState<T> to, IState<T> from, Func<bool> condition) => AddTransition(to, from, condition);
+	public void At(IState<T> to, IState<T> from, Func<bool> condition)
+	{
+		AddTransition(to, from, condition);
+	}
 
 	Transition<T> GetTransition => _currentTransitions.FirstOrDefault(t => t.Condition());
 }

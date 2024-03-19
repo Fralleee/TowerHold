@@ -126,13 +126,28 @@ public class MenuController : SingletonController<MenuController>
 		}
 	}
 
-	void Play() => _screenStack.PushScreen(_playScreen);
+	void Play()
+	{
+		_screenStack.PushScreen(_playScreen);
+	}
 
-	void Continue() => ToggleMenu(false);
+	void Continue()
+	{
+		ToggleMenu(false);
+	}
 
-	void Options() => _screenStack.PushScreen(_optionsScreen);
+	void Options()
+	{
+		_screenStack.PushScreen(_optionsScreen);
+	}
 
-	void ToMainMenu() => SceneManager.LoadScene("Menu");
+	void ToMainMenu()
+	{
+		SceneManager.LoadScene("Menu");
+	}
 
-	void Quit() => Application.Quit();
+	void Quit()
+	{
+		Application.Quit();
+	}
 }

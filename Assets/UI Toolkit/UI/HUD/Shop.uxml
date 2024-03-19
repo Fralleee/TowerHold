@@ -4,7 +4,7 @@
     <Style src="Tooltip.uss" />
     <Style src="Shop.uss" />
     <ui:VisualElement name="ShopContainer">
-        <Tooltip />
+        <Tooltip class="active" />
         <ui:VisualElement name="GameInfo">
             <ui:Label name="LevelLabel" text="Level: 0" />
             <ui:Label name="CoinLabel" text="Coin: 0" />

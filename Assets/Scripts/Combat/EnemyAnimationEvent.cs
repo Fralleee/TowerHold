@@ -4,7 +4,10 @@ public class EnemyAnimationEvent : MonoBehaviour
 {
 	Enemy _enemy;
 
-	void Awake() => _enemy = GetComponentInParent<Enemy>();
+	void Awake()
+	{
+		_enemy = GetComponentInParent<Enemy>();
+	}
 
 	public void PerformAttack()
 	{

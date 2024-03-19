@@ -25,7 +25,10 @@ public class ScoreManager : Singleton<ScoreManager>
 		GameController.OnGameEnd += HandleGameEnd;
 	}
 
-	void HandleEnemyDeath(Target enemy) => EnemiesKilled += 1;
+	void HandleEnemyDeath(Target enemy)
+	{
+		EnemiesKilled += 1;
+	}
 
 	public string GetScoresAsText()
 	{

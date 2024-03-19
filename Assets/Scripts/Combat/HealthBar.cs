@@ -49,7 +49,11 @@ public class HealthBar : MonoBehaviour
 		_healthUI.SetActive(!_isHidden);
 	}
 
-	public void SetMaxHealth(float newMaxHealth) => _maxHealth = newMaxHealth;
+	public void SetMaxHealth(float newMaxHealth)
+	{
+		_maxHealth = newMaxHealth;
+	}
+
 	public void SetHealth(float newHP, bool silent = false)
 	{
 		if (_isHidden)

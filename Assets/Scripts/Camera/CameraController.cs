@@ -149,8 +149,10 @@ public class CameraController : Controller
 		_newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / rotationDivisionAmount));
 	}
 
-	void HandleKeyboardRotation() => _newRotation *= Quaternion.Euler(Vector3.up * KeyboardRotation);
-
+	void HandleKeyboardRotation()
+	{
+		_newRotation *= Quaternion.Euler(Vector3.up * KeyboardRotation);
+	}
 
 	void CheckMouseAtScreenEdge()
 	{
@@ -225,7 +227,10 @@ public class CameraController : Controller
 		}
 	}
 
-	void Scroll(InputAction.CallbackContext context) => _newZoom += context.ReadValue<float>() * _zoomVector;
+	void Scroll(InputAction.CallbackContext context)
+	{
+		_newZoom += context.ReadValue<float>() * _zoomVector;
+	}
 
 	void RotationStart(InputAction.CallbackContext context)
 	{

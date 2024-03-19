@@ -34,7 +34,10 @@ public class Target : MonoBehaviour
 		AudioSettings.ApplySettings(AudioSource);
 	}
 
-	protected virtual void Start() => HealthBar = Instantiate(HealthBar, transform.position + (Vector3.up * _healthBarOffset), Quaternion.identity, transform);
+	protected virtual void Start()
+	{
+		HealthBar = Instantiate(HealthBar, transform.position + (Vector3.up * _healthBarOffset), Quaternion.identity, transform);
+	}
 
 	public float TakeDamage(int damage)
 	{

@@ -88,7 +88,7 @@ ShopItemButton .shadow {
 	position: absolute;
 	left: -20px;
 	top: -48px;
-	width: 160px;
+	right: -20px;
 	height: 130px;
 	background-color: #2a2a2a;
 	border-radius: 50%;
