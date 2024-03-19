@@ -79,4 +79,16 @@ public class StyleSettings : SerializedScriptableObject
 		Debug.LogError($"No color found for rarity type {rarityType}");
 		return Color.white;
 	}
+
+
+	public Color GetRarityTintColor(RarityType rarityType)
+	{
+		if (_rarityColors.ContainsKey(rarityType))
+		{
+			return Color.Lerp(_rarityColors[rarityType], Color.white, 0.5f);
+		}
+
+		Debug.LogError($"No color found for rarity type {rarityType}");
+		return Color.white;
+	}
 }
