@@ -54,7 +54,7 @@ public class RichTextWithImages : VisualElement
 			AddImage(icon, color);
 		}
 
-		AddText($" {shopType}", color);
+		AddText($" {shopType} damage", color);
 	}
 
 	void AddText(string text, Color? color = null)

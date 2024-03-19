@@ -27,7 +27,7 @@ public class TurretTooltipContent : TooltipContent
 			var (baseDamage, attackRange, timeBetweenAttacks, description) = turret.GetHoverData();
 			var currentDamage = Tower.Instance.GetDamage(turret.Category, baseDamage);
 
-			var safeDescription = string.IsNullOrEmpty(description) ? "Shoots thing towards enemy causing {Damage}" : description;
+			var safeDescription = string.IsNullOrEmpty(description) ? "Shoots towards nearest enemy causing {Damage}." : description;
 			DescriptionContainer.SetTurretDescription(safeDescription, currentDamage, turret.ShopType, styleSettings);
 
 			Cooldown.AddImageLabel(styleSettings.GetIcon(GameIcons.Cooldown), $"{timeBetweenAttacks:#.##}s");
