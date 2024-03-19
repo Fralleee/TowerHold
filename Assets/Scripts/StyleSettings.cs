@@ -20,9 +20,9 @@ public class StyleSettings : SerializedScriptableObject
 		{ ShopType.Defense, new Color(1f, 0.565647f, 0.5330188f) },
 		{ ShopType.Arcane, new Color(0.5424528f, 0.6516403f, 1f) },
 		{ ShopType.Normal, new Color(0.9150943f, 0.9150943f, 0.9150943f) },
-		{ ShopType.Siege, new Color(1f, 0.7747503f, 0.2f) },
-		{ ShopType.Technology, new Color(0.8f, 0.8f, 0.8f) },
-		{ ShopType.Void, new Color(0.2f, 0.8f, 0.2f) }
+		{ ShopType.Siege, new Color(1f, 0.7747503f, 0.5330188f) },
+		{ ShopType.Technology, new Color(0.5518868f, 0.9770199f, 1f) },
+		{ ShopType.Void, new Color(0.539465368f, 1f, 0.5235849f) }
 	};
 
 	[SerializeField]
@@ -37,9 +37,9 @@ public class StyleSettings : SerializedScriptableObject
 	};
 
 	[SerializeField]
-	Dictionary<RegularIcons, Texture2D> _icons = new Dictionary<RegularIcons, Texture2D> {
-		{ RegularIcons.Cooldown, null },
-		{ RegularIcons.Gold, null },
+	Dictionary<GameIcons, Texture2D> _icons = new Dictionary<GameIcons, Texture2D> {
+		{ GameIcons.Cooldown, null },
+		{ GameIcons.Gold, null },
 	};
 
 	public Texture2D GetShopTypeIcon(ShopType shopType)
@@ -58,7 +58,7 @@ public class StyleSettings : SerializedScriptableObject
 		return Color.white;
 	}
 
-	public Texture2D GetIcon(RegularIcons icon)
+	public Texture2D GetIcon(GameIcons icon)
 	{
 		if (_icons.ContainsKey(icon))
 		{

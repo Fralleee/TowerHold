@@ -26,11 +26,11 @@ public class UpdateUI : MonoBehaviour
 		_healthBar = _progressContainer.Q<CustomProgressBar>("HealthBar");
 		_levelBar = _progressContainer.Q<CustomProgressBar>("LevelBar");
 
-		_tooltipController.RegisterTooltip(_levelLabel, new TooltipContent("Level", null, "This is the current level"));
-		_tooltipController.RegisterTooltip(_coinLabel, new TooltipContent("Coin", null, "This is the amount of coins you have"));
-		_tooltipController.RegisterTooltip(_incomeLabel, new TooltipContent("Income", null, "This is the amount of coins you get per second"));
-		_tooltipController.RegisterTooltip(_healthBar, new TooltipContent("Health", null, "This is the health of your base"));
-		_tooltipController.RegisterTooltip(_levelBar, new TooltipContent("Level", null, "This is the progress of the current level"));
+		_tooltipController.RegisterTooltip(_levelLabel, new TooltipContent(null, "Level", null, "This is the current level"));
+		_tooltipController.RegisterTooltip(_coinLabel, new TooltipContent(null, "Coin", null, "This is the amount of coins you have"));
+		_tooltipController.RegisterTooltip(_incomeLabel, new TooltipContent(null, "Income", null, "This is the amount of coins you get per second"));
+		_tooltipController.RegisterTooltip(_healthBar, new TooltipContent(null, "Health", null, "This is the health of your base"));
+		_tooltipController.RegisterTooltip(_levelBar, new TooltipContent(null, "Level", null, "This is the progress of the current level"));
 
 
 		GameController.OnGameStart += OnGameStart;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class TooltipController : MonoBehaviour
 {
-	VisualElement _tooltip;
+	Tooltip _tooltip;
 	VisualElement _activeElement;
 
 	readonly List<(VisualElement element, EventCallback<MouseEnterEvent> enterCallback, EventCallback<MouseLeaveEvent> leaveCallback)> _eventRegistrations = new List<(VisualElement, EventCallback<MouseEnterEvent>, EventCallback<MouseLeaveEvent>)>();
@@ -42,9 +42,8 @@ public class TooltipController : MonoBehaviour
 	{
 		_activeElement = element;
 		var tooltipContent = _tooltipContents[element];
-		_tooltip.Clear();
 		_tooltip.AddToClassList("active");
-		_tooltip.Add(tooltipContent);
+		_tooltip.AddData(tooltipContent);
 	}
 
 	void HideTooltip()

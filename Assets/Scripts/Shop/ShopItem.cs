@@ -10,21 +10,17 @@ public class ShopItem : ScriptableObject
 	[Header("Shop Settings")]
 	public Texture2D Texture;
 	public RarityType RarityType;
-	public int Cost
+	public string Description = "Description text";
+	public string Name => name.Replace("Upgrade", "").Trim();
+	public int Cost => RarityType switch
 	{
-		get
-		{
-			return RarityType switch
-			{
-				RarityType.Common => 500,
-				RarityType.Uncommon => 2000,
-				RarityType.Rare => 5000,
-				RarityType.Epic => 10000,
-				RarityType.Legendary => 25000,
-				_ => throw new ArgumentOutOfRangeException(nameof(RarityType), RarityType, null),
-			};
-		}
-	}
+		RarityType.Common => 500,
+		RarityType.Uncommon => 2000,
+		RarityType.Rare => 5000,
+		RarityType.Epic => 10000,
+		RarityType.Legendary => 25000,
+		_ => throw new ArgumentOutOfRangeException(nameof(RarityType), RarityType, null),
+	};
 
 	public static ShopItem GetRandomItem(int currentLevel, ShopItem[] items, RandomGenerator randomGenerator)
 	{
@@ -81,5 +77,8 @@ public class ShopItem : ScriptableObject
 		return tooltip;
 	}
 
-	public virtual void OnPurchase() => Tower.OnUpgrade(this);
+	public virtual void OnPurchase()
+	{
+		Tower.OnUpgrade(this);
+	}
 }

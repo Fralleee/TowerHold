@@ -24,8 +24,10 @@ public static class SpatialPartition
 		};
 	}
 
-	public static float GetRange(this AttackRange attackRange) => Zones.TryGetValue(attackRange.ToZone(), out var range) ? range : 0f;
-
+	public static float GetRange(this AttackRange attackRange)
+	{
+		return Zones.TryGetValue(attackRange.ToZone(), out var range) ? range : 0f;
+	}
 
 	public static float DistanceToNextZone(this SpatialZone zone, float distanceToTower)
 	{
@@ -40,6 +42,8 @@ public static class SpatialPartition
 		return distanceToNextZone;
 	}
 
-	public static SpatialZone ToZone(this AttackRange attackRange) => (SpatialZone)attackRange;
-
+	public static SpatialZone ToZone(this AttackRange attackRange)
+	{
+		return (SpatialZone)attackRange;
+	}
 }

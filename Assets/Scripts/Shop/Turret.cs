@@ -53,7 +53,10 @@ public class Turret : DamageShopItem
 		ScoreManager.Instance.Turrets += 1;
 	}
 
-	public (float baseDamage, float attackRange, float timeBetweenAttacks) GetHoverData() => (_baseDamage, _attackRange.GetRange(), _timeBetweenAttacks);
+	public (float baseDamage, AttackRange attackRange, float timeBetweenAttacks, string description) GetHoverData()
+	{
+		return (_baseDamage, _attackRange, _timeBetweenAttacks, Description);
+	}
 
 	void Shoot()
 	{

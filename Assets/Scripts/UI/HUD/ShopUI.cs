@@ -48,13 +48,13 @@ public class ShopUI : Controller
 		_lockButton = uiDocument.rootVisualElement.Q<Button>("LockButton");
 		_shopSlots = _inventoryContainer.Query<ShopItemButton>().ToList();
 
-		_refreshTooltipContent = new TooltipContent("Refresh", $"Cost: {_refreshCost}", "Refresh the shop to get new items");
+		_refreshTooltipContent = new TooltipContent(null, "Refresh", $"Cost: {_refreshCost}", "Refresh the shop to get new items");
 		_tooltipController.RegisterTooltip(_refreshButton, _refreshTooltipContent);
 
 		_refreshButton.clicked += ManualRefresh;
 		_lockButton.clicked += ToggleLock;
 		_lockButton.SetEnabled(false);
-		_tooltipController.RegisterTooltip(_lockButton, new TooltipContent("Lock", null, "Lock the shop"));
+		_tooltipController.RegisterTooltip(_lockButton, new TooltipContent(null, "Lock", null, "Lock the shop"));
 
 		for (var i = 0; i < _shopSlots.Count; i++)
 		{
@@ -71,7 +71,7 @@ public class ShopUI : Controller
 		{
 			var index = i;
 			var slot = _shopSlots[index];
-			_tooltipController.RegisterTooltip(slot, new TooltipContent("Empty Slot", "This slot is currently empty."));
+			_tooltipController.RegisterTooltip(slot, new TooltipContent(null, "Empty Slot", "This slot is currently empty."));
 		}
 
 		Controls.Keyboard.RefreshShop.performed += ctx => ButtonClicked(_refreshButton);
@@ -83,9 +83,15 @@ public class ShopUI : Controller
 		GameController.OnLevelChanged += OnLevelChanged;
 	}
 
-	void OnGameStart() => _lockButton.SetEnabled(true);
+	void OnGameStart()
+	{
+		_lockButton.SetEnabled(true);
+	}
 
-	void OnLevelChanged(int level) => RefreshShop();
+	void OnLevelChanged(int level)
+	{
+		RefreshShop();
+	}
 
 	void ManualRefresh()
 	{
@@ -98,7 +104,7 @@ public class ShopUI : Controller
 		{
 			RefreshShop();
 			_refreshCost += _refreshCostIncrement;
-			_refreshTooltipContent.CostLabel.text = $"Cost: {_refreshCost}";
+			_refreshTooltipContent.CostContainer.AddImageLabel(_styleSettings.GetIcon(GameIcons.Gold), $"Cost: {_refreshCost}");
 		}
 	}
 
