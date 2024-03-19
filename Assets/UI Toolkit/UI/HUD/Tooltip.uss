@@ -1,14 +1,19 @@
 Tooltip {
-	width: 480px;
-	border-width: 2px;
-	border-color: #444;
-	background-color: rgba(255,255,255,.85);
+	position: relative;
+	min-width: 480px;
+
 	align-self: center;
-	padding: 12px;
 	margin-bottom: 36px;
+
 	scale: 0.8;
 	opacity: 0;
     transition: all 250ms 50ms ease-out;
+}
+
+Tooltip * {
+	margin: 0;
+	padding: 0;
+	white-space: normal;
 }
 
 Tooltip.active {
@@ -17,18 +22,141 @@ Tooltip.active {
     transition: all 250ms 0 ease-out;
 }
 
-Tooltip Label {
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
+Tooltip .border {
+	position: absolute;
+	left: 24px;
+	top: -8px;
+	right: 24px;
+	bottom: -8px;
+
+	background-color: #F7C94B;
+	border-width: 4px;
+	border-color: #111;
+	border-radius: 24px;
+
+	opacity: 0;
+    transition: all 150ms 0 ease-out;
 }
 
-Tooltip .item-name {
+Tooltip.active .border {
+	opacity: 1;
+}
+
+Tooltip .content {
+	width: 100%;
+	min-height: 100%;
+
+	background-color: #222;
+	border-width: 4px;
+	border-color: #111;
+	border-radius: 24px;
+
+	overflow: hidden;
+	transition: all 200ms ease-out-back;
+}
+
+Tooltip .shadow {
+	position: absolute;
+	left: -20px;
+	top: -48px;
+	right: -20px;
+
+	height: 130px;
+	background-color: #2a2a2a;
+	border-radius: 50%;
+}
+
+Tooltip .sparkling {
+	position: absolute;
+	left: 5px;
+	top: 8px;
+	width: 6px;
+	height: 3px;
+	rotate: -45deg;
+	border-radius: 3px;
+	background-color: rgba(255,255,255,.75);
+}
+
+
+Tooltip .data {
+	position: relative;
+	color: ghostwhite;
+	padding: 12px;
+}
+
+Tooltip .data .item-information {
+	flex-direction: row;
+}
+
+Tooltip .data .item-texts {
+	margin-left: 12px;
+}
+
+
+Tooltip .data Image.item-image {
+	width: 64px;
+	height: 64px;
+}
+
+Tooltip .data .item-name {
 	font-size: 24px;
+	margin-bottom: 6px;
+	align-self: flex-start;
 	-unity-font-style: bold;
 }
 
-Tooltip .item-cost {
+Tooltip .data .item-description {
+	margin-top: 16px;
+	border-top-width: 1px;
+	border-color: #bbb;
+	padding-top: 16px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	white-space: normal;
+
+	font-size: 16px;
+}
+
+Tooltip .data .item-cost {
+	flex-direction: row;
+	align-items: center;
+
 	-unity-font-style: bold;
 	color: goldenrod;
+}
+
+Tooltip .data .item-description Image {
+	width: 18px;
+	height: 18px;
+}
+
+Tooltip .data .item-cost Image {
+	width: 20px;
+	height: 20px;
+	margin-right: 6px;
+}
+
+Tooltip .data .item-attack-cooldown {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	font-size: 16px;
+	-unity-font-style: bold;
+	flex-direction: row;
+	align-items: center;
+}
+
+Tooltip .data .item-attack-cooldown Image {
+	width: 20px;
+	height: 20px;
+	margin-right: 6px;
+}
+
+Tooltip .data .item-range {
+	position: absolute;
+	top: 36px;
+	right: 12px;
+	font-size: 16px;
+	color: #bbb;
 }

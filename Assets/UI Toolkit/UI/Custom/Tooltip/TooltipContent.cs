@@ -1,28 +1,46 @@
 using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class TooltipContent : VisualElement
 {
 	public Action<TooltipContent> OnUpdate = delegate { };
 
+	public VisualElement InformationContainer;
+	public VisualElement TextContainer;
+	public Image Image;
 	public Label NameLabel;
-	public Label CostLabel;
-	public Label DescriptionLabel;
+	public RichTextWithImages CostContainer;
+	public RichTextWithImages DescriptionContainer;
 
-	public TooltipContent(string name = null, string cost = null, string description = null)
+	public TooltipContent(Texture2D texture2D = null, string name = null, string cost = null, string description = null)
 	{
+		InformationContainer = new VisualElement();
+		TextContainer = new VisualElement();
+		Image = new Image();
 		NameLabel = new Label();
-		CostLabel = new Label();
-		DescriptionLabel = new Label();
+		CostContainer = new RichTextWithImages();
+		DescriptionContainer = new RichTextWithImages();
 
-		Add(NameLabel);
-		Add(CostLabel);
-		Add(DescriptionLabel);
+		Add(InformationContainer);
+		InformationContainer.Add(Image);
+		InformationContainer.Add(TextContainer);
+		TextContainer.Add(NameLabel);
+		TextContainer.Add(CostContainer);
+		Add(DescriptionContainer);
 
-		AddToClassList("tooltip-data");
+		AddToClassList("data");
+		Image.AddToClassList("item-image");
+		InformationContainer.AddToClassList("item-information");
+		TextContainer.AddToClassList("item-texts");
 		NameLabel.AddToClassList("item-name");
-		CostLabel.AddToClassList("item-cost");
-		DescriptionLabel.AddToClassList("item-description");
+		CostContainer.AddToClassList("item-cost");
+		DescriptionContainer.AddToClassList("item-description");
+
+		if (texture2D != null)
+		{
+			Image.image = texture2D;
+		}
 
 		if (name != null)
 		{
@@ -31,21 +49,26 @@ public class TooltipContent : VisualElement
 
 		if (cost != null)
 		{
-			CostLabel.text = cost;
+			CostContainer.Add(new Label(cost));
 		}
 
 		if (description != null)
 		{
-			DescriptionLabel.text = description;
+			DescriptionContainer.Add(new Label(description));
 		}
 	}
 
 	public virtual void UpdateInformation(ShopItem item, StyleSettings styleSettings)
 	{
-		NameLabel.text = item.name;
-		CostLabel.text = item.Cost.ToString();
-		DescriptionLabel.text = item.ShopType.ToString();
-		NameLabel.style.color = styleSettings.RarityColors[item.RarityType];
+		Image.image = item.Texture;
+
+		NameLabel.text = item.Name;
+		NameLabel.style.color = styleSettings.GetRarityColor(item.RarityType);
+
+		CostContainer.AddImageLabel(styleSettings.GetIcon(GameIcons.Gold), item.Cost.ToString(), styleSettings.GetShopTypeColor(ShopType.Income));
+
+		var safeDescription = string.IsNullOrEmpty(item.Description) ? "No description available" : item.Description;
+		DescriptionContainer.SetDescription(safeDescription);
 	}
 
 	public virtual void Update(TooltipContent tooltipContent)
