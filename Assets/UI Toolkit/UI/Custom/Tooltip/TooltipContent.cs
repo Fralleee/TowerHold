@@ -12,6 +12,7 @@ public class TooltipContent : VisualElement
 	public Label NameLabel;
 	public RichTextWithImages CostContainer;
 	public RichTextWithImages DescriptionContainer;
+	public Color BorderColor;
 
 	public TooltipContent(Texture2D texture2D = null, string name = null, string cost = null, string description = null)
 	{
@@ -64,6 +65,8 @@ public class TooltipContent : VisualElement
 
 		NameLabel.text = item.Name;
 		NameLabel.style.color = styleSettings.GetRarityColor(item.RarityType);
+
+		BorderColor = styleSettings.GetRarityColor(item.RarityType);
 
 		CostContainer.AddImageLabel(styleSettings.GetIcon(GameIcons.Gold), item.Cost.ToString(), styleSettings.GetShopTypeColor(ShopType.Income));
 

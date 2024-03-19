@@ -32,6 +32,7 @@ public class TurretTooltipContent : TooltipContent
 
 			Cooldown.AddImageLabel(styleSettings.GetIcon(GameIcons.Cooldown), $"{timeBetweenAttacks:#.##}s");
 
+
 			RangeLabel.text = attackRange.AsText();
 		}
 	}

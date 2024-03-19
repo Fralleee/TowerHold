@@ -43,6 +43,7 @@ public class TooltipController : MonoBehaviour
 		_activeElement = element;
 		var tooltipContent = _tooltipContents[element];
 		_tooltip.AddToClassList("active");
+		_tooltip.Border.style.backgroundColor = tooltipContent.BorderColor;
 		_tooltip.AddData(tooltipContent);
 	}
 
