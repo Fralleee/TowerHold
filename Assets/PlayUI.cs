@@ -20,7 +20,8 @@ public class PlayUI : MonoBehaviour
 
 	void Play()
 	{
-		SceneManager.LoadScene("Game");
+		LoadingSceneManager.SceneToLoad = "Game";
+		SceneManager.LoadScene("LoadingScene");
 	}
 
 	void OnDestroy()

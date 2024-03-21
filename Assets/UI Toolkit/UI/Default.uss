@@ -100,3 +100,7 @@
 
 	background-image: url("/Assets/Art/Textures/Icons/defense.png");
 }
+
+.screen {
+    transition: scale 400ms ease-out;
+}

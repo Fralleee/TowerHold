@@ -78,6 +78,6 @@
 }
 
 
-#AttackTypesList:hover .attack-type-name {
+#AttackTypesList:hover .attack-type-name, #AttackTypesList.show-details .attack-type-name {
 	max-width: 128px;
 }

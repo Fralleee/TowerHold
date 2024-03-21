@@ -10,7 +10,7 @@ public class ScreenStack
 	{
 		if (_screenStack.Count > 0)
 		{
-			_screenStack.Peek().Hide();
+			_screenStack.Peek().Hide(false);
 		}
 
 		_screenStack.Push(screen);

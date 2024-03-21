@@ -221,6 +221,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ShowDetails"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9c28bdd-c7fe-4b8e-84c1-8db5e78513cc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""PurchaseItem"",
                     ""type"": ""Button"",
                     ""id"": ""0150f6c8-38c4-4803-bea3-bcc4e37e2146"",
@@ -492,6 +501,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dbc3db6-9a98-44ee-9ac9-df2e1228abc8"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowDetails"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -514,6 +534,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Keyboard_Reset = m_Keyboard.FindAction("Reset", throwIfNotFound: true);
         m_Keyboard_RefreshShop = m_Keyboard.FindAction("RefreshShop", throwIfNotFound: true);
         m_Keyboard_LockShop = m_Keyboard.FindAction("LockShop", throwIfNotFound: true);
+        m_Keyboard_ShowDetails = m_Keyboard.FindAction("ShowDetails", throwIfNotFound: true);
         m_Keyboard_PurchaseItem = m_Keyboard.FindAction("PurchaseItem", throwIfNotFound: true);
         m_Keyboard_ToggleMenu = m_Keyboard.FindAction("ToggleMenu", throwIfNotFound: true);
     }
@@ -676,6 +697,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Reset;
     private readonly InputAction m_Keyboard_RefreshShop;
     private readonly InputAction m_Keyboard_LockShop;
+    private readonly InputAction m_Keyboard_ShowDetails;
     private readonly InputAction m_Keyboard_PurchaseItem;
     private readonly InputAction m_Keyboard_ToggleMenu;
     public struct KeyboardActions
@@ -687,6 +709,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Reset => m_Wrapper.m_Keyboard_Reset;
         public InputAction @RefreshShop => m_Wrapper.m_Keyboard_RefreshShop;
         public InputAction @LockShop => m_Wrapper.m_Keyboard_LockShop;
+        public InputAction @ShowDetails => m_Wrapper.m_Keyboard_ShowDetails;
         public InputAction @PurchaseItem => m_Wrapper.m_Keyboard_PurchaseItem;
         public InputAction @ToggleMenu => m_Wrapper.m_Keyboard_ToggleMenu;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
@@ -713,6 +736,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LockShop.started += instance.OnLockShop;
             @LockShop.performed += instance.OnLockShop;
             @LockShop.canceled += instance.OnLockShop;
+            @ShowDetails.started += instance.OnShowDetails;
+            @ShowDetails.performed += instance.OnShowDetails;
+            @ShowDetails.canceled += instance.OnShowDetails;
             @PurchaseItem.started += instance.OnPurchaseItem;
             @PurchaseItem.performed += instance.OnPurchaseItem;
             @PurchaseItem.canceled += instance.OnPurchaseItem;
@@ -738,6 +764,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LockShop.started -= instance.OnLockShop;
             @LockShop.performed -= instance.OnLockShop;
             @LockShop.canceled -= instance.OnLockShop;
+            @ShowDetails.started -= instance.OnShowDetails;
+            @ShowDetails.performed -= instance.OnShowDetails;
+            @ShowDetails.canceled -= instance.OnShowDetails;
             @PurchaseItem.started -= instance.OnPurchaseItem;
             @PurchaseItem.performed -= instance.OnPurchaseItem;
             @PurchaseItem.canceled -= instance.OnPurchaseItem;
@@ -778,6 +807,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnReset(InputAction.CallbackContext context);
         void OnRefreshShop(InputAction.CallbackContext context);
         void OnLockShop(InputAction.CallbackContext context);
+        void OnShowDetails(InputAction.CallbackContext context);
         void OnPurchaseItem(InputAction.CallbackContext context);
         void OnToggleMenu(InputAction.CallbackContext context);
     }

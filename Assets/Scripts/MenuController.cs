@@ -49,23 +49,20 @@ public class MenuController : SingletonController<MenuController>
 
 		SceneManager.activeSceneChanged += OnSceneChanged;
 
-		if (SceneManager.GetActiveScene().name != "Menu")
+		if (SceneManager.GetActiveScene().name == "Game")
 		{
 			UpdateMenuContext(GameContext.InGameMenu);
-		}
-		else
-		{
-			UpdateMenuContext(GameContext.MainMenu);
 		}
 	}
 
 	void OnSceneChanged(Scene _, Scene next)
 	{
-		if (next.name != "Menu")
+		if (next.name == "Game")
 		{
 			UpdateMenuContext(GameContext.InGameMenu);
 		}
-		else
+
+		if (next.name == "Menu")
 		{
 			UpdateMenuContext(GameContext.MainMenu);
 		}

@@ -1,9 +1,10 @@
 using System;
-using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class UpgradeInformationUI : MonoBehaviour
+public class UpgradeInformationUI : Controller
 {
+	Box _attackTypesList;
 	UpgradeInformation _incomeUpgrade;
 	UpgradeInformation _defenseUpgrade;
 	UpgradeInformation _normalUpgrade;
@@ -17,25 +18,32 @@ public class UpgradeInformationUI : MonoBehaviour
 	UpgradeInformation _voidUpgrade;
 	UpgradeInformation _voidTurret;
 
-	void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		var uiDocument = GetComponent<UIDocument>();
-		var attackTypesList = uiDocument.rootVisualElement.Q<Box>("AttackTypesList");
+		_attackTypesList = uiDocument.rootVisualElement.Q<Box>("AttackTypesList");
+		_incomeUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("income-upgrade-label"));
+		_defenseUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("defense-upgrade-label"));
+		_normalUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("normal-upgrade-label"));
+		_normalTurret = new UpgradeInformation(_attackTypesList.Q<Label>("normal-turret-label"));
+		_siegeUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("siege-upgrade-label"));
+		_siegeTurret = new UpgradeInformation(_attackTypesList.Q<Label>("siege-turret-label"));
+		_technologyUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("technology-upgrade-label"));
+		_technologyTurret = new UpgradeInformation(_attackTypesList.Q<Label>("technology-turret-label"));
+		_arcaneUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("arcane-upgrade-label"));
+		_arcaneTurret = new UpgradeInformation(_attackTypesList.Q<Label>("arcane-turret-label"));
+		_voidUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("void-upgrade-label"));
+		_voidTurret = new UpgradeInformation(_attackTypesList.Q<Label>("void-turret-label"));
 
-		_incomeUpgrade = new UpgradeInformation(attackTypesList.Q<Label>("income-upgrade-label"));
-		_defenseUpgrade = new UpgradeInformation(attackTypesList.Q<Label>("defense-upgrade-label"));
-		_normalUpgrade = new UpgradeInformation(attackTypesList.Q<Label>("normal-upgrade-label"));
-		_normalTurret = new UpgradeInformation(attackTypesList.Q<Label>("normal-turret-label"));
-		_siegeUpgrade = new UpgradeInformation(attackTypesList.Q<Label>("siege-upgrade-label"));
-		_siegeTurret = new UpgradeInformation(attackTypesList.Q<Label>("siege-turret-label"));
-		_technologyUpgrade = new UpgradeInformation(attackTypesList.Q<Label>("technology-upgrade-label"));
-		_technologyTurret = new UpgradeInformation(attackTypesList.Q<Label>("technology-turret-label"));
-		_arcaneUpgrade = new UpgradeInformation(attackTypesList.Q<Label>("arcane-upgrade-label"));
-		_arcaneTurret = new UpgradeInformation(attackTypesList.Q<Label>("arcane-turret-label"));
-		_voidUpgrade = new UpgradeInformation(attackTypesList.Q<Label>("void-upgrade-label"));
-		_voidTurret = new UpgradeInformation(attackTypesList.Q<Label>("void-turret-label"));
-
+		Controls.Keyboard.ShowDetails.performed += ToggleDetails;
+		Controls.Keyboard.ShowDetails.canceled += ToggleDetails;
 		Tower.OnUpgrade += OnUpgrade;
+	}
+
+	void ToggleDetails(InputAction.CallbackContext context)
+	{
+		_attackTypesList.ToggleInClassList("show-details");
 	}
 
 	void OnUpgrade(ShopItem item)
@@ -62,6 +70,8 @@ public class UpgradeInformationUI : MonoBehaviour
 
 	void OnDestroy()
 	{
+		Controls.Keyboard.ShowDetails.performed -= ToggleDetails;
+		Controls.Keyboard.ShowDetails.canceled -= ToggleDetails;
 		Tower.OnUpgrade -= OnUpgrade;
 	}
 }

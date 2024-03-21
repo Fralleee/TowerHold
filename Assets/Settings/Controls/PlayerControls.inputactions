@@ -199,6 +199,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ShowDetails",
+                    "type": "Button",
+                    "id": "c9c28bdd-c7fe-4b8e-84c1-8db5e78513cc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "PurchaseItem",
                     "type": "Button",
                     "id": "0150f6c8-38c4-4803-bea3-bcc4e37e2146",
@@ -468,6 +477,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3dbc3db6-9a98-44ee-9ac9-df2e1228abc8",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowDetails",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
