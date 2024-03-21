@@ -32,7 +32,7 @@ public class AudioManager : SerializedSingleton<AudioManager>
 	{
 		_musicVolume = _musicSource.volume;
 
-		if (SceneManager.GetActiveScene().name != "Menu")
+		if (SceneManager.GetActiveScene().name != "MenuScene")
 		{
 			UpdateMenuContext(GameContext.InGameMenu);
 		}
@@ -52,7 +52,7 @@ public class AudioManager : SerializedSingleton<AudioManager>
 
 	void OnSceneChanged(Scene _, Scene next)
 	{
-		if (next.name != "Menu")
+		if (next.name != "MenuScene")
 		{
 			UpdateMenuContext(GameContext.InGameMenu);
 		}

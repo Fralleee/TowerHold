@@ -49,7 +49,7 @@ public class MenuController : SingletonController<MenuController>
 
 		SceneManager.activeSceneChanged += OnSceneChanged;
 
-		if (SceneManager.GetActiveScene().name == "Game")
+		if (SceneManager.GetActiveScene().name == "GameScene")
 		{
 			UpdateMenuContext(GameContext.InGameMenu);
 		}
@@ -57,14 +57,17 @@ public class MenuController : SingletonController<MenuController>
 
 	void OnSceneChanged(Scene _, Scene next)
 	{
-		if (next.name == "Game")
+		if (next.name == "GameScene")
 		{
 			UpdateMenuContext(GameContext.InGameMenu);
 		}
-
-		if (next.name == "Menu")
+		else if (next.name == "MenuScene")
 		{
 			UpdateMenuContext(GameContext.MainMenu);
+		}
+		else if (next.name == "LoadingScene")
+		{
+			ToggleMenu(false);
 		}
 	}
 
@@ -140,7 +143,7 @@ public class MenuController : SingletonController<MenuController>
 
 	void ToMainMenu()
 	{
-		SceneManager.LoadScene("Menu");
+		SceneManager.LoadScene("MenuScene");
 	}
 
 	void Quit()
