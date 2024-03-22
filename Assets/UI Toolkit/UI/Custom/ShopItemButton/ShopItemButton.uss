@@ -135,6 +135,6 @@ ShopItemButton .category {
 	height: 28px;
 	background-color: #2a2a2a;
     border-radius: 50%;
-	background-image: url("/Assets/Art/Textures/Icons/normal.png");
+	background-image: url("/Assets/Art/Textures/Icons/power.png");
 	background-size: 20px;
 }

@@ -9,10 +9,17 @@ VisualElement.container {
     position: relative;
 	width: 100%;
     background-color: #d81719;
+}
+
+VisualElement.screen-content {
+    position: relative;
+
+	width: 100%;
+	padding: 140px 0 60px 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-	padding: 140px 0 60px 0;
 }
 
 Label.title {

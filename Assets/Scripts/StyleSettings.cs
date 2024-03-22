@@ -19,10 +19,10 @@ public class StyleSettings : SerializedScriptableObject
 		{ ShopType.Income, new Color(0.967318356f, 0.4575472f, 1f) },
 		{ ShopType.Defense, new Color(1f, 0.565647f, 0.5330188f) },
 		{ ShopType.Arcane, new Color(0.5424528f, 0.6516403f, 1f) },
-		{ ShopType.Normal, new Color(0.9150943f, 0.9150943f, 0.9150943f) },
-		{ ShopType.Siege, new Color(1f, 0.7747503f, 0.5330188f) },
+		{ ShopType.Power, new Color(0.9150943f, 0.9150943f, 0.9150943f) },
+		{ ShopType.Precision, new Color(1f, 0.7747503f, 0.5330188f) },
 		{ ShopType.Technology, new Color(0.5518868f, 0.9770199f, 1f) },
-		{ ShopType.Void, new Color(0.539465368f, 1f, 0.5235849f) }
+		{ ShopType.Chemical, new Color(0.539465368f, 1f, 0.5235849f) }
 	};
 
 	[SerializeField]
@@ -30,10 +30,10 @@ public class StyleSettings : SerializedScriptableObject
 		{ ShopType.Income, null },
 		{ ShopType.Defense, null },
 		{ ShopType.Arcane, null },
-		{ ShopType.Normal, null },
-		{ ShopType.Siege, null },
+		{ ShopType.Power, null },
+		{ ShopType.Precision, null },
 		{ ShopType.Technology, null },
-		{ ShopType.Void, null }
+		{ ShopType.Chemical, null }
 	};
 
 	[SerializeField]

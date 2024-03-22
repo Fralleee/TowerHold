@@ -11,11 +11,11 @@ public enum DefenseType
 
 public enum DamageType
 {
-	Normal,
-	Siege,
+	Power,
+	Precision,
 	Technology,
 	Arcane,
-	Void
+	Chemical
 }
 
 public enum ShopType
@@ -23,9 +23,9 @@ public enum ShopType
 	Unspecified,
 	Income,
 	Defense,
-	Normal,
-	Siege,
+	Power,
+	Precision,
 	Technology,
 	Arcane,
-	Void
+	Chemical
 }

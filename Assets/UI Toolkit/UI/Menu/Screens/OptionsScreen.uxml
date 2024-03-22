@@ -2,7 +2,9 @@
     <Style src="Options.uss" />
     <ui:VisualElement name="OptionsScreen" class="screen" style="display: none;">
         <ui:VisualElement class="container">
-        	<ui:DropdownField label="Dropdown" name="QualityDropdown" />
+			<ui:VisualElement class="screen-content">
+				<ui:DropdownField label="Dropdown" name="QualityDropdown" />
+			</ui:VisualElement>
     	</ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

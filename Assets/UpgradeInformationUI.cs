@@ -7,16 +7,16 @@ public class UpgradeInformationUI : Controller
 	Box _attackTypesList;
 	UpgradeInformation _incomeUpgrade;
 	UpgradeInformation _defenseUpgrade;
-	UpgradeInformation _normalUpgrade;
-	UpgradeInformation _normalTurret;
-	UpgradeInformation _siegeUpgrade;
-	UpgradeInformation _siegeTurret;
+	UpgradeInformation _powerUpgrade;
+	UpgradeInformation _powerTurret;
+	UpgradeInformation _precisionUpgrade;
+	UpgradeInformation _precisionTurret;
 	UpgradeInformation _technologyUpgrade;
 	UpgradeInformation _technologyTurret;
 	UpgradeInformation _arcaneUpgrade;
 	UpgradeInformation _arcaneTurret;
-	UpgradeInformation _voidUpgrade;
-	UpgradeInformation _voidTurret;
+	UpgradeInformation _chemicalUpgrade;
+	UpgradeInformation _chemicalTurret;
 
 	protected override void Awake()
 	{
@@ -25,16 +25,16 @@ public class UpgradeInformationUI : Controller
 		_attackTypesList = uiDocument.rootVisualElement.Q<Box>("AttackTypesList");
 		_incomeUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("income-upgrade-label"));
 		_defenseUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("defense-upgrade-label"));
-		_normalUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("normal-upgrade-label"));
-		_normalTurret = new UpgradeInformation(_attackTypesList.Q<Label>("normal-turret-label"));
-		_siegeUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("siege-upgrade-label"));
-		_siegeTurret = new UpgradeInformation(_attackTypesList.Q<Label>("siege-turret-label"));
+		_powerUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("power-upgrade-label"));
+		_powerTurret = new UpgradeInformation(_attackTypesList.Q<Label>("power-turret-label"));
+		_precisionUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("precision-upgrade-label"));
+		_precisionTurret = new UpgradeInformation(_attackTypesList.Q<Label>("precision-turret-label"));
 		_technologyUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("technology-upgrade-label"));
 		_technologyTurret = new UpgradeInformation(_attackTypesList.Q<Label>("technology-turret-label"));
 		_arcaneUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("arcane-upgrade-label"));
 		_arcaneTurret = new UpgradeInformation(_attackTypesList.Q<Label>("arcane-turret-label"));
-		_voidUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("void-upgrade-label"));
-		_voidTurret = new UpgradeInformation(_attackTypesList.Q<Label>("void-turret-label"));
+		_chemicalUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("chemical-upgrade-label"));
+		_chemicalTurret = new UpgradeInformation(_attackTypesList.Q<Label>("chemical-turret-label"));
 
 		Controls.Keyboard.ShowDetails.performed += ToggleDetails;
 		Controls.Keyboard.ShowDetails.canceled += ToggleDetails;
@@ -58,11 +58,11 @@ public class UpgradeInformationUI : Controller
 		{
 			ShopType.Income => _incomeUpgrade,
 			ShopType.Defense => _defenseUpgrade,
-			ShopType.Normal => item is Turret ? _normalTurret : _normalUpgrade,
-			ShopType.Siege => item is Turret ? _siegeTurret : _siegeUpgrade,
+			ShopType.Power => item is Turret ? _powerTurret : _powerUpgrade,
+			ShopType.Precision => item is Turret ? _precisionTurret : _precisionUpgrade,
 			ShopType.Technology => item is Turret ? _technologyTurret : _technologyUpgrade,
 			ShopType.Arcane => item is Turret ? _arcaneTurret : _arcaneUpgrade,
-			ShopType.Void => item is Turret ? _voidTurret : _voidUpgrade,
+			ShopType.Chemical => item is Turret ? _chemicalTurret : _chemicalUpgrade,
 			ShopType.Unspecified => throw new ArgumentOutOfRangeException(),
 			_ => throw new ArgumentOutOfRangeException(),
 		};

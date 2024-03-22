@@ -15,11 +15,11 @@ public class Tower : Target
 	public static Tower Instance;
 	public List<Turret> Turrets;
 	public Dictionary<DamageType, float> DamageMultipliers = new Dictionary<DamageType, float>() {
-		{ DamageType.Normal, 1f },
-		{ DamageType.Siege, 1f },
+		{ DamageType.Power, 1f },
+		{ DamageType.Precision, 1f },
 		{ DamageType.Technology, 1f },
 		{ DamageType.Arcane, 1f },
-		{ DamageType.Void, 1f }
+		{ DamageType.Chemical, 1f }
 	};
 
 	protected override void Awake()

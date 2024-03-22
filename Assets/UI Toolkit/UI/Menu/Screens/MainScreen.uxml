@@ -3,14 +3,15 @@
     <ui:VisualElement name="MainScreen" class="screen">
         <ui:VisualElement class="side-overlay" />
         <ui:VisualElement class="content">
-            <ui:VisualElement class="top-overlay" />
             <ui:VisualElement class="container red">
-                <ui:Label text="VAKT" class="title" />
-                <ShadowButton name="PlayButton" buttonText="Play" class="teal" />
-                <ShadowButton name="ContinueButton" buttonText="Resume" class="green" />
-                <ShadowButton name="OptionsButton" buttonText="Options" class="teal" />
-                <ShadowButton name="MenuButton" buttonText="Quit to menu" class="orange" />
-                <ShadowButton name="QuitButton" buttonText="Quit" class="orange" />
+        		<ui:VisualElement class="screen-content">
+					<ui:Label text="VAKT" class="title" />
+					<ShadowButton name="PlayButton" buttonText="Play" class="teal" />
+					<ShadowButton name="ContinueButton" buttonText="Resume" class="green" />
+					<ShadowButton name="OptionsButton" buttonText="Options" class="teal" />
+					<ShadowButton name="MenuButton" buttonText="Quit to menu" class="orange" />
+					<ShadowButton name="QuitButton" buttonText="Quit" class="orange" />
+				</ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement class="side-overlay" />

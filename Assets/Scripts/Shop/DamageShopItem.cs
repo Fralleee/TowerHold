@@ -6,11 +6,11 @@ public class DamageShopItem : ShopItem
 	{
 		ShopType = Category switch
 		{
-			DamageType.Normal => ShopType.Normal,
-			DamageType.Siege => ShopType.Siege,
+			DamageType.Power => ShopType.Power,
+			DamageType.Precision => ShopType.Precision,
 			DamageType.Technology => ShopType.Technology,
 			DamageType.Arcane => ShopType.Arcane,
-			DamageType.Void => ShopType.Void,
+			DamageType.Chemical => ShopType.Chemical,
 			_ => throw new System.NotImplementedException()
 		};
 	}

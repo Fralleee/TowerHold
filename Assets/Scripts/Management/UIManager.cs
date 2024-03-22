@@ -12,10 +12,10 @@ public class UIManager : SerializedSingleton<UIManager>
 	};
 	public Dictionary<DamageType, Sprite> DamageTypeSprites = new Dictionary<DamageType, Sprite>() {
 		{ DamageType.Arcane, null },
-		{ DamageType.Normal, null },
-		{ DamageType.Siege, null },
+		{ DamageType.Power, null },
+		{ DamageType.Precision, null },
 		{ DamageType.Technology, null },
-		{ DamageType.Void, null }
+		{ DamageType.Chemical, null }
 	};
 
 	public Dictionary<ResourceType, Color> ResourceTypeColors = new Dictionary<ResourceType, Color>() {
@@ -27,10 +27,10 @@ public class UIManager : SerializedSingleton<UIManager>
 	};
 	public Dictionary<DamageType, Color> DamageTypeColors = new Dictionary<DamageType, Color>() {
 		{ DamageType.Arcane, Color.blue },
-		{ DamageType.Normal, Color.white },
-		{ DamageType.Siege, Color.black },
+		{ DamageType.Power, Color.white },
+		{ DamageType.Precision, Color.black },
 		{ DamageType.Technology, Color.cyan },
-		{ DamageType.Void, Color.magenta }
+		{ DamageType.Chemical, Color.magenta }
 	};
 
 	public Color GetShopItemColor(ShopItem item)

@@ -104,3 +104,7 @@
 .screen {
     transition: scale 400ms ease-out;
 }
+
+.screen-content {
+    transition: all 400ms ease-out;
+}
