@@ -43,7 +43,6 @@ VisualElement#GameInfo Label {
 	color: goldenrod;
 	padding: 6px 12px;
 	border-radius: 12px;
-	-unity-font-style: bold;
 }
 
 #HealthBar, #LevelBar {
