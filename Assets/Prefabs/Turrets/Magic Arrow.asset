@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Magic Arrow
   m_EditorClassIdentifier: 
   ShopType: 6
-  Texture: {fileID: 2800000, guid: 8f710f6cdeb2dda41a58d50ebe95fa94, type: 3}
+  Texture: {fileID: 2800000, guid: d06064f4caeea4947b71e0ad7eb40522, type: 3}
   RarityType: 3
+  Description: Description text
   Category: 3
-  _baseDamage: 25
-  _attackRange: 3
-  _timeBetweenAttacks: 1
-  _timeBetweenFindTarget: 1
+  _baseDamage: 75
+  _attackRange: 4
+  _timeBetweenAttacks: 0.1
+  _timeBetweenFindTarget: 0.1
   _projectilePrefab: {fileID: 9212724085591995478, guid: 179bd5562d5108e4a96dcb6568472d5a,
     type: 3}
   _projectileSettings:

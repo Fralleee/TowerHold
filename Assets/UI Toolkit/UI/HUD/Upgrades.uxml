@@ -22,17 +22,17 @@
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>
-      <ui:VisualElement name="Power" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/power.png');" />
+      <ui:VisualElement name="Force" class="attack-type">
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/force.png');" />
          <ui:VisualElement class="attack-type-information">
-            <ui:Label class="attack-type-name" text="Power" />
+            <ui:Label class="attack-type-name" text="Force" />
             <ui:VisualElement class="upgrade-icon-and-text">
                <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
-               <ui:Label  name="power-upgrade-label" text="0" />
+               <ui:Label  name="force-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
                <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/hatchet.png');" />
-               <ui:Label  name="power-turret-label" text="0" />
+               <ui:Label  name="force-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>

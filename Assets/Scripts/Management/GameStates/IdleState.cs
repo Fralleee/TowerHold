@@ -7,7 +7,7 @@ public class IdleState : IState<GameState>
 
 	}
 
-	public void OnLogic()
+	public void OnUpdate()
 	{
 
 	}

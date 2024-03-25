@@ -12,7 +12,7 @@ public class UIManager : SerializedSingleton<UIManager>
 	};
 	public Dictionary<DamageType, Sprite> DamageTypeSprites = new Dictionary<DamageType, Sprite>() {
 		{ DamageType.Arcane, null },
-		{ DamageType.Power, null },
+		{ DamageType.Force, null },
 		{ DamageType.Precision, null },
 		{ DamageType.Technology, null },
 		{ DamageType.Chemical, null }
@@ -27,7 +27,7 @@ public class UIManager : SerializedSingleton<UIManager>
 	};
 	public Dictionary<DamageType, Color> DamageTypeColors = new Dictionary<DamageType, Color>() {
 		{ DamageType.Arcane, Color.blue },
-		{ DamageType.Power, Color.white },
+		{ DamageType.Force, Color.white },
 		{ DamageType.Precision, Color.black },
 		{ DamageType.Technology, Color.cyan },
 		{ DamageType.Chemical, Color.magenta }

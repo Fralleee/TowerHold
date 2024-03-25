@@ -32,7 +32,7 @@ public class LiveState : IState<GameState>, ILevelProgress
 		RunLevel(GameController.GameSettings.StartLevel);
 	}
 
-	public void OnLogic()
+	public void OnUpdate()
 	{
 		TimeLeft -= Time.fixedDeltaTime;
 		if (TimeLeft <= 0)

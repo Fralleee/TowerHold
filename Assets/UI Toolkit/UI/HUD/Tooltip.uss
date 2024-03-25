@@ -114,6 +114,7 @@ Tooltip .data .item-description {
 	flex-wrap: wrap;
 	align-items: center;
 	white-space: normal;
+	background-color: rgba(255,0,0,.5);
 
 	font-size: 16px;
 }
@@ -127,8 +128,9 @@ Tooltip .data .item-cost {
 }
 
 Tooltip .data .item-description Image {
-	width: 18px;
-	height: 18px;
+	width: 28px;
+	height: 28px;
+	margin: 0;
 }
 
 Tooltip .data .item-cost Image {

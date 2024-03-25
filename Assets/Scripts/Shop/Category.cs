@@ -11,7 +11,7 @@ public enum DefenseType
 
 public enum DamageType
 {
-	Power,
+	Force,
 	Precision,
 	Technology,
 	Arcane,
@@ -23,7 +23,7 @@ public enum ShopType
 	Unspecified,
 	Income,
 	Defense,
-	Power,
+	Force,
 	Precision,
 	Technology,
 	Arcane,

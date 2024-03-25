@@ -5053,7 +5053,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8bb0c006f02c65f459c19d4a7e93729d, type: 2}
+  - {fileID: 2100000, guid: a704df82cf826ea40a8ae0427f000d85, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5150,7 +5150,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -5173,7 +5173,7 @@ Camera:
     height: 1
   near clip plane: 1
   far clip plane: 2000
-  field of view: 10.000001
+  field of view: 10
   orthographic: 0
   orthographic size: 25
   m_Depth: -1

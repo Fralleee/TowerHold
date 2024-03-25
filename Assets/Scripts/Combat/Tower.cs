@@ -15,7 +15,7 @@ public class Tower : Target
 	public static Tower Instance;
 	public List<Turret> Turrets;
 	public Dictionary<DamageType, float> DamageMultipliers = new Dictionary<DamageType, float>() {
-		{ DamageType.Power, 1f },
+		{ DamageType.Force, 1f },
 		{ DamageType.Precision, 1f },
 		{ DamageType.Technology, 1f },
 		{ DamageType.Arcane, 1f },
@@ -35,7 +35,7 @@ public class Tower : Target
 	{
 		base.Start();
 
-		StartCoroutine(RegenerateHealth());
+		_ = StartCoroutine(RegenerateHealth());
 	}
 
 

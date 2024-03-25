@@ -17,7 +17,7 @@ public class ConclusionState : IState<GameState>
 		GameController.OnGameEnd();
 	}
 
-	public void OnLogic()
+	public void OnUpdate()
 	{
 		// Do something
 	}

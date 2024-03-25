@@ -24,7 +24,7 @@ public class StateMachine<T>
 			SetState(transition.To);
 		}
 
-		CurrentState?.OnLogic();
+		CurrentState?.OnUpdate();
 	}
 
 	public void SetState(IState<T> state)

@@ -7,8 +7,8 @@ public class UpgradeInformationUI : Controller
 	Box _attackTypesList;
 	UpgradeInformation _incomeUpgrade;
 	UpgradeInformation _defenseUpgrade;
-	UpgradeInformation _powerUpgrade;
-	UpgradeInformation _powerTurret;
+	UpgradeInformation _forceUpgrade;
+	UpgradeInformation _forceTurret;
 	UpgradeInformation _precisionUpgrade;
 	UpgradeInformation _precisionTurret;
 	UpgradeInformation _technologyUpgrade;
@@ -25,8 +25,8 @@ public class UpgradeInformationUI : Controller
 		_attackTypesList = uiDocument.rootVisualElement.Q<Box>("AttackTypesList");
 		_incomeUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("income-upgrade-label"));
 		_defenseUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("defense-upgrade-label"));
-		_powerUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("power-upgrade-label"));
-		_powerTurret = new UpgradeInformation(_attackTypesList.Q<Label>("power-turret-label"));
+		_forceUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("force-upgrade-label"));
+		_forceTurret = new UpgradeInformation(_attackTypesList.Q<Label>("force-turret-label"));
 		_precisionUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("precision-upgrade-label"));
 		_precisionTurret = new UpgradeInformation(_attackTypesList.Q<Label>("precision-turret-label"));
 		_technologyUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("technology-upgrade-label"));
@@ -58,7 +58,7 @@ public class UpgradeInformationUI : Controller
 		{
 			ShopType.Income => _incomeUpgrade,
 			ShopType.Defense => _defenseUpgrade,
-			ShopType.Power => item is Turret ? _powerTurret : _powerUpgrade,
+			ShopType.Force => item is Turret ? _forceTurret : _forceUpgrade,
 			ShopType.Precision => item is Turret ? _precisionTurret : _precisionUpgrade,
 			ShopType.Technology => item is Turret ? _technologyTurret : _technologyUpgrade,
 			ShopType.Arcane => item is Turret ? _arcaneTurret : _arcaneUpgrade,

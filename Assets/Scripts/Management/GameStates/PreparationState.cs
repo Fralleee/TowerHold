@@ -18,7 +18,7 @@ public class PreparationState : IState<GameState>, ILevelProgress
 		TimeLeft = GameController.GameSettings.FreezeTime;
 	}
 
-	public void OnLogic()
+	public void OnUpdate()
 	{
 		TimeLeft -= Time.fixedDeltaTime;
 		if (TimeLeft <= 0)
