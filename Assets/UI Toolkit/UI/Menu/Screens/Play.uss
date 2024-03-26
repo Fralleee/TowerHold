@@ -30,7 +30,7 @@ Label.title {
     -unity-font-style: bold;
     -unity-text-outline-width: 6px;
     -unity-text-outline-color: rgb(17, 17, 17);
-    -unity-font-definition: url("/Assets/Art/Fonts/Cute.ttf");
+    -unity-font-definition: url("/Assets/Art/Fonts/Inter.ttf");
 }
 
 VisualElement.button-container {

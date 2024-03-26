@@ -14,6 +14,7 @@ public class Tower : Target
 
 	public static Tower Instance;
 	public List<Turret> Turrets;
+	public float GlobalDamageMultiplier = 1f;
 	public Dictionary<DamageType, float> DamageMultipliers = new Dictionary<DamageType, float>() {
 		{ DamageType.Force, 1f },
 		{ DamageType.Precision, 1f },
@@ -71,12 +72,19 @@ public class Tower : Target
 
 	public void AddUppgrade(DamageUpgrade damageUpgrade)
 	{
-		DamageMultipliers[damageUpgrade.Category] += damageUpgrade.Amount;
+		if (damageUpgrade.Category == DamageType.All)
+		{
+			GlobalDamageMultiplier += damageUpgrade.Amount;
+		}
+		else
+		{
+			DamageMultipliers[damageUpgrade.Category] += damageUpgrade.Amount;
+		}
 	}
 
 	public float GetDamage(DamageType damageType, float damage)
 	{
-		return damage * DamageMultipliers[damageType];
+		return damage * DamageMultipliers[damageType] * GlobalDamageMultiplier;
 	}
 
 	public void UpgradeHealth(int amount)

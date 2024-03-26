@@ -6,6 +6,7 @@ public class UpgradeInformationUI : Controller
 {
 	Box _attackTypesList;
 	UpgradeInformation _incomeUpgrade;
+	UpgradeInformation _offenseUpgrade;
 	UpgradeInformation _defenseUpgrade;
 	UpgradeInformation _forceUpgrade;
 	UpgradeInformation _forceTurret;
@@ -24,6 +25,7 @@ public class UpgradeInformationUI : Controller
 		var uiDocument = GetComponent<UIDocument>();
 		_attackTypesList = uiDocument.rootVisualElement.Q<Box>("AttackTypesList");
 		_incomeUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("income-upgrade-label"));
+		_offenseUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("offense-upgrade-label"));
 		_defenseUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("defense-upgrade-label"));
 		_forceUpgrade = new UpgradeInformation(_attackTypesList.Q<Label>("force-upgrade-label"));
 		_forceTurret = new UpgradeInformation(_attackTypesList.Q<Label>("force-turret-label"));
@@ -57,6 +59,7 @@ public class UpgradeInformationUI : Controller
 		return item.ShopType switch
 		{
 			ShopType.Income => _incomeUpgrade,
+			ShopType.Offense => _offenseUpgrade,
 			ShopType.Defense => _defenseUpgrade,
 			ShopType.Force => item is Turret ? _forceTurret : _forceUpgrade,
 			ShopType.Precision => item is Turret ? _precisionTurret : _precisionUpgrade,

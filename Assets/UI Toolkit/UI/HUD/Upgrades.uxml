@@ -12,13 +12,23 @@
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>
+      <ui:VisualElement name="Offense" class="attack-type">
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/offense.png');" />
+         <ui:VisualElement class="attack-type-information">
+            <ui:Label class="attack-type-name" text="Offense" />
+            <ui:VisualElement class="upgrade-icon-and-text">
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
+               <ui:Label name="offense-upgrade-label" text="0" />
+            </ui:VisualElement>
+         </ui:VisualElement>
+      </ui:VisualElement>
       <ui:VisualElement name="Defense" class="attack-type">
          <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/defense.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Defense" />
             <ui:VisualElement class="upgrade-icon-and-text">
                <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
-               <ui:Label  name="defense-upgrade-label" text="0" />
+               <ui:Label name="defense-upgrade-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>
@@ -32,7 +42,7 @@
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
                <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/hatchet.png');" />
-               <ui:Label  name="force-turret-label" text="0" />
+               <ui:Label name="force-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>

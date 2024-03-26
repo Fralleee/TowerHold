@@ -58,6 +58,22 @@ public class StyleSettings : SerializedScriptableObject
 		return Color.white;
 	}
 
+	public Color GetShopTypeColorForImage(ShopType shopType)
+	{
+		if (shopType is ShopType.Income or ShopType.Defense or ShopType.Offense)
+		{
+			return Color.white;
+		}
+
+		if (_shopTypeColors.ContainsKey(shopType))
+		{
+			return _shopTypeColors[shopType].TintColor(0f);
+		}
+
+		Debug.LogError($"No color found for shop type {shopType}");
+		return Color.white;
+	}
+
 	public Texture2D GetIcon(GameIcons icon)
 	{
 		if (_icons.ContainsKey(icon))

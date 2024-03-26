@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   ShopType: 3
-  Texture: {fileID: 2800000, guid: bb26c700e9e2c26468fa5a54c67a65de, type: 3}
+  Texture: {fileID: 2800000, guid: e2ecfcc2751b7914cae16a2bba092904, type: 3}
   RarityType: 0
-  Description: Hurls a hatchet towards the nearest enemy, causing {AmountDamage}.
+  Description: Shoots towards nearest enemy causing {Amount}{Type} damage.
   Amount: 30
   Category: 0
   _baseDamage: 35
   _attackRange: 4
-  _timeBetweenAttacks: 1.45
+  _timeBetweenAttacks: 1
   _timeBetweenFindTarget: 1
   _projectilePrefab: {fileID: 9212724085591995478, guid: ae3cff54fd2ef1042a7ec4520c94d5ca,
     type: 3}
   _projectileSettings:
-    Speed: 30
+    Speed: 35
     UseParabolicArc: 1
     MaxArcHeight: 5
   _attackSound: {fileID: 0}

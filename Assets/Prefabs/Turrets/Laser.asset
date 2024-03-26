@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: 
   ShopType: 5
-  Texture: {fileID: 2800000, guid: 4a93223a196927d46a78424fe8863b00, type: 3}
-  RarityType: 2
-  Description: Shoots a laser! Doing {AmountDamage} to anyone near it.
+  Texture: {fileID: 2800000, guid: 50bfbe88b6ae6c24b9eaa1f60369e193, type: 3}
+  RarityType: 0
+  Description: Shoots towards nearest enemy causing {Amount}{Type} damage.
   Amount: 30
   Category: 2
   _baseDamage: 10
-  _attackRange: 2
+  _attackRange: 4
   _timeBetweenAttacks: 1
   _timeBetweenFindTarget: 1
-  _projectilePrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 9212724085591995478, guid: 04916794acafc3f4c8208f05dbd98087,
+    type: 3}
   _projectileSettings:
-    Speed: 60
+    Speed: 80
     UseParabolicArc: 0
     MaxArcHeight: 5
   _attackSound: {fileID: 0}

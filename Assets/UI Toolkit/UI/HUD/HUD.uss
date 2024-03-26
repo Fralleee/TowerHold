@@ -9,7 +9,7 @@ VisualElement#Root {
 
 	padding: 50px;
 
-    -unity-font-definition: url("/Assets/Art/Fonts/Cute.ttf");
+    -unity-font-definition: url("/Assets/Art/Fonts/Inter.ttf");
 }
 
 Button {

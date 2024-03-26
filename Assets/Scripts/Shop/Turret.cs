@@ -23,7 +23,7 @@ public class Turret : DamageShopItem
 
 	public void Reset()
 	{
-		Description = "Shoots towards nearest enemy causing {Amount}{Type} damage.";
+		Description = "Shoots towards nearest enemy causing {Amount} {Type} damage.";
 	}
 
 	public void Setup(Tower inputTower)

@@ -34,6 +34,7 @@ public class DamageShopItem : ShopItem
 			DamageType.Technology => ShopType.Technology,
 			DamageType.Chemical => ShopType.Chemical,
 			DamageType.Arcane => ShopType.Arcane,
+			DamageType.All => ShopType.Offense,
 			_ => throw new System.NotImplementedException()
 		};
 	}

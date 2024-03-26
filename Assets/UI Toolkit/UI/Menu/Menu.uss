@@ -3,6 +3,6 @@ VisualElement.screen {
     display: flex;
     width: 100%;
     height: 100%;
-    -unity-font-definition: url("/Assets/Art/Fonts/Cute.ttf");
+    -unity-font-definition: url("/Assets/Art/Fonts/Inter.ttf");
 	background-color: #222;
 }

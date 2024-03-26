@@ -62,7 +62,7 @@ public class TooltipContent : VisualElement
 	public virtual void UpdateInformation(ShopItem item, StyleSettings styleSettings)
 	{
 		Image.image = item.Texture;
-		Image.tintColor = styleSettings.GetRarityTintColor(item.RarityType);
+		Image.tintColor = styleSettings.GetShopTypeColorForImage(item.ShopType);
 
 		NameLabel.text = item.Name;
 		NameLabel.style.color = styleSettings.GetRarityColor(item.RarityType);
@@ -72,7 +72,7 @@ public class TooltipContent : VisualElement
 		CostContainer.AddImageLabel(styleSettings.GetIcon(GameIcons.Gold), item.Cost.ToString(), styleSettings.GetShopTypeColor(ShopType.Income));
 
 		var safeDescription = string.IsNullOrEmpty(item.Description) ? "No description." : item.Description;
-		DescriptionContainer.SetDescription(item.Description, item.Amount, item.ShopType, styleSettings);
+		DescriptionContainer.SetDescription(safeDescription, item.Amount, item.ShopType, styleSettings);
 	}
 
 	public virtual void Update(TooltipContent tooltipContent)

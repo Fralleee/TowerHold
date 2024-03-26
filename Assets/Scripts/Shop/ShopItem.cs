@@ -12,7 +12,7 @@ public class ShopItem : ScriptableObject
 	public Texture2D Texture;
 	public RarityType RarityType;
 	[TextArea(4, 10)] public string Description;
-	public string Name => name.Replace("Upgrade", "").Trim();
+	public string Name => name.Trim();
 
 	[HideIf("HideAmount")] public float Amount;
 	public bool HideAmount => this is Turret;
