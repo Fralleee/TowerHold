@@ -56,10 +56,8 @@ public class ShopItemButton : Button
 	public void Setup(ShopItem item, StyleSettings styleSettings)
 	{
 		var rarityColor = styleSettings.GetRarityColor(item.RarityType);
-		var shopTypeColorForImage = styleSettings.GetShopTypeColorForImage(item.ShopType);
 
 		Image.style.backgroundImage = item.Texture;
-		Image.style.unityBackgroundImageTintColor = shopTypeColorForImage;
 		Border.style.backgroundColor = rarityColor;
 
 		var shopTypeImage = styleSettings.GetShopTypeIcon(item.ShopType);

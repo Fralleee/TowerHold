@@ -1,4 +1,0 @@
-- Wand select
-- New layer
-- Color overlay
-- Opacity 50%

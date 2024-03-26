@@ -62,7 +62,6 @@ public class TooltipContent : VisualElement
 	public virtual void UpdateInformation(ShopItem item, StyleSettings styleSettings)
 	{
 		Image.image = item.Texture;
-		Image.tintColor = styleSettings.GetShopTypeColorForImage(item.ShopType);
 
 		NameLabel.text = item.Name;
 		NameLabel.style.color = styleSettings.GetRarityColor(item.RarityType);

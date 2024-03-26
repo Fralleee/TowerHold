@@ -98,7 +98,7 @@
 	height: 24px;
 	width: 24px;
 
-	background-image: url("/Assets/Art/Textures/Icons/defense.png");
+	background-image: url("/Assets/Art/Textures/Icons/Types/defense.png");
 }
 
 .screen {

@@ -3,7 +3,7 @@
    <Style src="Upgrades.uss" />
    <ui:Box name="AttackTypesList">
       <ui:VisualElement name="Income" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/resource.png');" />
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/Types/resource.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Income" />
             <ui:VisualElement class="upgrade-icon-and-text">
@@ -13,7 +13,7 @@
          </ui:VisualElement>
       </ui:VisualElement>
       <ui:VisualElement name="Offense" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/offense.png');" />
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/Types/offense.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Offense" />
             <ui:VisualElement class="upgrade-icon-and-text">
@@ -23,7 +23,7 @@
          </ui:VisualElement>
       </ui:VisualElement>
       <ui:VisualElement name="Defense" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/defense.png');" />
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/Types/defense.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Defense" />
             <ui:VisualElement class="upgrade-icon-and-text">
@@ -33,7 +33,7 @@
          </ui:VisualElement>
       </ui:VisualElement>
       <ui:VisualElement name="Force" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/force.png');" />
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/Types/force.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Force" />
             <ui:VisualElement class="upgrade-icon-and-text">
@@ -41,13 +41,13 @@
                <ui:Label  name="force-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/hatchet.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
                <ui:Label name="force-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>
       <ui:VisualElement name="Precision" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/precision.png');" />
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/Types/precision.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Precision" />
             <ui:VisualElement class="upgrade-icon-and-text">
@@ -55,13 +55,13 @@
                <ui:Label name="precision-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/hatchet.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
                <ui:Label name="precision-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>
       <ui:VisualElement name="Technology" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/technology.png');" />
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/Types/technology.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Technology" />
             <ui:VisualElement class="upgrade-icon-and-text">
@@ -69,13 +69,13 @@
                <ui:Label name="technology-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/hatchet.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
                <ui:Label name="technology-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>
       <ui:VisualElement name="Arcane" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/arcane.png');" />
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/Types/arcane.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Arcane" />
             <ui:VisualElement class="upgrade-icon-and-text">
@@ -83,13 +83,13 @@
                <ui:Label name="arcane-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/hatchet.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
                <ui:Label name="arcane-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
       </ui:VisualElement>
       <ui:VisualElement name="Chemical" class="attack-type">
-         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/chemical.png');" />
+         <ui:Image class="attack-type-icon" style="--unity-image: url('/Assets/Art/Textures/Icons/Types/chemical.png');" />
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Chemical" />
             <ui:VisualElement class="upgrade-icon-and-text">
@@ -97,7 +97,7 @@
                <ui:Label name="chemical-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/hatchet.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
                <ui:Label name="chemical-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
