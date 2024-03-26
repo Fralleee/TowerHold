@@ -30,9 +30,6 @@ public class RichTextWithImages : VisualElement
 				case "Amount":
 					AddAmount(amount, shopType, styleSettings);
 					break;
-				// case "AmountDamage":
-				// 	AddAmount(amount, true, shopType, styleSettings);
-				// 	break;
 				default:
 					AddText(part);
 					break;
@@ -59,7 +56,7 @@ public class RichTextWithImages : VisualElement
 
 		if (!iconOnly)
 		{
-			AddText(shopType.ToString());
+			AddText($" {shopType}", color);
 		}
 	}
 
@@ -67,26 +64,8 @@ public class RichTextWithImages : VisualElement
 	{
 		var amountText = amount < PercentageThreshold ? $"{amount * 100:0.##}%" : amount.ToString("0.##");
 		var color = styleSettings.GetShopTypeColor(shopType);
-		AddText($"{amountText} ", color);
+		AddText(amountText, color);
 	}
-
-	// void AddAmount(float amount, bool asDamageText, ShopType shopType, StyleSettings styleSettings)
-	// {
-	// 	var amountText = amount < PercentageThreshold ? $"{amount * 100:0.##}%" : amount.ToString("0.##");
-	// 	var color = styleSettings.GetShopTypeColor(shopType);
-	// 	AddText($"{amountText} ", color);
-
-	// 	var icon = styleSettings.GetShopTypeIcon(shopType);
-	// 	if (icon != null)
-	// 	{
-	// 		AddImage(icon, color);
-	// 	}
-
-	// 	if (asDamageText)
-	// 	{
-	// 		AddText($"{shopType} damage", color);
-	// 	}
-	// }
 
 	void AddText(string text, Color? color = null)
 	{
