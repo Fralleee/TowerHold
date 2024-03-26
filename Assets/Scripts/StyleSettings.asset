@@ -19,10 +19,10 @@ MonoBehaviour:
     - {fileID: 2800000, guid: f2f177fa4d3c00045aa5e3ec311eba65, type: 3}
     - {fileID: 2800000, guid: 0bef7502200c07a4bbddf9e8628d8d56, type: 3}
     - {fileID: 2800000, guid: 3f7af477eb4c7e842af310bd70b1f340, type: 3}
-    - {fileID: 2800000, guid: 2d6a25b060522864fa7a082e6b116090, type: 3}
-    - {fileID: 2800000, guid: 5619dc2b3e177df4f8bcd1ebc181e054, type: 3}
+    - {fileID: 2800000, guid: 5a448d0709d8a0d4fb24ff52791361fe, type: 3}
+    - {fileID: 2800000, guid: 6da83ee733dd6794a88dcf4b761d67e3, type: 3}
     - {fileID: 2800000, guid: 56a2f6570c507af4b9f8b4d7a825370d, type: 3}
-    - {fileID: 2800000, guid: 8309f4a8f01283141aa4d3106f8a4d6a, type: 3}
+    - {fileID: 2800000, guid: 1e208ea895ec5314890e1e3285d78945, type: 3}
     - {fileID: 2800000, guid: 89f17a204f0c84c46a16a97540e7d78b, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -505,123 +505,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: _simpleShopTypeIcons
-      Entry: 7
-      Data: 5|System.Collections.Generic.Dictionary`2[[ShopType, Assembly-CSharp],[UnityEngine.Texture2D,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 6|System.Collections.Generic.EnumEqualityComparer`1[[ShopType, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 7
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 2
-    - Name: $v
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 6
-    - Name: $v
-      Entry: 10
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 4
-    - Name: $v
-      Entry: 10
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 5
-    - Name: $v
-      Entry: 10
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 7
-    - Name: $v
-      Entry: 10
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: _icons
       Entry: 7
-      Data: 7|System.Collections.Generic.Dictionary`2[[GameIcons, Assembly-CSharp],[UnityEngine.Texture2D,
+      Data: 5|System.Collections.Generic.Dictionary`2[[GameIcons, Assembly-CSharp],[UnityEngine.Texture2D,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 8|System.Collections.Generic.EnumEqualityComparer`1[[GameIcons, Assembly-CSharp]],
+      Data: 6|System.Collections.Generic.EnumEqualityComparer`1[[GameIcons, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12

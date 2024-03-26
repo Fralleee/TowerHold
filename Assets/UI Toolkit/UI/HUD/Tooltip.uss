@@ -114,7 +114,6 @@ Tooltip .data .item-description {
 	flex-wrap: wrap;
 	align-items: center;
 	white-space: normal;
-	background-color: rgba(255,0,0,.5);
 
 	font-size: 16px;
 }

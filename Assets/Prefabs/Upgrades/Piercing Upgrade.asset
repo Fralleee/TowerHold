@@ -15,5 +15,6 @@ MonoBehaviour:
   ShopType: 4
   Texture: {fileID: 2800000, guid: 618c3decda70bbb41bec57f7984ac22f, type: 3}
   RarityType: 0
-  Description: Description text
+  Description: 
+  Amount: 1.1
   Category: 1

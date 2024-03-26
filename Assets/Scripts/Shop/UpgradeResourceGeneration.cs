@@ -3,14 +3,17 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "VAKT/Shop/Income/Resource Generation")]
 public class UpgradeResourceGeneration : ResourceShopItem
 {
-	[Header("Upgrade Settings")]
-	public int ResourceGenerationIncrease = 10;
+	public void Reset()
+	{
+		Amount = 10f;
+		Description = "Increases income by {Amount}{TypeIcon}.";
+	}
 
 	public override void OnPurchase()
 	{
 		base.OnPurchase();
 
-		ResourceManager.Instance.AddIncome(ResourceGenerationIncrease);
+		ResourceManager.Instance.AddIncome((int)Amount);
 		ScoreManager.Instance.Upgrades += 1;
 	}
 }

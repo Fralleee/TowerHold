@@ -21,6 +21,11 @@ public class Turret : DamageShopItem
 	Enemy _target;
 	AudioSource _audioSource;
 
+	public void Reset()
+	{
+		Description = "Shoots towards nearest enemy causing {Amount}{Type} damage.";
+	}
+
 	public void Setup(Tower inputTower)
 	{
 		_tower = inputTower;

@@ -69,9 +69,9 @@ public class Tower : Target
 		Turrets.Add(instance);
 	}
 
-	public void AddUppgrade(DamageType damageType)
+	public void AddUppgrade(DamageUpgrade damageUpgrade)
 	{
-		DamageMultipliers[damageType] += 0.1f;
+		DamageMultipliers[damageUpgrade.Category] += damageUpgrade.Amount;
 	}
 
 	public float GetDamage(DamageType damageType, float damage)

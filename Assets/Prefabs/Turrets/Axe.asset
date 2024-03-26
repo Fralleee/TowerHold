@@ -15,7 +15,8 @@ MonoBehaviour:
   ShopType: 3
   Texture: {fileID: 2800000, guid: bb26c700e9e2c26468fa5a54c67a65de, type: 3}
   RarityType: 0
-  Description: Hurls a hatchet towards the nearest enemy, causing {Damage}.
+  Description: Hurls a hatchet towards the nearest enemy, causing {AmountDamage}.
+  Amount: 30
   Category: 0
   _baseDamage: 35
   _attackRange: 4

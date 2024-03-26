@@ -15,7 +15,8 @@ MonoBehaviour:
   ShopType: 5
   Texture: {fileID: 2800000, guid: 4a93223a196927d46a78424fe8863b00, type: 3}
   RarityType: 2
-  Description: Shoots a laser! Doing {Damage} to anyone near it.
+  Description: Shoots a laser! Doing {AmountDamage} to anyone near it.
+  Amount: 30
   Category: 2
   _baseDamage: 10
   _attackRange: 2

@@ -170,7 +170,7 @@ public class ShopUI : Controller
 			button.SetEnabled(false);
 			_purchaseFeedback.TriggerFeedback(Tower.Instance.transform, this);
 
-			if (item is Upgrade)
+			if (item is DamageUpgrade)
 			{
 				UpdateShopItemTooltips();
 			}

@@ -15,6 +15,8 @@ MonoBehaviour:
   ShopType: 4
   Texture: {fileID: 2800000, guid: dc88e97fa1569734b9972842890e1669, type: 3}
   RarityType: 4
+  Description: 
+  Amount: 0
   Category: 1
   _baseDamage: 10
   _attackRange: 2

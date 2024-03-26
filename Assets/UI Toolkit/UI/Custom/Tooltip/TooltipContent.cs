@@ -71,8 +71,8 @@ public class TooltipContent : VisualElement
 
 		CostContainer.AddImageLabel(styleSettings.GetIcon(GameIcons.Gold), item.Cost.ToString(), styleSettings.GetShopTypeColor(ShopType.Income));
 
-		var safeDescription = string.IsNullOrEmpty(item.Description) ? "No description available." : item.Description;
-		DescriptionContainer.SetDescription(safeDescription);
+		var safeDescription = string.IsNullOrEmpty(item.Description) ? "No description." : item.Description;
+		DescriptionContainer.SetDescription(item.Description, item.Amount, item.ShopType, styleSettings);
 	}
 
 	public virtual void Update(TooltipContent tooltipContent)

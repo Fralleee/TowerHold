@@ -4,7 +4,9 @@ using UnityEngine.UIElements;
 
 public class RichTextWithImages : VisualElement
 {
-	public void SetTurretDescription(string description, float damage, ShopType shopType, StyleSettings styleSettings)
+	const float PercentageThreshold = 5f;
+
+	public void SetDescription(string description, float amount, ShopType shopType, StyleSettings styleSettings)
 	{
 		Clear();
 
@@ -19,20 +21,23 @@ public class RichTextWithImages : VisualElement
 		{
 			switch (part)
 			{
-				case "Damage":
-					AddDamageDescription(damage, shopType, styleSettings);
+				case "Type":
+					AddType(shopType, styleSettings);
 					break;
+				case "TypeIcon":
+					AddType(shopType, styleSettings, true);
+					break;
+				case "Amount":
+					AddAmount(amount, shopType, styleSettings);
+					break;
+				// case "AmountDamage":
+				// 	AddAmount(amount, true, shopType, styleSettings);
+				// 	break;
 				default:
 					AddText(part);
 					break;
 			}
 		}
-	}
-
-	public void SetDescription(string description)
-	{
-		Clear();
-		AddText(description);
 	}
 
 	public void AddImageLabel(Texture2D texture, string text, Color? tint = null)
@@ -43,19 +48,45 @@ public class RichTextWithImages : VisualElement
 		Add(new Label(text));
 	}
 
-	void AddDamageDescription(float damage, ShopType shopType, StyleSettings styleSettings)
+	void AddType(ShopType shopType, StyleSettings styleSettings, bool iconOnly = false)
 	{
 		var color = styleSettings.GetShopTypeColor(shopType);
-		AddText($"{damage} ", color);
-
 		var icon = styleSettings.GetShopTypeIcon(shopType);
 		if (icon != null)
 		{
 			AddImage(icon, color);
 		}
 
-		AddText($" {shopType} damage", color);
+		if (!iconOnly)
+		{
+			AddText(shopType.ToString());
+		}
 	}
+
+	void AddAmount(float amount, ShopType shopType, StyleSettings styleSettings)
+	{
+		var amountText = amount < PercentageThreshold ? $"{amount * 100:0.##}%" : amount.ToString("0.##");
+		var color = styleSettings.GetShopTypeColor(shopType);
+		AddText($"{amountText} ", color);
+	}
+
+	// void AddAmount(float amount, bool asDamageText, ShopType shopType, StyleSettings styleSettings)
+	// {
+	// 	var amountText = amount < PercentageThreshold ? $"{amount * 100:0.##}%" : amount.ToString("0.##");
+	// 	var color = styleSettings.GetShopTypeColor(shopType);
+	// 	AddText($"{amountText} ", color);
+
+	// 	var icon = styleSettings.GetShopTypeIcon(shopType);
+	// 	if (icon != null)
+	// 	{
+	// 		AddImage(icon, color);
+	// 	}
+
+	// 	if (asDamageText)
+	// 	{
+	// 		AddText($"{shopType} damage", color);
+	// 	}
+	// }
 
 	void AddText(string text, Color? color = null)
 	{

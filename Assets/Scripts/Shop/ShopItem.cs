@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ShopItem : ScriptableObject
@@ -10,8 +11,11 @@ public class ShopItem : ScriptableObject
 	[Header("Shop Settings")]
 	public Texture2D Texture;
 	public RarityType RarityType;
-	public string Description = "Description text";
+	[TextArea(4, 10)] public string Description;
 	public string Name => name.Replace("Upgrade", "").Trim();
+
+	[HideIf("HideAmount")] public float Amount;
+	public bool HideAmount => this is Turret;
 	public int Cost => RarityType switch
 	{
 		RarityType.Common => 500,

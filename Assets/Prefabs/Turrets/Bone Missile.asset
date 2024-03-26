@@ -16,6 +16,7 @@ MonoBehaviour:
   Texture: {fileID: 2800000, guid: 8a6251082ddb79b4aa2f5e46bc20bbdf, type: 3}
   RarityType: 1
   Description: 
+  Amount: 30
   Category: 4
   _baseDamage: 10
   _attackRange: 2
