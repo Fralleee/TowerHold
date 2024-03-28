@@ -41,6 +41,7 @@
 .attack-type-information {
 	flex-direction: row;
 	padding-left: 4px;
+	-unity-font-style: bold;
 }
 
 .attack-type-name {
@@ -71,7 +72,6 @@
 	width: 32px;
 	margin: 0;
 	margin-left: 10px;
-	-unity-font-style: bold;
     -unity-text-align: middle-left;
 	color: white;
 }

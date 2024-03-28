@@ -27,7 +27,7 @@
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Defense" />
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/upgrade.png');" />
                <ui:Label name="defense-upgrade-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
@@ -37,11 +37,11 @@
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Force" />
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/upgrade.png');" />
                <ui:Label  name="force-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/turret.png');" />
                <ui:Label name="force-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
@@ -51,11 +51,11 @@
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Precision" />
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/upgrade.png');" />
                <ui:Label name="precision-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/turret.png');" />
                <ui:Label name="precision-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
@@ -65,11 +65,11 @@
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Technology" />
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/upgrade.png');" />
                <ui:Label name="technology-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/turret.png');" />
                <ui:Label name="technology-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
@@ -79,11 +79,11 @@
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Arcane" />
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/upgrade.png');" />
                <ui:Label name="arcane-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/turret.png');" />
                <ui:Label name="arcane-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>
@@ -93,11 +93,11 @@
          <ui:VisualElement class="attack-type-information">
             <ui:Label class="attack-type-name" text="Chemical" />
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/plus.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/upgrade.png');" />
                <ui:Label name="chemical-upgrade-label" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="upgrade-icon-and-text">
-               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Weapons/axe.png');" />
+               <ui:Image style="--unity-image: url('/Assets/Art/Textures/Icons/Types/turret.png');" />
                <ui:Label name="chemical-turret-label" text="0" />
             </ui:VisualElement>
          </ui:VisualElement>

@@ -225,10 +225,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 4
-      Data: 0.9603808
+      Data: 0.8431373
     - Name: 
       Entry: 4
-      Data: 0.458823562
+      Data: 0
     - Name: 
       Entry: 4
       Data: 1
@@ -252,10 +252,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 4
-      Data: 0.5185678
+      Data: 0.3317605
     - Name: 
       Entry: 4
-      Data: 0.485849082
+      Data: 0.239215672
     - Name: 
       Entry: 4
       Data: 1
@@ -276,10 +276,10 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.345098019
+      Data: 0.8319266
     - Name: 
       Entry: 4
-      Data: 0.986904442
+      Data: 0.5518868
     - Name: 
       Entry: 4
       Data: 1
@@ -303,13 +303,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.3254717
+      Data: 0.8980393
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.8980393
     - Name: 
       Entry: 4
-      Data: 0.5560796
+      Data: 0.8980393
     - Name: 
       Entry: 4
       Data: 1
@@ -330,13 +330,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
+      Data: 0.1745283
+    - Name: 
+      Entry: 4
+      Data: 0.8435526
+    - Name: 
+      Entry: 4
       Data: 1
-    - Name: 
-      Entry: 4
-      Data: 0.5990566
-    - Name: 
-      Entry: 4
-      Data: 0.831603765
     - Name: 
       Entry: 4
       Data: 1
@@ -360,10 +360,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 4
-      Data: 0.776470661
+      Data: 0.6598231
     - Name: 
       Entry: 4
-      Data: 0.533333361
+      Data: 0.07843137
     - Name: 
       Entry: 4
       Data: 1
@@ -384,13 +384,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.694117665
-    - Name: 
-      Entry: 4
-      Data: 0.68235296
-    - Name: 
-      Entry: 4
       Data: 1
+    - Name: 
+      Entry: 4
+      Data: 0.193396211
+    - Name: 
+      Entry: 4
+      Data: 0.681184232
     - Name: 
       Entry: 4
       Data: 1
@@ -411,13 +411,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.6813355
+      Data: 0.7430279
     - Name: 
       Entry: 4
       Data: 1
     - Name: 
       Entry: 4
-      Data: 0.240566015
+      Data: 0.25
     - Name: 
       Entry: 4
       Data: 1
@@ -438,8 +438,18 @@ MonoBehaviour:
       Data: 4|System.Collections.Generic.Dictionary`2[[ShopType, Assembly-CSharp],[UnityEngine.Texture2D,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
-      Entry: 9
-      Data: 3
+      Entry: 7
+      Data: 5|System.Collections.Generic.EnumEqualityComparer`1[[ShopType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 12
       Data: 8
@@ -547,11 +557,11 @@ MonoBehaviour:
       Data: 
     - Name: _icons
       Entry: 7
-      Data: 5|System.Collections.Generic.Dictionary`2[[GameIcons, Assembly-CSharp],[UnityEngine.Texture2D,
+      Data: 6|System.Collections.Generic.Dictionary`2[[GameIcons, Assembly-CSharp],[UnityEngine.Texture2D,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 6|System.Collections.Generic.EnumEqualityComparer`1[[GameIcons, Assembly-CSharp]],
+      Data: 7|System.Collections.Generic.EnumEqualityComparer`1[[GameIcons, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12

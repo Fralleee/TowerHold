@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a7aea870d312443b5cab9b222199d3, type: 3}
   m_Name: Global Upgrade
   m_EditorClassIdentifier: 
-  ShopType: 8
-  Texture: {fileID: 2800000, guid: ecfe67dd4ed9aa641be5f241c758a3f5, type: 3}
+  ShopType: 2
+  Texture: {fileID: 2800000, guid: 4f0819d4f0108da41ada49ee9a32135d, type: 3}
   RarityType: 0
   Description: Increases all damage by {Amount}.
   Amount: 0.05
