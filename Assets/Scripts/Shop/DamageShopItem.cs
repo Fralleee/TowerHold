@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class DamageShopItem : ShopItem
 {
@@ -23,18 +24,20 @@ public class DamageShopItem : ShopItem
 			"- Essential for controlling battle flow and making strategic plays.";
 
 	[DetailedInfoBox("Category Information", GetCategoryInfo, InfoMessageType.Info)]
-	public DamageType Category;
+	[SerializeField] DamgeShopType _category = DamgeShopType.Offense;
+	[HideIf("HideDamageType")] public DamageType DamageType;
+	public bool HideDamageType => this is DamageUpgrade && ShopType != ShopType.Offense;
 
 	void OnValidate()
 	{
-		ShopType = Category switch
+		ShopType = _category switch
 		{
-			DamageType.Force => ShopType.Force,
-			DamageType.Precision => ShopType.Precision,
-			DamageType.Technology => ShopType.Technology,
-			DamageType.Chemical => ShopType.Chemical,
-			DamageType.Arcane => ShopType.Arcane,
-			DamageType.All => ShopType.Offense,
+			DamgeShopType.Offense => ShopType.Offense,
+			DamgeShopType.Force => ShopType.Force,
+			DamgeShopType.Precision => ShopType.Precision,
+			DamgeShopType.Technology => ShopType.Technology,
+			DamgeShopType.Chemical => ShopType.Chemical,
+			DamgeShopType.Arcane => ShopType.Arcane,
 			_ => throw new System.NotImplementedException()
 		};
 	}

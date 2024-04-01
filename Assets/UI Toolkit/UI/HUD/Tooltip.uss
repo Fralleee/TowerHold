@@ -86,6 +86,7 @@ Tooltip .data {
 
 Tooltip .data .item-information {
 	flex-direction: row;
+	min-height: 76px;
 }
 
 Tooltip .data .item-texts {
@@ -118,29 +119,39 @@ Tooltip .data .item-description {
 	font-size: 16px;
 }
 
+Tooltip .data .item-crit {
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	white-space: normal;
+
+	font-size: 16px;
+}
+
+
 Tooltip .data .item-cost {
 	flex-direction: row;
 	align-items: center;
 
+	font-size: 16px;
 	-unity-font-style: bold;
-	color: goldenrod;
 }
 
-Tooltip .data .item-description Image {
+Tooltip .data .item-description Image, Tooltip .data .item-crit Image {
 	width: 28px;
 	height: 28px;
 	margin: 0;
 }
 
-Tooltip .data .item-cost Image {
-	width: 20px;
-	height: 20px;
+Tooltip .data .item-cost Image, Tooltip .data .item-shoptype Image {
+	width: 28px;
+	height: 28px;
 	margin-right: 6px;
 }
 
 Tooltip .data .item-attack-cooldown {
 	position: absolute;
-	top: 12px;
+	top: 0;
 	right: 12px;
 	font-size: 16px;
 	-unity-font-style: bold;
@@ -156,8 +167,17 @@ Tooltip .data .item-attack-cooldown Image {
 
 Tooltip .data .item-range {
 	position: absolute;
-	top: 36px;
+	top: 24px;
 	right: 12px;
 	font-size: 16px;
 	color: #bbb;
+}
+
+Tooltip .data .item-shoptype {
+	position: absolute;
+	top: 48px;
+	right: 12px;
+	flex-direction: row;
+	align-items: center;
+	font-size: 16px;
 }

@@ -15,12 +15,17 @@ public class Tower : Target
 	public static Tower Instance;
 	public List<Turret> Turrets;
 	public float GlobalDamageMultiplier = 1f;
-	public Dictionary<DamageType, float> DamageMultipliers = new Dictionary<DamageType, float>() {
-		{ DamageType.Force, 1f },
-		{ DamageType.Precision, 1f },
-		{ DamageType.Technology, 1f },
-		{ DamageType.Arcane, 1f },
-		{ DamageType.Chemical, 1f }
+	public Dictionary<ShopType, float> ShopTypeMultipliers = new Dictionary<ShopType, float>() {
+		{ ShopType.Force, 1f },
+		{ ShopType.Precision, 1f },
+		{ ShopType.Technology, 1f },
+		{ ShopType.Arcane, 1f },
+		{ ShopType.Chemical, 1f }
+	};
+	public Dictionary<DamageType, float> DamageTypeMultipliers = new Dictionary<DamageType, float>() {
+		{ DamageType.Physical, 1f },
+		{ DamageType.Magical, 1f },
+		{ DamageType.Global, 1f },
 	};
 
 	protected override void Awake()
@@ -72,19 +77,30 @@ public class Tower : Target
 
 	public void AddUppgrade(DamageUpgrade damageUpgrade)
 	{
-		if (damageUpgrade.Category == DamageType.All)
+		if (damageUpgrade.ShopType == ShopType.Offense)
 		{
-			GlobalDamageMultiplier += damageUpgrade.Amount;
+			if (damageUpgrade.DamageType == DamageType.Global)
+			{
+				GlobalDamageMultiplier += damageUpgrade.Amount;
+			}
+			else
+			{
+				DamageTypeMultipliers[damageUpgrade.DamageType] += damageUpgrade.Amount;
+			}
 		}
 		else
 		{
-			DamageMultipliers[damageUpgrade.Category] += damageUpgrade.Amount;
+			ShopTypeMultipliers[damageUpgrade.ShopType] += damageUpgrade.Amount;
 		}
 	}
 
-	public float GetDamage(DamageType damageType, float damage)
+	public float GetDamage(DamageType damageType, ShopType shopType, float damage, float criticalHitChance, float criticalHitMultiplier)
 	{
-		return damage * DamageMultipliers[damageType] * GlobalDamageMultiplier;
+		var isCriticalHit = UnityEngine.Random.value < criticalHitChance;
+		var multipliers = DamageTypeMultipliers[damageType] * ShopTypeMultipliers[shopType] * GlobalDamageMultiplier;
+		var calculatedDamage = damage * (isCriticalHit ? criticalHitMultiplier : 1f) * multipliers;
+
+		return calculatedDamage;
 	}
 
 	public void UpgradeHealth(int amount)

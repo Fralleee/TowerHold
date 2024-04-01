@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
   m_Name: Laser
   m_EditorClassIdentifier: 
-  ShopType: 5
+  ShopType: 6
   Texture: {fileID: 2800000, guid: 50bfbe88b6ae6c24b9eaa1f60369e193, type: 3}
   RarityType: 0
-  Description: Shoots towards nearest enemy causing {Amount}{Type} damage.
+  Description: Shoots towards nearest enemy causing {DamageAmount} {DamageType} damage.
   Amount: 30
-  Category: 2
+  _category: 3
+  DamageType: 1
   _baseDamage: 10
   _attackRange: 4
   _timeBetweenAttacks: 1

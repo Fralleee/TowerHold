@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
   m_Name: Slingshot
   m_EditorClassIdentifier: 
-  ShopType: 4
+  ShopType: 5
   Texture: {fileID: 2800000, guid: 2253d0668613b584ebe2a794ba76a2d4, type: 3}
   RarityType: 0
-  Description: Shoots towards nearest enemy causing {Amount}{Type} damage.
+  Description: Shoots towards nearest enemy causing {DamageAmount} {DamageType} damage.
   Amount: 30
-  Category: 1
+  _category: 2
+  DamageType: 0
   _baseDamage: 35
   _attackRange: 4
   _timeBetweenAttacks: 1
   _timeBetweenFindTarget: 1
+  _criticalHitChance: 0.2
+  _criticalHitMultiplier: 3
   _projectilePrefab: {fileID: 9212724085591995478, guid: 02e570c8d0e868841911ce82789924eb,
     type: 3}
   _projectileSettings:
@@ -30,3 +33,4 @@ MonoBehaviour:
     MaxArcHeight: 5
   _attackSound: {fileID: 0}
   _audioSettings: {fileID: 0}
+  _impactParticle: {fileID: 0}

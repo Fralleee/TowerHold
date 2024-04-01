@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a7aea870d312443b5cab9b222199d3, type: 3}
   m_Name: Arcane Upgrade
   m_EditorClassIdentifier: 
-  ShopType: 6
+  ShopType: 7
   Texture: {fileID: 2800000, guid: 394040bdf6b5e2d498651de20eaf4883, type: 3}
   RarityType: 0
   Description: Increases {Type} damage by {Amount}.
   Amount: 0.1
-  Category: 3
+  _category: 4
+  DamageType: 0

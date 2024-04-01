@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a7aea870d312443b5cab9b222199d3, type: 3}
   m_Name: Force Upgrade
   m_EditorClassIdentifier: 
-  ShopType: 3
+  ShopType: 4
   Texture: {fileID: 2800000, guid: 8a10cec7c9bd8dd4392228903393c241, type: 3}
   RarityType: 0
   Description: Increases {Type} damage by {Amount}.
   Amount: 0.1
-  Category: 0
+  _category: 1
+  DamageType: 0

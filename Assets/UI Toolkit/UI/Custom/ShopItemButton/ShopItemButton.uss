@@ -134,7 +134,7 @@ ShopItemButton .category {
 	width: 40px;
 	height: 40px;
 	background-color: #2a2a2a;
-	background-image: url("/Assets/Art/Textures/Icons/force.png");
+	background-image: url("/Assets/Art/Textures/Icons/Types/defense.png");
 	background-size: 32px;
 
 	border-radius: 50%;

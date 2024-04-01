@@ -9,11 +9,14 @@ public class Turret : DamageShopItem
 	[SerializeField] AttackRange _attackRange = AttackRange.Short;
 	[SerializeField] float _timeBetweenAttacks = 1f;
 	[SerializeField] float _timeBetweenFindTarget = 1f;
+	[SerializeField] float _criticalHitChance = 0f;
+	[SerializeField] float _criticalHitMultiplier = 2f;
 
 	[SerializeField] Projectile _projectilePrefab;
 	[ShowIf("_projectilePrefab")][SerializeField][InlineProperty(LabelWidth = 140)] ProjectileSettings _projectileSettings;
 	[HideIf("_projectilePrefab")][SerializeField] AudioClip _attackSound;
 	[HideIf("_projectilePrefab")][SerializeField] AudioSettings _audioSettings;
+	[HideIf("_projectilePrefab")][SerializeField] GameObject _impactParticle;
 
 	float _lastAttackTime = 0f;
 	float _lastTargetSearch = 0f;
@@ -23,7 +26,7 @@ public class Turret : DamageShopItem
 
 	public void Reset()
 	{
-		Description = "Shoots towards nearest enemy causing {Amount} {Type} damage.";
+		Description = "Shoots towards nearest enemy causing {DamageAmount} {DamageType} damage.";
 	}
 
 	public void Setup(Tower inputTower)
@@ -58,9 +61,9 @@ public class Turret : DamageShopItem
 		ScoreManager.Instance.Turrets += 1;
 	}
 
-	public (float baseDamage, AttackRange attackRange, float timeBetweenAttacks, string description) GetHoverData()
+	public (float baseDamage, AttackRange attackRange, float timeBetweenAttacks, float criticalHitChance, float criticalHitMultiplier, string description) GetHoverData()
 	{
-		return (_baseDamage, _attackRange, _timeBetweenAttacks, Description);
+		return (_baseDamage, _attackRange, _timeBetweenAttacks, _criticalHitChance, _criticalHitMultiplier, Description);
 	}
 
 	void Shoot()
@@ -72,15 +75,22 @@ public class Turret : DamageShopItem
 		}
 		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
 		var projectile = Instantiate(_projectilePrefab, _tower.Center.position, rotation);
-		projectile.Setup(_target, _tower.GetDamage(Category, _baseDamage), true, _projectileSettings);
+		projectile.Setup(_target, _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier), true, _projectileSettings);
 	}
 
 	void InstantAttack()
 	{
 		if (_target != null)
 		{
-			var damage = _tower.GetDamage(Category, _baseDamage);
-			_target.TakeDamage(Mathf.RoundToInt(damage));
+			var damage = _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier);
+			_ = _target.TakeDamage(Mathf.RoundToInt(damage));
+
+			if (_impactParticle)
+			{
+				var direction = (_target.Center.position - _tower.Center.position).normalized;
+				_impactParticle = Instantiate(_impactParticle, _target.Center.position, Quaternion.FromToRotation(Vector3.up, -direction));
+				Destroy(_impactParticle, 5.0f);
+			}
 		}
 
 		if (_attackSound != null && _audioSource != null)

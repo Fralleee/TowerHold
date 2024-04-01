@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  ShopType: 3
+  ShopType: 4
   Texture: {fileID: 2800000, guid: e2ecfcc2751b7914cae16a2bba092904, type: 3}
   RarityType: 0
-  Description: Shoots towards nearest enemy causing {Amount}{Type} damage.
+  Description: Shoots towards nearest enemy causing {DamageAmount} {DamageType} damage.
   Amount: 30
-  Category: 0
+  _category: 1
+  DamageType: 0
   _baseDamage: 35
   _attackRange: 4
   _timeBetweenAttacks: 1

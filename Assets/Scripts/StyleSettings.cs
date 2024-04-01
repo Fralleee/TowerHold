@@ -40,7 +40,37 @@ public class StyleSettings : SerializedScriptableObject
 	Dictionary<GameIcons, Texture2D> _icons = new Dictionary<GameIcons, Texture2D> {
 		{ GameIcons.Cooldown, null },
 		{ GameIcons.Gold, null },
+		{ GameIcons.Physical, null },
+		{ GameIcons.Magical, null },
+		{ GameIcons.Global, null },
 	};
+
+	[SerializeField]
+	Dictionary<GameIcons, Color> _colors = new Dictionary<GameIcons, Color> {
+		{ GameIcons.Cooldown, Color.white },
+		{ GameIcons.Gold, Color.white },
+		{ GameIcons.Physical, Color.white },
+		{ GameIcons.Magical, Color.white },
+		{ GameIcons.Global, Color.white },
+	};
+
+	public Texture2D GetDamageTypeIcon(DamageType damageType)
+	{
+		var gameIcon = damageType.AsIcon();
+		return _icons[gameIcon];
+	}
+
+	public Color GetDamageTypeColor(DamageType damageType)
+	{
+		var gameIcon = damageType.AsIcon();
+		if (_colors.ContainsKey(gameIcon))
+		{
+			return _colors[gameIcon];
+		}
+
+		Debug.LogError($"No color found for damage type {damageType}");
+		return Color.white;
+	}
 
 	public Texture2D GetShopTypeIcon(ShopType shopType)
 	{

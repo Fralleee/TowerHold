@@ -10,12 +10,12 @@ public class UIManager : SerializedSingleton<UIManager>
 		{ DefenseType.Defense, null },
 		{ DefenseType.Health, null }
 	};
-	public Dictionary<DamageType, Sprite> DamageTypeSprites = new Dictionary<DamageType, Sprite>() {
-		{ DamageType.Arcane, null },
-		{ DamageType.Force, null },
-		{ DamageType.Precision, null },
-		{ DamageType.Technology, null },
-		{ DamageType.Chemical, null }
+	public Dictionary<ShopType, Sprite> DamageTypeSprites = new Dictionary<ShopType, Sprite>() {
+		{ ShopType.Arcane, null },
+		{ ShopType.Force, null },
+		{ ShopType.Precision, null },
+		{ ShopType.Technology, null },
+		{ ShopType.Chemical, null }
 	};
 
 	public Dictionary<ResourceType, Color> ResourceTypeColors = new Dictionary<ResourceType, Color>() {
@@ -25,12 +25,12 @@ public class UIManager : SerializedSingleton<UIManager>
 		{ DefenseType.Defense, Color.gray },
 		{ DefenseType.Health, Color.red }
 	};
-	public Dictionary<DamageType, Color> DamageTypeColors = new Dictionary<DamageType, Color>() {
-		{ DamageType.Arcane, Color.blue },
-		{ DamageType.Force, Color.white },
-		{ DamageType.Precision, Color.black },
-		{ DamageType.Technology, Color.cyan },
-		{ DamageType.Chemical, Color.magenta }
+	public Dictionary<ShopType, Color> DamageTypeColors = new Dictionary<ShopType, Color>() {
+		{ ShopType.Arcane, Color.blue },
+		{ ShopType.Force, Color.white },
+		{ ShopType.Precision, Color.black },
+		{ ShopType.Technology, Color.cyan },
+		{ ShopType.Chemical, Color.magenta }
 	};
 
 	public Color GetShopItemColor(ShopItem item)
@@ -47,7 +47,7 @@ public class UIManager : SerializedSingleton<UIManager>
 		}
 		else if (item is DamageShopItem damageItem)
 		{
-			shopColor = DamageTypeColors[damageItem.Category];
+			shopColor = DamageTypeColors[damageItem.ShopType];
 		}
 		else
 		{

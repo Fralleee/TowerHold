@@ -6,7 +6,7 @@ public class RichTextWithImages : VisualElement
 {
 	const float PercentageThreshold = 5f;
 
-	public void SetDescription(string description, float amount, ShopType shopType, StyleSettings styleSettings)
+	public void SetDescription(string description, float amount, DamageType? damageType, ShopType shopType, StyleSettings styleSettings)
 	{
 		Clear();
 
@@ -21,6 +21,27 @@ public class RichTextWithImages : VisualElement
 		{
 			switch (part)
 			{
+				case "DamageType":
+					if (damageType.HasValue)
+					{
+						AddDamageType(damageType.Value, styleSettings);
+					}
+					else
+					{
+						throw new ArgumentException("DamageType is null");
+					}
+
+					break;
+				case "DamageAmount":
+					if (damageType.HasValue)
+					{
+						AddDamageAmount(amount, damageType.Value, styleSettings);
+					}
+					else
+					{
+						throw new ArgumentException("DamageType is null");
+					}
+					break;
 				case "Type":
 					AddType(shopType, styleSettings);
 					break;
@@ -37,12 +58,50 @@ public class RichTextWithImages : VisualElement
 		}
 	}
 
+	public void SetCriticalHitDescription(float damage, float criticalHitChance, float criticalHitMultiplier, DamageType damageType, StyleSettings styleSettings)
+	{
+		Clear();
+
+		var critChanceString = (criticalHitChance * 100).ToString() + "%";
+		var critDamage = criticalHitMultiplier * damage;
+		Add(new VisualElement { style = { width = Length.Percent(100) } });
+		AddText("This ability has a ");
+		AddText(critChanceString, styleSettings.GetDamageTypeColor(damageType));
+		AddText(" chance of a critical hit which causes ");
+		AddDamageAmount(critDamage, damageType, styleSettings);
+		AddText(" ");
+		AddDamageType(damageType, styleSettings);
+		AddText(" damage");
+	}
+
 	public void AddImageLabel(Texture2D texture, string text, Color? tint = null)
 	{
 		Clear();
 		var image = new Image { image = texture, tintColor = tint ?? Color.white };
 		Add(image);
-		Add(new Label(text));
+		AddText(text, tint);
+	}
+
+	void AddDamageType(DamageType damageType, StyleSettings styleSettings, bool iconOnly = false)
+	{
+		var color = styleSettings.GetDamageTypeColor(damageType);
+		var icon = styleSettings.GetDamageTypeIcon(damageType);
+		if (icon != null)
+		{
+			AddImage(icon, color);
+		}
+
+		if (!iconOnly)
+		{
+			AddText($" {damageType}", color);
+		}
+	}
+
+	void AddDamageAmount(float amount, DamageType damageType, StyleSettings styleSettings)
+	{
+		var amountText = amount < PercentageThreshold ? $"{amount * 100:0.##}%" : amount.ToString("0.##");
+		var color = styleSettings.GetDamageTypeColor(damageType);
+		AddText(amountText, color);
 	}
 
 	void AddType(ShopType shopType, StyleSettings styleSettings, bool iconOnly = false)

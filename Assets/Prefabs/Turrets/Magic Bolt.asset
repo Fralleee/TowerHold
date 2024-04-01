@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
   m_Name: Magic Bolt
   m_EditorClassIdentifier: 
-  ShopType: 6
+  ShopType: 7
   Texture: {fileID: 2800000, guid: ee64f51f3936d7844b76c991b23c55a4, type: 3}
   RarityType: 0
-  Description: Shoots towards nearest enemy causing {Amount}{Type} damage.
+  Description: Shoots towards nearest enemy causing {DamageAmount} {DamageType} damage.
   Amount: 0
-  Category: 3
+  _category: 4
+  DamageType: 1
   _baseDamage: 25
   _attackRange: 4
   _timeBetweenAttacks: 1

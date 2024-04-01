@@ -17,4 +17,5 @@ MonoBehaviour:
   RarityType: 0
   Description: Increases all damage by {Amount}.
   Amount: 0.05
-  Category: 5
+  _category: 0
+  DamageType: 2
