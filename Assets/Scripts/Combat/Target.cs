@@ -22,6 +22,8 @@ public class Target : MonoBehaviour
 
 	protected AudioSource AudioSource;
 
+    protected Dictionary<string, IDebuff> ActiveDebuffs = new Dictionary<string, IDebuff>();
+
 	protected virtual void Awake()
 	{
 		if (Center == null)
@@ -37,6 +39,15 @@ public class Target : MonoBehaviour
 	protected virtual void Start()
 	{
 		HealthBar = Instantiate(HealthBar, transform.position + (Vector3.up * _healthBarOffset), Quaternion.identity, transform);
+	}
+
+	protected virtual void Update()
+	{
+		// Use ToList() if you might modify the collection during iteration
+		foreach (var debuff in activeDebuffs.Values.ToList())
+		{
+			debuff.Tick(this);
+		}
 	}
 
 	public float TakeDamage(int damage)
@@ -60,6 +71,28 @@ public class Target : MonoBehaviour
 		OnDamageTaken(damage);
 		return damage;
 
+	}
+
+    public void ApplyDebuff(IDebuff debuff)
+    {
+		if (activeDebuffs.ContainsKey(debuff.Identifier))
+		{
+			// Ensure your debuffs have a Refresh method to reset their timers or amounts
+			activeDebuffs[debuff.Identifier].Refresh();
+		}
+		else
+		{
+			activeDebuffs.Add(debuff.Identifier, debuff);
+			debuff.Apply(this);
+		}
+    }
+
+	public void RemoveDebuff(IDebuff debuff)
+	{
+		if (activeDebuffs.ContainsKey(debuff.Identifier))
+		{
+			activeDebuffs.Remove(debuff.Identifier);
+		}
 	}
 
 	void PlaySound(AudioClip clip)
