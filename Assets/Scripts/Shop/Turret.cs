@@ -18,6 +18,12 @@ public class Turret : DamageShopItem
 	[HideIf("_projectilePrefab")][SerializeField] AudioSettings _audioSettings;
 	[HideIf("_projectilePrefab")][SerializeField] GameObject _impactParticle;
 
+	[Header("Damage over time settings")]
+	[SerializeField] bool _isDamageOverTime;
+	[ShowIf("_isDamageOverTime")][SerializeField] float _dotDuration = 5f;
+	[ShowIf("_isDamageOverTime")][SerializeField] float _dotTotalDamage = 10f;
+	[ShowIf("_isDamageOverTime")][SerializeField] float _dotTickRate = 1f;
+
 	float _lastAttackTime = 0f;
 	float _lastTargetSearch = 0f;
 	Tower _tower;
@@ -76,6 +82,10 @@ public class Turret : DamageShopItem
 		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
 		var projectile = Instantiate(_projectilePrefab, _tower.Center.position, rotation);
 		projectile.Setup(_target, _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier), true, _projectileSettings);
+		if (_isDamageOverTime)
+		{
+			projectile.SetupDamageOverTime(_dotDuration, _dotTotalDamage, _dotTickRate);
+		}
 	}
 
 	void InstantAttack()
@@ -84,6 +94,11 @@ public class Turret : DamageShopItem
 		{
 			var damage = _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier);
 			_ = _target.TakeDamage(Mathf.RoundToInt(damage));
+
+			if (_isDamageOverTime)
+			{
+				_target.ApplyDebuff(new DamageOverTimeDebuff(Name, _dotDuration, _dotTotalDamage, _dotTickRate));
+			}
 
 			if (_impactParticle)
 			{

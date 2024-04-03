@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -22,7 +24,7 @@ public class Target : MonoBehaviour
 
 	protected AudioSource AudioSource;
 
-    protected Dictionary<string, IDebuff> ActiveDebuffs = new Dictionary<string, IDebuff>();
+	protected Dictionary<string, IDebuff> ActiveDebuffs = new Dictionary<string, IDebuff>();
 
 	protected virtual void Awake()
 	{
@@ -44,7 +46,7 @@ public class Target : MonoBehaviour
 	protected virtual void Update()
 	{
 		// Use ToList() if you might modify the collection during iteration
-		foreach (var debuff in activeDebuffs.Values.ToList())
+		foreach (var debuff in ActiveDebuffs.Values.ToList())
 		{
 			debuff.Tick(this);
 		}
@@ -73,25 +75,25 @@ public class Target : MonoBehaviour
 
 	}
 
-    public void ApplyDebuff(IDebuff debuff)
-    {
-		if (activeDebuffs.ContainsKey(debuff.Identifier))
+	public void ApplyDebuff(IDebuff debuff)
+	{
+		if (ActiveDebuffs.ContainsKey(debuff.Identifier))
 		{
 			// Ensure your debuffs have a Refresh method to reset their timers or amounts
-			activeDebuffs[debuff.Identifier].Refresh();
+			ActiveDebuffs[debuff.Identifier].Refresh();
 		}
 		else
 		{
-			activeDebuffs.Add(debuff.Identifier, debuff);
+			ActiveDebuffs.Add(debuff.Identifier, debuff);
 			debuff.Apply(this);
 		}
-    }
+	}
 
 	public void RemoveDebuff(IDebuff debuff)
 	{
-		if (activeDebuffs.ContainsKey(debuff.Identifier))
+		if (ActiveDebuffs.ContainsKey(debuff.Identifier))
 		{
-			activeDebuffs.Remove(debuff.Identifier);
+			ActiveDebuffs.Remove(debuff.Identifier);
 		}
 	}
 

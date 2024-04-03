@@ -21,6 +21,11 @@ public class Projectile : MonoBehaviour
 	float _hitTime;
 	float _startTime;
 
+	bool _isDamageOverTime;
+	float _dotDuration = 5f;
+	float _dotTotalDamage = 10f;
+	float _dotTickRate = 1f;
+
 	public void Setup(Target target, float damage, bool towerProjectile, ProjectileSettings projectileSettings)
 	{
 		_target = target;
@@ -38,6 +43,15 @@ public class Projectile : MonoBehaviour
 
 		_audioSource = GetComponent<AudioSource>();
 	}
+
+	public void SetupDamageOverTime(float dotDuration, float dotTotalDamage, float dotTickRate)
+	{
+		_isDamageOverTime = true;
+		_dotDuration = dotDuration;
+		_dotTotalDamage = dotTotalDamage;
+		_dotTickRate = dotTickRate;
+	}
+
 
 	void Start()
 	{
@@ -94,6 +108,11 @@ public class Projectile : MonoBehaviour
 			{
 				ScoreManager.Instance.DamageDone += actualDamage;
 				(_target as Enemy).Attackers--;
+			}
+
+			if (_isDamageOverTime)
+			{
+				_target.ApplyDebuff(new DamageOverTimeDebuff(name, _dotDuration, _dotTotalDamage, _dotTickRate));
 			}
 		}
 
