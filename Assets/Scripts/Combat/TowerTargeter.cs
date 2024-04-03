@@ -5,7 +5,7 @@ public static class TowerTargeter
 		Enemy selectedTarget = null;
 		var closestDistance = float.MaxValue;
 		var fewestAttackers = int.MaxValue;
-		var isTargetWithoutDebuffPreferred = false;
+		var hasNonDebuffedEnemyBeenFound = false;
 
 		var enemies = EnemyManager.SpatialPartitionManager.GetEnemiesWithinZone(attackRange.ToZone());
 		foreach (var enemy in enemies)
@@ -13,13 +13,19 @@ public static class TowerTargeter
 			var enemyHasDebuff = debuffName != null && enemy.ActiveDebuffs.ContainsKey(debuffName);
 			var betterChoice = enemy.Attackers < fewestAttackers || (enemy.Attackers == fewestAttackers && enemy.DistanceToTower < closestDistance);
 
-			// Update conditions to consider debuff presence
-			if ((selectedTarget == null || betterChoice) && (!enemyHasDebuff || !isTargetWithoutDebuffPreferred))
+			if (!enemyHasDebuff && (!hasNonDebuffedEnemyBeenFound || betterChoice))
 			{
 				selectedTarget = enemy;
 				fewestAttackers = enemy.Attackers;
 				closestDistance = enemy.DistanceToTower;
-				isTargetWithoutDebuffPreferred = !enemyHasDebuff;
+				hasNonDebuffedEnemyBeenFound = true; // Now prioritizing non-debuffed enemies
+			}
+			else if (enemyHasDebuff && !hasNonDebuffedEnemyBeenFound && betterChoice)
+			{
+				selectedTarget = enemy;
+				fewestAttackers = enemy.Attackers;
+				closestDistance = enemy.DistanceToTower;
+				// Don't update hasNonDebuffedEnemyBeenFound because we're still looking for non-debuffed targets.
 			}
 		}
 

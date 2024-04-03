@@ -19,7 +19,7 @@ MonoBehaviour:
   Amount: 30
   _category: 5
   DamageType: 1
-  _baseDamage: 15
+  _baseDamage: 5
   _attackRange: 4
   _timeBetweenAttacks: 0.5
   _timeBetweenFindTarget: 1
@@ -34,3 +34,7 @@ MonoBehaviour:
   _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   _impactParticle: {fileID: 6323416476027258973, guid: 4ed37b5d754312643a9ba4a33c5bdd69,
     type: 3}
+  _isDamageOverTime: 1
+  _dotDuration: 10
+  _dotTotalDamage: 300
+  _dotTickRate: 1

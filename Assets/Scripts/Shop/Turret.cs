@@ -37,6 +37,7 @@ public class Turret : DamageShopItem
 
 	public void Setup(Tower inputTower)
 	{
+		_timeBetweenFindTarget = Mathf.Min(_timeBetweenFindTarget, _timeBetweenAttacks); // Ensure that the target search interval is not longer than the attack interval
 		_tower = inputTower;
 		_lastTargetSearch = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenFindTarget);
 		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenAttacks); // Add random delay for the first attack
@@ -97,14 +98,14 @@ public class Turret : DamageShopItem
 
 			if (_isDamageOverTime)
 			{
-				_target.ApplyDebuff(new DamageOverTimeDebuff(Name, _dotDuration, _dotTotalDamage, _dotTickRate));
+				_target.ApplyDebuff(new DamageOverTimeDebuff(Name, _dotDuration, _dotTotalDamage, _dotTickRate, _impactParticle));
 			}
-
-			if (_impactParticle)
+			else if (_impactParticle)
 			{
 				var direction = (_target.Center.position - _tower.Center.position).normalized;
 				_impactParticle = Instantiate(_impactParticle, _target.Center.position, Quaternion.FromToRotation(Vector3.up, -direction));
 				Destroy(_impactParticle, 5.0f);
+
 			}
 		}
 

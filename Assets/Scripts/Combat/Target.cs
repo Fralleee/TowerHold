@@ -24,7 +24,7 @@ public class Target : MonoBehaviour
 
 	protected AudioSource AudioSource;
 
-	public Dictionary<string, IDebuff> ActiveDebuffs = new Dictionary<string, IDebuff>();
+	public Dictionary<string, IDebuff> ActiveDebuffs;
 
 	protected virtual void Awake()
 	{
@@ -36,6 +36,7 @@ public class Target : MonoBehaviour
 		OnHealthChanged(Health, MaxHealth);
 		AudioSource = GetComponent<AudioSource>();
 		AudioSettings.ApplySettings(AudioSource);
+		ActiveDebuffs = new Dictionary<string, IDebuff>();
 	}
 
 	protected virtual void Start()
@@ -50,6 +51,11 @@ public class Target : MonoBehaviour
 		{
 			debuff.Tick(this);
 		}
+	}
+
+	public bool HasDebuff(string debuffName)
+	{
+		return ActiveDebuffs.ContainsKey(debuffName);
 	}
 
 	public float TakeDamage(int damage)
@@ -93,6 +99,7 @@ public class Target : MonoBehaviour
 	{
 		if (ActiveDebuffs.ContainsKey(debuff.Identifier))
 		{
+			Debug.Log($"Removed debuff: {debuff.Identifier}");
 			_ = ActiveDebuffs.Remove(debuff.Identifier);
 		}
 	}

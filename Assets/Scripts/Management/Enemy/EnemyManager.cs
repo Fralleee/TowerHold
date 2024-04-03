@@ -6,6 +6,10 @@ using System.Collections;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
+	static readonly List<string> Names = new List<string>() {
+		"Jeff", "Broseph", "Julian", "Count", "Doctor Z"
+	};
+
 	public static SpatialPartitionManager SpatialPartitionManager => Instance._spatialPartitionManager;
 
 	const int PointLevelScaling = 5;
@@ -173,7 +177,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		var rotation = Quaternion.LookRotation(transform.position - spawnPosition, Vector3.up);
 
 		var instance = Instantiate(enemy.gameObject, spawnPosition, rotation, _enemies);
-		instance.name = enemy.name;
+		instance.name = $"{Names[UnityEngine.Random.Range(0, Names.Count)]} the {enemy.name}";
 	}
 
 	LevelSpawnConfiguration? GetLevelSpecificSpawn(int currentLevel)

@@ -10,8 +10,9 @@ public class DamageOverTimeDebuff : IDebuff
 	float _nextTickTime; // When the next tick should occur
 	float _remainingTime; // Remaining time for the debuff
 	readonly float _damagePerTick; // Damage dealt each tick
+	GameObject _debuffEffect;
 
-	public DamageOverTimeDebuff(string identifier, float totalDuration, float totalDamage, float tickRate)
+	public DamageOverTimeDebuff(string identifier, float totalDuration, float totalDamage, float tickRate, GameObject effect)
 	{
 		Identifier = identifier;
 		TotalDuration = totalDuration;
@@ -20,11 +21,22 @@ public class DamageOverTimeDebuff : IDebuff
 		_nextTickTime = Time.time + TickRate;
 		_remainingTime = TotalDuration;
 		_damagePerTick = TotalDamage / (TotalDuration / TickRate);
+		_debuffEffect = effect;
 	}
 
 	public void Apply(Target target)
 	{
-		// Initial application logic here, if any
+		if (!_debuffEffect)
+		{
+			return;
+		}
+		_debuffEffect = Object.Instantiate(_debuffEffect, target.Center.position, Quaternion.identity, target.Center);
+		var particleSystems = _debuffEffect.GetComponentsInChildren<ParticleSystem>();
+		foreach (var particleSystem in particleSystems)
+		{
+			var main = particleSystem.main;
+			main.startLifetime = TickRate;
+		}
 	}
 
 	public void Tick(Target target)
@@ -55,5 +67,6 @@ public class DamageOverTimeDebuff : IDebuff
 	public void Remove(Target target)
 	{
 		target.RemoveDebuff(this);
+		Object.Destroy(_debuffEffect);
 	}
 }

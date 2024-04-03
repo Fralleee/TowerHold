@@ -112,7 +112,7 @@ public class Projectile : MonoBehaviour
 
 			if (_isDamageOverTime)
 			{
-				_target.ApplyDebuff(new DamageOverTimeDebuff(name, _dotDuration, _dotTotalDamage, _dotTickRate));
+				_target.ApplyDebuff(new DamageOverTimeDebuff(name, _dotDuration, _dotTotalDamage, _dotTickRate, _impactParticle));
 			}
 		}
 

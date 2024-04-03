@@ -72,6 +72,7 @@ public class Tower : Target
 	{
 		var instance = Instantiate(turret);
 		instance.Setup(this);
+		instance.name = turret.name;
 		Turrets.Add(instance);
 	}
 
