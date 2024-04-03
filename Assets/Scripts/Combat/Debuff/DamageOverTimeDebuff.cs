@@ -17,7 +17,7 @@ public class DamageOverTimeDebuff : IDebuff
 		TotalDuration = totalDuration;
 		TotalDamage = totalDamage;
 		TickRate = tickRate;
-		_nextTickTime = TickRate;
+		_nextTickTime = Time.time + TickRate;
 		_remainingTime = TotalDuration;
 		_damagePerTick = TotalDamage / (TotalDuration / TickRate);
 	}
@@ -31,7 +31,6 @@ public class DamageOverTimeDebuff : IDebuff
 	{
 		if (Time.time >= _nextTickTime)
 		{
-			Debug.Log($"Dealing {_damagePerTick} damage to " + target.name);
 			_ = target.TakeDamage((int)_damagePerTick);
 			_nextTickTime += TickRate;
 			_remainingTime -= TickRate;

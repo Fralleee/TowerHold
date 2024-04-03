@@ -1,26 +1,28 @@
 public static class TowerTargeter
 {
-	public static Enemy GetEnemyTarget(AttackRange attackRange)
+	public static Enemy GetEnemyTarget(AttackRange attackRange, string debuffName = null)
 	{
 		Enemy selectedTarget = null;
 		var closestDistance = float.MaxValue;
 		var fewestAttackers = int.MaxValue;
+		var isTargetWithoutDebuffPreferred = false;
+
 		var enemies = EnemyManager.SpatialPartitionManager.GetEnemiesWithinZone(attackRange.ToZone());
 		foreach (var enemy in enemies)
 		{
-			// For the enemy to be a valid target it has to be within the range
-			// We want to prioritize targets in the following order:
-			// - By number of attackers (fewer, the better)
-			// - By distance (closest to the tower)
-			// Check if this enemy has fewer attackers or is closer while having the same number of attackers
-			if (enemy.Attackers < fewestAttackers || (enemy.Attackers == fewestAttackers && enemy.DistanceToTower < closestDistance))
+			var enemyHasDebuff = debuffName != null && enemy.ActiveDebuffs.ContainsKey(debuffName);
+			var betterChoice = enemy.Attackers < fewestAttackers || (enemy.Attackers == fewestAttackers && enemy.DistanceToTower < closestDistance);
+
+			// Update conditions to consider debuff presence
+			if ((selectedTarget == null || betterChoice) && (!enemyHasDebuff || !isTargetWithoutDebuffPreferred))
 			{
 				selectedTarget = enemy;
 				fewestAttackers = enemy.Attackers;
 				closestDistance = enemy.DistanceToTower;
+				isTargetWithoutDebuffPreferred = !enemyHasDebuff;
 			}
 		}
-		// Increment the attackers count for the selected target
+
 		if (selectedTarget != null)
 		{
 			selectedTarget.Attackers++;

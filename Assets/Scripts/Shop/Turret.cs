@@ -47,7 +47,7 @@ public class Turret : DamageShopItem
 	{
 		if (Time.time - _lastTargetSearch > _timeBetweenFindTarget)
 		{
-			_target = TowerTargeter.GetEnemyTarget(_attackRange);
+			_target = TowerTargeter.GetEnemyTarget(_attackRange, _isDamageOverTime ? Name : null);
 			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenFindTarget); // Add some variance to the search timing
 		}
 

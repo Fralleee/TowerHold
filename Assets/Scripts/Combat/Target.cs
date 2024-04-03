@@ -24,7 +24,7 @@ public class Target : MonoBehaviour
 
 	protected AudioSource AudioSource;
 
-	protected Dictionary<string, IDebuff> ActiveDebuffs = new Dictionary<string, IDebuff>();
+	public Dictionary<string, IDebuff> ActiveDebuffs = new Dictionary<string, IDebuff>();
 
 	protected virtual void Awake()
 	{
@@ -93,7 +93,7 @@ public class Target : MonoBehaviour
 	{
 		if (ActiveDebuffs.ContainsKey(debuff.Identifier))
 		{
-			ActiveDebuffs.Remove(debuff.Identifier);
+			_ = ActiveDebuffs.Remove(debuff.Identifier);
 		}
 	}
 
