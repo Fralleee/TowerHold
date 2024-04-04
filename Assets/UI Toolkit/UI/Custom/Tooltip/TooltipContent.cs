@@ -12,7 +12,6 @@ public class TooltipContent : VisualElement
 	public Label NameLabel;
 	public RichTextWithImages CostContainer;
 	public RichTextWithImages DescriptionContainer;
-	public RichTextWithImages CritContainer;
 	public Color BorderColor;
 
 	public TooltipContent(Texture2D texture2D = null, string name = null, string cost = null, string description = null)
@@ -23,7 +22,6 @@ public class TooltipContent : VisualElement
 		NameLabel = new Label();
 		CostContainer = new RichTextWithImages();
 		DescriptionContainer = new RichTextWithImages();
-		CritContainer = new RichTextWithImages();
 
 		Add(InformationContainer);
 		InformationContainer.Add(Image);
@@ -31,7 +29,6 @@ public class TooltipContent : VisualElement
 		TextContainer.Add(NameLabel);
 		TextContainer.Add(CostContainer);
 		Add(DescriptionContainer);
-		Add(CritContainer);
 
 		AddToClassList("data");
 		Image.AddToClassList("item-image");
@@ -40,7 +37,6 @@ public class TooltipContent : VisualElement
 		NameLabel.AddToClassList("item-name");
 		CostContainer.AddToClassList("item-cost");
 		DescriptionContainer.AddToClassList("item-description");
-		CritContainer.AddToClassList("item-crit");
 
 		if (texture2D != null)
 		{
@@ -75,8 +71,8 @@ public class TooltipContent : VisualElement
 		CostContainer.AddImageLabel(styleSettings.GetIcon(GameIcons.Gold), item.Cost.ToString(), styleSettings.GetShopTypeColor(ShopType.Income));
 
 		var safeDescription = string.IsNullOrEmpty(item.Description) ? "No description." : item.Description;
-		DamageType? damageType = item is DamageShopItem damageShopItem ? damageShopItem.DamageType : null;
-		DescriptionContainer.SetDescription(safeDescription, item.Amount, damageType, item.ShopType, styleSettings);
+		var damageType = item is DamageShopItem damageShopItem ? damageShopItem.DamageType : DamageType.Global;
+		DescriptionContainer.Write(safeDescription, styleSettings, item.Amount, 0, 0, damageType, item.ShopType);
 	}
 
 	public virtual void Update(TooltipContent tooltipContent)

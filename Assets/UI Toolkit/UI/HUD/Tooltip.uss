@@ -111,12 +111,16 @@ Tooltip .data .item-description {
 	border-top-width: 1px;
 	border-color: #bbb;
 	padding-top: 16px;
+	flex-direction: column;
+
+	font-size: 16px;
+}
+
+Tooltip .row {
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
 	white-space: normal;
-
-	font-size: 16px;
 }
 
 Tooltip .data .item-crit {

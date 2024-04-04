@@ -10,6 +10,8 @@ public class ScreenTransition : MonoBehaviour
 	Image _image;
 	Material _material;
 
+	readonly int _threshold = Shader.PropertyToID("_Threshold");
+
 	void Awake()
 	{
 		_image = GetComponentInChildren<Image>();
@@ -28,11 +30,11 @@ public class ScreenTransition : MonoBehaviour
 		while (time < _dissolveDuration)
 		{
 			_dissolveThreshold = Mathf.Lerp(1f, 0f, time / _dissolveDuration);
-			_material.SetFloat("_Threshold", _dissolveThreshold);
+			_material.SetFloat(_threshold, _dissolveThreshold);
 			time += Time.deltaTime;
 			yield return null;
 		}
 
-		_material.SetFloat("_Threshold", 0f);
+		_material.SetFloat(_threshold, 0f);
 	}
 }

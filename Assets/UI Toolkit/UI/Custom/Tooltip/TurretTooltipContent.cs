@@ -26,17 +26,27 @@ public class TurretTooltipContent : TooltipContent
 	{
 		base.UpdateInformation(item, styleSettings);
 
+		DescriptionContainer.Clear();
+
 		if (item is Turret turret)
 		{
 			var (baseDamage, attackRange, timeBetweenAttacks, criticalHitChance, criticalHitMultiplier, description) = turret.GetHoverData();
 			var currentDamage = Tower.Instance.GetDamage(turret.DamageType, turret.ShopType, baseDamage, 0, 0);
 
 			var safeDescription = string.IsNullOrEmpty(description) ? "No description." : description;
-			DescriptionContainer.SetDescription(safeDescription, currentDamage, turret.DamageType, turret.ShopType, styleSettings);
+			DescriptionContainer.Write(safeDescription, styleSettings, currentDamage, timeBetweenAttacks, 0, turret.DamageType, turret.ShopType);
 
 			if (criticalHitChance > 0)
 			{
-				CritContainer.SetCriticalHitDescription(currentDamage, criticalHitChance, criticalHitMultiplier, turret.DamageType, styleSettings);
+				var template = "This ability has a {Chance} chance of a critical hit which causes {Damage} {DamageType} damage.";
+				DescriptionContainer.Write(template, styleSettings, criticalHitMultiplier * currentDamage, 0, criticalHitChance, turret.DamageType, turret.ShopType);
+			}
+
+			var (isDamageOverTime, dotDuration, dotTotalDamage) = turret.GetDOTData();
+			if (isDamageOverTime)
+			{
+				var template = "Deals {DPS} {DamageType} damage per second for {Duration} seconds for a total of {Damage} {DamageType} damage.";
+				DescriptionContainer.Write(template, styleSettings, dotTotalDamage, dotDuration, 0, turret.DamageType, turret.ShopType);
 			}
 
 			ShopTypeContainer.AddImageLabel(styleSettings.GetShopTypeIcon(item.ShopType), item.ShopType.ToString(), styleSettings.GetShopTypeColor(item.ShopType));

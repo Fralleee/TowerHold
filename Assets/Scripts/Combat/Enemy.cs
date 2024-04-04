@@ -42,6 +42,7 @@ public class Enemy : Target
 	NavMeshAgent _agent;
 	Bobbing _bobbing;
 
+	int _attackTrigger = Animator.StringToHash("Attack");
 	float _lastAttackTime = 0f;
 	float _nextDistanceCheck = 0f;
 	float _distanceToNextZone;
@@ -173,7 +174,7 @@ public class Enemy : Target
 
 	void StartAttack()
 	{
-		_animator.SetTrigger("Attack");
+		_animator.SetTrigger(_attackTrigger);
 	}
 
 	public void PerformAttack()

@@ -32,7 +32,7 @@ public class Turret : DamageShopItem
 
 	public void Reset()
 	{
-		Description = "Shoots towards nearest enemy causing {DamageAmount} {DamageType} damage.";
+		Description = "Shoots towards nearest enemy causing {Damage} {DamageType} damage.";
 	}
 
 	public void Setup(Tower inputTower)
@@ -64,6 +64,8 @@ public class Turret : DamageShopItem
 	{
 		base.OnPurchase();
 
+		Debug.Log("Turret purchased: " + Name);
+
 		Tower.Instance.AddTurret(this);
 		ScoreManager.Instance.Turrets += 1;
 	}
@@ -71,6 +73,12 @@ public class Turret : DamageShopItem
 	public (float baseDamage, AttackRange attackRange, float timeBetweenAttacks, float criticalHitChance, float criticalHitMultiplier, string description) GetHoverData()
 	{
 		return (_baseDamage, _attackRange, _timeBetweenAttacks, _criticalHitChance, _criticalHitMultiplier, Description);
+	}
+
+
+	public (bool isDamageOverTime, float duration, float totalDamage) GetDOTData()
+	{
+		return (_isDamageOverTime, _dotDuration, _dotTotalDamage);
 	}
 
 	void Shoot()

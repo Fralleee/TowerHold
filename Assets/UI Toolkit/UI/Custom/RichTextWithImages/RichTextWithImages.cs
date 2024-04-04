@@ -6,41 +6,42 @@ public class RichTextWithImages : VisualElement
 {
 	const float PercentageThreshold = 5f;
 
-	public void SetDescription(string description, float amount, DamageType? damageType, ShopType shopType, StyleSettings styleSettings)
+	VisualElement _currentContainer;
+
+	public void AddImageLabel(Texture2D texture, string text, Color? tint = null)
 	{
 		Clear();
+		AddRow();
 
-		if (string.IsNullOrEmpty(description))
-		{
-			AddText("No description available");
-			return;
-		}
+		var image = new Image { image = texture, tintColor = tint ?? Color.white };
+		_currentContainer.Add(image);
+		AddText(text, tint);
+	}
 
-		var parts = description.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
+	public void Write(string text, StyleSettings styleSettings, float amount, float duration, float chance, DamageType damageType, ShopType shopType)
+	{
+		AddRow();
+
+		var parts = text.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
 		foreach (var part in parts)
 		{
 			switch (part)
 			{
-				case "DamageType":
-					if (damageType.HasValue)
-					{
-						AddDamageType(damageType.Value, styleSettings);
-					}
-					else
-					{
-						throw new ArgumentException("DamageType is null");
-					}
-
+				case "Chance":
+					AddChance(chance, damageType, styleSettings);
 					break;
-				case "DamageAmount":
-					if (damageType.HasValue)
-					{
-						AddDamageAmount(amount, damageType.Value, styleSettings);
-					}
-					else
-					{
-						throw new ArgumentException("DamageType is null");
-					}
+				case "Damage":
+					AddDamage(amount, damageType, styleSettings);
+					break;
+				case "DamageType":
+					AddDamageType(damageType, styleSettings);
+					break;
+				case "DPS":
+					var damagePerSecond = amount / duration;
+					AddDamage(damagePerSecond, damageType, styleSettings);
+					break;
+				case "Duration":
+					AddDuration(duration, damageType, styleSettings);
 					break;
 				case "Type":
 					AddType(shopType, styleSettings);
@@ -51,6 +52,9 @@ public class RichTextWithImages : VisualElement
 				case "Amount":
 					AddAmount(amount, shopType, styleSettings);
 					break;
+				case "Newline":
+					AddRow();
+					break;
 				default:
 					AddText(part);
 					break;
@@ -58,28 +62,17 @@ public class RichTextWithImages : VisualElement
 		}
 	}
 
-	public void SetCriticalHitDescription(float damage, float criticalHitChance, float criticalHitMultiplier, DamageType damageType, StyleSettings styleSettings)
+	void AddRow()
 	{
-		Clear();
-
-		var critChanceString = (criticalHitChance * 100).ToString() + "%";
-		var critDamage = criticalHitMultiplier * damage;
-		Add(new VisualElement { style = { width = Length.Percent(100) } });
-		AddText("This ability has a ");
-		AddText(critChanceString, styleSettings.GetDamageTypeColor(damageType));
-		AddText(" chance of a critical hit which causes ");
-		AddDamageAmount(critDamage, damageType, styleSettings);
-		AddText(" ");
-		AddDamageType(damageType, styleSettings);
-		AddText(" damage");
+		_currentContainer = new VisualElement();
+		_currentContainer.AddToClassList("row");
+		Add(_currentContainer);
 	}
 
-	public void AddImageLabel(Texture2D texture, string text, Color? tint = null)
+	void AddChance(float chance, DamageType damageType, StyleSettings styleSettings)
 	{
-		Clear();
-		var image = new Image { image = texture, tintColor = tint ?? Color.white };
-		Add(image);
-		AddText(text, tint);
+		var color = styleSettings.GetDamageTypeColor(damageType);
+		AddText($"{chance * 100:0.##}%", color);
 	}
 
 	void AddDamageType(DamageType damageType, StyleSettings styleSettings, bool iconOnly = false)
@@ -97,11 +90,17 @@ public class RichTextWithImages : VisualElement
 		}
 	}
 
-	void AddDamageAmount(float amount, DamageType damageType, StyleSettings styleSettings)
+	void AddDamage(float amount, DamageType damageType, StyleSettings styleSettings)
 	{
 		var amountText = amount < PercentageThreshold ? $"{amount * 100:0.##}%" : amount.ToString("0.##");
 		var color = styleSettings.GetDamageTypeColor(damageType);
 		AddText(amountText, color);
+	}
+
+	void AddDuration(float duration, DamageType damageType, StyleSettings styleSettings)
+	{
+		var color = styleSettings.GetDamageTypeColor(damageType);
+		AddText(duration.ToString("0.##"), color);
 	}
 
 	void AddType(ShopType shopType, StyleSettings styleSettings, bool iconOnly = false)
@@ -133,12 +132,12 @@ public class RichTextWithImages : VisualElement
 		{
 			label.style.color = color.Value;
 		}
-		Add(label);
+		_currentContainer.Add(label);
 	}
 
 	void AddImage(Texture2D texture, Color tint)
 	{
 		var image = new Image { image = texture, tintColor = tint };
-		Add(image);
+		_currentContainer.Add(image);
 	}
 }
