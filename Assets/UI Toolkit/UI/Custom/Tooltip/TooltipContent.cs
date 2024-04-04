@@ -72,7 +72,7 @@ public class TooltipContent : VisualElement
 
 		var safeDescription = string.IsNullOrEmpty(item.Description) ? "No description." : item.Description;
 		var damageType = item is DamageShopItem damageShopItem ? damageShopItem.DamageType : DamageType.Global;
-		DescriptionContainer.Write(safeDescription, styleSettings, item.Amount, 0, 0, damageType, item.ShopType);
+		DescriptionContainer.Write(safeDescription, styleSettings, item.Amount, 0, item.Amount, damageType, item.ShopType);
 	}
 
 	public virtual void Update(TooltipContent tooltipContent)

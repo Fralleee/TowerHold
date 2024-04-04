@@ -38,7 +38,7 @@ public class TurretTooltipContent : TooltipContent
 
 			if (criticalHitChance > 0)
 			{
-				var template = "This ability has a {Chance} chance of a critical hit which causes {Damage} {DamageType} damage.";
+				var template = "This ability has a {PercentDamageType} chance of a critical hit which causes {Damage} {DamageType} damage.";
 				DescriptionContainer.Write(template, styleSettings, criticalHitMultiplier * currentDamage, 0, criticalHitChance, turret.DamageType, turret.ShopType);
 			}
 

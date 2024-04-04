@@ -4,8 +4,6 @@ using UnityEngine.UIElements;
 
 public class RichTextWithImages : VisualElement
 {
-	const float PercentageThreshold = 5f;
-
 	VisualElement _currentContainer;
 
 	public void AddImageLabel(Texture2D texture, string text, Color? tint = null)
@@ -18,7 +16,7 @@ public class RichTextWithImages : VisualElement
 		AddText(text, tint);
 	}
 
-	public void Write(string text, StyleSettings styleSettings, float amount, float duration, float chance, DamageType damageType, ShopType shopType)
+	public void Write(string text, StyleSettings styleSettings, float amount, float duration, float factor, DamageType damageType, ShopType shopType)
 	{
 		AddRow();
 
@@ -27,8 +25,11 @@ public class RichTextWithImages : VisualElement
 		{
 			switch (part)
 			{
-				case "Chance":
-					AddChance(chance, damageType, styleSettings);
+				case "PercentDamageType":
+					AddPercent(factor, damageType, styleSettings);
+					break;
+				case "PercentType":
+					AddPercent(factor, shopType, styleSettings);
 					break;
 				case "Damage":
 					AddDamage(amount, damageType, styleSettings);
@@ -69,10 +70,16 @@ public class RichTextWithImages : VisualElement
 		Add(_currentContainer);
 	}
 
-	void AddChance(float chance, DamageType damageType, StyleSettings styleSettings)
+	void AddPercent(float factor, DamageType damageType, StyleSettings styleSettings)
 	{
 		var color = styleSettings.GetDamageTypeColor(damageType);
-		AddText($"{chance * 100:0.##}%", color);
+		AddText($"{factor * 100:0.##}%", color);
+	}
+
+	void AddPercent(float factor, ShopType shopType, StyleSettings styleSettings)
+	{
+		var color = styleSettings.GetShopTypeColor(shopType);
+		AddText($"{factor * 100:0.##}%", color);
 	}
 
 	void AddDamageType(DamageType damageType, StyleSettings styleSettings, bool iconOnly = false)
@@ -92,7 +99,7 @@ public class RichTextWithImages : VisualElement
 
 	void AddDamage(float amount, DamageType damageType, StyleSettings styleSettings)
 	{
-		var amountText = amount < PercentageThreshold ? $"{amount * 100:0.##}%" : amount.ToString("0.##");
+		var amountText = amount.ToString("0.##");
 		var color = styleSettings.GetDamageTypeColor(damageType);
 		AddText(amountText, color);
 	}
@@ -120,7 +127,7 @@ public class RichTextWithImages : VisualElement
 
 	void AddAmount(float amount, ShopType shopType, StyleSettings styleSettings)
 	{
-		var amountText = amount < PercentageThreshold ? $"{amount * 100:0.##}%" : amount.ToString("0.##");
+		var amountText = amount.ToString("0.##");
 		var color = styleSettings.GetShopTypeColor(shopType);
 		AddText(amountText, color);
 	}
