@@ -15,11 +15,11 @@ MonoBehaviour:
   ShopType: 8
   Texture: {fileID: 2800000, guid: 055fdf273079625489400668c50ff225, type: 3}
   RarityType: 0
-  Description: Shoots towards nearest enemy causing {DamageAmount} {DamageType} damage.
+  Description: Shoots towards nearest enemy causing {Damage} {DamageType} damage.
   Amount: 30
   _category: 5
   DamageType: 1
-  _baseDamage: 5
+  _baseDamage: 15
   _attackRange: 4
   _timeBetweenAttacks: 0.5
   _timeBetweenFindTarget: 1
@@ -32,9 +32,9 @@ MonoBehaviour:
     MaxArcHeight: 5
   _attackSound: {fileID: 8300000, guid: 40f9dc839d97a454782e11bf5da041c2, type: 3}
   _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
-  _impactParticle: {fileID: 6323416476027258973, guid: 4ed37b5d754312643a9ba4a33c5bdd69,
+  _impactParticle: {fileID: 6323416476027258973, guid: 53d966f0e6af0c4459ab3814c4de41ef,
     type: 3}
   _isDamageOverTime: 1
   _dotDuration: 10
-  _dotTotalDamage: 300
+  _dotTotalDamage: 150
   _dotTickRate: 1

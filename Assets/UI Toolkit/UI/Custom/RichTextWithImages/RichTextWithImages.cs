@@ -73,13 +73,13 @@ public class RichTextWithImages : VisualElement
 	void AddPercent(float factor, DamageType damageType, StyleSettings styleSettings)
 	{
 		var color = styleSettings.GetDamageTypeColor(damageType);
-		AddText($"{factor * 100:0.##}%", color);
+		AddText($"<b>{factor * 100:0.##}%</b>", color);
 	}
 
 	void AddPercent(float factor, ShopType shopType, StyleSettings styleSettings)
 	{
 		var color = styleSettings.GetShopTypeColor(shopType);
-		AddText($"{factor * 100:0.##}%", color);
+		AddText($"<b>{factor * 100:0.##}%</b>", color);
 	}
 
 	void AddDamageType(DamageType damageType, StyleSettings styleSettings, bool iconOnly = false)
@@ -93,21 +93,22 @@ public class RichTextWithImages : VisualElement
 
 		if (!iconOnly)
 		{
-			AddText($" {damageType}", color);
+			AddText($" <b>{damageType}</b>", color);
 		}
 	}
 
 	void AddDamage(float amount, DamageType damageType, StyleSettings styleSettings)
 	{
-		var amountText = amount.ToString("0.##");
+		var text = $"<b>{amount:0.##}</b>";
 		var color = styleSettings.GetDamageTypeColor(damageType);
-		AddText(amountText, color);
+		AddText(text, color);
 	}
 
 	void AddDuration(float duration, DamageType damageType, StyleSettings styleSettings)
 	{
+		var text = $"<b>{duration:0.##}</b>";
 		var color = styleSettings.GetDamageTypeColor(damageType);
-		AddText(duration.ToString("0.##"), color);
+		AddText(text, color);
 	}
 
 	void AddType(ShopType shopType, StyleSettings styleSettings, bool iconOnly = false)
@@ -121,20 +122,24 @@ public class RichTextWithImages : VisualElement
 
 		if (!iconOnly)
 		{
-			AddText($" {shopType}", color);
+			AddText($" <b>{shopType}</b>", color);
 		}
 	}
 
 	void AddAmount(float amount, ShopType shopType, StyleSettings styleSettings)
 	{
-		var amountText = amount.ToString("0.##");
+		var text = $"<b>{amount:0.##}</b>";
 		var color = styleSettings.GetShopTypeColor(shopType);
-		AddText(amountText, color);
+		AddText(text, color);
 	}
 
 	void AddText(string text, Color? color = null)
 	{
-		var label = new Label(text);
+		var label = new Label()
+		{
+			enableRichText = true,
+			text = text
+		};
 		if (color.HasValue)
 		{
 			label.style.color = color.Value;
