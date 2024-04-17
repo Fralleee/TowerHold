@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class Turret : DamageShopItem
 	[SerializeField] float _timeBetweenFindTarget = 1f;
 	[SerializeField] float _criticalHitChance = 0f;
 	[SerializeField] float _criticalHitMultiplier = 2f;
+	public List<TurretBehavior> Behaviors = new List<TurretBehavior>();
 
 	[SerializeField] Projectile _projectilePrefab;
 	[ShowIf("_projectilePrefab")][SerializeField][InlineProperty(LabelWidth = 140)] ProjectileSettings _projectileSettings;
@@ -64,8 +66,6 @@ public class Turret : DamageShopItem
 	{
 		base.OnPurchase();
 
-		Debug.Log("Turret purchased: " + Name);
-
 		Tower.Instance.AddTurret(this);
 		ScoreManager.Instance.Turrets += 1;
 	}
@@ -81,19 +81,37 @@ public class Turret : DamageShopItem
 		return (_isDamageOverTime, _dotDuration, _dotTotalDamage);
 	}
 
-	void Shoot()
+	public void Shoot(bool executeBehaviors = true, TurretBehavior excludeBehavior = null)
+	{
+		PerformAttack();
+
+		if (executeBehaviors)
+		{
+			ExecuteBehaviors(excludeBehavior);
+		}
+	}
+
+	void PerformAttack()
 	{
 		if (_projectilePrefab == null)
 		{
 			InstantAttack();
-			return;
 		}
-		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
-		var projectile = Instantiate(_projectilePrefab, _tower.Center.position, rotation);
-		projectile.Setup(_target, _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier), true, _projectileSettings);
-		if (_isDamageOverTime)
+		else
 		{
-			projectile.SetupDamageOverTime(_dotDuration, _dotTotalDamage, _dotTickRate);
+			ProjectileAttack();
+		}
+	}
+
+	void ExecuteBehaviors(TurretBehavior excludeBehavior = null)
+	{
+		foreach (var behavior in Behaviors)
+		{
+			if (behavior == excludeBehavior)
+			{
+				continue;
+			}
+			behavior.Execute(this, _target);
 		}
 	}
 
@@ -125,6 +143,18 @@ public class Turret : DamageShopItem
 		else
 		{
 			Debug.LogWarning("EnemyAttack: No audio source or attack sound assigned to enemy.");
+		}
+	}
+
+	void ProjectileAttack()
+	{
+		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
+		var projectile = Instantiate(_projectilePrefab, _tower.Center.position, rotation);
+		var damage = _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier);
+		projectile.Setup(_target, damage, true, _projectileSettings);
+		if (_isDamageOverTime)
+		{
+			projectile.SetupDamageOverTime(_dotDuration, _dotTotalDamage, _dotTickRate);
 		}
 	}
 

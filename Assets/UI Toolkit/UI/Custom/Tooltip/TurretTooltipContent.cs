@@ -36,6 +36,8 @@ public class TurretTooltipContent : TooltipContent
 			var safeDescription = string.IsNullOrEmpty(description) ? "No description." : description;
 			DescriptionContainer.Write(safeDescription, styleSettings, currentDamage, timeBetweenAttacks, 0, turret.DamageType, turret.ShopType);
 
+			turret.Behaviors.ForEach(behavior => behavior.Tooltip(DescriptionContainer, styleSettings, turret));
+
 			if (criticalHitChance > 0)
 			{
 				var template = "This ability has a {PercentDamageType} chance of a critical hit which causes {Damage} {DamageType} damage.";

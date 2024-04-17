@@ -118,7 +118,6 @@ Tooltip .data .item-description {
 
 Tooltip .row {
 	flex-direction: row;
-	flex-wrap: wrap;
 	align-items: center;
 	white-space: normal;
 }
