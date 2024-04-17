@@ -10,7 +10,7 @@ public static class TowerTargeter
 		var enemies = EnemyManager.SpatialPartitionManager.GetEnemiesWithinZone(attackRange.ToZone());
 		foreach (var enemy in enemies)
 		{
-			var enemyHasDebuff = debuffName != null && enemy.ActiveDebuffs.ContainsKey(debuffName);
+			var enemyHasDebuff = debuffName != null && enemy.HasDebuff(debuffName);
 			var betterChoice = enemy.Attackers < fewestAttackers || (enemy.Attackers == fewestAttackers && enemy.DistanceToTower < closestDistance);
 
 			if (!enemyHasDebuff && (!hasNonDebuffedEnemyBeenFound || betterChoice))

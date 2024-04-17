@@ -87,7 +87,7 @@ public class Target : MonoBehaviour
 
 	public void ApplyDebuff(IDebuff debuff)
 	{
-		if (ActiveDebuffs.ContainsKey(debuff.Identifier))
+		if (HasDebuff(debuff.Identifier))
 		{
 			// Ensure your debuffs have a Refresh method to reset their timers or amounts
 			ActiveDebuffs[debuff.Identifier].Refresh();

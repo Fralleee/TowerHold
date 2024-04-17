@@ -30,7 +30,8 @@ public class DamageOverTimeDebuff : IDebuff
 		{
 			return;
 		}
-		_debuffEffect = Object.Instantiate(_debuffEffect, target.Center.position, Quaternion.identity, target.Center);
+
+		_debuffEffect = Object.Instantiate(_debuffEffect, target.Center.position, Quaternion.identity, target.transform);
 		var particleSystems = _debuffEffect.GetComponentsInChildren<ParticleSystem>();
 		foreach (var particleSystem in particleSystems)
 		{

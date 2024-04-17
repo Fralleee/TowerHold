@@ -44,13 +44,6 @@ public class TurretTooltipContent : TooltipContent
 				DescriptionContainer.Write(template, styleSettings, criticalHitMultiplier * currentDamage, 0, criticalHitChance, turret.DamageType, turret.ShopType);
 			}
 
-			var (isDamageOverTime, dotDuration, dotTotalDamage) = turret.GetDOTData();
-			if (isDamageOverTime)
-			{
-				var template = "Deals {DPS} {DamageType} damage per second for {Duration} seconds for a total of {Damage} {DamageType} damage.";
-				DescriptionContainer.Write(template, styleSettings, dotTotalDamage, dotDuration, 0, turret.DamageType, turret.ShopType);
-			}
-
 			ShopTypeContainer.AddImageLabel(styleSettings.GetShopTypeIcon(item.ShopType), item.ShopType.ToString(), styleSettings.GetShopTypeColor(item.ShopType));
 
 			Cooldown.AddImageLabel(styleSettings.GetIcon(GameIcons.Cooldown), $"{timeBetweenAttacks:#.##}s");

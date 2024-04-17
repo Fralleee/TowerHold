@@ -6,21 +6,12 @@ public class DamageBuildUpBehavior : TurretBehavior
 	public float DamageMultiplierPerStack = 0.1f;
 	public int MaxStacks = 5;
 
+	public override bool PreferNewTarget => false;
+
 	public override void Execute(Turret turret, Enemy target)
 	{
-		DamageBuildUpDebuff debuff;
-		if (target.ActiveDebuffs.ContainsKey(turret.Name))
-		{
-			debuff = target.ActiveDebuffs[turret.Name] as DamageBuildUpDebuff;
-			debuff?.Refresh();
-		}
-		else
-		{
-			debuff = new DamageBuildUpDebuff(turret.Name, DamageMultiplierPerStack, MaxStacks);
-			target.ApplyDebuff(debuff);
-		}
-
-		turret.Shoot(false, this);
+		var debuff = new DamageBuildUpDebuff(turret.Name, DamageMultiplierPerStack, MaxStacks);
+		target.ApplyDebuff(debuff);
 	}
 
 	public override void Tooltip(RichTextWithImages descriptionContainer, StyleSettings styleSettings, Turret turret)

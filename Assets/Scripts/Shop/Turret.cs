@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -20,14 +21,9 @@ public class Turret : DamageShopItem
 	[HideIf("_projectilePrefab")][SerializeField] AudioSettings _audioSettings;
 	[HideIf("_projectilePrefab")][SerializeField] GameObject _impactParticle;
 
-	[Header("Damage over time settings")]
-	[SerializeField] bool _isDamageOverTime;
-	[ShowIf("_isDamageOverTime")][SerializeField] float _dotDuration = 5f;
-	[ShowIf("_isDamageOverTime")][SerializeField] float _dotTotalDamage = 10f;
-	[ShowIf("_isDamageOverTime")][SerializeField] float _dotTickRate = 1f;
-
 	float _lastAttackTime = 0f;
 	float _lastTargetSearch = 0f;
+	bool _preferNewTarget = false;
 	Tower _tower;
 	Enemy _target;
 	AudioSource _audioSource;
@@ -44,13 +40,14 @@ public class Turret : DamageShopItem
 		_lastTargetSearch = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenFindTarget);
 		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenAttacks); // Add random delay for the first attack
 		_audioSource = _tower.GetComponent<AudioSource>();
+		_preferNewTarget = Behaviors.Any(behavior => behavior.PreferNewTarget);
 	}
 
 	public void FixedUpdate()
 	{
 		if (Time.time - _lastTargetSearch > _timeBetweenFindTarget)
 		{
-			_target = TowerTargeter.GetEnemyTarget(_attackRange, _isDamageOverTime ? Name : null);
+			_target = TowerTargeter.GetEnemyTarget(_attackRange, _preferNewTarget ? Name : null);
 			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenFindTarget); // Add some variance to the search timing
 		}
 
@@ -75,14 +72,13 @@ public class Turret : DamageShopItem
 		return (_baseDamage, _attackRange, _timeBetweenAttacks, _criticalHitChance, _criticalHitMultiplier, Description);
 	}
 
-
-	public (bool isDamageOverTime, float duration, float totalDamage) GetDOTData()
-	{
-		return (_isDamageOverTime, _dotDuration, _dotTotalDamage);
-	}
-
 	public void Shoot(bool executeBehaviors = true, TurretBehavior excludeBehavior = null)
 	{
+		if (_target == null || _target.IsDead)
+		{
+			return;
+		}
+
 		PerformAttack();
 
 		if (executeBehaviors)
@@ -122,16 +118,11 @@ public class Turret : DamageShopItem
 			var damage = _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier);
 			_ = _target.TakeDamage(Mathf.RoundToInt(damage));
 
-			if (_isDamageOverTime)
-			{
-				_target.ApplyDebuff(new DamageOverTimeDebuff(Name, _dotDuration, _dotTotalDamage, _dotTickRate, _impactParticle));
-			}
-			else if (_impactParticle)
+			if (_impactParticle)
 			{
 				var direction = (_target.Center.position - _tower.Center.position).normalized;
 				_impactParticle = Instantiate(_impactParticle, _target.Center.position, Quaternion.FromToRotation(Vector3.up, -direction));
 				Destroy(_impactParticle, 5.0f);
-
 			}
 		}
 
@@ -152,10 +143,6 @@ public class Turret : DamageShopItem
 		var projectile = Instantiate(_projectilePrefab, _tower.Center.position, rotation);
 		var damage = _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier);
 		projectile.Setup(_target, damage, true, _projectileSettings);
-		if (_isDamageOverTime)
-		{
-			projectile.SetupDamageOverTime(_dotDuration, _dotTotalDamage, _dotTickRate);
-		}
 	}
 
 	public override TooltipContent Tooltip(StyleSettings styleSettings)

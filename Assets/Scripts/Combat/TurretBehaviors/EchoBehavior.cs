@@ -7,6 +7,8 @@ public class EchoBehavior : TurretBehavior
 	public float Delay = 0.2f;
 	public float Chance = 0.5f;
 
+	public override bool PreferNewTarget => false;
+
 	public override void Execute(Turret turret, Enemy target)
 	{
 		var random = GameController.Instance.RandomGenerator.NextFloat();
