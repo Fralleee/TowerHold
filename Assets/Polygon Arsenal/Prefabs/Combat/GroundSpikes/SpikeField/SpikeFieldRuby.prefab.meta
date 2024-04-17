@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b593bac47514bf748b4c6e3b847e3d6c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/GroundSpikes/SpikeField/SpikeFieldRuby.prefab
+  uploadId: 623125

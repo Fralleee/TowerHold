@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 52bd043f8f4e14e4c901335600a207eb
+timeCreated: 1515542342
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Sound/Prefabs/Missile/PolySmokeGrenadeMissileSND.prefab
+  uploadId: 623125

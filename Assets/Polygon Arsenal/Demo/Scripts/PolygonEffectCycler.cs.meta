@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: be519f55af4c45343a1f1208559ecd37
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scripts/PolygonEffectCycler.cs
+  uploadId: 623125

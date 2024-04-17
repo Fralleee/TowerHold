@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d69ca65b234b2bc479a6da823ca47801
+timeCreated: 1513458521
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Loot/LootRay/LootRayRed.prefab
+  uploadId: 623125

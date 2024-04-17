@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6276e2e71db0014449a26578405bc814
+timeCreated: 1514780436
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Sci-Fi/Rocket/RocketMissilePink.prefab
+  uploadId: 623125

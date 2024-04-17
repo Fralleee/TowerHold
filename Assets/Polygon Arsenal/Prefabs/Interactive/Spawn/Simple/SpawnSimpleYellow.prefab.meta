@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 844d55bf64b1c8d49a6414f3454627c5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Spawn/Simple/SpawnSimpleYellow.prefab
+  uploadId: 623125

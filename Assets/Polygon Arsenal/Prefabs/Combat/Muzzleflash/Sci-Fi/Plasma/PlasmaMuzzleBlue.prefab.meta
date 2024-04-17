@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 58e39ded56e8b1a47b7035be3cad890a
+timeCreated: 1515103011
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Plasma/PlasmaMuzzleBlue.prefab
+  uploadId: 623125

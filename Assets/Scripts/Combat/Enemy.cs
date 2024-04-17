@@ -4,8 +4,6 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-
 [SelectionBase]
 public class Enemy : Target
 {

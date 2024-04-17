@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6f832c5adbd045a4a8b2e7bc29d3d8a7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Aura/DamageAura/DamageAuraHoly.prefab
+  uploadId: 623125

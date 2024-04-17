@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6c9ef52b5950c0b4e8d9726df3a1320c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Barrage/Nova/BarrageNovaShell.prefab
+  uploadId: 623125

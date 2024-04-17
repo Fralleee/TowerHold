@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9aa670fab9a0c664e85bcf9d96b4c506
+timeCreated: 1514502545
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Sci-Fi/Grenade/GrenadeExplosionYellow.prefab
+  uploadId: 623125

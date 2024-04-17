@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f19db60ac8cec5043baa0b70bd0c500b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Aura/DamageAura/DamageAuraStorm.prefab
+  uploadId: 623125

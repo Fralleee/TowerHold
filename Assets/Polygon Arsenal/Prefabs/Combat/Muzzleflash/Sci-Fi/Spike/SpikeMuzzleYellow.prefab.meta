@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 33a465ce6f03cab498f3f25f154a1005
+timeCreated: 1515171392
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Spike/SpikeMuzzleYellow.prefab
+  uploadId: 623125

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 14d95a72de3b52a43aa03e11402f35a9
+timeCreated: 1515512149
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Buff/BuffGreen.prefab
+  uploadId: 623125

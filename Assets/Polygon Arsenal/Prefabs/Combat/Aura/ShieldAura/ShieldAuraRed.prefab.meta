@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 44f53485b1604f64a89c89df1e81c578
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Aura/ShieldAura/ShieldAuraRed.prefab
+  uploadId: 623125

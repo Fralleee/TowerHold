@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 69e09af0bf31c1c4f94aac4de1a7b286
+timeCreated: 1512489480
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Powerups/Orbs/Small/GlowPowerupSmallBlue.prefab
+  uploadId: 623125

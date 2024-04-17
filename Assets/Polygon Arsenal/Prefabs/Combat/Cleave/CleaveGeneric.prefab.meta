@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 093c96e014050c34c82900e22bb4c2be
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Cleave/CleaveGeneric.prefab
+  uploadId: 623125

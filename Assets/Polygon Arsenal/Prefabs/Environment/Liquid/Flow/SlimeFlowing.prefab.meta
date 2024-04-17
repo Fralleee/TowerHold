@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ce50c0d669751724fa6ffe6158937849
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Liquid/Flow/SlimeFlowing.prefab
+  uploadId: 623125

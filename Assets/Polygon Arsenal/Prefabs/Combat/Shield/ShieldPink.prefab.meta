@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d4282856d39d5764c8788bd5ece3f58e
+timeCreated: 1514485524
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Shield/ShieldPink.prefab
+  uploadId: 623125

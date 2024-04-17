@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b5f4925f720394e488fc885f7fa344d8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Treasure/Fountain/Coin/CoinFountainGold.prefab
+  uploadId: 623125

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a1abe34d22b8be947a05ddbb0137d2d3
+timeCreated: 1514666056
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Sci-Fi/Bullet/BulletGreen.prefab
+  uploadId: 623125

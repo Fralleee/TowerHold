@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 556e8517be08de84c85b9688bfc51853
+timeCreated: 1515079731
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Sniper/SniperMuzzlePink.prefab
+  uploadId: 623125

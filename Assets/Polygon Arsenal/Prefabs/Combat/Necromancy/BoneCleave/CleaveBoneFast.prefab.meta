@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 41e901fdaa309f14da5c9d03f44d5986
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Necromancy/BoneCleave/CleaveBoneFast.prefab
+  uploadId: 623125

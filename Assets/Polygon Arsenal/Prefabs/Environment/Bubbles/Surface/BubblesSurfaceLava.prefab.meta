@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d2c879185db1c7f478ab03620635a3cc
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Bubbles/Surface/BubblesSurfaceLava.prefab
+  uploadId: 623125

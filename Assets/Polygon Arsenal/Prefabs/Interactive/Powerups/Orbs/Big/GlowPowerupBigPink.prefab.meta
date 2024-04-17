@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ec8013c333a35a04aa1b916a66612051
+timeCreated: 1512488930
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Powerups/Orbs/Big/GlowPowerupBigPink.prefab
+  uploadId: 623125

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 42bf9ea7ef7afc04c8b680b9a7a75039
+timeCreated: 1509477786
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Magic/Liquid/WaterMissile.prefab
+  uploadId: 623125

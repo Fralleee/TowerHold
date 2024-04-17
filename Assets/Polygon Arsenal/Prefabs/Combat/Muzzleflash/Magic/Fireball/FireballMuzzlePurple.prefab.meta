@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0f4faf49a7bdcbc46be66c4326c4d3d2
+timeCreated: 1514688860
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Magic/Fireball/FireballMuzzlePurple.prefab
+  uploadId: 623125

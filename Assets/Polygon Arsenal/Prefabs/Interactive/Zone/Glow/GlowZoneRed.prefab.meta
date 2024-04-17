@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 70d59fac261e86f489f55b465d666b26
+timeCreated: 1512669937
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Zone/Glow/GlowZoneRed.prefab
+  uploadId: 623125

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1f71a30319178e04bb7ccbb4eb0f8e31
+timeCreated: 1513459435
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Loot/LootRing/LootRingRed.prefab
+  uploadId: 623125

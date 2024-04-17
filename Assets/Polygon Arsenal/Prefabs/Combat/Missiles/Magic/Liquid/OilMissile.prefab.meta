@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7f5e55fc979b2ee4e94cda9bba5ec971
+timeCreated: 1509476796
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Magic/Liquid/OilMissile.prefab
+  uploadId: 623125

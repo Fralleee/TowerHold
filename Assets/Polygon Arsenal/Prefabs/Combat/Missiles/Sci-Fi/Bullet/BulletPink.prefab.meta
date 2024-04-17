@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f32519dcf58417d42baabdf6e4f2c04e
+timeCreated: 1514666116
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Sci-Fi/Bullet/BulletPink.prefab
+  uploadId: 623125

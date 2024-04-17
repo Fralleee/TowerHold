@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2911843ef7fbabf4da3be1e87ff86ebb
+timeCreated: 1515542342
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Sound/Prefabs/Explosions/PolyLaserExplosionSND.prefab
+  uploadId: 623125

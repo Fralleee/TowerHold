@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a3e599a9a05588f48b01a8de1a048882
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Standard/PistolExplosionStandard.prefab
+  uploadId: 623125

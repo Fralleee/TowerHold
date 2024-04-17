@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7d5fbd835b0710442b596746582004eb
+timeCreated: 1514664259
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Sci-Fi/BlackHole/BlackHoleExplosionBlue.prefab
+  uploadId: 623125

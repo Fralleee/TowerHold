@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 148b1a0736ef85e41845a188ca3b7d35
+timeCreated: 1528834050
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Tornado/FireTornado.prefab
+  uploadId: 623125

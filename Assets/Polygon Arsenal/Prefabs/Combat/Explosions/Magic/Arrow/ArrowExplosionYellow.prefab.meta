@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 63c71c05f1f12d042bd91b7ef53e1549
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Magic/Arrow/ArrowExplosionYellow.prefab
+  uploadId: 623125

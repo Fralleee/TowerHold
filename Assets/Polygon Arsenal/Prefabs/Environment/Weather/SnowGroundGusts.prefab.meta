@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3925cb1eb901b5f458accf160182bc17
+timeCreated: 1513957385
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Weather/SnowGroundGusts.prefab
+  uploadId: 623125

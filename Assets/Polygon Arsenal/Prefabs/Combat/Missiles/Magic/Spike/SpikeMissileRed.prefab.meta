@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 60dd61ebca5e9744a9d71b48cfde9130
+timeCreated: 1510595977
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Magic/Spike/SpikeMissileRed.prefab
+  uploadId: 623125

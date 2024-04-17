@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 30b7d03015c747f49abcdcf534eadf32
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Treasure/Grab/TreasureGrabEpic.prefab
+  uploadId: 623125

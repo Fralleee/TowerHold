@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 41503e5db06023b46873ae2eb41ca3b7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Chains/ChainTarget/ChainTargetFire.prefab
+  uploadId: 623125

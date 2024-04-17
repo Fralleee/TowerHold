@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8ae493ccd5d0cd445b5da9b30256cce9
+timeCreated: 1514401230
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Charge/V1/ChargeSphereBlue.prefab
+  uploadId: 623125

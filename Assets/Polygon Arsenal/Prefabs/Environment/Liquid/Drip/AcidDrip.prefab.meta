@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 02f9b7403c0b2fd46ae119f92aeb1ce5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Liquid/Drip/AcidDrip.prefab
+  uploadId: 623125

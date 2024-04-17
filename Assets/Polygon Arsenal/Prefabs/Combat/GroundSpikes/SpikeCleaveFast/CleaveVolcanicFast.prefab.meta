@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3f1eb40c2bfc8544d82cc38629fa82ed
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/GroundSpikes/SpikeCleaveFast/CleaveVolcanicFast.prefab
+  uploadId: 623125

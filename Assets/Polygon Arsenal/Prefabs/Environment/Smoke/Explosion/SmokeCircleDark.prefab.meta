@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 32b679ac2fa27cb4f921a45940ac0e7c
+timeCreated: 1515507071
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Smoke/Explosion/SmokeCircleDark.prefab
+  uploadId: 623125

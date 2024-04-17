@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8f0ca58aea37bc848b13d4e2f8c5faf3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Magic/Lightning/LightningExplosionGreen.prefab
+  uploadId: 623125

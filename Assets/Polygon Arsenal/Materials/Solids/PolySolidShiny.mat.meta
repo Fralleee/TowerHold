@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6da7e584c6c676c42baf97788cd19ad8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Materials/Solids/PolySolidShiny.mat
+  uploadId: 623125

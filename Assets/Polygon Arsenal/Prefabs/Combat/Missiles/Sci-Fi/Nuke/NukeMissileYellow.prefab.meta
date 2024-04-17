@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5bbe345b3bde06a46895ec62cdf32566
+timeCreated: 1514827357
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Sci-Fi/Nuke/NukeMissileYellow.prefab
+  uploadId: 623125

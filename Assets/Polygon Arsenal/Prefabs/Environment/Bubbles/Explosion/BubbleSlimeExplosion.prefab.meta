@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 212a829d776579a40859ae9f24b4c2a2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Bubbles/Explosion/BubbleSlimeExplosion.prefab
+  uploadId: 623125

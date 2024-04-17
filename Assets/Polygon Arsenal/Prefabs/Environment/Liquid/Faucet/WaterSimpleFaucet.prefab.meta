@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 475e102bb25f42c4ab36d56df148217f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Liquid/Faucet/WaterSimpleFaucet.prefab
+  uploadId: 623125

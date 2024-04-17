@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8b0bac695c4b3a84e9512ec34ab8fad7
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Environment/PolyEnvironment.unity
+  uploadId: 623125

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fadade6a90b5e4f47ba846b5ff143b90
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Chains/ChainTarget/ChainTargetLife.prefab
+  uploadId: 623125

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 293eb36a3d90b754881b27bea2223b4e
+timeCreated: 1515517142
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Powerups/Icons Solid/PowerIconShieldv2.prefab
+  uploadId: 623125

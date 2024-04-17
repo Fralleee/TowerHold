@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9b3a82ef39983f445b4eeb92eacc8157
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Rocks/FallingRocks.prefab
+  uploadId: 623125

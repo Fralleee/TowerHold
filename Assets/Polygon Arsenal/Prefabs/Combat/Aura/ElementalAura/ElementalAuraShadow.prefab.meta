@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9cc8c345b8d4c464aaadb8423b26fa60
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Aura/ElementalAura/ElementalAuraShadow.prefab
+  uploadId: 623125

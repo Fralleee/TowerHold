@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ab29580e29199d245a45e7b72c663b4a
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Environment/PolyConfetti.unity
+  uploadId: 623125

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: add048e63cd92234a914b6f691ac05c3
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Interactive/PolyTreasure2.unity
+  uploadId: 623125

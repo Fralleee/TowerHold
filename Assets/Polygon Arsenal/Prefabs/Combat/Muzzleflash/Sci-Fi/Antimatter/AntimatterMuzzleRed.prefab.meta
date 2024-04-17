@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9728a472fc8602a46b15c6e5b69c45a9
+timeCreated: 1514994283
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Antimatter/AntimatterMuzzleRed.prefab
+  uploadId: 623125

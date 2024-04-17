@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d6a7f9187723d5b46bf5fa9a69529067
+timeCreated: 1515439063
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Sci-Fi/Proton/ProtonMissilePink.prefab
+  uploadId: 623125

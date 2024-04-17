@@ -226,7 +226,8 @@ MonoBehaviour:
     type: 3}
   _healthBarOffset: 1
   IsDead: 0
-  _deathSound: {fileID: 8300000, guid: 9b50fce87f197464c872748be6bdefe3, type: 3}
+  _deathSound: {fileID: 6418180475301049370, guid: 8b997ecc3e247824b977891ea86c390e,
+    type: 2}
   AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   CurrentZone: 5
   DistanceToTower: 0

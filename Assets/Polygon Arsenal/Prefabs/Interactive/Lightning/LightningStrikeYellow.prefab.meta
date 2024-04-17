@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5a00130b18b389a499fb14acfe26bc2d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Lightning/LightningStrikeYellow.prefab
+  uploadId: 623125

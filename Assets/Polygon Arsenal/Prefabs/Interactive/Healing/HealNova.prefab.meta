@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ac2e3333c9fe890459e7a4aba4a3b2b9
+timeCreated: 1534695297
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Healing/HealNova.prefab
+  uploadId: 623125

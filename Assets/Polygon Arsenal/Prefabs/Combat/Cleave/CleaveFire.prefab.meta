@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 46660d7c20f9b264084e19daa4b93b1e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Cleave/CleaveFire.prefab
+  uploadId: 623125

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a17347c42dfc98c4b861a7e41a444d6f
+timeCreated: 1510014154
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Magic/Ice/IceExplosion.prefab
+  uploadId: 623125

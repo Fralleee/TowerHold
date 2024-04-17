@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: eeb92f10136c3174d8c830dc83ece4a7
+timeCreated: 1515108824
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Spike/SpikeMuzzleBlue.prefab
+  uploadId: 623125

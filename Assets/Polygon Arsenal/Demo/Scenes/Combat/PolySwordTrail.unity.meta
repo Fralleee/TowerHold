@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b1d670b984fd14c4c87f66e77915d22e
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Combat/PolySwordTrail.unity
+  uploadId: 623125

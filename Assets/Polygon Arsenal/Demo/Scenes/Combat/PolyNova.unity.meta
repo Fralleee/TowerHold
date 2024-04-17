@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 854df391496826b4493124d6250f3bb6
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Combat/PolyNova.unity
+  uploadId: 623125

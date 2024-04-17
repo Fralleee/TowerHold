@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 00f33c39964fa154b9b082dc73e7eca2
+timeCreated: 1515512146
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Buff/BuffRed.prefab
+  uploadId: 623125

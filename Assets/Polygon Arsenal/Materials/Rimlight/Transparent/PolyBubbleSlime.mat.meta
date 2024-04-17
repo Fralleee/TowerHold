@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6943738e13eb6d349bf31bbc0ecf83e6
+timeCreated: 1508778075
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Materials/Rimlight/Transparent/PolyBubbleSlime.mat
+  uploadId: 623125

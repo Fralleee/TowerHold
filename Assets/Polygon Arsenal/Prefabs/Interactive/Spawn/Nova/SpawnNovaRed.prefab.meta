@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f1a1c60952b571c4fa485b0139d4a6b7
+timeCreated: 1512669536
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Spawn/Nova/SpawnNovaRed.prefab
+  uploadId: 623125

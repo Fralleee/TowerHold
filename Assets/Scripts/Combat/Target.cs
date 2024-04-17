@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Target : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Target : MonoBehaviour
 	[ReadOnly] public bool IsDead;
 
 	[Header("Audio")]
-	[SerializeField] AudioClip _deathSound;
+	[SerializeField] AudioResource _deathSound;
 	[SerializeField] protected AudioSettings AudioSettings;
 
 	protected AudioSource AudioSource;
@@ -104,11 +105,12 @@ public class Target : MonoBehaviour
 		}
 	}
 
-	void PlaySound(AudioClip clip)
+	void PlaySound(AudioResource clip)
 	{
 		if (clip != null && AudioSource != null)
 		{
-			AudioSource.PlayOneShot(clip);
+			AudioSource.resource = clip;
+			AudioSource.Play();
 		}
 		else
 		{

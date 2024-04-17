@@ -226,7 +226,8 @@ MonoBehaviour:
     type: 3}
   _healthBarOffset: 0
   IsDead: 0
-  _deathSound: {fileID: 8300000, guid: 9b50fce87f197464c872748be6bdefe3, type: 3}
+  _deathSound: {fileID: 6418180475301049370, guid: 8b997ecc3e247824b977891ea86c390e,
+    type: 2}
   AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   CurrentZone: 0
   DistanceToTower: 0
@@ -756,7 +757,7 @@ Animator:
   m_GameObject: {fileID: 7170081506080153353}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a1009a87b6bc3f34186440137fc0df16, type: 2}
+  m_Controller: {fileID: 22100000, guid: fba5d5dc0adbac94d8fb2a3a3fffb251, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -4,6 +4,7 @@ public class Projectile : MonoBehaviour
 	[Header("Graphics")]
 	[SerializeField] GameObject _impactParticle;
 	[SerializeField] GameObject _muzzleParticle;
+	[SerializeField] GameObject[] _trails;
 
 	[Header("Audio")]
 	[SerializeField] AudioClip _attackSound;
@@ -128,17 +129,13 @@ public class Projectile : MonoBehaviour
 			Destroy(_impactParticle, 5.0f);
 		}
 
-		Destroy(gameObject);
-		var trails = GetComponentsInChildren<ParticleSystem>();
-		for (var i = 1; i < trails.Length; i++)
+		foreach (var trail in _trails)
 		{
-			var trail = trails[i];
-			if (trail.gameObject.name.Contains("Trail"))
-			{
-				trail.transform.SetParent(null);
-				Destroy(trail.gameObject, 2f);
-			}
+			trail.transform.SetParent(null);
+			Destroy(trail, 2f);
 		}
+
+		Destroy(gameObject);
 	}
 
 	void PlaySound(AudioClip clip)

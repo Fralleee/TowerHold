@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 461f30ea84bf15043914df9a21e1b2c1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Chains/ChainTarget/ChainTargetLightningPurple.prefab
+  uploadId: 623125

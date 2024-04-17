@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3b16c1a4df23b3f418dd8e0bb1d0378c
+timeCreated: 1508778075
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Materials/Rimlight/Solid/PolyIceSolid.mat
+  uploadId: 623125

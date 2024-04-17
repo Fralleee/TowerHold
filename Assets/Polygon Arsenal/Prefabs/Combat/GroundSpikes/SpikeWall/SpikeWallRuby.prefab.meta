@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c787f092f550d1b4283ddc72abdec1ec
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/GroundSpikes/SpikeWall/SpikeWallRuby.prefab
+  uploadId: 623125

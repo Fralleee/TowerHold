@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: de71daae06d6c744088c3acad25c54b3
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Interactive/PolyPortal2.unity
+  uploadId: 623125

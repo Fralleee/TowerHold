@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fa4a4b8cfb8c5db4eae3b57a6eafc8dd
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/BeamUp/Chargeup/BeamupChargeupGreen.prefab
+  uploadId: 623125

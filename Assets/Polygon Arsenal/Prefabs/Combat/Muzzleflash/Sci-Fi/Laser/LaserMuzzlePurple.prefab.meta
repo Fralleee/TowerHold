@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b88d1ae098830534ba2128cc572c52b1
+timeCreated: 1514691118
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Laser/LaserMuzzlePurple.prefab
+  uploadId: 623125

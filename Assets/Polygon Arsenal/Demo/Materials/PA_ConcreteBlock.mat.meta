@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 814c9855971351d47b17e020a3440381
+timeCreated: 1516036597
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Materials/PA_ConcreteBlock.mat
+  uploadId: 623125

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: aa2a368f1ca139b4ea6dfc8d752ecbcb
+timeCreated: 1514485399
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Shield/ShieldYellow.prefab
+  uploadId: 623125

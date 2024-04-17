@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a5454a3bd40ff7e4b9e27a68e3fc0c11
+timeCreated: 1515542342
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Sound/Prefabs/Explosions/PolyFlashGrenadeExplosionSND.prefab
+  uploadId: 623125

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 196711e4573d52940884d218d09b056f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Liquid/Flow/OilFlowing.prefab
+  uploadId: 623125

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 88d4bc0f42a87644881bf502ed212718
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Liquid/Drip/OilDrip.prefab
+  uploadId: 623125

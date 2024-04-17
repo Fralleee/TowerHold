@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 86a522c6fc590e5419e5d157fc6bd1e2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Trails/AirTrails/SparklyTrail.prefab
+  uploadId: 623125

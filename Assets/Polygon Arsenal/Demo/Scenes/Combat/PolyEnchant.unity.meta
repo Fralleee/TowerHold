@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c43644689fc2bd74baf2130037176173
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Combat/PolyEnchant.unity
+  uploadId: 623125

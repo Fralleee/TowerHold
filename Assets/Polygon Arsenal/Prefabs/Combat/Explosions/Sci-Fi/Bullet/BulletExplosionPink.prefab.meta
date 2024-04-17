@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5c3ba859e2763bf4e837212aba554d74
+timeCreated: 1515439316
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Sci-Fi/Bullet/BulletExplosionPink.prefab
+  uploadId: 623125

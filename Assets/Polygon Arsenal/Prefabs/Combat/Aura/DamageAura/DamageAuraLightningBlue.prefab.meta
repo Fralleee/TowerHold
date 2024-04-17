@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7946c70af3b048440a5e52d114f76cd3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Aura/DamageAura/DamageAuraLightningBlue.prefab
+  uploadId: 623125

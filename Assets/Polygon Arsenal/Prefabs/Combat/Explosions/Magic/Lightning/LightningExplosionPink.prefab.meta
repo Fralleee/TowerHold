@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ec0b960c2f3b95349ad9b1a85f07858c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Magic/Lightning/LightningExplosionPink.prefab
+  uploadId: 623125

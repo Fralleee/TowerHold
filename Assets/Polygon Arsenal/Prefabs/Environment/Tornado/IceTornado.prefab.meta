@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 848fa759b9145764d8a5a8fbf331237c
+timeCreated: 1528834705
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Tornado/IceTornado.prefab
+  uploadId: 623125

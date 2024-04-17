@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: acc1861bc8fa24f42a0aca61eb54c17e
+timeCreated: 1515089974
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Grenade/GrenadeMuzzlePink.prefab
+  uploadId: 623125

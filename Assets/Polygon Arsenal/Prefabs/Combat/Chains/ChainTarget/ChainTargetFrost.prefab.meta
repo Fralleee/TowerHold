@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4e3f11d7440e9c947b5c3a26f30659c4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Chains/ChainTarget/ChainTargetFrost.prefab
+  uploadId: 623125

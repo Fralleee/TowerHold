@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 972c2ef1fd537864f999a420385e987a
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Combat/PolyCleave.unity
+  uploadId: 623125

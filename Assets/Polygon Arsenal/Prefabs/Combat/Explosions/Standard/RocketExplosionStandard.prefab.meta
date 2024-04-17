@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: be01741081bb2c944aad51a527b3e120
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Standard/RocketExplosionStandard.prefab
+  uploadId: 623125

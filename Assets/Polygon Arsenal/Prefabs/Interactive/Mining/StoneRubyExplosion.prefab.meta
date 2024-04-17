@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ebb990470c008a448ae79ed7c31dc0c4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Mining/StoneRubyExplosion.prefab
+  uploadId: 623125

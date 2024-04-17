@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 05f78e81ece0b22478931e139dcd522a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Aura/ElementalAura/ElementalAuraStorm2.prefab
+  uploadId: 623125

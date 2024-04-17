@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dd2dba16c3d8cb94eb0700c99f3e2fe4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Barrage/Nova/BarrageNovaBone.prefab
+  uploadId: 623125

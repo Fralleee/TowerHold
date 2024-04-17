@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 02a7afa317cd14f43b44c350f8344262
+timeCreated: 1513563281
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Fireflies/Advanced/FireFliesBlue.prefab
+  uploadId: 623125

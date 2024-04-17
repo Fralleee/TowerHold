@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 125267563b10ea44cbac9fdd2323e95d
+timeCreated: 1515426104
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Sharp/SharpMuzzlePurple.prefab
+  uploadId: 623125

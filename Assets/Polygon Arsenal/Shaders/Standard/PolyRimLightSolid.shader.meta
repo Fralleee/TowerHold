@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 86889086497f4f4459550c816ab55e34
+timeCreated: 1509838764
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Shaders/Standard/PolyRimLightSolid.shader
+  uploadId: 623125

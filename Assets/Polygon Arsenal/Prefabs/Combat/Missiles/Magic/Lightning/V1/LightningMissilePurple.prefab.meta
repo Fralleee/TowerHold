@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1df1b7b3b7abdfb4b8ed847537d6ab7b
+timeCreated: 1514823771
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Magic/Lightning/V1/LightningMissilePurple.prefab
+  uploadId: 623125

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 29db89a531eeb0a44b653f7ee1d5dcf7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Lightning/LightningStrikeBlue.prefab
+  uploadId: 623125

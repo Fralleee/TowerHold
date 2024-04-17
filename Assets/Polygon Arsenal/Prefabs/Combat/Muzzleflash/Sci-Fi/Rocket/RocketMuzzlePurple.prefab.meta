@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4024818252d44d64d87d853380a90c65
+timeCreated: 1515082784
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Muzzleflash/Sci-Fi/Rocket/RocketMuzzlePurple.prefab
+  uploadId: 623125

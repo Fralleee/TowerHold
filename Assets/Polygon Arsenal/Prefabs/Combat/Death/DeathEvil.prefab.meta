@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7ae1d86c2db118940a3a5a8f8e59a43d
+timeCreated: 1534425046
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Death/DeathEvil.prefab
+  uploadId: 623125

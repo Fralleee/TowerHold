@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9203be95001d8d345ba85e8df14c36d6
+timeCreated: 1514602102
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Sci-Fi/Proton/ProtonExplosionPink.prefab
+  uploadId: 623125

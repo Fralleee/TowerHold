@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9e045a0c133562f4e8bfa2863d2e8cf1
+timeCreated: 1528810150
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Confetti/ConfettiRain.prefab
+  uploadId: 623125

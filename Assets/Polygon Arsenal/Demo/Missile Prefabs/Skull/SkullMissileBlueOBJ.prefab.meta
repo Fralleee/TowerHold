@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8f9e8a92edad4354884a5d4a3501497e
+timeCreated: 1508948566
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Missile Prefabs/Skull/SkullMissileBlueOBJ.prefab
+  uploadId: 623125

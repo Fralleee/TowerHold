@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 23c35bb40b4c7ad40b6ffde697ffe612
+timeCreated: 1514823288
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Sci-Fi/Plasma/PlasmaMissilePink.prefab
+  uploadId: 623125

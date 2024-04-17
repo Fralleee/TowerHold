@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 89e35a83dcbef2349897d34e9e57e49a
+timeCreated: 1510251853
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Shield/ShieldBlue.prefab
+  uploadId: 623125

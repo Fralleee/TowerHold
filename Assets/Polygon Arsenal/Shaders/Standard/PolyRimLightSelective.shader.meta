@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b4b9827572db2a6458d7ef80fafe4b23
+timeCreated: 1512433847
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Shaders/Standard/PolyRimLightSelective.shader
+  uploadId: 623125

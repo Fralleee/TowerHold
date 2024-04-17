@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6aed5a3057d00d84aabcbed62f48a79a
+timeCreated: 1512604165
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Spawn/Nova/SpawnNovaPurple.prefab
+  uploadId: 623125

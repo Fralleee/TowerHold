@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 694eaf4eb7cfdcb449e05d557350dd93
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Beams/Static Beam/PolyBeamStaticYellow.prefab
+  uploadId: 623125

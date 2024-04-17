@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 30d2aa8b9225a3846b91b4e55dca1939
+timeCreated: 1514487417
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Explosions/Magic/Fireball/FireballExplosionGreen.prefab
+  uploadId: 623125

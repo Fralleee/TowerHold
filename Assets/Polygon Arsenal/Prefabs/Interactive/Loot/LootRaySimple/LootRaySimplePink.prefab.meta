@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 381e47c45c0398d47bcbacb8ab93ce89
+timeCreated: 1513458806
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Loot/LootRaySimple/LootRaySimplePink.prefab
+  uploadId: 623125

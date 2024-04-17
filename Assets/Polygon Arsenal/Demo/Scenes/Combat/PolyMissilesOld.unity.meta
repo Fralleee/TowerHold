@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 90da665e61c9e4f4a8be80a346e39c90
+timeCreated: 1508520462
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Demo/Scenes/Combat/PolyMissilesOld.unity
+  uploadId: 623125

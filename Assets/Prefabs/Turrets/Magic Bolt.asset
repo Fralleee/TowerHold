@@ -25,7 +25,7 @@ MonoBehaviour:
   _timeBetweenFindTarget: 1
   _criticalHitChance: 0
   _criticalHitMultiplier: 2
-  _projectilePrefab: {fileID: 9212724085591995478, guid: 84414ce358c1a0f4888564b24840db29,
+  _projectilePrefab: {fileID: 6381126167893304047, guid: d3a5c3853c82a1941a3fc7ad8f7fcaf2,
     type: 3}
   _projectileSettings:
     Speed: 25

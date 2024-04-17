@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2e1c0b8011b0f2f469b6177bfbe55a65
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/Liquid/Drip/SlimeDrip.prefab
+  uploadId: 623125

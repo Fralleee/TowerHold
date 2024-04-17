@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0d5d2e997cd0fe24e864f44814f515b7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/GroundSpikes/SpikeCleaveFast/CleaveIceFast.prefab
+  uploadId: 623125

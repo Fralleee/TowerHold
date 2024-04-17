@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 273fc170e362768478e417cf30ff1edc
+timeCreated: 1514825729
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Combat/Missiles/Sci-Fi/Nuke/NukeMissilePink.prefab
+  uploadId: 623125

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 09207917865331a44b801d5fd677fb6e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Interactive/Trails/AirTrails/TreasureTrail.prefab
+  uploadId: 623125

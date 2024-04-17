@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b1a53a00c72a0ba499170ba2f29ace6e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 109286
+  packageName: Polygon Arsenal
+  packageVersion: 2.04
+  assetPath: Assets/Polygon Arsenal/Prefabs/Environment/LightRays/LightRayFlickerSquare01.prefab
+  uploadId: 623125
