@@ -45,6 +45,7 @@ public class TooltipController : MonoBehaviour
 		_tooltip.AddToClassList("active");
 		_tooltip.Border.style.backgroundColor = tooltipContent.BorderColor;
 		_tooltip.AddData(tooltipContent);
+		_tooltip.SetPickingModeRecursive(PickingMode.Ignore);
 	}
 
 	void HideTooltip()
