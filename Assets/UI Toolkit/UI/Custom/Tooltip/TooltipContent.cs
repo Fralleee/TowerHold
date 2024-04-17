@@ -71,8 +71,9 @@ public class TooltipContent : VisualElement
 		CostContainer.AddImageLabel(styleSettings.GetIcon(GameIcons.Gold), item.Cost.ToString(), styleSettings.GetShopTypeColor(ShopType.Income));
 
 		var safeDescription = string.IsNullOrEmpty(item.Description) ? "No description." : item.Description;
+		var parsedDescription = safeDescription.Replace("#Amount#", item.Amount.ToString());
 		var damageType = item is DamageShopItem damageShopItem ? damageShopItem.DamageType : DamageType.Global;
-		DescriptionContainer.Write(safeDescription, styleSettings, item.Amount, 0, item.Amount, damageType, item.ShopType);
+		DescriptionContainer.Write(parsedDescription, styleSettings, damageType, item.ShopType);
 	}
 
 	public virtual void Update(TooltipContent tooltipContent)

@@ -16,51 +16,68 @@ public class RichTextWithImages : VisualElement
 		AddText(text, tint);
 	}
 
-	public void Write(string text, StyleSettings styleSettings, float amount, float duration, float factor, DamageType damageType, ShopType shopType)
+	public void Write(string text, StyleSettings styleSettings, DamageType damageType, ShopType shopType)
 	{
 		AddRow();
 
 		var parts = text.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
 		foreach (var part in parts)
 		{
-			switch (part)
+			var segments = part.Split(':');
+			if (segments.Length == 1)
 			{
-				case "PercentDamageType":
-					AddPercent(factor, damageType, styleSettings);
+				switch (part)
+				{
+					case "DamageTypeIcon":
+						AddDamageType(damageType, styleSettings, true);
+						break;
+					case "ShopTypeIcon":
+						AddShopType(shopType, styleSettings, true);
+						break;
+					case "DamageType":
+						AddDamageType(damageType, styleSettings);
+						break;
+					case "ShopType":
+						AddShopType(shopType, styleSettings);
+						break;
+					case "Newline":
+						AddRow();
+						break;
+					default:
+						AddText(part);
+						break;
+				}
+				continue;
+			}
+
+
+			var formatType = segments[0];
+			var value = float.Parse(segments[1]);
+			var colorType = segments.Length > 2 ? segments[2] : null;
+			Color? color = colorType != null ? GetColorByType(colorType, damageType, shopType, styleSettings) : null;
+			switch (formatType)
+			{
+				case "Percent":
+					AddFormattedText($"{value * 100:0.##}%", color);
 					break;
-				case "PercentType":
-					AddPercent(factor, shopType, styleSettings);
-					break;
-				case "Damage":
-					AddDamage(amount, damageType, styleSettings);
-					break;
-				case "DamageType":
-					AddDamageType(damageType, styleSettings);
-					break;
-				case "DPS":
-					var damagePerSecond = amount / duration;
-					AddDamage(damagePerSecond, damageType, styleSettings);
-					break;
-				case "Duration":
-					AddDuration(duration, damageType, styleSettings);
-					break;
-				case "Type":
-					AddType(shopType, styleSettings);
-					break;
-				case "TypeIcon":
-					AddType(shopType, styleSettings, true);
-					break;
-				case "Amount":
-					AddAmount(amount, shopType, styleSettings);
-					break;
-				case "Newline":
-					AddRow();
+				case "Flat":
+					AddFormattedText($"{value:0.##}", color);
 					break;
 				default:
 					AddText(part);
 					break;
 			}
 		}
+	}
+
+	Color GetColorByType(string type, DamageType damageType, ShopType shopType, StyleSettings styleSettings)
+	{
+		return type switch
+		{
+			"ShopType" => styleSettings.GetShopTypeColor(shopType),
+			"DamageType" => styleSettings.GetDamageTypeColor(damageType),
+			_ => Color.white // Default color
+		};
 	}
 
 	void AddRow()
@@ -70,16 +87,9 @@ public class RichTextWithImages : VisualElement
 		Add(_currentContainer);
 	}
 
-	void AddPercent(float factor, DamageType damageType, StyleSettings styleSettings)
+	void AddFormattedText(string value, Color? color = null)
 	{
-		var color = styleSettings.GetDamageTypeColor(damageType);
-		AddText($"<b>{factor * 100:0.##}%</b>", color);
-	}
-
-	void AddPercent(float factor, ShopType shopType, StyleSettings styleSettings)
-	{
-		var color = styleSettings.GetShopTypeColor(shopType);
-		AddText($"<b>{factor * 100:0.##}%</b>", color);
+		AddText($"<b>{value:0.##}</b>", color);
 	}
 
 	void AddDamageType(DamageType damageType, StyleSettings styleSettings, bool iconOnly = false)
@@ -97,21 +107,7 @@ public class RichTextWithImages : VisualElement
 		}
 	}
 
-	void AddDamage(float amount, DamageType damageType, StyleSettings styleSettings)
-	{
-		var text = $"<b>{amount:0.##}</b>";
-		var color = styleSettings.GetDamageTypeColor(damageType);
-		AddText(text, color);
-	}
-
-	void AddDuration(float duration, DamageType damageType, StyleSettings styleSettings)
-	{
-		var text = $"<b>{duration:0.##}</b>";
-		var color = styleSettings.GetDamageTypeColor(damageType);
-		AddText(text, color);
-	}
-
-	void AddType(ShopType shopType, StyleSettings styleSettings, bool iconOnly = false)
+	void AddShopType(ShopType shopType, StyleSettings styleSettings, bool iconOnly = false)
 	{
 		var color = styleSettings.GetShopTypeColor(shopType);
 		var icon = styleSettings.GetShopTypeIcon(shopType);
@@ -124,13 +120,6 @@ public class RichTextWithImages : VisualElement
 		{
 			AddText($" <b>{shopType}</b>", color);
 		}
-	}
-
-	void AddAmount(float amount, ShopType shopType, StyleSettings styleSettings)
-	{
-		var text = $"<b>{amount:0.##}</b>";
-		var color = styleSettings.GetShopTypeColor(shopType);
-		AddText(text, color);
 	}
 
 	void AddText(string text, Color? color = null)

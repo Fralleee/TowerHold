@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine.UIElements;
 
 public class TurretTooltipContent : TooltipContent
@@ -34,14 +35,15 @@ public class TurretTooltipContent : TooltipContent
 			var currentDamage = Tower.Instance.GetDamage(turret.DamageType, turret.ShopType, baseDamage, 0, 0);
 
 			var safeDescription = string.IsNullOrEmpty(description) ? "No description." : description;
-			DescriptionContainer.Write(safeDescription, styleSettings, currentDamage, timeBetweenAttacks, 0, turret.DamageType, turret.ShopType);
+			var parsedDescription = safeDescription.Replace("#Damage#", $"{{Flat:{currentDamage}:DamageType}} {{DamageType}}");
+			DescriptionContainer.Write(parsedDescription, styleSettings, turret.DamageType, turret.ShopType);
 
 			turret.Behaviors.ForEach(behavior => behavior.Tooltip(DescriptionContainer, styleSettings, turret));
 
 			if (criticalHitChance > 0)
 			{
-				var template = "This ability has a {PercentDamageType} chance of a critical hit which causes {Damage} {DamageType} damage.";
-				DescriptionContainer.Write(template, styleSettings, criticalHitMultiplier * currentDamage, 0, criticalHitChance, turret.DamageType, turret.ShopType);
+				var template = $"This ability has a {{Percent:{criticalHitChance}:ShopType}} chance of a critical hit which causes {{Flat:{currentDamage * criticalHitMultiplier}:DamageType}} {{DamageType}} damage.";
+				DescriptionContainer.Write(template, styleSettings, turret.DamageType, turret.ShopType);
 			}
 
 			ShopTypeContainer.AddImageLabel(styleSettings.GetShopTypeIcon(item.ShopType), item.ShopType.ToString(), styleSettings.GetShopTypeColor(item.ShopType));

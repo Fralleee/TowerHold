@@ -17,7 +17,7 @@ public class DamageOverTimeBehavior : TurretBehavior
 
 	public override void Tooltip(RichTextWithImages descriptionContainer, StyleSettings styleSettings, Turret turret)
 	{
-		var template = "Deals {DPS} {DamageType} damage per second for {Duration} seconds for a total of {Damage} {DamageType} damage.";
-		descriptionContainer.Write(template, styleSettings, TotalDamage, Duration, 0, turret.DamageType, turret.ShopType);
+		var template = $"Deals {{Flat:{TotalDamage / Duration}:DamageType}} {{DamageType}} damage per second for {{Flat:{Duration}:DamageType}} seconds for a total of {{Flat:{TotalDamage}:DamageType}} {{DamageType}} damage.";
+		descriptionContainer.Write(template, styleSettings, turret.DamageType, turret.ShopType);
 	}
 }

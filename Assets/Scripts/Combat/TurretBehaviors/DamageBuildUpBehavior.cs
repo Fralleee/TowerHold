@@ -16,7 +16,7 @@ public class DamageBuildUpBehavior : TurretBehavior
 
 	public override void Tooltip(RichTextWithImages descriptionContainer, StyleSettings styleSettings, Turret turret)
 	{
-		var template = "Each hit increases damage by {PercentDamageType} up to {Damage} times.";
-		descriptionContainer.Write(template, styleSettings, MaxStacks, 0, DamageMultiplierPerStack, turret.DamageType, turret.ShopType);
+		var template = $"Each hit increases damage by {{Percent:{DamageMultiplierPerStack}:DamageType}} up to {{Flat:{MaxStacks}:DamageType}} times.";
+		descriptionContainer.Write(template, styleSettings, turret.DamageType, turret.ShopType);
 	}
 }
