@@ -15,7 +15,7 @@ MonoBehaviour:
   ShopType: 6
   Texture: {fileID: 2800000, guid: 47752a3a5783e224d94e0f617c5b50a0, type: 3}
   RarityType: 0
-  Description: Increases {Type} weapons by {PercentType}.
+  Description: Increases {{ShopType}} weapons by {{Percent:#Amount#:ShopType}}.
   Amount: 0.1
   _category: 3
   DamageType: 0

@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
-  m_Name: Slingshot
+  m_Name: DartProjectile
   m_EditorClassIdentifier: 
-  ShopType: 5
-  Texture: {fileID: 2800000, guid: 2253d0668613b584ebe2a794ba76a2d4, type: 3}
+  ShopType: 8
+  Texture: {fileID: 2800000, guid: 055fdf273079625489400668c50ff225, type: 3}
   RarityType: 0
   Description: Shoots towards nearest enemy causing #Damage# damage.
   Amount: 30
-  _category: 2
-  DamageType: 0
-  _baseDamage: 35
+  _category: 5
+  DamageType: 1
+  _baseDamage: 15
   _attackRange: 4
-  _timeBetweenAttacks: 1
+  _timeBetweenAttacks: 0.5
   _timeBetweenFindTarget: 1
-  _criticalHitChance: 0.2
-  _criticalHitMultiplier: 3
-  Behaviors: []
-  _projectilePrefab: {fileID: 9212724085591995478, guid: 02e570c8d0e868841911ce82789924eb,
-    type: 3}
+  _criticalHitChance: 0
+  _criticalHitMultiplier: 2
+  Behaviors:
+  - {fileID: 11400000, guid: d3045c9f63bc8a542a7437ce503f7a69, type: 2}
+  _projectilePrefab: {fileID: 0}
   _projectileSettings:
-    Speed: 55
+    Speed: 40
     UseParabolicArc: 1
     MaxArcHeight: 5
-  _attackSound: {fileID: 0}
-  _audioSettings: {fileID: 0}
+  _attackSound: {fileID: 8300000, guid: 40f9dc839d97a454782e11bf5da041c2, type: 3}
+  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   _impactParticle: {fileID: 0}

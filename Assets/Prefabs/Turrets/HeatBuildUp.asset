@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc752b4a44bc7f14cbf07355b23c43b1, type: 3}
   m_Name: HeatBuildUp
   m_EditorClassIdentifier: 
-  DamageMultiplierPerStack: 0.1
-  MaxStacks: 5
+  DamageMultiplierPerStack: 0.2
+  MaxStacks: 10

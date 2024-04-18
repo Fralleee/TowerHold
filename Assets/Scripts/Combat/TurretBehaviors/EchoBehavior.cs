@@ -9,7 +9,7 @@ public class EchoBehavior : TurretBehavior
 
 	public override bool PreferNewTarget => false;
 
-	public override void Execute(Turret turret, Enemy target)
+	public override void Execute(Turret turret, Target target)
 	{
 		var random = GameController.Instance.RandomGenerator.NextFloat();
 		if (random < Chance)

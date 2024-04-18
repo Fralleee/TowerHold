@@ -8,7 +8,7 @@ public class DamageBuildUpBehavior : TurretBehavior
 
 	public override bool PreferNewTarget => false;
 
-	public override void Execute(Turret turret, Enemy target)
+	public override void Execute(Turret turret, Target target)
 	{
 		var debuff = new DamageBuildUpDebuff(turret.Name, DamageMultiplierPerStack, MaxStacks);
 		target.ApplyDebuff(debuff);

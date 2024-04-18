@@ -79,23 +79,13 @@ public class Turret : DamageShopItem
 			return;
 		}
 
-		PerformAttack();
-
-		if (executeBehaviors)
-		{
-			ExecuteBehaviors(excludeBehavior);
-		}
-	}
-
-	void PerformAttack()
-	{
 		if (_projectilePrefab == null)
 		{
-			InstantAttack();
+			InstantAttack(executeBehaviors, excludeBehavior);
 		}
 		else
 		{
-			ProjectileAttack();
+			ProjectileAttack(executeBehaviors, excludeBehavior);
 		}
 	}
 
@@ -111,12 +101,17 @@ public class Turret : DamageShopItem
 		}
 	}
 
-	void InstantAttack()
+	void InstantAttack(bool executeBehaviors = true, TurretBehavior excludeBehavior = null)
 	{
 		if (_target != null)
 		{
 			var damage = _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier);
 			_ = _target.TakeDamage(Mathf.RoundToInt(damage));
+
+			if (executeBehaviors)
+			{
+				ExecuteBehaviors(excludeBehavior);
+			}
 
 			if (_impactParticle)
 			{
@@ -137,12 +132,12 @@ public class Turret : DamageShopItem
 		}
 	}
 
-	void ProjectileAttack()
+	void ProjectileAttack(bool executeBehaviors = true, TurretBehavior excludeBehavior = null)
 	{
 		var rotation = Quaternion.LookRotation(_target.transform.position - _tower.Center.position);
 		var projectile = Instantiate(_projectilePrefab, _tower.Center.position, rotation);
 		var damage = _tower.GetDamage(DamageType, ShopType, _baseDamage, _criticalHitChance, _criticalHitMultiplier);
-		projectile.Setup(_target, damage, true, _projectileSettings);
+		projectile.Setup(_target, damage, _projectileSettings, this, executeBehaviors, excludeBehavior);
 	}
 
 	public override TooltipContent Tooltip(StyleSettings styleSettings)

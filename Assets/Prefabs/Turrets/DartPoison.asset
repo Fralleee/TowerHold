@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bfad47e39a10345ab991decd06df17, type: 3}
   m_Name: DartPoison
   m_EditorClassIdentifier: 
-  Duration: 5
-  TotalDamage: 50
+  Duration: 10
+  TotalDamage: 150
   TickRate: 1
-  ImpactParticle: {fileID: 0}
+  ImpactParticle: {fileID: 6323416476027258973, guid: 53d966f0e6af0c4459ab3814c4de41ef,
+    type: 3}

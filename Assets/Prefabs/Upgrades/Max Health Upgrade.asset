@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ded228ee73cfe45b6c1be22783bf0c, type: 3}
   m_Name: Max Health Upgrade
   m_EditorClassIdentifier: 
-  ShopType: 2
+  ShopType: 3
   Texture: {fileID: 2800000, guid: c826545a8afc71f4a9281978d7ad1a3f, type: 3}
   RarityType: 0
-  Description: Increases max health by {Amount}{TypeIcon}.
+  Description: Increases max health by {{Flat:#Amount#:ShopType}}{{ShopTypeIcon}}.
   Amount: 500
   Category: 0

@@ -184,7 +184,7 @@ public class Enemy : Target
 		}
 
 		var projectile = Instantiate(_projectilePrefab, _attackOrigin.position, _attackOrigin.rotation);
-		projectile.Setup(_target, _baseDamage, false, _projectileSettings);
+		projectile.Setup(_target, _baseDamage, _projectileSettings);
 	}
 
 	void InstantAttack()

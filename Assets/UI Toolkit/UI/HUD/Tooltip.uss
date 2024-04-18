@@ -120,6 +120,7 @@ Tooltip .row {
 	flex-direction: row;
 	align-items: center;
 	white-space: normal;
+	margin-top: 6px;
 }
 
 Tooltip .data .item-crit {

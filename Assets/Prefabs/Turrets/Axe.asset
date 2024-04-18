@@ -15,7 +15,7 @@ MonoBehaviour:
   ShopType: 4
   Texture: {fileID: 2800000, guid: e2ecfcc2751b7914cae16a2bba092904, type: 3}
   RarityType: 0
-  Description: Shoots towards nearest enemy causing {Damage} {DamageType} damage.
+  Description: Shoots towards nearest enemy causing #Damage# damage.
   Amount: 30
   _category: 1
   DamageType: 0
@@ -25,6 +25,7 @@ MonoBehaviour:
   _timeBetweenFindTarget: 1
   _criticalHitChance: 0
   _criticalHitMultiplier: 2
+  Behaviors: []
   _projectilePrefab: {fileID: 9212724085591995478, guid: ae3cff54fd2ef1042a7ec4520c94d5ca,
     type: 3}
   _projectileSettings:
@@ -34,7 +35,3 @@ MonoBehaviour:
   _attackSound: {fileID: 0}
   _audioSettings: {fileID: 0}
   _impactParticle: {fileID: 0}
-  _isDamageOverTime: 1
-  _dotDuration: 5
-  _dotTotalDamage: 10
-  _dotTickRate: 1

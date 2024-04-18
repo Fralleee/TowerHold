@@ -9,7 +9,7 @@ public class DamageOverTimeBehavior : TurretBehavior
 	public GameObject ImpactParticle;
 	public override bool PreferNewTarget => true;
 
-	public override void Execute(Turret turret, Enemy target)
+	public override void Execute(Turret turret, Target target)
 	{
 		var debuff = new DamageOverTimeDebuff(turret.Name, Duration, TotalDamage, TickRate, ImpactParticle);
 		target.ApplyDebuff(debuff);

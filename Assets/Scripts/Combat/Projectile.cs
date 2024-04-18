@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 public class Projectile : MonoBehaviour
 {
@@ -10,26 +11,50 @@ public class Projectile : MonoBehaviour
 	[SerializeField] AudioClip _attackSound;
 	[SerializeField] AudioSettings _audioSettings;
 
+	Turret _turret;
+	TurretBehavior _excludeBehavior;
 	Target _target;
 	AudioSource _audioSource;
 	Vector3 _startPosition;
 	Vector3 _lastPosition;
 	bool _useParabolicArc;
 	bool _towerProjectile;
+	bool _executeBehaviors;
 	float _speed = 10f;
 	float _maxArcHeight;
 	float _damage;
 	float _hitTime;
 	float _startTime;
 
-	public void Setup(Target target, float damage, bool towerProjectile, ProjectileSettings projectileSettings)
+	public void Setup(Target target, float damage, ProjectileSettings projectileSettings)
 	{
 		_target = target;
 		_damage = damage;
-		_towerProjectile = towerProjectile;
+		_towerProjectile = false;
 		_speed = projectileSettings.Speed;
 		_useParabolicArc = projectileSettings.UseParabolicArc;
 		_maxArcHeight = projectileSettings.MaxArcHeight;
+		_startPosition = transform.position;
+
+		// The distance is shorter if not a towerProjectile since we have to account for the towers's scale
+		var initialDistance = _towerProjectile ? Vector3.Distance(_startPosition, target.Center.position) : Vector3.Distance(_startPosition, target.Center.position) - (Tower.Instance.Scale + 1f);
+		_hitTime = initialDistance / _speed;
+		_startTime = Time.time;
+
+		_audioSource = GetComponent<AudioSource>();
+	}
+
+	public void Setup(Target target, float damage, ProjectileSettings projectileSettings, Turret turret, bool executeBehaviors = true, TurretBehavior excludeBehavior = null)
+	{
+		_target = target;
+		_damage = damage;
+		_towerProjectile = true;
+		_speed = projectileSettings.Speed;
+		_useParabolicArc = projectileSettings.UseParabolicArc;
+		_maxArcHeight = projectileSettings.MaxArcHeight;
+		_turret = turret;
+		_excludeBehavior = excludeBehavior;
+		_executeBehaviors = executeBehaviors;
 		_startPosition = transform.position;
 
 		// The distance is shorter if not a towerProjectile since we have to account for the towers's scale
@@ -93,12 +118,28 @@ public class Projectile : MonoBehaviour
 			var actualDamage = _target.TakeDamage(Mathf.RoundToInt(_damage));
 			if (_towerProjectile)
 			{
+				if (_executeBehaviors)
+				{
+					ExecuteBehaviors(_excludeBehavior);
+				}
 				ScoreManager.Instance.DamageDone += actualDamage;
 				(_target as Enemy).Attackers--;
 			}
 		}
 
 		DestroyProjectile();
+	}
+
+	void ExecuteBehaviors(TurretBehavior excludeBehavior = null)
+	{
+		foreach (var behavior in _turret.Behaviors)
+		{
+			if (behavior == excludeBehavior)
+			{
+				continue;
+			}
+			behavior.Execute(_turret, _target);
+		}
 	}
 
 	void DestroyProjectile()
