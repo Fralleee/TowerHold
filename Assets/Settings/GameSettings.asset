@@ -18,5 +18,5 @@ MonoBehaviour:
   MaxLevel: 30
   MaxEnemiesAlive: 60
   StartSeed: 32
-  StartingResources: 15000
-  StartingIncome: 100
+  StartingResources: 5000
+  StartingIncome: 50

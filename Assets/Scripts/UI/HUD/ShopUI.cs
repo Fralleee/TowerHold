@@ -24,8 +24,8 @@ public class ShopUI : Controller
 
 	bool _lockInventory;
 
-	int _refreshCost = 5;
-	readonly int _refreshCostIncrement = 1;
+	int _refreshCost = 50;
+	readonly int _refreshCostIncrement = 50;
 
 	RandomGenerator _randomGenerator;
 	readonly WaitForSeconds _nextFrame = new WaitForSeconds(0.1f);

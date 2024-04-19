@@ -27,7 +27,8 @@ MonoBehaviour:
   _criticalHitMultiplier: 2
   Behaviors:
   - {fileID: 11400000, guid: d3045c9f63bc8a542a7437ce503f7a69, type: 2}
-  _projectilePrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 9212724085591995478, guid: 7a2f7b30567bffc4ea4ebbf84de42941,
+    type: 3}
   _projectileSettings:
     Speed: 40
     UseParabolicArc: 1

@@ -220,8 +220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Scale: 1
   Center: {fileID: 1844471586531011950}
-  MaxHealth: 50
-  Health: 50
+  MaxHealth: 75
+  Health: 75
   HealthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
     type: 3}
   _healthBarOffset: 0

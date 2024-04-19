@@ -16,5 +16,5 @@ MonoBehaviour:
   Texture: {fileID: 2800000, guid: 0e379ce0e7fb8a74e90cbd07ebd20741, type: 3}
   RarityType: 0
   Description: Increases income by {{Flat:#Amount#:ShopType}}{{ShopTypeIcon}}.
-  Amount: 50
+  Amount: 5
   Category: 0

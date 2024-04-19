@@ -13,7 +13,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	public static SpatialPartitionManager SpatialPartitionManager => Instance._spatialPartitionManager;
 
 	const int PointLevelScaling = 5;
-	const int StartPoints = 200;
+	const int StartPoints = 100;
 	const int TotalMinSpawnsPerLevel = 8;
 	const int TotalMaxSpawnsPerLevel = 16;
 	const int GroupOffsetDistanceMax = 3;
