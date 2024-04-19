@@ -103,7 +103,6 @@ public class Target : MonoBehaviour
 	{
 		if (ActiveDebuffs.ContainsKey(debuff.Identifier))
 		{
-			Debug.Log($"Removed debuff: {debuff.Identifier}");
 			_ = ActiveDebuffs.Remove(debuff.Identifier);
 		}
 	}

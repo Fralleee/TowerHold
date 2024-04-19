@@ -61,9 +61,7 @@ MonoBehaviour:
   _menuPlayList:
   - {fileID: 8300000, guid: dad5fc0bdaeb15c47b88ea3e55113810, type: 3}
   _gamePlayList:
-  - {fileID: 8300000, guid: f9ee752307455b64e973b131125010cc, type: 3}
   - {fileID: 8300000, guid: cc9daa31f89ef974ba9ddb4fc45e23ff, type: 3}
-  - {fileID: 8300000, guid: 450fcf24c2b711a49a7621ff788e00c3, type: 3}
 --- !u!82 &6214230971490080007
 AudioSource:
   m_ObjectHideFlags: 0
