@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Tower : Target
@@ -14,19 +13,8 @@ public class Tower : Target
 
 	public static Tower Instance;
 	public List<Turret> Turrets;
-	public float GlobalDamageMultiplier = 1f;
-	public Dictionary<ShopType, float> ShopTypeMultipliers = new Dictionary<ShopType, float>() {
-		{ ShopType.Force, 1f },
-		{ ShopType.Precision, 1f },
-		{ ShopType.Technology, 1f },
-		{ ShopType.Arcane, 1f },
-		{ ShopType.Chemical, 1f }
-	};
-	public Dictionary<DamageType, float> DamageTypeMultipliers = new Dictionary<DamageType, float>() {
-		{ DamageType.Physical, 1f },
-		{ DamageType.Magical, 1f },
-		{ DamageType.Global, 1f },
-	};
+
+	readonly DamageMultipliers _damageMultipliers = new DamageMultipliers();
 
 	protected override void Awake()
 	{
@@ -78,28 +66,13 @@ public class Tower : Target
 
 	public void AddUppgrade(DamageUpgrade damageUpgrade)
 	{
-		if (damageUpgrade.ShopType == ShopType.Offense)
-		{
-			if (damageUpgrade.DamageType == DamageType.Global)
-			{
-				GlobalDamageMultiplier += damageUpgrade.Amount;
-			}
-			else
-			{
-				DamageTypeMultipliers[damageUpgrade.DamageType] += damageUpgrade.Amount;
-			}
-		}
-		else
-		{
-			ShopTypeMultipliers[damageUpgrade.ShopType] += damageUpgrade.Amount;
-		}
+		_damageMultipliers.AddUppgrade(damageUpgrade);
 	}
 
 	public float GetDamage(DamageType damageType, ShopType shopType, float damage, float criticalHitChance, float criticalHitMultiplier)
 	{
 		var isCriticalHit = UnityEngine.Random.value < criticalHitChance;
-		var multipliers = DamageTypeMultipliers[damageType] * ShopTypeMultipliers[shopType] * GlobalDamageMultiplier;
-		var calculatedDamage = damage * (isCriticalHit ? criticalHitMultiplier : 1f) * multipliers;
+		var calculatedDamage = damage * (isCriticalHit ? criticalHitMultiplier : 1f) * _damageMultipliers.GetMultiplier(damageType, shopType);
 
 		return calculatedDamage;
 	}

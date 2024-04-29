@@ -53,7 +53,6 @@ public class Turret : DamageShopItem
 				Shoot();
 			}
 		}
-
 	}
 
 	public override void OnPurchase()
