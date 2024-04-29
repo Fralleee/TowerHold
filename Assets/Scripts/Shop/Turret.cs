@@ -10,7 +10,6 @@ public class Turret : DamageShopItem
 	[SerializeField] float _baseDamage = 10f;
 	[SerializeField] AttackRange _attackRange = AttackRange.Short;
 	[SerializeField] float _timeBetweenAttacks = 1f;
-	[SerializeField] float _timeBetweenFindTarget = 1f;
 	[SerializeField] float _criticalHitChance = 0f;
 	[SerializeField] float _criticalHitMultiplier = 2f;
 	public List<TurretBehavior> Behaviors = new List<TurretBehavior>();
@@ -22,7 +21,7 @@ public class Turret : DamageShopItem
 	[HideIf("_projectilePrefab")][SerializeField] GameObject _impactParticle;
 
 	float _lastAttackTime = 0f;
-	float _lastTargetSearch = 0f;
+	float _attackRangeValue;
 	bool _preferNewTarget = false;
 	Tower _tower;
 	Enemy _target;
@@ -35,9 +34,8 @@ public class Turret : DamageShopItem
 
 	public void Setup(Tower inputTower)
 	{
-		_timeBetweenFindTarget = Mathf.Min(_timeBetweenFindTarget, _timeBetweenAttacks); // Ensure that the target search interval is not longer than the attack interval
 		_tower = inputTower;
-		_lastTargetSearch = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenFindTarget);
+		_attackRangeValue = _attackRange.GetRange();
 		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, _timeBetweenAttacks); // Add random delay for the first attack
 		_audioSource = _tower.GetComponent<AudioSource>();
 		_preferNewTarget = Behaviors.Any(behavior => behavior.PreferNewTarget);
@@ -45,18 +43,17 @@ public class Turret : DamageShopItem
 
 	public void FixedUpdate()
 	{
-		if (Time.time - _lastTargetSearch > _timeBetweenFindTarget)
+		if (Time.time - _lastAttackTime > _timeBetweenAttacks)
 		{
-			_target = TowerTargeter.GetEnemyTarget(_attackRange, _preferNewTarget ? Name : null);
-			_lastTargetSearch = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenFindTarget); // Add some variance to the search timing
+			_target = TowerTargeter.FindTargets(_attackRangeValue, _preferNewTarget ? Name : null);
+			_lastAttackTime = Time.time;
+
+			if (_target != null && !_target.IsDead)
+			{
+				Shoot();
+			}
 		}
 
-		if (_target != null && !_target.IsDead && Time.time - _lastAttackTime > _timeBetweenAttacks)
-		{
-			Shoot();
-			_lastAttackTime = Time.time + GameController.Instance.RandomGenerator.Variance(_timeBetweenAttacks); // Add some variance to the attack timing
-			_lastTargetSearch = Time.time; // This should probably be adjusted to have a delay as well
-		}
 	}
 
 	public override void OnPurchase()

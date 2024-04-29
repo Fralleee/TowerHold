@@ -21,4 +21,17 @@ public static class AttackRangeExtensions
 			_ => "N/A",
 		};
 	}
+
+	public static float GetRange(this AttackRange attackRange)
+	{
+		return attackRange switch
+		{
+			AttackRange.Melee => 6f,
+			AttackRange.Short => 16f,
+			AttackRange.Medium => 24f,
+			AttackRange.Long => 32f,
+			AttackRange.VeryLong => 40f,
+			_ => 0f,
+		};
+	}
 }

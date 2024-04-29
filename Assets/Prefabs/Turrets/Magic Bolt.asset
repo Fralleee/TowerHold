@@ -22,7 +22,6 @@ MonoBehaviour:
   _baseDamage: 25
   _attackRange: 4
   _timeBetweenAttacks: 1
-  _timeBetweenFindTarget: 1
   _criticalHitChance: 0
   _criticalHitMultiplier: 2
   Behaviors:

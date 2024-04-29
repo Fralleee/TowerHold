@@ -11,12 +11,6 @@ public class Biome : ScriptableObject
 	public Material Material;
 	public Texture2D Texture;
 
-	[ToggleGroup("Roads", CollapseOthersOnExpand = false)] public bool Roads;
-	[ToggleGroup("Roads")] public GameObject RoadPrefab;
-	[ToggleGroup("Roads")] public Color RoadColor;
-	[ToggleGroup("Roads")] public Color GroundColor;
-	[ToggleGroup("Roads"), Range(12f, 36f)] public float RoadWidth = 24f;
-
 	[ToggleGroup("Rivers", CollapseOthersOnExpand = false)] public bool Rivers;
 	[ToggleGroup("Rivers")] public GameObject RiverPrefab;
 	[ToggleGroup("Rivers")] public Color RiverColorShallow;

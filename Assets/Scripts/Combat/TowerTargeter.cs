@@ -1,13 +1,33 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 public static class TowerTargeter
 {
-	public static Enemy GetEnemyTarget(AttackRange attackRange, string debuffName = null)
+	internal static Enemy[] GetEnemyTargets(float range)
+	{
+		var colliders = Physics.OverlapSphere(Tower.Instance.transform.position, range, LayerMask.GetMask("Enemy"));
+		var enemies = new List<Enemy>();
+		for (var i = 0; i < colliders.Length; i++)
+		{
+			if (colliders[i].TryGetComponent<Enemy>(out var enemy))
+			{
+				if (!enemy.IsDead)
+				{
+					enemies.Add(enemy);
+				}
+			}
+		}
+
+		return enemies.ToArray();
+	}
+
+	static Enemy GetBestEnemy(Enemy[] enemies, string debuffName = null)
 	{
 		Enemy selectedTarget = null;
 		var closestDistance = float.MaxValue;
 		var fewestAttackers = int.MaxValue;
 		var hasNonDebuffedEnemyBeenFound = false;
 
-		var enemies = EnemyManager.SpatialPartitionManager.GetEnemiesWithinZone(attackRange.ToZone());
 		foreach (var enemy in enemies)
 		{
 			var enemyHasDebuff = debuffName != null && enemy.HasDebuff(debuffName);
@@ -35,5 +55,12 @@ public static class TowerTargeter
 		}
 
 		return selectedTarget;
+	}
+
+	public static Enemy FindTargets(float range, string debuffName = null)
+	{
+		var enemies = GetEnemyTargets(range);
+		var enemy = GetBestEnemy(enemies, debuffName);
+		return enemy;
 	}
 }

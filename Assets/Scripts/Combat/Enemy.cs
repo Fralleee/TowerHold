@@ -11,7 +11,6 @@ public class Enemy : Target
 	public static List<Enemy> AllEnemies = new List<Enemy>();
 	public static int AliveEnemies => AllEnemies.Count;
 
-	[HideInInspector] public SpatialZone CurrentZone = SpatialZone.OutOfRange;
 	[HideInInspector] public float DistanceToTower = 0;
 	[HideInInspector] public int Attackers = 0;
 	[HideInInspector] public bool HasAttackers => Attackers > 0;
@@ -40,13 +39,11 @@ public class Enemy : Target
 	NavMeshAgent _agent;
 	Bobbing _bobbing;
 
-	int _attackTrigger = Animator.StringToHash("Attack");
+	readonly int _attackTrigger = Animator.StringToHash("Attack");
+	readonly float _timeBetweenDistanceChecks = 0.5f;
 	float _lastAttackTime = 0f;
 	float _nextDistanceCheck = 0f;
-	float _distanceToNextZone;
-	readonly float _minTimeBetweenDistanceChecks = 0.5f;
-
-	public float DistanceCoveredBeforeNextCheck => _agent.speed * _minTimeBetweenDistanceChecks;
+	float _attackRangeValue;
 	float TimeBetweenAttacks => 1f / _attacksPerSecond;
 
 	protected override void Awake()
@@ -66,6 +63,8 @@ public class Enemy : Target
 
 		Value += GameController.Instance.CurrentLevel * 2;
 		OnDeath += HandleDeath;
+
+		_attackRangeValue = _attackRange.GetRange();
 
 		AllEnemies.Add(this);
 	}
@@ -132,15 +131,14 @@ public class Enemy : Target
 	{
 		if (Time.time >= _nextDistanceCheck)
 		{
-			DistanceToTower = Vector3.Distance(transform.position, Tower.Instance.transform.position);
-			(CurrentZone, _distanceToNextZone) = EnemyManager.SpatialPartitionManager.UpdateZone(this);
-			if (CurrentZone == _attackRange.ToZone())
+			DistanceToTower = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(Tower.Instance.transform.position.x, Tower.Instance.transform.position.z));
+			if (DistanceToTower <= _attackRangeValue)
 			{
 				ChangeState(EnemyState.Attacking);
 			}
 			else
 			{
-				_nextDistanceCheck = GetNextDistanceCheckTime();
+				_nextDistanceCheck = Time.time + _timeBetweenDistanceChecks;
 			}
 		}
 	}
@@ -230,18 +228,9 @@ public class Enemy : Target
 	{
 		_ = _agent.SetDestination(Tower.Instance.transform.position);
 		DistanceToTower = Vector3.Distance(transform.position, Tower.Instance.transform.position);
-		(CurrentZone, _distanceToNextZone) = EnemyManager.SpatialPartitionManager.UpdateZone(this);
-		_nextDistanceCheck = GetNextDistanceCheckTime();
+		_nextDistanceCheck = Time.time + _timeBetweenDistanceChecks;
 		_agent.isStopped = false;
 		_bobbing.StartBobbing();
-	}
-
-	float GetNextDistanceCheckTime()
-	{
-		var timeToNextZone = _distanceToNextZone / _agent.speed;
-		var nextDistanceCheck = Time.time + timeToNextZone + GameController.Instance.RandomGenerator.Variance(_minTimeBetweenDistanceChecks);
-
-		return nextDistanceCheck;
 	}
 
 	public void StopMovement()
@@ -272,7 +261,6 @@ public class Enemy : Target
 	{
 		base.Die();
 
-		EnemyManager.SpatialPartitionManager.RemoveEnemy(this);
 		OnAnyDeath(this);
 	}
 

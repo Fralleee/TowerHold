@@ -73,25 +73,12 @@ public class ObjectPlacer : MonoBehaviour
 
 	void Generate()
 	{
-		GenerateRoads();
 		GenerateRivers();
 		GenerateMountains();
 		GenerateForests();
 		GenerateDetails();
 		GenerateIslands();
 		GenerateEffects();
-	}
-
-	void GenerateRoads()
-	{
-		if (!_biome.Roads)
-		{
-			return;
-		}
-
-		var roadsGenerator = new RoadsGenerator(_biome, gameObject, _objectsContainer, transform.position);
-		roadsGenerator.Generate();
-		Physics.SyncTransforms();
 	}
 
 	void GenerateRivers()

@@ -10,9 +10,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		"Jeff", "Broseph", "Julian", "Count", "Doctor Z"
 	};
 
-	public static SpatialPartitionManager SpatialPartitionManager => Instance._spatialPartitionManager;
-
-	const int PointLevelScaling = 5;
+	const int PointLevelScaling = 25;
 	const int StartPoints = 100;
 	const int TotalMinSpawnsPerLevel = 8;
 	const int TotalMaxSpawnsPerLevel = 16;
@@ -48,7 +46,6 @@ public class EnemyManager : Singleton<EnemyManager>
 	Dictionary<int, LevelSpawnConfiguration> _levelSpawnConfigurations;
 
 	RandomGenerator _randomGenerator;
-	SpatialPartitionManager _spatialPartitionManager;
 
 	protected override void Awake()
 	{
@@ -62,7 +59,6 @@ public class EnemyManager : Singleton<EnemyManager>
 	void Start()
 	{
 		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
-		_spatialPartitionManager = new SpatialPartitionManager();
 
 		_enemies = new GameObject("Enemies").transform;
 		_enemies.SetParent(transform);

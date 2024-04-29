@@ -61,7 +61,7 @@ public class SelectionController : Controller
 		if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _selectableLayer))
 		{
 			var hitObject = hit.transform.gameObject;
-			var target = hitObject.GetComponentInParent<Target>();
+			var target = hitObject.GetComponent<Target>();
 			if (target)
 			{
 				SelectUnit(target);

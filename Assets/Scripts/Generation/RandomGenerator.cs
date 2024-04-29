@@ -25,6 +25,7 @@ public class RandomGenerator
 		return (float)((_random.NextDouble() * (maxValue - minValue)) + minValue);
 	}
 
+	// Adds a random variance to a value between -0.1f and 0.1f
 	public float Variance(float value)
 	{
 		return value + (float)((_random.NextDouble() * 0.1 * 2) - 0.1);

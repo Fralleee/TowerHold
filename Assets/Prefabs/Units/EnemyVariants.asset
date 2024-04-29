@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyVariants
   m_EditorClassIdentifier: 
   Enemies:
+  - {fileID: 1035760656611226112, guid: cd595260df6fd3e4e986713ca8ea6c15, type: 3}
   - {fileID: 1035760656611226112, guid: 6e9f14004ce40394c9625aefa0e890aa, type: 3}
   - {fileID: 1035760656611226112, guid: 8e36786af0d4ae44cb8427d2bb32fcbe, type: 3}
-  - {fileID: 1035760656611226112, guid: cd595260df6fd3e4e986713ca8ea6c15, type: 3}
   - {fileID: 1035760656611226112, guid: 72ebe7facbcf8954a9453d2b5926945b, type: 3}
