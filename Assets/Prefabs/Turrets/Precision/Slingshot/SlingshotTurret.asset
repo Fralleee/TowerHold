@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
+  m_Name: SlingshotTurret
+  m_EditorClassIdentifier: 
+  ShopType: 5
+  Texture: {fileID: 2800000, guid: 2253d0668613b584ebe2a794ba76a2d4, type: 3}
+  RarityType: 0
+  Description: Shoots towards nearest enemy causing #Damage# damage.
+  Amount: 30
+  _category: 2
+  DamageType: 0
+  BaseDamage: 10
+  AttackRange: 1
+  TimeBetweenAttacks: 1
+  CriticalHitChance: 0
+  CriticalHitMultiplier: 2
+  _attackSound: {fileID: 8300000, guid: b0e61778ac9d9d64ba6dc0a29e6fa991, type: 3}
+  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
+  AttackType: {fileID: 0}
+  Afflictions:
+    AfflictionList: []
+  PreferNewTarget: 0

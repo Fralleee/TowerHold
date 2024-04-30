@@ -1,4 +1,4 @@
-public enum AttackType
+public enum EnemyAttackType
 {
 	MELEE,
 	RANGED_INSTANT,

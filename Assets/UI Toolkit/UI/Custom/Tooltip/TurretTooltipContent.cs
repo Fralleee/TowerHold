@@ -31,26 +31,25 @@ public class TurretTooltipContent : TooltipContent
 
 		if (item is Turret turret)
 		{
-			var (baseDamage, attackRange, timeBetweenAttacks, criticalHitChance, criticalHitMultiplier, description) = turret.GetHoverData();
-			var currentDamage = Tower.Instance.GetDamage(turret.DamageType, turret.ShopType, baseDamage, 0, 0);
+			var currentDamage = Tower.Instance.GetDamage(turret);
 
-			var safeDescription = string.IsNullOrEmpty(description) ? "No description." : description;
+			var safeDescription = string.IsNullOrEmpty(turret.Description) ? "No description." : turret.Description;
 			var parsedDescription = safeDescription.Replace("#Damage#", $"{{Flat:{currentDamage}:DamageType}} {{DamageType}}");
 			DescriptionContainer.Write(parsedDescription, styleSettings, turret.DamageType, turret.ShopType);
 
-			turret.Behaviors.ForEach(behavior => behavior.Tooltip(DescriptionContainer, styleSettings, turret));
+			turret.Afflictions.Tooltip(DescriptionContainer, styleSettings, turret);
 
-			if (criticalHitChance > 0)
+			if (turret.CriticalHitChance > 0)
 			{
-				var template = $"This ability has a {{Percent:{criticalHitChance}:ShopType}} chance of a critical hit which causes {{Flat:{currentDamage * criticalHitMultiplier}:DamageType}} {{DamageType}} damage.";
+				var template = $"This ability has a {{Percent:{turret.CriticalHitChance}:ShopType}} chance of a critical hit which causes {{Flat:{currentDamage * turret.CriticalHitMultiplier}:DamageType}} {{DamageType}} damage.";
 				DescriptionContainer.Write(template, styleSettings, turret.DamageType, turret.ShopType);
 			}
 
 			ShopTypeContainer.AddImageLabel(styleSettings.GetShopTypeIcon(item.ShopType), item.ShopType.ToString(), styleSettings.GetShopTypeColor(item.ShopType));
 
-			Cooldown.AddImageLabel(styleSettings.GetIcon(GameIcons.Cooldown), $"{timeBetweenAttacks:#.##}s");
+			Cooldown.AddImageLabel(styleSettings.GetIcon(GameIcons.Cooldown), $"{turret.TimeBetweenAttacks:#.##}s");
 
-			RangeLabel.text = attackRange.AsText();
+			RangeLabel.text = turret.AttackRange.AsText();
 		}
 	}
 }

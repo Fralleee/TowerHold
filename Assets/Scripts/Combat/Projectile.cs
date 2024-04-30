@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
 	[SerializeField] AudioSettings _audioSettings;
 
 	Turret _turret;
-	TurretBehavior _excludeBehavior;
+	Affliction _excludeBehavior;
 	Target _target;
 	AudioSource _audioSource;
 	Vector3 _startPosition;
@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
 		_audioSource = GetComponent<AudioSource>();
 	}
 
-	public void Setup(Target target, float damage, ProjectileSettings projectileSettings, Turret turret, bool executeBehaviors = true, TurretBehavior excludeBehavior = null)
+	public void Setup(Target target, float damage, ProjectileSettings projectileSettings, Turret turret, bool executeBehaviors = true, Affliction excludeBehavior = null)
 	{
 		_target = target;
 		_damage = damage;
@@ -120,7 +120,7 @@ public class Projectile : MonoBehaviour
 			{
 				if (_executeBehaviors)
 				{
-					ExecuteBehaviors(_excludeBehavior);
+					_turret.Afflictions.TriggerAfflictions(_target, _excludeBehavior);
 				}
 				ScoreManager.Instance.DamageDone += actualDamage;
 				(_target as Enemy).Attackers--;
@@ -128,18 +128,6 @@ public class Projectile : MonoBehaviour
 		}
 
 		DestroyProjectile();
-	}
-
-	void ExecuteBehaviors(TurretBehavior excludeBehavior = null)
-	{
-		foreach (var behavior in _turret.Behaviors)
-		{
-			if (behavior == excludeBehavior)
-			{
-				continue;
-			}
-			behavior.Execute(_turret, _target);
-		}
 	}
 
 	void DestroyProjectile()

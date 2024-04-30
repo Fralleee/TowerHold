@@ -3,7 +3,11 @@ guid: c8b7dbed49e5ed1428645c4e96b310c0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Texture: {instanceID: 0}
+  - AttackBehavior: {instanceID: 0}
+  - _attackSound: {instanceID: 0}
+  - _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

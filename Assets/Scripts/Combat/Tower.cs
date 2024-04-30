@@ -69,10 +69,10 @@ public class Tower : Target
 		_damageMultipliers.AddUppgrade(damageUpgrade);
 	}
 
-	public float GetDamage(DamageType damageType, ShopType shopType, float damage, float criticalHitChance, float criticalHitMultiplier)
+	public float GetDamage(Turret turret)
 	{
-		var isCriticalHit = UnityEngine.Random.value < criticalHitChance;
-		var calculatedDamage = damage * (isCriticalHit ? criticalHitMultiplier : 1f) * _damageMultipliers.GetMultiplier(damageType, shopType);
+		var isCriticalHit = UnityEngine.Random.value < turret.CriticalHitChance;
+		var calculatedDamage = turret.BaseDamage * (isCriticalHit ? turret.CriticalHitMultiplier : 1f) * _damageMultipliers.GetMultiplier(turret.DamageType, turret.ShopType);
 
 		return calculatedDamage;
 	}

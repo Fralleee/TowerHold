@@ -23,16 +23,16 @@ public class Enemy : Target
 	[SerializeField] GameObject _deathEffect;
 
 	[Header("Attack Settings")]
-	[SerializeField] AttackType _attackType;
+	[SerializeField] EnemyAttackType _attackType;
 	[SerializeField] float _baseDamage = 10f;
 	[SerializeField] float _attacksPerSecond = 1f;
-	[HideIf("_attackType", AttackType.MELEE), SerializeField] AttackRange _attackRange = AttackRange.Melee;
+	[HideIf("_attackType", EnemyAttackType.MELEE), SerializeField] AttackRange _attackRange = AttackRange.Melee;
 
 	[Space(10)]
-	[ShowIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField] Projectile _projectilePrefab;
-	[ShowIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField, ChildGameObjectsOnly] Transform _attackOrigin;
-	[ShowIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField, InlineProperty(LabelWidth = 140)] ProjectileSettings _projectileSettings;
-	[HideIf("_attackType", AttackType.RANGED_PROJECTILE), SerializeField] AudioClip _attackSound;
+	[ShowIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), SerializeField] Projectile _projectilePrefab;
+	[ShowIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), SerializeField, ChildGameObjectsOnly] Transform _attackOrigin;
+	[ShowIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), SerializeField, InlineProperty(LabelWidth = 140)] ProjectileSettings _projectileSettings;
+	[HideIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), SerializeField] AudioClip _attackSound;
 
 	Target _target;
 	Animator _animator;
@@ -267,12 +267,12 @@ public class Enemy : Target
 	protected override void OnValidate()
 	{
 		base.OnValidate();
-		if (_attackType == AttackType.MELEE)
+		if (_attackType == EnemyAttackType.MELEE)
 		{
 			_attackRange = AttackRange.Melee;
 			_projectilePrefab = null;
 		}
-		else if (_attackType == AttackType.RANGED_PROJECTILE)
+		else if (_attackType == EnemyAttackType.RANGED_PROJECTILE)
 		{
 			_attackSound = null;
 		}

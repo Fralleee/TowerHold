@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b7dbed49e5ed1428645c4e96b310c0, type: 3}
+  m_Name: MagicBoltTurret
+  m_EditorClassIdentifier: 
+  ShopType: 7
+  Texture: {fileID: 2800000, guid: ee64f51f3936d7844b76c991b23c55a4, type: 3}
+  RarityType: 0
+  Description: Shoots towards nearest enemy causing #Damage# damage.
+  Amount: 0
+  _category: 4
+  DamageType: 1
+  _baseDamage: 25
+  _attackRange: 4
+  _timeBetweenAttacks: 1
+  _criticalHitChance: 0
+  _criticalHitMultiplier: 2
+  Behaviors:
+  - {fileID: 11400000, guid: 13ee1e5f452c6c34bb3d15272ce22a64, type: 2}
+  _projectilePrefab: {fileID: 6381126167893304047, guid: d3a5c3853c82a1941a3fc7ad8f7fcaf2,
+    type: 3}
+  _projectileSettings:
+    Speed: 25
+    UseParabolicArc: 1
+    MaxArcHeight: 5
+  _attackSound: {fileID: 0}
+  _audioSettings: {fileID: 0}
+  _impactParticle: {fileID: 0}
