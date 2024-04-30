@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MagicBoltAttackType
   m_EditorClassIdentifier: 
   _projectileSettings:
-    ProjectilePrefab: {fileID: 0}
+    ProjectilePrefab: {fileID: 6381126167893304047, guid: d3a5c3853c82a1941a3fc7ad8f7fcaf2,
+      type: 3}
     Speed: 30
-    UseParabolicArc: 0
+    UseParabolicArc: 1
     MaxArcHeight: 5

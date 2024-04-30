@@ -19,19 +19,15 @@ MonoBehaviour:
   Amount: 0
   _category: 4
   DamageType: 1
-  _baseDamage: 25
-  _attackRange: 4
-  _timeBetweenAttacks: 1
-  _criticalHitChance: 0
-  _criticalHitMultiplier: 2
-  Behaviors:
-  - {fileID: 11400000, guid: 13ee1e5f452c6c34bb3d15272ce22a64, type: 2}
-  _projectilePrefab: {fileID: 6381126167893304047, guid: d3a5c3853c82a1941a3fc7ad8f7fcaf2,
-    type: 3}
-  _projectileSettings:
-    Speed: 25
-    UseParabolicArc: 1
-    MaxArcHeight: 5
-  _attackSound: {fileID: 0}
-  _audioSettings: {fileID: 0}
-  _impactParticle: {fileID: 0}
+  BaseDamage: 10
+  AttackRange: 1
+  TimeBetweenAttacks: 1
+  CriticalHitChance: 0
+  CriticalHitMultiplier: 2
+  _attackSound: {fileID: 8300000, guid: 4873a99fcfa4bf4498ce683d0f0594e7, type: 3}
+  _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
+  AttackType: {fileID: 11400000, guid: 29a855a615bc04c4f99b32674de69750, type: 2}
+  Afflictions:
+    AfflictionList:
+    - {fileID: 11400000, guid: 13ee1e5f452c6c34bb3d15272ce22a64, type: 2}
+  PreferNewTarget: 0

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 
@@ -7,18 +6,11 @@ using Sirenix.OdinInspector;
 public class Afflictions
 {
 	[ListDrawerSettings(DefaultExpandedState = true, ShowFoldout = true)]
-	public List<Affliction> AfflictionList = new List<Affliction>();
+	public Affliction[] AfflictionList;
 
-	readonly Turret _turret;
+	public bool PreferNewTarget => AfflictionList.Any(affliction => affliction.PreferNewTarget);
 
-	public Afflictions(Turret turret)
-	{
-		_turret = turret;
-	}
-
-	public bool PreferNewTarget => AfflictionList.Any(behavior => behavior.PreferNewTarget);
-
-	public void TriggerAfflictions(Target target, Affliction excludedAffliction = null)
+	public void TriggerAfflictions(Target target, Turret turret, Affliction excludedAffliction = null)
 	{
 		foreach (var affliction in AfflictionList)
 		{
@@ -26,7 +18,7 @@ public class Afflictions
 			{
 				continue;
 			}
-			affliction.Trigger(_turret, target);
+			affliction.Trigger(turret, target);
 		}
 	}
 

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SlingshotAttackType
   m_EditorClassIdentifier: 
   _projectileSettings:
-    ProjectilePrefab: {fileID: 0}
+    ProjectilePrefab: {fileID: 9212724085591995478, guid: 02e570c8d0e868841911ce82789924eb,
+      type: 3}
     Speed: 30
-    UseParabolicArc: 0
-    MaxArcHeight: 5
+    UseParabolicArc: 1
+    MaxArcHeight: 3

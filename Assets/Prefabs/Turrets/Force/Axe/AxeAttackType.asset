@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: AxeAttackType
   m_EditorClassIdentifier: 
   _projectileSettings:
-    ProjectilePrefab: {fileID: 0}
+    ProjectilePrefab: {fileID: 9212724085591995478, guid: ae3cff54fd2ef1042a7ec4520c94d5ca,
+      type: 3}
     Speed: 30
-    UseParabolicArc: 0
+    UseParabolicArc: 1
     MaxArcHeight: 5

@@ -35,7 +35,6 @@ public class Turret : DamageShopItem
 		_tower = inputTower;
 		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, TimeBetweenAttacks); // Add random delay for the first attack
 		_audioSource = _tower.GetComponent<AudioSource>();
-		Afflictions = new Afflictions(this);
 		PreferNewTarget = Afflictions.PreferNewTarget;
 	}
 

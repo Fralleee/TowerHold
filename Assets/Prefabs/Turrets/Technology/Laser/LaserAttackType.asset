@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LaserAttackType
   m_EditorClassIdentifier: 
   _projectileSettings:
-    ProjectilePrefab: {fileID: 0}
+    ProjectilePrefab: {fileID: 9212724085591995478, guid: 04916794acafc3f4c8208f05dbd98087,
+      type: 3}
     Speed: 30
     UseParabolicArc: 0
     MaxArcHeight: 5

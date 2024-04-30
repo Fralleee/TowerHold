@@ -20,13 +20,13 @@ MonoBehaviour:
   _category: 2
   DamageType: 0
   BaseDamage: 10
-  AttackRange: 1
+  AttackRange: 4
   TimeBetweenAttacks: 1
-  CriticalHitChance: 0
+  CriticalHitChance: 0.2
   CriticalHitMultiplier: 2
   _attackSound: {fileID: 8300000, guid: b0e61778ac9d9d64ba6dc0a29e6fa991, type: 3}
   _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
-  AttackType: {fileID: 0}
+  AttackType: {fileID: 11400000, guid: e5e7ef33a29df56499ddb4993af8655d, type: 2}
   Afflictions:
     AfflictionList: []
   PreferNewTarget: 0
