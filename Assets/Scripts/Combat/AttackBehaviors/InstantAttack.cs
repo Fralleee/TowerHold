@@ -24,7 +24,7 @@ public class InstantAttack : AttackType
 
 			if (executeBehaviors)
 			{
-				turret.Afflictions.TriggerAfflictions(target, turret, excludeBehavior);
+				turret.AfflictionsController.TriggerAfflictions(target, turret, excludeBehavior);
 			}
 
 			if (_impactParticle)

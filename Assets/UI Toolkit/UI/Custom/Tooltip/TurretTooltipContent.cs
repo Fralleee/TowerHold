@@ -37,7 +37,7 @@ public class TurretTooltipContent : TooltipContent
 			var parsedDescription = safeDescription.Replace("#Damage#", $"{{Flat:{currentDamage}:DamageType}} {{DamageType}}");
 			DescriptionContainer.Write(parsedDescription, styleSettings, turret.DamageType, turret.ShopType);
 
-			turret.Afflictions.Tooltip(DescriptionContainer, styleSettings, turret);
+			turret.AfflictionsController.Tooltip(DescriptionContainer, styleSettings, turret);
 
 			if (turret.CriticalHitChance > 0)
 			{

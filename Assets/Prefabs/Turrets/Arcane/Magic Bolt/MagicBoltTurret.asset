@@ -27,7 +27,7 @@ MonoBehaviour:
   _attackSound: {fileID: 8300000, guid: 4873a99fcfa4bf4498ce683d0f0594e7, type: 3}
   _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   AttackType: {fileID: 11400000, guid: 29a855a615bc04c4f99b32674de69750, type: 2}
-  Afflictions:
-    AfflictionList:
+  AfflictionsController:
+    Afflictions:
     - {fileID: 11400000, guid: 13ee1e5f452c6c34bb3d15272ce22a64, type: 2}
   PreferNewTarget: 0

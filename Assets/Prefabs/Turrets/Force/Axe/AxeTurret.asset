@@ -15,18 +15,19 @@ MonoBehaviour:
   ShopType: 4
   Texture: {fileID: 2800000, guid: e2ecfcc2751b7914cae16a2bba092904, type: 3}
   RarityType: 0
-  Description: Shoots towards nearest enemy causing #Damage# damage.
+  Description: Shoots towards nearest enemy causing 10 damage.
   Amount: 30
   _category: 1
   DamageType: 0
-  BaseDamage: 10
   AttackRange: 1
+  BaseDamage: 10
   TimeBetweenAttacks: 1
+  DPS: 10
   CriticalHitChance: 0
   CriticalHitMultiplier: 2
   _attackSound: {fileID: 8300000, guid: b0e61778ac9d9d64ba6dc0a29e6fa991, type: 3}
   _audioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   AttackType: {fileID: 11400000, guid: f9799ec51113ef948bca1de93963adfc, type: 2}
-  Afflictions:
-    AfflictionList: []
+  AfflictionsController:
+    Afflictions: []
   PreferNewTarget: 0

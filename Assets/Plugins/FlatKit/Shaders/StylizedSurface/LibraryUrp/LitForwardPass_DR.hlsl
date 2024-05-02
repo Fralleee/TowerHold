@@ -52,7 +52,7 @@ struct Varyings
 #endif
 
     DECLARE_LIGHTMAP_OR_SH(staticLightmapUV, vertexSH, 7);
-    
+
 #ifdef DYNAMICLIGHTMAP_ON
     float2  dynamicLightmapUV : TEXCOORD8; // Dynamic lightmap UVs
 #endif
@@ -154,7 +154,7 @@ Varyings StylizedPassVertex(Attributes input)
 
     const VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
     VertexNormalInputs normalInput = GetVertexNormalInputs(input.normalOS, input.tangentOS);
-    
+
 #if defined(_FOG_FRAGMENT)
     half fogFactor = 0;
 #else
@@ -222,7 +222,7 @@ half4 StylizedPassFragment(Varyings input) : SV_Target
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
     #if VERSION_GREATER_EQUAL(12, 0)
-    SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
+    SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv);
     #endif
 
 #if defined(DR_VERTEX_COLORS_ON)

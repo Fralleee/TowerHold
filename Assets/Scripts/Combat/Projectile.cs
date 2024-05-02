@@ -120,7 +120,7 @@ public class Projectile : MonoBehaviour
 			{
 				if (_executeBehaviors)
 				{
-					_turret.Afflictions.TriggerAfflictions(_target, _turret, _excludeBehavior);
+					_turret.AfflictionsController.TriggerAfflictions(_target, _turret, _excludeBehavior);
 				}
 				ScoreManager.Instance.DamageDone += actualDamage;
 				(_target as Enemy).Attackers--;

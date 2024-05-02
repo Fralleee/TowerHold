@@ -2,17 +2,17 @@ using System;
 using System.Linq;
 using Sirenix.OdinInspector;
 
-[Serializable, InlineProperty]
-public class Afflictions
+[Serializable, InlineProperty, HideLabel]
+public class AfflictionsController
 {
-	[ListDrawerSettings(DefaultExpandedState = true, ShowFoldout = true)]
-	public Affliction[] AfflictionList;
+	[ListDrawerSettings(DefaultExpandedState = true, ShowFoldout = true), InlineEditor(InlineEditorModes.GUIOnly)]
+	public Affliction[] Afflictions;
 
-	public bool PreferNewTarget => AfflictionList.Any(affliction => affliction.PreferNewTarget);
+	public bool PreferNewTarget => Afflictions.Any(affliction => affliction.PreferNewTarget);
 
 	public void TriggerAfflictions(Target target, Turret turret, Affliction excludedAffliction = null)
 	{
-		foreach (var affliction in AfflictionList)
+		foreach (var affliction in Afflictions)
 		{
 			if (affliction == excludedAffliction)
 			{
@@ -24,7 +24,7 @@ public class Afflictions
 
 	public void Tooltip(RichTextWithImages descriptionContainer, StyleSettings styleSettings, Turret turret)
 	{
-		foreach (var affliction in AfflictionList)
+		foreach (var affliction in Afflictions)
 		{
 			affliction.Tooltip(descriptionContainer, styleSettings, turret);
 		}

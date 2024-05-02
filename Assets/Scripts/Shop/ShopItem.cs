@@ -11,8 +11,9 @@ public class ShopItem : ScriptableObject
 	[Header("Shop Settings")]
 	public Texture2D Texture;
 	public RarityType RarityType;
-	[TextArea(4, 10)] public string Description;
+	[TextArea(4, 10), HideIf("IsTurretType")] public string Description;
 	public string Name => name.Trim();
+	public virtual bool IsTurretType => false;
 
 	[HideIf("HideAmount")] public float Amount;
 	public bool HideAmount => this is Turret;

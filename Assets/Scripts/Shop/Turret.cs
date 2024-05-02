@@ -5,12 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "VAKT/Shop/Turret")]
 public class Turret : DamageShopItem
 {
-	[Header("Settings")]
-	public float BaseDamage = 10f;
-	public AttackRange AttackRange = AttackRange.Short;
-	public float TimeBetweenAttacks = 1f;
-	public float CriticalHitChance = 0f;
-	public float CriticalHitMultiplier = 2f;
+	[EnumToggleButtons] public AttackRange AttackRange = AttackRange.Short;
+
+	[Header("Damage")]
+	[MinValue(1f)] public float BaseDamage = 10f;
+	[Unit(Units.Second), MinValue(0.5f)] public float TimeBetweenAttacks = 1f;
+	[ReadOnly] public float DPS;
+
+	[Header("Critical hit")]
+	[Range(0, 1)] public float CriticalHitChance = 0f;
+	[HideIf("@CriticalHitChance==0")] public float CriticalHitMultiplier = 2f;
 
 	[Header("Audio")]
 	[SerializeField] AudioClip _attackSound;
@@ -18,24 +22,20 @@ public class Turret : DamageShopItem
 
 	[Header("Behaviors")]
 	[InlineEditor(InlineEditorModes.GUIOnly)] public AttackType AttackType;
-	public Afflictions Afflictions;
+	public AfflictionsController AfflictionsController;
 	public bool PreferNewTarget = false;
+	public override bool IsTurretType => true;
 
 	float _lastAttackTime = 0f;
 	Tower _tower;
 	AudioSource _audioSource;
-
-	public void Reset()
-	{
-		Description = "Shoots towards nearest enemy causing #Damage# damage.";
-	}
 
 	public void Setup(Tower inputTower)
 	{
 		_tower = inputTower;
 		_lastAttackTime = GameController.Instance.RandomGenerator.NextFloat(0f, TimeBetweenAttacks); // Add random delay for the first attack
 		_audioSource = _tower.GetComponent<AudioSource>();
-		PreferNewTarget = Afflictions.PreferNewTarget;
+		PreferNewTarget = AfflictionsController.PreferNewTarget;
 	}
 
 	public void FixedUpdate()
@@ -83,5 +83,11 @@ public class Turret : DamageShopItem
 		var tooltip = new TurretTooltipContent();
 		tooltip.UpdateInformation(this, styleSettings);
 		return tooltip;
+	}
+
+	void OnValidate()
+	{
+		Description = $"Shoots towards nearest enemy causing {BaseDamage} damage.";
+		DPS = BaseDamage / TimeBetweenAttacks;
 	}
 }

@@ -35,12 +35,12 @@ namespace PolygonArsenal
             else
                 rad = colliderRadius;
 
-            Vector3 dir = transform.GetComponent<Rigidbody>().velocity;
+            Vector3 dir = transform.GetComponent<Rigidbody>().linearVelocity;
             if (transform.GetComponent<Rigidbody>().useGravity)
                 dir += Physics.gravity * Time.deltaTime;
             dir = dir.normalized;
 
-            float dist = transform.GetComponent<Rigidbody>().velocity.magnitude * Time.deltaTime;
+            float dist = transform.GetComponent<Rigidbody>().linearVelocity.magnitude * Time.deltaTime;
 
             if (Physics.SphereCast(transform.position, rad, dir, out hit, dist))
             {
