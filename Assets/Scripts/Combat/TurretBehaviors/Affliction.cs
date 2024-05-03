@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Affliction : ScriptableObject, IAffliction
+public abstract class Affliction : ScriptableObject
 {
 	public abstract void Trigger(Turret turret, Target target);
 
