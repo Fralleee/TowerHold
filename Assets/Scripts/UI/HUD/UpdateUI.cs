@@ -24,7 +24,11 @@ public class UpdateUI : MonoBehaviour
 		_gameStartEvent = new EventBinding<GameStartEvent>(e => _levelBar.AddToClassList("active"));
 		EventBus<GameStartEvent>.Register(_gameStartEvent);
 
-		_levelChangedEvent = new EventBinding<LevelChangedEvent>(e => _levelLabel.text = $"Level: {e.CurrentLevel}");
+		_levelChangedEvent = new EventBinding<LevelChangedEvent>(e =>
+		{
+			_levelLabel.text = $"Level: {e.CurrentLevel}";
+			UpdateLevelProgress();
+		});
 		EventBus<LevelChangedEvent>.Register(_levelChangedEvent);
 
 		_incomeChangedEvent = new EventBinding<IncomeChangedEvent>(e => _incomeLabel.text = $"Income: {e.CurrentIncome}");
@@ -82,7 +86,7 @@ public class UpdateUI : MonoBehaviour
 		var (timeLeft, totalTime, progress) = GameController.Instance.LevelProgress;
 		var value = Mathf.Round(progress * totalTime) / totalTime;
 
-		_levelBar.MinMaxValue = (Mathf.CeilToInt(timeLeft), Mathf.CeilToInt(totalTime));
+		_levelBar.MinMaxValue = (Mathf.RoundToInt(timeLeft), Mathf.CeilToInt(totalTime));
 		_levelBar.Value = value;
 	}
 }
