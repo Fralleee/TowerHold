@@ -19,7 +19,6 @@ public class ProjectileAttack : AttackType
 		var target = targets.First();
 		if (target != null && !target.IsDead)
 		{
-			Debug.Log($"[{turret.Name}] is attacking [{target.name}]");
 			var tower = Tower.Instance;
 			var rotation = Quaternion.LookRotation(target.transform.position - tower.Center.position);
 			var projectile = Instantiate(_projectileSettings.ProjectilePrefab, tower.Center.position, rotation);

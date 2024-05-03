@@ -7,18 +7,15 @@ public class Turret : DamageShopItem
 {
 	[EnumToggleButtons] public AttackRange AttackRange = AttackRange.Short;
 
-	[Header("Damage")]
+	[Header("Settings")]
 	[MinValue(1f)] public float BaseDamage = 10f;
 	[Unit(Units.Second), MinValue(0.5f)] public float TimeBetweenAttacks = 1f;
 	[ReadOnly] public float DPS;
+	[SerializeField] AudioClip _attackSound;
 
 	[Header("Critical hit")]
 	[Range(0, 1)] public float CriticalHitChance = 0f;
 	[HideIf("@CriticalHitChance==0")] public float CriticalHitMultiplier = 2f;
-
-	[Header("Audio")]
-	[SerializeField] AudioClip _attackSound;
-	[SerializeField] AudioSettings _audioSettings;
 
 	[Header("Behaviors")]
 	[InlineEditor(InlineEditorModes.GUIOnly)] public AttackType AttackType;
@@ -69,7 +66,6 @@ public class Turret : DamageShopItem
 	{
 		if (_attackSound != null && _audioSource != null)
 		{
-			_audioSettings.ApplySettings(_audioSource);
 			_audioSource.PlayOneShot(_attackSound);
 		}
 		else

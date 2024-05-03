@@ -9,7 +9,6 @@ public class Projectile : MonoBehaviour
 
 	[Header("Audio")]
 	[SerializeField] AudioClip _attackSound;
-	[SerializeField] AudioSettings _audioSettings;
 
 	Turret _turret;
 	Affliction _excludeBehavior;
@@ -152,7 +151,6 @@ public class Projectile : MonoBehaviour
 	{
 		if (clip != null && _audioSource != null)
 		{
-			_audioSettings.ApplySettings(_audioSource);
 			_audioSource.PlayOneShot(clip);
 		}
 		else

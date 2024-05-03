@@ -76,7 +76,7 @@ AudioSource:
   m_GameObject: {fileID: 7943569025180232256}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 633887cea0f42fa42bebbe9cb94522af,
+  OutputAudioMixerGroup: {fileID: -520496798812680158, guid: 633887cea0f42fa42bebbe9cb94522af,
     type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
@@ -88,9 +88,9 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  DopplerLevel: 0
+  MinDistance: 60
+  MaxDistance: 420
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -125,7 +125,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -186,10 +186,8 @@ MonoBehaviour:
   _healthBarOffset: 8
   IsDead: 0
   _deathSound: {fileID: 0}
-  AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   HealthRegenerationRate: 5
   Turrets: []
-  GlobalDamageMultiplier: 1
 --- !u!136 &-6422980373278009004
 CapsuleCollider:
   m_ObjectHideFlags: 0

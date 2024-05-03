@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 
 public class ShopItemButton : Button
 {
+	public VisualElement Overlay;
 	public VisualElement Border;
 	public Label Hotkey;
 	public VisualElement Content;
@@ -51,6 +52,10 @@ public class ShopItemButton : Button
 		Category = new VisualElement();
 		Category.AddToClassList("category");
 		TypeContainer.Add(Category);
+
+		Overlay = new VisualElement();
+		Overlay.AddToClassList("overlay");
+		Content.Add(Overlay);
 	}
 
 	public void Setup(ShopItem item, StyleSettings styleSettings)
@@ -67,6 +72,21 @@ public class ShopItemButton : Button
 
 
 		SetEnabled(true);
+	}
+
+	public void Disable()
+	{
+		SetEnabled(false);
+		Overlay.style.display = DisplayStyle.None;
+	}
+
+	public void SetCanBePurchased(bool canBePurchased)
+	{
+		if (enabledSelf)
+		{
+			Overlay.style.display = DisplayStyle.Flex;
+			Overlay.style.opacity = canBePurchased ? 0 : 1;
+		}
 	}
 
 	public void SetHotkey(string hotkey)

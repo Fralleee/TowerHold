@@ -22,7 +22,6 @@ public class Target : MonoBehaviour
 
 	[Header("Audio")]
 	[SerializeField] AudioResource _deathSound;
-	[SerializeField] protected AudioSettings AudioSettings;
 
 	protected AudioSource AudioSource;
 
@@ -37,7 +36,6 @@ public class Target : MonoBehaviour
 
 		OnHealthChanged(Health, MaxHealth);
 		AudioSource = GetComponent<AudioSource>();
-		AudioSettings.ApplySettings(AudioSource);
 		ActiveDebuffs = new Dictionary<string, IDebuff>();
 		DamageModifiers = new DamageModifiers();
 	}
@@ -61,7 +59,7 @@ public class Target : MonoBehaviour
 		return ActiveDebuffs.ContainsKey(debuffName);
 	}
 
-	public float TakeDamage(int baseDamage)
+	public virtual float TakeDamage(int baseDamage)
 	{
 		if (IsDead)
 		{
@@ -82,7 +80,6 @@ public class Target : MonoBehaviour
 		}
 		OnDamageTaken(damage);
 		return baseDamage;
-
 	}
 
 	public void ApplyDebuff(IDebuff debuff)

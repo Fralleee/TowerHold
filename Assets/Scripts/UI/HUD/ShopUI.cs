@@ -22,8 +22,8 @@ public class ShopUI : Controller
 
 	VisualElement _inventoryContainer;
 
+	bool ShopReady => _shopSlots.Count == _shopItems.Count;
 	bool _lockInventory;
-
 	int _refreshCost = 50;
 	readonly int _refreshCostIncrement = 50;
 
@@ -81,6 +81,7 @@ public class ShopUI : Controller
 
 		GameController.OnGameStart += OnGameStart;
 		GameController.OnLevelChanged += OnLevelChanged;
+		ResourceManager.OnResourceChange += OnResourceChanged;
 	}
 
 	void OnGameStart()
@@ -88,9 +89,31 @@ public class ShopUI : Controller
 		_lockButton.SetEnabled(true);
 	}
 
+	void OnResourceChanged(int amount)
+	{
+		SetPurchasable();
+	}
+
 	void OnLevelChanged(int level)
 	{
 		RefreshShop();
+	}
+
+	void SetPurchasable()
+	{
+		if (!ShopReady)
+		{
+			return;
+		}
+
+		for (var i = 0; i < _shopSlots.Count; i++)
+		{
+			var item = _shopItems[i];
+			item.CanBePurchased = item.Cost <= ResourceManager.Instance.Resources;
+
+			var slot = _shopSlots[i];
+			slot.SetCanBePurchased(item.CanBePurchased);
+		}
 	}
 
 	void ManualRefresh()
@@ -125,6 +148,7 @@ public class ShopUI : Controller
 			_shopItems.Add(item);
 		}
 
+		SetPurchasable();
 		UpdateShopItemTooltips();
 		_ = StartCoroutine(PerformRefresh());
 	}
@@ -167,7 +191,7 @@ public class ShopUI : Controller
 		if (ResourceManager.Instance.SpendResources(item.Cost))
 		{
 			item.OnPurchase();
-			button.SetEnabled(false);
+			button.Disable();
 			_purchaseFeedback.TriggerFeedback(Tower.Instance.transform, this);
 
 			if (item is DamageUpgrade)
@@ -225,5 +249,6 @@ public class ShopUI : Controller
 
 		GameController.OnGameStart -= OnGameStart;
 		GameController.OnLevelChanged -= OnLevelChanged;
+		ResourceManager.OnResourceChange -= OnResourceChanged;
 	}
 }

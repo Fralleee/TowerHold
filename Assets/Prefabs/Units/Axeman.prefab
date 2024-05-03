@@ -96,7 +96,8 @@ AudioSource:
   m_GameObject: {fileID: 4373877528160310618}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -520496798812680158, guid: 633887cea0f42fa42bebbe9cb94522af,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -107,9 +108,9 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  DopplerLevel: 0
+  MinDistance: 60
+  MaxDistance: 420
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -144,7 +145,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -228,7 +229,6 @@ MonoBehaviour:
   IsDead: 0
   _deathSound: {fileID: 6418180475301049370, guid: 8b997ecc3e247824b977891ea86c390e,
     type: 2}
-  AudioSettings: {fileID: 11400000, guid: 33dcbf1023b8c7545a7c52f9dd8c140f, type: 2}
   DistanceToTower: 0
   Attackers: 0
   _currentState: 0
@@ -243,6 +243,7 @@ MonoBehaviour:
     type: 3}
   _attackOrigin: {fileID: 9087330267229638144}
   _projectileSettings:
+    ProjectilePrefab: {fileID: 0}
     Speed: 30
     UseParabolicArc: 0
     MaxArcHeight: 5

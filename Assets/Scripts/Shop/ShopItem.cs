@@ -14,6 +14,7 @@ public class ShopItem : ScriptableObject
 	[TextArea(4, 10), HideIf("IsTurretType")] public string Description;
 	public string Name => name.Trim();
 	public virtual bool IsTurretType => false;
+	[HideInInspector] public bool CanBePurchased;
 
 	[HideIf("HideAmount")] public float Amount;
 	public bool HideAmount => this is Turret;

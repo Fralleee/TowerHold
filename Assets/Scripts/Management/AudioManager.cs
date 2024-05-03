@@ -1,17 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AudioManager : SerializedSingleton<AudioManager>
 {
-	public GameContext CurrentContext = GameContext.MainMenu;
+	[ReadOnly] public GameContext CurrentContext = GameContext.MainMenu;
 
+	[Header("Sources")]
 	[SerializeField] AudioSource _musicSource;
 	[SerializeField] AudioSource _effectSource;
+
+	[Header("Playlists")]
 	[SerializeField] List<AudioClip> _menuPlayList;
 	[SerializeField] List<AudioClip> _gamePlayList;
+
+	[Header("Sounds")]
+	[SerializeField] Dictionary<SoundEffect, AudioClip> _soundEffects;
 
 	List<AudioClip> _currentPlaylist;
 	int _currentTrackIndex = 0;
@@ -77,9 +84,21 @@ public class AudioManager : SerializedSingleton<AudioManager>
 		PlayMusic();
 	}
 
-	public void PlayEffect(AudioClip clip)
+	public static void PlayEffect(AudioClip clip)
 	{
-		_effectSource.PlayOneShot(clip);
+		Instance._effectSource.PlayOneShot(clip);
+	}
+
+	public static void PlayEffect(SoundEffect effect)
+	{
+		if (Instance._soundEffects.TryGetValue(effect, out var clip))
+		{
+			Instance._effectSource.PlayOneShot(clip);
+		}
+		else
+		{
+			Debug.LogWarning($"Sound effect {effect} not found in dictionary");
+		}
 	}
 
 	void PlayMusic()
@@ -89,7 +108,7 @@ public class AudioManager : SerializedSingleton<AudioManager>
 			_isPlayingMusic = true;
 			_currentTrackIndex = UnityEngine.Random.Range(0, _currentPlaylist.Count);
 			_musicSource.clip = _currentPlaylist[_currentTrackIndex];
-			StartCoroutine(FadeIn(_musicSource, _fadeDuration));
+			_ = StartCoroutine(FadeIn(_musicSource, _fadeDuration));
 		}
 	}
 
@@ -99,7 +118,7 @@ public class AudioManager : SerializedSingleton<AudioManager>
 		{
 			_isPlayingMusic = true;
 			_musicSource.clip = _currentPlaylist[UnityEngine.Random.Range(0, _currentPlaylist.Count)];
-			StartCoroutine(FadeIn(_musicSource, _fadeDuration));
+			_ = StartCoroutine(FadeIn(_musicSource, _fadeDuration));
 		}
 	}
 

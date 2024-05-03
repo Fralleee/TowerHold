@@ -96,6 +96,16 @@ public class Enemy : Target
 		}
 	}
 
+	public override float TakeDamage(int baseDamage)
+	{
+		var actualDamage = base.TakeDamage(baseDamage);
+		if (actualDamage > 0)
+		{
+			AudioManager.PlayEffect(SoundEffect.Hit);
+		}
+		return actualDamage;
+	}
+
 	void ChangeState(EnemyState newState)
 	{
 		_currentState = newState;

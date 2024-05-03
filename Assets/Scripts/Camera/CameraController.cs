@@ -23,6 +23,7 @@ public class CameraController : Controller
 	[SerializeField] float _smoothingTime = 10;
 
 	[Header("Cursor Settings")]
+	[SerializeField] Texture2D _defaultCursor;
 	[SerializeField] Texture2D _moveCursor;
 	[SerializeField] Texture2D _rotationCursor;
 
@@ -64,6 +65,8 @@ public class CameraController : Controller
 		_startPosition = _transform.position;
 		_startRotation = _transform.rotation;
 		_cameraStartLocalPosition = _cameraTransform.localPosition;
+
+		SetCursor(_defaultCursor, new Vector2(12, 12), CursorMode.Auto);
 	}
 
 	void LateUpdate()
@@ -223,7 +226,7 @@ public class CameraController : Controller
 		}
 		else
 		{
-			SetCursor(null, Vector2.zero, CursorMode.Auto);
+			SetCursor(_defaultCursor, new Vector2(12, 12), CursorMode.Auto);
 		}
 	}
 
@@ -248,7 +251,7 @@ public class CameraController : Controller
 		}
 		else
 		{
-			SetCursor(null, Vector2.zero, CursorMode.Auto);
+			SetCursor(_defaultCursor, new Vector2(12, 12), CursorMode.Auto);
 		}
 	}
 
