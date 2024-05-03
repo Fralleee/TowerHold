@@ -16,7 +16,7 @@ MonoBehaviour:
   TimePerLevel: 5
   StartLevel: 1
   MaxLevel: 30
-  MaxEnemiesAlive: 80
+  MaxEnemiesAlive: 160
   StartSeed: 32
   StartingResources: 5000
   StartingIncome: 150

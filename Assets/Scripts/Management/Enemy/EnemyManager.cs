@@ -176,6 +176,7 @@ public class EnemyManager : Singleton<EnemyManager>
 			var damage = DamageFromValue(enemy);
 			Debug.Log($"EnemyManager: Max enemies alive, dealing {damage} damage to target.");
 			_ = Target.TakeDamage(damage);
+			return;
 		}
 
 		// Slight random offset from the group's central spawn position
