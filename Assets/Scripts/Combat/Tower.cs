@@ -76,8 +76,13 @@ public class Tower : Target
 		_damageMultipliers.AddUppgrade(damageUpgrade);
 	}
 
-	public float GetDamage(Turret turret)
+	public float GetDamage(Turret turret, bool tooltip = false)
 	{
+		if (tooltip)
+		{
+			return turret.BaseDamage * _damageMultipliers.GetMultiplier(turret.DamageType, turret.ShopType);
+		}
+
 		var isCriticalHit = Random.value < turret.CriticalHitChance;
 		var calculatedDamage = turret.BaseDamage * (isCriticalHit ? turret.CriticalHitMultiplier : 1f) * _damageMultipliers.GetMultiplier(turret.DamageType, turret.ShopType);
 

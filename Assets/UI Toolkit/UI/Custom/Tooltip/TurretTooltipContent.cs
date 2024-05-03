@@ -31,7 +31,7 @@ public class TurretTooltipContent : TooltipContent
 
 		if (item is Turret turret)
 		{
-			var currentDamage = Tower.Instance.GetDamage(turret);
+			var currentDamage = Tower.Instance.GetDamage(turret, true);
 
 			var safeDescription = string.IsNullOrEmpty(turret.Description) ? "No description." : turret.Description;
 			var parsedDescription = safeDescription.Replace("#Damage#", $"{{Flat:{currentDamage}:DamageType}} {{DamageType}}");

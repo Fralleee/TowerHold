@@ -85,7 +85,7 @@ public class SelectionController : Controller
 
 	void OnPrimaryFire()
 	{
-		if (EventSystem.current.IsPointerOverGameObject())
+		if (EventSystem.current && EventSystem.current.IsPointerOverGameObject())
 		{
 			return;
 		}

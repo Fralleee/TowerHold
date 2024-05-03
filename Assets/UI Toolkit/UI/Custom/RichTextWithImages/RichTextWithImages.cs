@@ -89,7 +89,7 @@ public class RichTextWithImages : VisualElement
 
 	void AddFormattedText(string value, Color? color = null)
 	{
-		AddText($"<b>{value:0.##}</b>", color);
+		AddText($" <b>{value:0.##}</b> ", color);
 	}
 
 	void AddDamageType(DamageType damageType, StyleSettings styleSettings, bool iconOnly = false)
@@ -124,6 +124,7 @@ public class RichTextWithImages : VisualElement
 
 	void AddText(string text, Color? color = null)
 	{
+		text = text.Replace(" ", "\u00A0"); // Replace all normal spaces with non-breaking spaces
 		var label = new Label()
 		{
 			enableRichText = true,
@@ -139,6 +140,7 @@ public class RichTextWithImages : VisualElement
 	void AddImage(Texture2D texture, Color tint)
 	{
 		var image = new Image { image = texture, tintColor = tint };
+		image.style.marginLeft = 2;
 		_currentContainer.Add(image);
 	}
 }

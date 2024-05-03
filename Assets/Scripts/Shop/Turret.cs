@@ -83,7 +83,7 @@ public class Turret : DamageShopItem
 
 	void OnValidate()
 	{
-		Description = $"Shoots towards nearest enemy causing {BaseDamage} damage.";
+		Description = $"Shoots towards nearest enemy causing #Damage# damage.";
 		DPS = BaseDamage / TimeBetweenAttacks;
 	}
 }
