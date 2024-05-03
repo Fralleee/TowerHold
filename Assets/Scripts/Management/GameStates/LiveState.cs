@@ -1,11 +1,7 @@
-using System;
 using UnityEngine;
 
 public class LiveState : IState<GameState>, ILevelProgress
 {
-	public event Action OnMaxLevelReached;
-	public event Action OnTowerDeath;
-
 	public GameState Identifier => GameState.Live;
 
 	public int CurrentLevel { get; private set; }
@@ -24,8 +20,8 @@ public class LiveState : IState<GameState>, ILevelProgress
 	{
 		_enemyManager.Target = Tower.Instance;
 		_enemyManager.IsSpawning = true;
-		GameController.OnGameStart();
-		Tower.OnTowerDeath += OnTowerDeath;
+
+		EventBus<GameStartEvent>.Raise(new GameStartEvent());
 
 		TimeLeft = 0;
 		CurrentLevel = GameController.GameSettings.StartLevel;
@@ -41,22 +37,21 @@ public class LiveState : IState<GameState>, ILevelProgress
 		}
 	}
 
-	public void OnExit()
-	{
-		Tower.OnTowerDeath -= OnTowerDeath;
-	}
-
 	void RunLevel(int level)
 	{
 		if (level > GameController.GameSettings.MaxLevel)
 		{
-			OnMaxLevelReached();
+			EventBus<GameEndEvent>.Raise(new GameEndEvent());
 			return;
 		}
 
 		CurrentLevel = level;
 		TimeLeft += GameController.GameSettings.TimePerLevel;
 
-		GameController.OnLevelChanged(CurrentLevel);
+		EventBus<LevelChangedEvent>.Raise(new LevelChangedEvent { CurrentLevel = CurrentLevel });
+	}
+
+	public void OnExit()
+	{
 	}
 }

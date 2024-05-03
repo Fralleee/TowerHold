@@ -19,6 +19,25 @@ public class UpgradeInformationUI : Controller
 	UpgradeInformation _chemicalUpgrade;
 	UpgradeInformation _chemicalTurret;
 
+	EventBinding<ShopItemPurchasedEvent> _shopItemPurchasedEvent;
+
+	void OnEnable()
+	{
+		_shopItemPurchasedEvent = new EventBinding<ShopItemPurchasedEvent>(HandleShopItemPurchased);
+		EventBus<ShopItemPurchasedEvent>.Register(_shopItemPurchasedEvent);
+	}
+
+	void HandleShopItemPurchased(ShopItemPurchasedEvent e)
+	{
+		var upgradeInformation = GetUpgradeInformation(e.Item);
+		upgradeInformation.IncrementNumber();
+	}
+
+	void OnDisable()
+	{
+		EventBus<ShopItemPurchasedEvent>.Deregister(_shopItemPurchasedEvent);
+	}
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -40,18 +59,11 @@ public class UpgradeInformationUI : Controller
 
 		Controls.Keyboard.ShowDetails.performed += ToggleDetails;
 		Controls.Keyboard.ShowDetails.canceled += ToggleDetails;
-		Tower.OnUpgrade += OnUpgrade;
 	}
 
 	void ToggleDetails(InputAction.CallbackContext context)
 	{
 		_attackTypesList.ToggleInClassList("show-details");
-	}
-
-	void OnUpgrade(ShopItem item)
-	{
-		var upgradeInformation = GetUpgradeInformation(item);
-		upgradeInformation.IncrementNumber();
 	}
 
 	UpgradeInformation GetUpgradeInformation(ShopItem item)
@@ -75,6 +87,5 @@ public class UpgradeInformationUI : Controller
 	{
 		Controls.Keyboard.ShowDetails.performed -= ToggleDetails;
 		Controls.Keyboard.ShowDetails.canceled -= ToggleDetails;
-		Tower.OnUpgrade -= OnUpgrade;
 	}
 }

@@ -14,7 +14,7 @@ public class ConclusionState : IState<GameState>
 		_enemyManager.IsSpawning = false;
 		Enemy.GameOver();
 
-		GameController.OnGameEnd();
+		EventBus<GameEndEvent>.Raise(new GameEndEvent());
 	}
 
 	public void OnUpdate()

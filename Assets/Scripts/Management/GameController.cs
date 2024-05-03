@@ -7,10 +7,6 @@ public class GameController : Singleton<GameController>
 {
 	public static GameSettings GameSettings => Instance.Settings;
 
-	public static Action OnGameStart = delegate { };
-	public static Action<int> OnLevelChanged = delegate { };
-	public static Action OnGameEnd = delegate { };
-
 	[HideInInspector] public RandomGenerator RandomGenerator;
 
 	[ReadOnly] public GameState CurrentState;
@@ -35,6 +31,29 @@ public class GameController : Singleton<GameController>
 			}
 			return (0f, 0f, 0f);
 		}
+	}
+
+	EventBinding<TowerDeathEvent> _towerDeathEvent;
+	EventBinding<PreparationCompleteEvent> _preparationCompleteEvent;
+	EventBinding<GameEndEvent> _gameEndEvent;
+
+	void OnEnable()
+	{
+		_preparationCompleteEvent = new EventBinding<PreparationCompleteEvent>(e => _stateMachine.SetState(_liveState));
+		EventBus<PreparationCompleteEvent>.Register(_preparationCompleteEvent);
+
+		_towerDeathEvent = new EventBinding<TowerDeathEvent>(e => _stateMachine.SetState(_conclusionState));
+		EventBus<TowerDeathEvent>.Register(_towerDeathEvent);
+
+		_gameEndEvent = new EventBinding<GameEndEvent>(e => _stateMachine.SetState(_conclusionState));
+		EventBus<GameEndEvent>.Register(_gameEndEvent);
+	}
+
+	void OnDisable()
+	{
+		EventBus<PreparationCompleteEvent>.Deregister(_preparationCompleteEvent);
+		EventBus<TowerDeathEvent>.Deregister(_towerDeathEvent);
+		EventBus<GameEndEvent>.Deregister(_gameEndEvent);
 	}
 
 	protected override void Awake()
@@ -63,10 +82,6 @@ public class GameController : Singleton<GameController>
 		_preparationState = new PreparationState();
 		_liveState = new LiveState(_enemyManager);
 		_conclusionState = new ConclusionState(_enemyManager);
-
-		_preparationState.OnPreparationComplete += () => _stateMachine.SetState(_liveState);
-		_liveState.OnMaxLevelReached += () => _stateMachine.SetState(_conclusionState);
-		_liveState.OnTowerDeath += () => _stateMachine.SetState(_conclusionState);
 
 		switch (StartState)
 		{
@@ -100,13 +115,6 @@ public class GameController : Singleton<GameController>
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
-
-		OnGameStart = delegate
-		{ };
-		OnLevelChanged = delegate
-		{ };
-		OnGameEnd = delegate
-		{ };
 
 		Time.timeScale = 1;
 

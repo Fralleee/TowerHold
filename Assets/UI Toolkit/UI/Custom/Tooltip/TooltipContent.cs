@@ -1,11 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class TooltipContent : VisualElement
 {
-	public Action<TooltipContent> OnUpdate = delegate { };
-
 	public VisualElement InformationContainer;
 	public VisualElement TextContainer;
 	public Image Image;
@@ -74,10 +71,5 @@ public class TooltipContent : VisualElement
 		var parsedDescription = safeDescription.Replace("#Amount#", item.Amount.ToString());
 		var damageType = item is DamageShopItem damageShopItem ? damageShopItem.DamageType : DamageType.Global;
 		DescriptionContainer.Write(parsedDescription, styleSettings, damageType, item.ShopType);
-	}
-
-	public virtual void Update(TooltipContent tooltipContent)
-	{
-		OnUpdate(tooltipContent);
 	}
 }

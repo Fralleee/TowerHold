@@ -1,13 +1,9 @@
-using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ResourceManager : Singleton<ResourceManager>
 {
-	public static Action<int> OnResourceChange = delegate { };
-	public static Action<int> OnIncomeChange = delegate { };
-
 	[ReadOnly] public int Resources = 0;
 	[ReadOnly] public int Income = 0;
 
@@ -16,12 +12,22 @@ public class ResourceManager : Singleton<ResourceManager>
 	Coroutine _incomeCoroutine;
 	Vector3 _defaultTextSpawnPosition;
 
-	protected override void Awake()
-	{
-		base.Awake();
+	EventBinding<GameStartEvent> _gameStartEvent;
+	EventBinding<GameEndEvent> _gameEndEvent;
 
-		GameController.OnGameStart += OnGameStart;
-		GameController.OnGameEnd += OnGameEnd;
+	void OnEnable()
+	{
+		_gameStartEvent = new EventBinding<GameStartEvent>(e => OnGameStart());
+		EventBus<GameStartEvent>.Register(_gameStartEvent);
+
+		_gameEndEvent = new EventBinding<GameEndEvent>(e => OnGameEnd());
+		EventBus<GameEndEvent>.Register(_gameEndEvent);
+	}
+
+	void OnDisable()
+	{
+		EventBus<GameStartEvent>.Deregister(_gameStartEvent);
+		EventBus<GameEndEvent>.Deregister(_gameEndEvent);
 	}
 
 	void Start()
@@ -58,13 +64,13 @@ public class ResourceManager : Singleton<ResourceManager>
 	public void AddIncome(int amount)
 	{
 		Income += amount;
-		OnIncomeChange(Mathf.FloorToInt(Income));
+		EventBus<IncomeChangedEvent>.Raise(new IncomeChangedEvent { CurrentIncome = Income });
 	}
 
 	public void AddResourceSilent(int amount)
 	{
 		Resources += amount;
-		OnResourceChange(Resources);
+		EventBus<ResourceChangedEvent>.Raise(new ResourceChangedEvent { CurrentResources = Resources });
 		ScoreManager.Instance.ResourcesEarned += amount;
 	}
 
@@ -79,25 +85,11 @@ public class ResourceManager : Singleton<ResourceManager>
 		if (amount <= Resources)
 		{
 			Resources -= amount;
-			OnResourceChange(Resources);
+			EventBus<ResourceChangedEvent>.Raise(new ResourceChangedEvent { CurrentResources = Resources });
 			ScoreManager.Instance.ResourcesSpent += amount;
 			return true;
 		}
 
 		return false;
-	}
-
-	protected override void OnDestroy()
-	{
-		base.OnDestroy();
-
-		OnResourceChange = delegate
-		{ };
-
-		OnIncomeChange = delegate
-		{ };
-
-		GameController.OnGameStart -= OnGameStart;
-		GameController.OnGameEnd -= OnGameEnd;
 	}
 }

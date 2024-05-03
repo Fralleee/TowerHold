@@ -47,13 +47,24 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	RandomGenerator _randomGenerator;
 
+	EventBinding<LevelChangedEvent> _levelChangedEvent;
+
+	void OnEnable()
+	{
+		_levelChangedEvent = new EventBinding<LevelChangedEvent>(e => InitializeForLevel());
+		EventBus<LevelChangedEvent>.Register(_levelChangedEvent);
+	}
+
+	void OnDisable()
+	{
+		EventBus<LevelChangedEvent>.Deregister(_levelChangedEvent);
+	}
+
 	protected override void Awake()
 	{
 		base.Awake();
 
 		InitializeLevelSpawnConfigurations();
-
-		GameController.OnLevelChanged += OnLevelChanged;
 	}
 
 	void Start()
@@ -209,15 +220,9 @@ public class EnemyManager : Singleton<EnemyManager>
 		return _enemyVariants.Enemies;
 	}
 
-	void OnLevelChanged(int level)
-	{
-		InitializeForLevel();
-	}
-
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
-		GameController.OnLevelChanged -= OnLevelChanged;
 	}
 
 	void OnValidate()

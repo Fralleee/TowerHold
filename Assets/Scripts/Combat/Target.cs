@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -7,10 +6,6 @@ using UnityEngine.Audio;
 
 public class Target : MonoBehaviour
 {
-	public Action<Target> OnDeath = delegate { };
-	public Action<int> OnDamageTaken = delegate { };
-	public Action<int, int> OnHealthChanged = delegate { };
-
 	[HideInInspector] public float Scale = 1f;
 	public Transform Center;
 	public int MaxHealth = 100;
@@ -34,7 +29,7 @@ public class Target : MonoBehaviour
 			Center = transform;
 		}
 
-		OnHealthChanged(Health, MaxHealth);
+		EventBus<TargetHealthChangedEvent>.Raise(new TargetHealthChangedEvent { Target = this, Health = Health, MaxHealth = MaxHealth });
 		AudioSource = GetComponent<AudioSource>();
 		ActiveDebuffs = new Dictionary<string, IDebuff>();
 		DamageModifiers = new DamageModifiers();
@@ -69,16 +64,16 @@ public class Target : MonoBehaviour
 		var damage = (int)(baseDamage * DamageModifiers.GetMultiplier());
 		Health -= damage;
 		HealthBar.SetHealth(Health);
-		OnHealthChanged(Health, MaxHealth);
+		EventBus<TargetHealthChangedEvent>.Raise(new TargetHealthChangedEvent { Target = this, Health = Health, MaxHealth = MaxHealth });
 
 		if (Health <= 0)
 		{
 			Die();
 			var actualDamage = damage + Health;
-			OnDamageTaken(actualDamage);
+			EventBus<TargetDamageTakenEvent>.Raise(new TargetDamageTakenEvent { Target = this, Damage = actualDamage });
 			return actualDamage;
 		}
-		OnDamageTaken(damage);
+		EventBus<TargetDamageTakenEvent>.Raise(new TargetDamageTakenEvent { Target = this, Damage = damage });
 		return baseDamage;
 	}
 
@@ -120,8 +115,8 @@ public class Target : MonoBehaviour
 	public virtual void Die()
 	{
 		PlaySound(_deathSound);
-		OnDeath(this);
 		IsDead = true;
+		EventBus<TargetDeathEvent>.Raise(new TargetDeathEvent { Target = this });
 	}
 
 	Color GetHealthBarColor(float value)

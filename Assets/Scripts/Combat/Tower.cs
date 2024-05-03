@@ -1,14 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : Target
 {
-	public static new Action<int, int> OnHealthChanged = delegate { };
-	public static Action OnTowerDeath = delegate { };
-	public static Action<ShopItem> OnUpgrade = delegate { };
-
 	public int HealthRegenerationRate = 5;
 
 	public static Tower Instance;
@@ -16,13 +11,25 @@ public class Tower : Target
 
 	readonly DamageMultipliers _damageMultipliers = new DamageMultipliers();
 
+	EventBinding<TargetDamageTakenEvent> _targetDamageTakenEvent;
+
+	void OnEnable()
+	{
+		_targetDamageTakenEvent = new EventBinding<TargetDamageTakenEvent>(HandleDamageTaken);
+		EventBus<TargetDamageTakenEvent>.Register(_targetDamageTakenEvent);
+	}
+
+	void OnDisable()
+	{
+		EventBus<TargetDamageTakenEvent>.Deregister(_targetDamageTakenEvent);
+	}
+
 	protected override void Awake()
 	{
 		base.Awake();
 
 		Scale = 4f;
 		Instance = this;
-		OnDamageTaken += HandleDamageTaken;
 	}
 
 	protected override void Start()
@@ -48,7 +55,7 @@ public class Tower : Target
 			// Increment health, ensuring that it doesn't exceed the maximum
 			Health = Mathf.Min(Health + HealthRegenerationRate, MaxHealth);
 			HealthBar.SetHealth(Health, true);
-			OnHealthChanged(Health, MaxHealth);
+			EventBus<TowerHealthChangedEvent>.Raise(new TowerHealthChangedEvent { Health = Health, MaxHealth = MaxHealth });
 
 			// You may want to add a callback or event when the health changes, for UI updates or other game logic.
 
@@ -71,7 +78,7 @@ public class Tower : Target
 
 	public float GetDamage(Turret turret)
 	{
-		var isCriticalHit = UnityEngine.Random.value < turret.CriticalHitChance;
+		var isCriticalHit = Random.value < turret.CriticalHitChance;
 		var calculatedDamage = turret.BaseDamage * (isCriticalHit ? turret.CriticalHitMultiplier : 1f) * _damageMultipliers.GetMultiplier(turret.DamageType, turret.ShopType);
 
 		return calculatedDamage;
@@ -85,15 +92,14 @@ public class Tower : Target
 		HealthBar.SetHealth(Health, true);
 	}
 
-	void HandleDamageTaken(int damage)
+	void HandleDamageTaken(TargetDamageTakenEvent e)
 	{
-		ScoreManager.Instance.DamageTaken += damage;
+		ScoreManager.Instance.DamageDone += e.Damage;
 	}
 
 	void OnDestroy()
 	{
-		OnTowerDeath();
-		OnDamageTaken -= HandleDamageTaken;
+		EventBus<TowerDeathEvent>.Raise(new TowerDeathEvent());
 	}
 
 	public static void ResetGameState()

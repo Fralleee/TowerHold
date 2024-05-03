@@ -32,6 +32,29 @@ public class ShopUI : Controller
 
 	readonly Dictionary<Button, Action> _buttonActions = new Dictionary<Button, Action>();
 
+	EventBinding<GameStartEvent> _gameStartEvent;
+	EventBinding<LevelChangedEvent> _levelChangedEvent;
+	EventBinding<ResourceChangedEvent> _resourceChangedEvent;
+
+	void OnEnable()
+	{
+		_gameStartEvent = new EventBinding<GameStartEvent>(e => _lockButton.SetEnabled(true));
+		EventBus<GameStartEvent>.Register(_gameStartEvent);
+
+		_levelChangedEvent = new EventBinding<LevelChangedEvent>(e => RefreshShop());
+		EventBus<LevelChangedEvent>.Register(_levelChangedEvent);
+
+		_resourceChangedEvent = new EventBinding<ResourceChangedEvent>(e => SetPurchasable());
+		EventBus<ResourceChangedEvent>.Register(_resourceChangedEvent);
+	}
+
+	void OnDisable()
+	{
+		EventBus<GameStartEvent>.Deregister(_gameStartEvent);
+		EventBus<LevelChangedEvent>.Deregister(_levelChangedEvent);
+		EventBus<ResourceChangedEvent>.Deregister(_resourceChangedEvent);
+	}
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -78,25 +101,6 @@ public class ShopUI : Controller
 		Controls.Keyboard.LockShop.performed += ctx => ButtonClicked(_lockButton);
 		Controls.Keyboard.PurchaseItem.performed += ctx => PurchaseItemKey(ctx.control.name);
 		SetupHotkeyLabels();
-
-		GameController.OnGameStart += OnGameStart;
-		GameController.OnLevelChanged += OnLevelChanged;
-		ResourceManager.OnResourceChange += OnResourceChanged;
-	}
-
-	void OnGameStart()
-	{
-		_lockButton.SetEnabled(true);
-	}
-
-	void OnResourceChanged(int amount)
-	{
-		SetPurchasable();
-	}
-
-	void OnLevelChanged(int level)
-	{
-		RefreshShop();
 	}
 
 	void SetPurchasable()
@@ -246,9 +250,5 @@ public class ShopUI : Controller
 		Controls.Keyboard.RefreshShop.performed -= ctx => ButtonClicked(_refreshButton);
 		Controls.Keyboard.LockShop.performed -= ctx => ButtonClicked(_lockButton);
 		Controls.Keyboard.PurchaseItem.performed -= ctx => PurchaseItemKey(ctx.control.name);
-
-		GameController.OnGameStart -= OnGameStart;
-		GameController.OnLevelChanged -= OnLevelChanged;
-		ResourceManager.OnResourceChange -= OnResourceChanged;
 	}
 }

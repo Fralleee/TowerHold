@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,7 +6,6 @@ using UnityEngine.AI;
 [SelectionBase]
 public class Enemy : Target
 {
-	public static Action<Enemy> OnAnyDeath = delegate { };
 	public static List<Enemy> AllEnemies = new List<Enemy>();
 	public static int AliveEnemies => AllEnemies.Count;
 
@@ -62,7 +60,6 @@ public class Enemy : Target
 		}
 
 		Value += GameController.Instance.CurrentLevel * 2;
-		OnDeath += HandleDeath;
 
 		_attackRangeValue = _attackRange.GetRange();
 
@@ -212,12 +209,14 @@ public class Enemy : Target
 		}
 	}
 
-	void HandleDeath(Target target)
+	public override void Die()
 	{
+		base.Die();
+
 		StopMovement();
 
 		_ = AllEnemies.Remove(this);
-		ResourceManager.Instance.AddResource(Value, target.transform.position + (Vector3.up * 2));
+		ResourceManager.Instance.AddResource(Value, transform.position + (Vector3.up * 2));
 
 		foreach (Transform child in transform)
 		{
@@ -232,6 +231,8 @@ public class Enemy : Target
 		var instance = Instantiate(_deathEffect, Center.position, Quaternion.LookRotation(-transform.forward));
 		Destroy(instance, 10f);
 		Destroy(gameObject, 3f);
+
+		EventBus<EnemyDeathEvent>.Raise(new EnemyDeathEvent { Enemy = this });
 	}
 
 	public void StartMovement()
@@ -255,8 +256,6 @@ public class Enemy : Target
 	public static void ResetGameState()
 	{
 		AllEnemies.Clear();
-		OnAnyDeath = delegate
-		{ };
 	}
 
 	public static void GameOver()
@@ -265,13 +264,6 @@ public class Enemy : Target
 		{
 			enemy.ChangeState(EnemyState.Victory);
 		}
-	}
-
-	public override void Die()
-	{
-		base.Die();
-
-		OnAnyDeath(this);
 	}
 
 	protected override void OnValidate()

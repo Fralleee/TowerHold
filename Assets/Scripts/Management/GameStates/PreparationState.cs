@@ -1,10 +1,7 @@
-using System;
 using UnityEngine;
 
 public class PreparationState : IState<GameState>, ILevelProgress
 {
-	public event Action OnPreparationComplete;
-
 	public GameState Identifier => GameState.Preparation;
 
 	public int CurrentLevel => -1;
@@ -23,7 +20,7 @@ public class PreparationState : IState<GameState>, ILevelProgress
 		TimeLeft -= Time.fixedDeltaTime;
 		if (TimeLeft <= 0)
 		{
-			OnPreparationComplete();
+			EventBus<PreparationCompleteEvent>.Raise(new PreparationCompleteEvent());
 		}
 	}
 

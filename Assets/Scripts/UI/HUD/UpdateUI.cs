@@ -13,6 +13,43 @@ public class UpdateUI : MonoBehaviour
 	CustomProgressBar _healthBar;
 	CustomProgressBar _levelBar;
 
+	EventBinding<GameStartEvent> _gameStartEvent;
+	EventBinding<LevelChangedEvent> _levelChangedEvent;
+	EventBinding<IncomeChangedEvent> _incomeChangedEvent;
+	EventBinding<ResourceChangedEvent> _resourceChangedEvent;
+	EventBinding<TowerHealthChangedEvent> _towerHealthChangedEvent;
+
+	void OnEnable()
+	{
+		_gameStartEvent = new EventBinding<GameStartEvent>(e => _levelBar.AddToClassList("active"));
+		EventBus<GameStartEvent>.Register(_gameStartEvent);
+
+		_levelChangedEvent = new EventBinding<LevelChangedEvent>(e => _levelLabel.text = $"Level: {e.CurrentLevel}");
+		EventBus<LevelChangedEvent>.Register(_levelChangedEvent);
+
+		_incomeChangedEvent = new EventBinding<IncomeChangedEvent>(e => _incomeLabel.text = $"Income: {e.CurrentIncome}");
+		EventBus<IncomeChangedEvent>.Register(_incomeChangedEvent);
+
+		_resourceChangedEvent = new EventBinding<ResourceChangedEvent>(e => _coinLabel.text = $"Coin: {e.CurrentResources}");
+		EventBus<ResourceChangedEvent>.Register(_resourceChangedEvent);
+
+		_towerHealthChangedEvent = new EventBinding<TowerHealthChangedEvent>(e =>
+		{
+			_healthBar.MinMaxValue = (e.Health, e.MaxHealth);
+			_healthBar.Value = e.Health / (float)e.MaxHealth;
+		});
+		EventBus<TowerHealthChangedEvent>.Register(_towerHealthChangedEvent);
+	}
+
+	void OnDisable()
+	{
+		EventBus<GameStartEvent>.Deregister(_gameStartEvent);
+		EventBus<LevelChangedEvent>.Deregister(_levelChangedEvent);
+		EventBus<IncomeChangedEvent>.Deregister(_incomeChangedEvent);
+		EventBus<ResourceChangedEvent>.Deregister(_resourceChangedEvent);
+		EventBus<TowerHealthChangedEvent>.Deregister(_towerHealthChangedEvent);
+	}
+
 	void Awake()
 	{
 		var uiDocument = GetComponent<UIDocument>();
@@ -31,13 +68,6 @@ public class UpdateUI : MonoBehaviour
 		_tooltipController.RegisterTooltip(_incomeLabel, new TooltipContent(null, "Income", null, "This is the amount of coins you get per second"));
 		_tooltipController.RegisterTooltip(_healthBar, new TooltipContent(null, "Health", null, "This is the health of your base"));
 		_tooltipController.RegisterTooltip(_levelBar, new TooltipContent(null, "Level", null, "This is the progress of the current level"));
-
-
-		GameController.OnGameStart += OnGameStart;
-		GameController.OnLevelChanged += OnLevelChanged;
-		ResourceManager.OnResourceChange += OnResourceChanged;
-		ResourceManager.OnIncomeChange += OnIncomeChanged;
-		Tower.OnHealthChanged += OnHealthChanged;
 	}
 
 	void Start()
@@ -54,41 +84,5 @@ public class UpdateUI : MonoBehaviour
 
 		_levelBar.MinMaxValue = (Mathf.CeilToInt(timeLeft), Mathf.CeilToInt(totalTime));
 		_levelBar.Value = value;
-	}
-
-	void OnGameStart()
-	{
-		_levelBar.AddToClassList("active");
-	}
-
-	void OnLevelChanged(int level)
-	{
-		_levelLabel.text = $"Level: {level}";
-	}
-
-	void OnHealthChanged(int currentHealth, int maxHealth)
-	{
-		_healthBar.MinMaxValue = (currentHealth, maxHealth);
-		_healthBar.Value = currentHealth / (float)maxHealth;
-	}
-
-
-	void OnResourceChanged(int coin)
-	{
-		_coinLabel.text = $"Coin: {coin}";
-	}
-
-	void OnIncomeChanged(int income)
-	{
-		_incomeLabel.text = $"Income: {income}";
-	}
-
-	void OnDestroy()
-	{
-		GameController.OnGameStart -= OnGameStart;
-		GameController.OnLevelChanged -= OnLevelChanged;
-		ResourceManager.OnResourceChange -= OnResourceChanged;
-		ResourceManager.OnIncomeChange -= OnIncomeChanged;
-		Tower.OnHealthChanged -= OnHealthChanged;
 	}
 }

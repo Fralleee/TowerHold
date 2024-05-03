@@ -13,6 +13,40 @@ public class SelectionController : Controller
 	VisualElement _container;
 	CustomProgressBar _healthBar;
 
+	EventBinding<TargetDeathEvent> _targetDeathEvent;
+	EventBinding<TargetHealthChangedEvent> _targetHealthChangedEvent;
+
+	void OnEnable()
+	{
+		_targetDeathEvent = new EventBinding<TargetDeathEvent>(HandleTargetDeath);
+		EventBus<TargetDeathEvent>.Register(_targetDeathEvent);
+
+		_targetHealthChangedEvent = new EventBinding<TargetHealthChangedEvent>(HandleTargetHealthChanged);
+		EventBus<TargetHealthChangedEvent>.Register(_targetHealthChangedEvent);
+	}
+
+	void HandleTargetHealthChanged(TargetHealthChangedEvent e)
+	{
+		if (e.Target == _selectedTarget)
+		{
+			OnHealthChanged(e.Health, e.MaxHealth);
+		}
+	}
+
+	void HandleTargetDeath(TargetDeathEvent @event)
+	{
+		if (@event.Target == _selectedTarget)
+		{
+			DeselectUnit(_selectedTarget);
+		}
+	}
+
+	void OnDisable()
+	{
+		EventBus<TargetDeathEvent>.Deregister(_targetDeathEvent);
+		EventBus<TargetHealthChangedEvent>.Deregister(_targetHealthChangedEvent);
+	}
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -78,10 +112,6 @@ public class SelectionController : Controller
 	void SelectUnit(Target target)
 	{
 		_selectedTarget = target;
-		_selectedTarget.OnHealthChanged += OnHealthChanged;
-		_selectedTarget.OnDeath += DeselectUnit;
-		OnHealthChanged(_selectedTarget.Health, _selectedTarget.MaxHealth);
-
 		_nameLabel.text = _selectedTarget.name;
 		_container.RemoveFromClassList("no-target");
 
@@ -99,8 +129,6 @@ public class SelectionController : Controller
 	{
 		if (_selectedTarget != null)
 		{
-			_selectedTarget.OnHealthChanged -= OnHealthChanged;
-			_selectedTarget.OnDeath -= DeselectUnit;
 			_selectedTarget = null;
 
 			_container.AddToClassList("no-target");

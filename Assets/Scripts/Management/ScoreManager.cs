@@ -16,16 +16,32 @@ public class ScoreManager : Singleton<ScoreManager>
 	public int Turrets = 0;
 	public int Upgrades = 0;
 
+	EventBinding<EnemyDeathEvent> _enemyDeathEvent;
+	EventBinding<GameEndEvent> _gameEndEvent;
+
+	void OnEnable()
+	{
+		_enemyDeathEvent = new EventBinding<EnemyDeathEvent>(HandleEnemyDeath);
+		EventBus<EnemyDeathEvent>.Register(_enemyDeathEvent);
+
+		_gameEndEvent = new EventBinding<GameEndEvent>(HandleGameEnd);
+		EventBus<GameEndEvent>.Register(_gameEndEvent);
+	}
+
+	void OnDisable()
+	{
+		EventBus<EnemyDeathEvent>.Deregister(_enemyDeathEvent);
+		EventBus<GameEndEvent>.Deregister(_gameEndEvent);
+	}
+
 	protected override void Awake()
 	{
 		base.Awake();
 
 		_scoreUI.gameObject.SetActive(false);
-		Enemy.OnAnyDeath += HandleEnemyDeath;
-		GameController.OnGameEnd += HandleGameEnd;
 	}
 
-	void HandleEnemyDeath(Target enemy)
+	void HandleEnemyDeath(EnemyDeathEvent e)
 	{
 		EnemiesKilled += 1;
 	}
@@ -46,13 +62,5 @@ public class ScoreManager : Singleton<ScoreManager>
 	{
 		_scoreUI.gameObject.SetActive(true);
 		_scoreUI.SetScores(GetScoresAsText());
-	}
-
-	protected override void OnDestroy()
-	{
-		base.OnDestroy();
-
-		Enemy.OnAnyDeath -= HandleEnemyDeath;
-		GameController.OnGameEnd -= HandleGameEnd;
 	}
 }

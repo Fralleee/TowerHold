@@ -85,6 +85,6 @@ public class ShopItem : ScriptableObject
 
 	public virtual void OnPurchase()
 	{
-		Tower.OnUpgrade(this);
+		EventBus<ShopItemPurchasedEvent>.Raise(new ShopItemPurchasedEvent { Item = this });
 	}
 }
