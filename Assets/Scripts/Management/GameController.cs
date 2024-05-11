@@ -60,6 +60,8 @@ public class GameController : Singleton<GameController>
 	{
 		base.Awake();
 
+		Application.runInBackground = true;
+
 		_enemyManager = GetComponentInChildren<EnemyManager>();
 
 		InitializeStateMachine();

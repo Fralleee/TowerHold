@@ -5,3 +5,10 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 143368
+  packageName: 'Flat Kit: Toon Shading and Water'
+  packageVersion: 4.6.0
+  assetPath: Assets/Plugins/FlatKit/[Render Pipeline] Universal (URP).unitypackage
+  uploadId: 661899
