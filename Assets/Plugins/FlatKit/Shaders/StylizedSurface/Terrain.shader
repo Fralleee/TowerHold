@@ -169,6 +169,11 @@
             #pragma multi_compile _ _FORWARD_PLUS
             #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
             #endif
+            #if UNITY_VERSION >= 600000
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
+            #endif
 
             // -------------------------------------
             // Unity defined keywords

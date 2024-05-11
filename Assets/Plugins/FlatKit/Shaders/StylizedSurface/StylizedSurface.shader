@@ -51,7 +51,7 @@
         _OutlineColor("[DR_OUTLINE_ON]Color", Color) = (1, 1, 1, 1)
     	_OutlineScale("[DR_OUTLINE_ON]Scale", Float) = 1.0
         [Toggle(DR_OUTLINE_SMOOTH_NORMALS)] _VertexExtrusionSmoothNormals("[DR_OUTLINE_ON]Smooth Normals", Float) = 0.0
-        _OutlineDepthOffset("[DR_OUTLINE_ON]Depth Offset", Range(-1, 1)) = 0.0
+        _OutlineDepthOffset("[DR_OUTLINE_ON]Depth Offset", Range(0, 1)) = 0.0
         [KeywordEnum(Screen, Object)] _OutlineSpace("[DR_OUTLINE_ON]Space", Float) = 0.0
         _CameraDistanceImpact("[DR_OUTLINE_ON][_OUTLINESPACE_SCREEN]Camera Distance Impact", Range(0, 1)) = 0.0
 
@@ -84,7 +84,7 @@
     	_DetailMapImpact("[]Detail Impact", Range(0, 1)) = 0.0
 
         _BumpMap ("Normal Map", 2D) = "bump" {}
-
+    	
         _EmissionMap ("Emission Map", 2D) = "white" {}
         [HDR]_EmissionColor("Emission Color", Color) = (1, 1, 1, 1)
 
@@ -109,10 +109,11 @@
 
     SubShader
     {
-        Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "IgnoreProjector" = "True" "Queue" = "Geometry"}
+        Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "IgnoreProjector" = "True"}
         LOD 300
 
     	HLSLINCLUDE
+    	// #define FLAT_KIT_DOTS_INSTANCING_ON // Uncomment to enable DOTS instancing
     	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
     	ENDHLSL
 
@@ -126,18 +127,18 @@
             Cull[_Cull]
 
             HLSLPROGRAM
-            #pragma shader_feature_local __ _CELPRIMARYMODE_SINGLE _CELPRIMARYMODE_STEPS _CELPRIMARYMODE_CURVE
-            #pragma shader_feature_local DR_CEL_EXTRA_ON
-            #pragma shader_feature_local DR_GRADIENT_ON
-            #pragma multi_compile __ _GRADIENTSPACE_WORLD _GRADIENTSPACE_LOCAL
-            #pragma shader_feature_local DR_SPECULAR_ON
-            #pragma shader_feature_local DR_RIM_ON
+            #pragma shader_feature_local_fragment __ _CELPRIMARYMODE_SINGLE _CELPRIMARYMODE_STEPS _CELPRIMARYMODE_CURVE
+            #pragma shader_feature_local_fragment DR_CEL_EXTRA_ON
+            #pragma shader_feature_local_fragment DR_GRADIENT_ON
+            #pragma shader_feature_local_fragment __ _GRADIENTSPACE_WORLD _GRADIENTSPACE_LOCAL
+            #pragma shader_feature_local_fragment DR_SPECULAR_ON
+            #pragma shader_feature_local_fragment DR_RIM_ON
             #pragma shader_feature_local DR_VERTEX_COLORS_ON
-            #pragma shader_feature_local DR_ENABLE_LIGHTMAP_DIR
-            #pragma shader_feature_local __ _UNITYSHADOWMODE_MULTIPLY _UNITYSHADOWMODE_COLOR
-            #pragma shader_feature_local _TEXTUREBLENDINGMODE_MULTIPLY _TEXTUREBLENDINGMODE_ADD
-            #pragma shader_feature_local _UNITYSHADOW_OCCLUSION
-            #pragma shader_feature_local _BASEMAP_PREMULTIPLY
+            #pragma shader_feature_local_fragment DR_ENABLE_LIGHTMAP_DIR
+            #pragma shader_feature_local_fragment __ _UNITYSHADOWMODE_MULTIPLY _UNITYSHADOWMODE_COLOR
+            #pragma shader_feature_local_fragment _TEXTUREBLENDINGMODE_MULTIPLY _TEXTUREBLENDINGMODE_ADD
+            #pragma shader_feature_local_fragment _UNITYSHADOW_OCCLUSION
+            #pragma shader_feature_local_fragment _BASEMAP_PREMULTIPLY
 
             // -------------------------------------
             // Material Keywords
@@ -169,9 +170,15 @@
             #pragma multi_compile_fragment _ _LIGHT_COOKIES
             #pragma multi_compile _ _CLUSTERED_RENDERING
             #endif
-            #if UNITY_VERSION >= 202220
+            #if UNITY_VERSION >= 202220 && UNITY_VERSION < 600000
             #pragma multi_compile _ _FORWARD_PLUS
             #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
+            #endif
+            #if UNITY_VERSION >= 600000
+            #pragma multi_compile _ _FORWARD_PLUS
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
             #endif
 
             // -------------------------------------
@@ -189,7 +196,10 @@
             // GPU Instancing
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
-            #pragma multi_compile _ DOTS_INSTANCING_ON
+            #if defined(FLAT_KIT_DOTS_INSTANCING_ON)
+            #pragma target 4.5							// Uncomment to enable DOTs instancing
+            #pragma multi_compile _ DOTS_INSTANCING_ON	// Uncomment to enable DOTs instancing
+            #endif
 
             // Detail map.
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -225,7 +235,7 @@
         Pass
         {
             Name "Outline"
-            Tags{ "LightMode" = "SRPDefaultUnlit" }
+            Tags{"LightMode" = "SRPDefaultUnlit"}
 
             Cull Front
 
@@ -293,10 +303,10 @@
             			float3 objectScale = abs(UNITY_MATRIX_M[0].xyz) + abs(UNITY_MATRIX_M[1].xyz) + abs(UNITY_MATRIX_M[2].xyz);
             			v.normal = v.uv2.xyz / objectScale;
             		#endif
-
+            	
             		#if defined(_OUTLINESPACE_OBJECT)
             			float3 offset = v.normal * _OutlineWidth * 0.01;
-		                float4 clipPosition = ObjectToClipPos(v.position * _OutlineScale + float4(offset, 0));
+		                float4 clipPosition = ObjectToClipPos(v.position * _OutlineScale + float4(offset, 0)); 
 					#else
 		                float4 clipPosition = ObjectToClipPos(v.position * _OutlineScale);
 		                const float3 clipNormal = ObjectToClipDir(v.normal).xyz;
@@ -319,7 +329,7 @@
 	                o.position = clipPosition;
 	                o.fogCoord = ComputeFogFactor(o.position.z);
                 #endif
-
+            	
                 return o;
             }
 
@@ -350,13 +360,16 @@
             HLSLPROGRAM
             // -------------------------------------
             // Material Keywords
-            #pragma shader_feature_local_fragment _ALPHATEST_ON
+            #pragma shader_feature_local _ALPHATEST_ON
             #pragma shader_feature_local_fragment _GLOSSINESS_FROM_BASE_ALPHA
 
             //--------------------------------------
             // GPU Instancing
             #pragma multi_compile_instancing
-            #pragma multi_compile _ DOTS_INSTANCING_ON
+            #if defined(FLAT_KIT_DOTS_INSTANCING_ON)
+            #pragma target 4.5							// Uncomment to enable DOTs instancing
+            #pragma multi_compile _ DOTS_INSTANCING_ON	// Uncomment to enable DOTs instancing
+            #endif
 
             // -------------------------------------
             // Universal Pipeline keywords
@@ -430,7 +443,10 @@
             // GPU Instancing
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
-            #pragma multi_compile _ DOTS_INSTANCING_ON
+            #if defined(FLAT_KIT_DOTS_INSTANCING_ON)
+            #pragma target 4.5							// Uncomment to enable DOTs instancing
+            #pragma multi_compile _ DOTS_INSTANCING_ON	// Uncomment to enable DOTs instancing
+            #endif
 
             #pragma vertex LitPassVertexSimple
             #pragma fragment LitPassFragmentSimple
@@ -457,7 +473,7 @@
 
             // -------------------------------------
             // Material Keywords
-            #pragma shader_feature_local_fragment _ALPHATEST_ON
+            #pragma shader_feature_local _ALPHATEST_ON
             #pragma shader_feature_local_fragment _GLOSSINESS_FROM_BASE_ALPHA
 
             // -------------------------------------
@@ -469,7 +485,10 @@
             //--------------------------------------
             // GPU Instancing
             #pragma multi_compile_instancing
-            #pragma multi_compile _ DOTS_INSTANCING_ON
+            #if defined(FLAT_KIT_DOTS_INSTANCING_ON)
+            #pragma target 4.5							// Uncomment to enable DOTs instancing
+            #pragma multi_compile _ DOTS_INSTANCING_ON	// Uncomment to enable DOTs instancing
+            #endif
 
             #include "LibraryUrp/StylizedInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthOnlyPass.hlsl"
@@ -501,7 +520,7 @@
             // -------------------------------------
             // Material Keywords
             #pragma shader_feature_local _NORMALMAP
-            #pragma shader_feature_local_fragment _ALPHATEST_ON
+            #pragma shader_feature_local _ALPHATEST_ON
             #pragma shader_feature_local_fragment _GLOSSINESS_FROM_BASE_ALPHA
 
             // -------------------------------------
@@ -515,7 +534,10 @@
             //--------------------------------------
             // GPU Instancing
             #pragma multi_compile_instancing
-            #pragma multi_compile _ DOTS_INSTANCING_ON
+            #if defined(FLAT_KIT_DOTS_INSTANCING_ON)
+            #pragma target 4.5							// Uncomment to enable DOTs instancing
+            #pragma multi_compile _ DOTS_INSTANCING_ON	// Uncomment to enable DOTs instancing
+            #endif
 
             #include "LibraryUrp/StylizedInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthNormalsPass.hlsl"

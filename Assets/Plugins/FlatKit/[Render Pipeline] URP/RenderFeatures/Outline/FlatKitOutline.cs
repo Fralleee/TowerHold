@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 #if UNITY_2022_3_OR_NEWER
@@ -81,7 +82,7 @@ public class FlatKitOutline : ScriptableRendererFeature {
     }
 
     protected override void Dispose(bool disposing) {
-        _fullScreenPass.Dispose();
+        _fullScreenPass?.Dispose();
     }
 
     private void SetMaterialProperties() {
@@ -122,10 +123,14 @@ public class FlatKitOutline : ScriptableRendererFeature {
     }
 
     private static void SetKeyword(Material material, string keyword, bool enabled) {
-        if (enabled) {
-            material.EnableKeyword(keyword);
+        if (material.shader != null) {
+            material.SetKeyword(new LocalKeyword(material.shader, keyword), enabled);
         } else {
-            material.DisableKeyword(keyword);
+            if (enabled) {
+                material.EnableKeyword(keyword);
+            } else {
+                material.DisableKeyword(keyword);
+            }
         }
     }
 }

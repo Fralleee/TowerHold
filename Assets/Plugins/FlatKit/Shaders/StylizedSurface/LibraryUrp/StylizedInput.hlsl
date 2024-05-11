@@ -7,7 +7,7 @@
 // NOTE: Do not ifdef the properties here as SRP batcher can not handle different layouts.
 
 #ifndef FLATKIT_TERRAIN
-#if _FORWARD_PLUS
+#if _FORWARD_PLUS && UNITY_VERSION < 600000
 CBUFFER_START(UnityPerMaterialNoBatching)
 #else
 CBUFFER_START(UnityPerMaterial)
@@ -103,7 +103,7 @@ CBUFFER_END
         UNITY_DOTS_INSTANCED_PROP(float , _Cutoff)
         UNITY_DOTS_INSTANCED_PROP(float , _Surface)
         UNITY_DOTS_INSTANCED_PROP(float4, _EmissionColor)
-        UNITY_DOT_INSTANCED_PROP(float4 , _UnityShadowColor)
+        UNITY_DOTS_INSTANCED_PROP(float4 , _UnityShadowColor)
         UNITY_DOTS_INSTANCED_PROP(float4, _ColorDim)
         UNITY_DOTS_INSTANCED_PROP(float4, _FlatSpecularColor)
         UNITY_DOTS_INSTANCED_PROP(float , _FlatSpecularSize)

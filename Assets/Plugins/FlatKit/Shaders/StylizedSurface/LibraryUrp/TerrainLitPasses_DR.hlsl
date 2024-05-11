@@ -72,7 +72,9 @@ half4 SplatmapFragment_DSTRM(Varyings IN) : SV_TARGET
 #endif
     */
 
-#if VERSION_GREATER_EQUAL(12, 1)
+#if UNITY_VERSION > 202340
+    SETUP_DEBUG_TEXTURE_DATA_FOR_TEX(inputData, IN.uvMainAndLM.xy, _BaseMap);
+#elif VERSION_GREATER_EQUAL(12, 1)
     SETUP_DEBUG_TEXTURE_DATA(inputData, IN.uvMainAndLM.xy, _BaseMap);
 #endif
 

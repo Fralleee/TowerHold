@@ -43,18 +43,6 @@ public class ScreenRecorder : MonoBehaviour
 		_commandBuffer = new CommandBuffer { name = "Capture Screen Command Buffer" };
 	}
 
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Y))
-		{
-			StartRecording();
-		}
-		if (Input.GetKeyDown(KeyCode.U))
-		{
-			StopRecording();
-		}
-	}
-
 	[Button]
 	public void StartRecording()
 	{

@@ -20,18 +20,18 @@ public class FlatKitFog : ScriptableRendererFeature {
     private Texture2D _lutHeight;
 
     private const string ShaderName = "Hidden/FlatKit/FogWrap";
-    private static readonly int DistanceLut = Shader.PropertyToID("_DistanceLUT");
-    private static readonly int Near = Shader.PropertyToID("_Near");
-    private static readonly int Far = Shader.PropertyToID("_Far");
-    private static readonly int DistanceFogIntensity = Shader.PropertyToID("_DistanceFogIntensity");
-    private static readonly int HeightLut = Shader.PropertyToID("_HeightLUT");
-    private static readonly int LowWorldY = Shader.PropertyToID("_LowWorldY");
-    private static readonly int HighWorldY = Shader.PropertyToID("_HighWorldY");
-    private static readonly int HeightFogIntensity = Shader.PropertyToID("_HeightFogIntensity");
-    private static readonly int DistanceHeightBlend = Shader.PropertyToID("_DistanceHeightBlend");
     private const string CameraRelativePosition = "FOG_CAMERA_RELATIVE";
     private const string UseDistanceFog = "USE_DISTANCE_FOG";
     private const string UseHeightFog = "USE_HEIGHT_FOG";
+    private static int distanceLut => Shader.PropertyToID("_DistanceLUT");
+    private static int near => Shader.PropertyToID("_Near");
+    private static int far => Shader.PropertyToID("_Far");
+    private static int distanceFogIntensity => Shader.PropertyToID("_DistanceFogIntensity");
+    private static int heightLut => Shader.PropertyToID("_HeightLUT");
+    private static int lowWorldY => Shader.PropertyToID("_LowWorldY");
+    private static int highWorldY => Shader.PropertyToID("_HighWorldY");
+    private static int heightFogIntensity => Shader.PropertyToID("_HeightFogIntensity");
+    private static int distanceHeightBlend => Shader.PropertyToID("_DistanceHeightBlend");
 
     public override void Create() {
         // Settings.
@@ -87,13 +87,13 @@ public class FlatKitFog : ScriptableRendererFeature {
     public override void OnCameraPreCull(ScriptableRenderer renderer, in CameraData cameraData) {
         base.OnCameraPreCull(renderer, in cameraData);
         if (settings == null) return;
-        if (settings.useDistance && !_effectMaterial.GetTexture(DistanceLut)) UpdateDistanceLut();
-        if (settings.useHeight && !_effectMaterial.GetTexture(HeightLut)) UpdateHeightLut();
+        if (settings.useDistance && !_effectMaterial.GetTexture(distanceLut)) UpdateDistanceLut();
+        if (settings.useHeight && !_effectMaterial.GetTexture(heightLut)) UpdateHeightLut();
     }
 #endif
 
     protected override void Dispose(bool disposing) {
-        _fullScreenPass.Dispose();
+        _fullScreenPass?.Dispose();
     }
 
     private void SetMaterialProperties() {
@@ -102,18 +102,18 @@ public class FlatKitFog : ScriptableRendererFeature {
         SetKeyword(_effectMaterial, UseDistanceFog, settings.useDistance);
         if (settings.useDistance) {
             UpdateDistanceLut();
-            _effectMaterial.SetFloat(Near, settings.near);
-            _effectMaterial.SetFloat(Far, settings.far);
-            _effectMaterial.SetFloat(DistanceFogIntensity, settings.distanceFogIntensity);
+            _effectMaterial.SetFloat(near, settings.near);
+            _effectMaterial.SetFloat(far, settings.far);
+            _effectMaterial.SetFloat(distanceFogIntensity, settings.distanceFogIntensity);
         }
 
         SetKeyword(_effectMaterial, UseHeightFog, settings.useHeight);
         if (settings.useHeight) {
             UpdateHeightLut();
-            _effectMaterial.SetFloat(LowWorldY, settings.low);
-            _effectMaterial.SetFloat(HighWorldY, settings.high);
-            _effectMaterial.SetFloat(HeightFogIntensity, settings.heightFogIntensity);
-            _effectMaterial.SetFloat(DistanceHeightBlend, settings.distanceHeightBlend);
+            _effectMaterial.SetFloat(lowWorldY, settings.low);
+            _effectMaterial.SetFloat(highWorldY, settings.high);
+            _effectMaterial.SetFloat(heightFogIntensity, settings.heightFogIntensity);
+            _effectMaterial.SetFloat(distanceHeightBlend, settings.distanceHeightBlend);
         }
 
         SetKeyword(_effectMaterial, CameraRelativePosition, settings.cameraRelativePosition);
@@ -140,7 +140,7 @@ public class FlatKitFog : ScriptableRendererFeature {
         }
 
         _lutDepth.Apply();
-        _effectMaterial.SetTexture(DistanceLut, _lutDepth);
+        _effectMaterial.SetTexture(distanceLut, _lutDepth);
     }
 
     private void UpdateHeightLut() {
@@ -164,7 +164,7 @@ public class FlatKitFog : ScriptableRendererFeature {
         }
 
         _lutHeight.Apply();
-        _effectMaterial.SetTexture(HeightLut, _lutHeight);
+        _effectMaterial.SetTexture(heightLut, _lutHeight);
     }
 
     private static void SetKeyword(Material material, string keyword, bool enabled) {

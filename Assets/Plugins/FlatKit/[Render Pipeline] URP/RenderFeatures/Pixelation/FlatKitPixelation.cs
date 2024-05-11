@@ -15,7 +15,7 @@ public class FlatKitPixelation : ScriptableRendererFeature {
     private ScriptableRenderPassInput _requirements = ScriptableRenderPassInput.Color;
 
     private const string ShaderName = "Hidden/FlatKit/PixelationWrap";
-    private static readonly int PixelSizeProperty = Shader.PropertyToID("_PixelSize");
+    private static int pixelSizeProperty => Shader.PropertyToID("_PixelSize");
 
     public override void Create() {
         // Settings.
@@ -67,13 +67,13 @@ public class FlatKitPixelation : ScriptableRendererFeature {
     }
 
     protected override void Dispose(bool disposing) {
-        _fullScreenPass.Dispose();
+        _fullScreenPass?.Dispose();
     }
 
     private void SetMaterialProperties() {
         if (_effectMaterial == null) return;
         var pixelSize = Mathf.Max(1f / settings.resolution, 0.0001f);
-        _effectMaterial.SetFloat(PixelSizeProperty, pixelSize);
+        _effectMaterial.SetFloat(pixelSizeProperty, pixelSize);
     }
 }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace FlatKit.StylizedSurface {
 public static class Tooltips {
+    // @formatter:off
     public static readonly Dictionary<string, string> Map = new Dictionary<string, string> {
         { "Color", "Primary color of the material. This color is usually the most visible." }, {
             "Cel Shading Mode", "Lets you choose how the coloring/shading is applied.\n" +
@@ -85,12 +86,11 @@ public static class Tooltips {
                                     "color layers."
         }, {
             "Light Color Contribution",
-            "How much the color of the light (directional, point or spot) influences the color " +
-            "of the object."
+            "How much the color of real-time lights (directional, point or spot) influences the color of the object.\n" +
+            "Has no effect when the lighting is baked as that color is already included in the lightmap and/or light probes."
         }, {
             "Point / Spot Light Edge",
-            "Sharpness of the transition between lit and unlit parts of the surface when using " +
-            "point or spot lights."
+            "Sharpness of the transition between lit and unlit parts of the surface when using point or spot lights."
         }, {
             "Override Light Direction",
             "Enables overriding of light direction. Use it when you want to re-align the shaded part for the current material only."
@@ -108,23 +108,27 @@ public static class Tooltips {
         { "[_UNITYSHADOWMODE_COLOR]Color", "Color of the received shadows." }, {
             "Sharpness",
             "How smooth or sharp the received shadows are. Values to the left mean 'sharper', values to the right are 'smoother'."
-        }, {
+        },
+        {
             "Shadow Occlusion",
             "Mask received Unity shadows in areas where normals face away from the light. Useful to " +
             "remove shadows that 'go through' objects."
         },
 
         // Texture maps.
-        { "Albedo", "" }, {
+        { "Albedo", "Main texture of the material. It is also known as 'Diffuse'." }, 
+        {
             "Mix Into Shading",
             "Uses the main texture when calculating lighting and shading colors. When disabled, the Environment Lighting of the scene has a greater impact on the material."
         },
-        { "Texture Impact", "How opaque or transparent the texture is." }, {
+        { "Texture Impact", "How opaque or transparent the texture is." }, 
+        {
             "Blending Mode", "Select which blending mode to use for the texture:\n" +
                              "-'Add' adds the texture to the existing colors of shading;\n" +
                              "-'Multiply' multiplies the texture over the existing colors of shading;\n" +
                              "-'Interpolate' (only Detail Map) blends the texture with the existing colors of shading."
-        }, {
+        },
+        {
             "Detail Map",
             "A texture that is used to add small details to the surface. There is no principal difference " +
             "between this texture and the main one, except that it is usually smaller and has more details."
@@ -148,5 +152,6 @@ public static class Tooltips {
         { "Alpha Clipping", "Allows controlling which pixels to render based on the texture alpha values." },
         { "Enable GPU Instancing", "GPU Instancing allows rendering many copies of the same mesh at once." },
     };
+    // @formatter:on
 }
 }

@@ -2,6 +2,8 @@
 #define FLATKIT_LIGHT_PASS_DR_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
 // Check is needed because in Unity 2021 they use two different URP versions - 14 on desktop and 12 on mobile.
 #if !VERSION_LOWER(13, 0)
 #if defined(LOD_FADE_CROSSFADE)
@@ -68,8 +70,8 @@ struct Varyings
 };
 
 /// ---------------------------------------------------------------------------
-
-void InitializeInputData(Varyings input, half3 normalTS, out InputData inputData)
+// Library/PackageCache/com.unity.render-pipelines.universal@16.0.5/Shaders/SimpleLitForwardPass.hlsl
+void InitializeInputData_DR(Varyings input, half3 normalTS, out InputData inputData)
 {
     inputData = (InputData)0;
 
@@ -96,29 +98,34 @@ void InitializeInputData(Varyings input, half3 normalTS, out InputData inputData
 
     inputData.viewDirectionWS = viewDirWS;
 
-#if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
-    inputData.shadowCoord = input.shadowCoord;
-#elif defined(MAIN_LIGHT_CALCULATE_SHADOWS)
-    inputData.shadowCoord = TransformWorldToShadowCoord(inputData.positionWS);
-#else
-    inputData.shadowCoord = float4(0, 0, 0, 0);
-#endif
+    #if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
+        inputData.shadowCoord = input.shadowCoord;
+    #elif defined(MAIN_LIGHT_CALCULATE_SHADOWS)
+        inputData.shadowCoord = TransformWorldToShadowCoord(inputData.positionWS);
+    #else
+        inputData.shadowCoord = float4(0, 0, 0, 0);
+    #endif
 
-#ifdef _ADDITIONAL_LIGHTS_VERTEX
-    inputData.fogCoord = InitializeInputDataFog(float4(inputData.positionWS, 1.0), input.fogFactorAndVertexLight.x);
-    inputData.vertexLighting = input.fogFactorAndVertexLight.yzw;
-#else
+    #ifdef _ADDITIONAL_LIGHTS_VERTEX
+        inputData.fogCoord = InitializeInputDataFog(float4(inputData.positionWS, 1.0), input.fogFactorAndVertexLight.x);
+        inputData.vertexLighting = input.fogFactorAndVertexLight.yzw;
+    #else
 #if VERSION_GREATER_EQUAL(12, 0)
     inputData.fogCoord = InitializeInputDataFog(float4(inputData.positionWS, 1.0), input.fogFactor);
 #endif
     inputData.vertexLighting = half3(0, 0, 0);
-#endif
+    #endif
 
 #if defined(DYNAMICLIGHTMAP_ON)
     inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, input.dynamicLightmapUV, input.vertexSH, inputData.normalWS);
+#elif !defined(LIGHTMAP_ON) && (defined(PROBE_VOLUMES_L1) || defined(PROBE_VOLUMES_L2))
+    inputData.bakedGI = SAMPLE_GI(input.vertexSH,
+        GetAbsolutePositionWS(inputData.positionWS),
+        inputData.normalWS,
+        inputData.viewDirectionWS,
+        input.positionCS.xy);
 #else
-    const half lightmapWorkaroundFlip = -1.0;
-    inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, input.vertexSH, lightmapWorkaroundFlip * inputData.normalWS);
+    inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, input.vertexSH, inputData.normalWS);
 #endif
 
     inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(input.positionCS);
@@ -181,7 +188,7 @@ Varyings StylizedPassVertex(Attributes input)
     output.dynamicLightmapUV = input.dynamicLightmapUV.xy * unity_DynamicLightmapST.xy + unity_DynamicLightmapST.zw;
 #endif
 
-#if UNITY_VERSION >= 202319
+#if UNITY_VERSION >= 202317
     OUTPUT_SH4(vertexInput.positionWS, output.normalWS.xyz, GetWorldSpaceNormalizeViewDir(vertexInput.positionWS), output.vertexSH);
 #elif UNITY_VERSION >= 202310
     OUTPUT_SH(vertexInput.positionWS, output.normalWS.xyz, GetWorldSpaceNormalizeViewDir(vertexInput.positionWS), output.vertexSH);
@@ -220,17 +227,27 @@ half4 StylizedPassFragment(Varyings input) : SV_Target
 #endif
 
     InputData inputData;
-    InitializeInputData(input, surfaceData.normalTS, inputData);
-    #if VERSION_GREATER_EQUAL(12, 0)
+    InitializeInputData_DR(input, surfaceData.normalTS, inputData);
+    #if UNITY_VERSION >= 202330
     SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv);
+    #elif UNITY_VERSION >= 202210
+    SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
     #endif
 
-#if defined(DR_VERTEX_COLORS_ON)
-    _BaseColor.rgb *= input.VertexColor.rgb;
-#endif
+    // Apply vertex color before shading (default behavior). Remove the #if block and uncomment below to apply after
+    // shading.
+    #if defined(DR_VERTEX_COLORS_ON)
+        _BaseColor.rgb *= input.VertexColor.rgb;
+    #endif
 
     // Computes direct light contribution.
     half4 color = UniversalFragment_DSTRM(inputData, surfaceData, input.uv);
+
+    /*
+    #if defined(DR_VERTEX_COLORS_ON)
+    color.rgb *= input.VertexColor.rgb;
+    #endif
+    */
 
     color.rgb = MixFog(color.rgb, inputData.fogCoord);
 #if UNITY_VERSION >= 202220

@@ -43,7 +43,7 @@ inline void ApplyLightToColor(Light light, inout half3 c) {
     c *= lerp(1, light.shadowAttenuation, _UnityShadowPower);
     #endif
     #if defined(_UNITYSHADOWMODE_COLOR)
-    c = lerp(lerp(c, _UnityShadowColor, _UnityShadowColor.a), c, light.shadowAttenuation);
+    c = lerp(lerp(c, _UnityShadowColor.rgb, _UnityShadowColor.a), c, light.shadowAttenuation);
     #endif
 
     c.rgb *= light.color * light.distanceAttenuation;
@@ -52,7 +52,11 @@ inline void ApplyLightToColor(Light light, inout half3 c) {
 half3 LightingPhysicallyBased_DSTRM(Light light, InputData inputData)
 {
     // If all light in the scene is baked, we use custom light direction for the cel shading.
+#if defined(LIGHTMAP_ON)
+    light.direction = _LightmapDirection;
+#else
     light.direction = lerp(light.direction, _LightmapDirection, _OverrideLightmapDir);
+#endif
 
     half4 c = _BaseColor;
 
@@ -127,20 +131,17 @@ void StylizeLight(inout Light light)
     const float distanceAttenuation = smoothstep(0, _LightFalloffSize + 0.001, light.distanceAttenuation);
     light.distanceAttenuation = distanceAttenuation;
 
+    #if LIGHTMAP_ON
+    const half3 lightColor = 0;
+    #else
     const half3 lightColor = lerp(half3(1, 1, 1), light.color, _LightContribution);
+    #endif
     light.color = lightColor;
 }
 
 half4 UniversalFragment_DSTRM(InputData inputData, SurfaceData surfaceData, float2 uv)
 {
-    // To ensure backward compatibility we have to avoid using shadowMask input, as it is not present in older shaders
-    #if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)
-    const half4 shadowMask = inputData.shadowMask;
-    #elif !defined (LIGHTMAP_ON)
-    const half4 shadowMask = unity_ProbesOcclusion;
-    #else
-    const half4 shadowMask = half4(1, 1, 1, 1);
-    #endif
+    const half4 shadowMask = CalculateShadowMask(inputData);
 
     #if VERSION_GREATER_EQUAL(10, 0)
     Light mainLight = GetMainLight(inputData.shadowCoord, inputData.positionWS, shadowMask);
@@ -169,12 +170,17 @@ half4 UniversalFragment_DSTRM(InputData inputData, SurfaceData surfaceData, floa
 
     // Apply Flat Kit stylizing to `inputData.bakedGI` (which is half3).
 #if LIGHTMAP_ON
+    // Apply cel shading. Can also separate modes by `#if defined(_CELPRIMARYMODE_SINGLE)` etc.
+    // length(inputData.bakedGI) can be replaced with inputData.bakedGI to use light map color more directly.
+    inputData.bakedGI = lerp(_ColorDim.rgb, _BaseColor.rgb,
+        smoothstep(_SelfShadingSize - _ShadowEdgeSize, _SelfShadingSize + _ShadowEdgeSize, length(inputData.bakedGI)));
+
+    // Apply shadow modes
     #if defined(_UNITYSHADOWMODE_MULTIPLY)
-        inputData.bakedGI *= _UnityShadowPower;
+        inputData.bakedGI = lerp(1, inputData.bakedGI, (1 - inputData.bakedGI) * _UnityShadowPower);
     #endif
     #if defined(_UNITYSHADOWMODE_COLOR)
-        float giLength = length(inputData.bakedGI);
-        inputData.bakedGI = lerp(giLength, _UnityShadowColor.rgb, _UnityShadowColor.a * giLength);
+        inputData.bakedGI = lerp(inputData.bakedGI, _UnityShadowColor.rgb, _UnityShadowColor.a * inputData.bakedGI);
     #endif
 #endif
 
@@ -184,9 +190,9 @@ half4 UniversalFragment_DSTRM(InputData inputData, SurfaceData surfaceData, floa
     const half4 detail = SAMPLE_TEXTURE2D(_DetailMap, sampler_DetailMap, detailUV);
 
     #if defined(_BASEMAP_PREMULTIPLY)
-        half3 brdf = albedo.rgb;
+        const half3 brdf = albedo.rgb;
     #else
-        half3 brdf = _BaseColor.rgb;
+        const half3 brdf = _BaseColor.rgb;
     #endif
     
     BRDFData brdfData;

@@ -57,3 +57,4 @@ Material:
     - _PixelSize: 0.00125
     m_Colors: []
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

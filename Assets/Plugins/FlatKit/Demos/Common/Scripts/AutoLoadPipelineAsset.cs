@@ -9,11 +9,11 @@ public class AutoLoadPipelineAsset : MonoBehaviour {
     private RenderPipelineAsset _previousPipelineAsset;
     private bool _overrodeQualitySettings;
 
-    void OnEnable() {
+    private void OnEnable() {
         UpdatePipeline();
     }
 
-    void OnDisable() {
+    private void OnDisable() {
         ResetPipeline();
     }
 
@@ -27,10 +27,17 @@ public class AutoLoadPipelineAsset : MonoBehaviour {
                 _previousPipelineAsset = QualitySettings.renderPipeline;
                 QualitySettings.renderPipeline = pipelineAsset;
                 _overrodeQualitySettings = true;
-            } else if (GraphicsSettings.defaultRenderPipeline != pipelineAsset) {
-                _previousPipelineAsset = GraphicsSettings.defaultRenderPipeline;
-                GraphicsSettings.defaultRenderPipeline = pipelineAsset;
-                _overrodeQualitySettings = false;
+            } else {
+#if UNITY_6000_0_OR_NEWER
+                var currentPipeline = GraphicsSettings.defaultRenderPipeline;
+#else
+                var currentPipeline = GraphicsSettings.renderPipelineAsset;
+#endif
+                if (currentPipeline != pipelineAsset) {
+                    _previousPipelineAsset = currentPipeline;
+                    GraphicsSettings.defaultRenderPipeline = pipelineAsset;
+                    _overrodeQualitySettings = false;
+                }
             }
         }
     }
@@ -40,7 +47,11 @@ public class AutoLoadPipelineAsset : MonoBehaviour {
             if (_overrodeQualitySettings) {
                 QualitySettings.renderPipeline = _previousPipelineAsset;
             } else {
+#if UNITY_6000_0_OR_NEWER
                 GraphicsSettings.defaultRenderPipeline = _previousPipelineAsset;
+#else
+                GraphicsSettings.renderPipelineAsset = _previousPipelineAsset;
+#endif
             }
         }
     }

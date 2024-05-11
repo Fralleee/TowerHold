@@ -46,10 +46,10 @@
         _RefractionSpeed("Speed", Float) = 0.1
         _RefractionScale("Scale", Float) = 1
 
-/*
+        /*
         _SpecularAmount("[FOLDOUT(Specular){2}]Amount{Specular}", Range(0, 1)) = 0.5
         [HDR] _SpecularColor("Color{Specular}", Color) = (1, 1, 1, 1)
-*/
+        */
 
         [HideInInspector] [ToggleOff] _Opaque("Opaque", Float) = 0.0
         [HideInInspector] _QueueOffset("Queue offset", Float) = 0.0
@@ -100,9 +100,15 @@
             #pragma multi_compile_fragment _ _LIGHT_COOKIES
             #pragma multi_compile _ _CLUSTERED_RENDERING
             #endif
-            #if UNITY_VERSION >= 202220
+            #if UNITY_VERSION >= 202220 && UNITY_VERSION < 600000
             #pragma multi_compile _ _FORWARD_PLUS
             #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
+            #endif
+            #if UNITY_VERSION >= 600000
+            #pragma multi_compile _ _FORWARD_PLUS
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
             #endif
 
             // -------------------------------------
@@ -415,7 +421,9 @@
                 #endif
 
                 // Shadows.
+                #ifndef _MAIN_LIGHT_SHADOWS
                 #define _MAIN_LIGHT_SHADOWS  // Since URP 13 or 14 this is not defined by default.
+                #endif
                 #if defined(_MAIN_LIGHT_SHADOWS)
                     VertexPositionInputs vertexInput = (VertexPositionInputs)0;
                     vertexInput.positionWS = i.positionWS.xyz;
