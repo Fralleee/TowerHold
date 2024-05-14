@@ -47,7 +47,6 @@ public class ScreenRecorder : MonoBehaviour
 
 		_timeBetweenFrames = 1.0f / FrameRate;
 		_waitForEndOfFrame = new WaitForEndOfFrame();
-		_nextFrameTime = Time.time;
 		_commandBuffer = new CommandBuffer { name = "Capture Screen Command Buffer" };
 	}
 
@@ -95,6 +94,7 @@ public class ScreenRecorder : MonoBehaviour
 
 	IEnumerator Capture()
 	{
+		_nextFrameTime = Time.time;
 		while (true)
 		{
 			yield return _waitForEndOfFrame;
