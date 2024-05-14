@@ -4,6 +4,7 @@ using FFmpegOut;
 using System.Collections;
 using System.IO;
 using Sirenix.OdinInspector;
+using System;
 
 public class ScreenRecorder : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class ScreenRecorder : MonoBehaviour
 	float _nextFrameTime;
 	string _videoOutputPath;
 	string _audioOutputPath;
+	string _finalOutputPath;
 
 	void Start()
 	{
@@ -41,6 +43,8 @@ public class ScreenRecorder : MonoBehaviour
 		var sessionName = "ScreenCapture_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 		_videoOutputPath = Path.Combine(Application.persistentDataPath, sessionName + ".mp4");
 		_audioOutputPath = Path.Combine(Application.persistentDataPath, sessionName + ".wav");
+		_finalOutputPath = Path.Combine(Application.persistentDataPath, sessionName + "_final.mp4");
+
 
 		_ffmpegSession = FFmpegSession.CreateWithOutputPath(_videoOutputPath, Screen.width, Screen.height, FrameRate, Preset);
 		Debug.Log("FFmpeg session started: " + _videoOutputPath);
@@ -61,7 +65,7 @@ public class ScreenRecorder : MonoBehaviour
 	}
 
 	[Button]
-	public void StopRecording()
+	public async void StopRecording()
 	{
 		if (_captureScreenCoroutine != null)
 		{
@@ -69,8 +73,36 @@ public class ScreenRecorder : MonoBehaviour
 			_captureScreenCoroutine = null;
 			_audioRecorder.StopRecording();
 			Dispose();
+
+			var success = await FFmpegPipe.CombineAudioAndVideoAsync(_videoOutputPath, _audioOutputPath, _finalOutputPath);
+			if (success)
+			{
+				Debug.Log("Recording stopped and files combined successfully.");
+				try
+				{
+					if (File.Exists(_videoOutputPath))
+					{
+						File.Delete(_videoOutputPath);
+					}
+					if (File.Exists(_audioOutputPath))
+					{
+						File.Delete(_audioOutputPath);
+					}
+					Debug.Log("Temporary files deleted.");
+				}
+				catch (Exception ex)
+				{
+					Debug.LogError($"Failed to delete temporary files: {ex.Message}");
+				}
+			}
+			else
+			{
+				Debug.LogError("Failed to combine audio and video files.");
+			}
 		}
 	}
+
+
 
 	void FreeRenderResources()
 	{

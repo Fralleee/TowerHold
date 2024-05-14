@@ -1,13 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using Unity.Collections;
 using UnityEngine;
 
 namespace FFmpegOut
 {
-	public sealed class FFmpegPipe : System.IDisposable
+	public sealed class FFmpegPipe : IDisposable
 	{
 		public static bool IsAvailable => File.Exists(ExecutablePath);
 
@@ -31,10 +33,14 @@ namespace FFmpegOut
 				var platform = Application.platform;
 
 				if (platform is RuntimePlatform.OSXPlayer or RuntimePlatform.OSXEditor)
+				{
 					return Path.Combine(basePath, "FFmpegOut/macOS/ffmpeg");
+				}
 
 				if (platform is RuntimePlatform.LinuxPlayer or RuntimePlatform.LinuxEditor)
+				{
 					return Path.Combine(basePath, "FFmpegOut/Linux/ffmpeg");
+				}
 
 				return Path.Combine(basePath, "FFmpegOut/Windows/ffmpeg.exe");
 			}
@@ -60,7 +66,7 @@ namespace FFmpegOut
 				_copyThread.Start();
 				_pipeThread.Start();
 			}
-			catch (System.Exception ex)
+			catch (Exception ex)
 			{
 				UnityEngine.Debug.LogError($"Failed to start FFmpeg process: {ex.Message}");
 			}
@@ -196,7 +202,7 @@ namespace FFmpegOut
 						pipe.Write(buffer, 0, buffer.Length);
 						pipe.Flush();
 					}
-					catch (System.Exception ex)
+					catch (Exception ex)
 					{
 						UnityEngine.Debug.LogError($"Error writing to FFmpeg pipe: {ex.Message}");
 					}
@@ -210,5 +216,61 @@ namespace FFmpegOut
 				}
 			}
 		}
+
+		public static async Task<bool> CombineAudioAndVideoAsync(string videoPath, string audioPath, string outputPath, int timeout = 30000)
+		{
+			var process = new Process
+			{
+				StartInfo = new ProcessStartInfo
+				{
+					FileName = ExecutablePath,
+					Arguments = $"-i \"{videoPath}\" -i \"{audioPath}\" -c:v copy -c:a aac -strict experimental \"{outputPath}\"",
+					RedirectStandardOutput = true,
+					RedirectStandardError = true,
+					UseShellExecute = false,
+					CreateNoWindow = true
+				}
+			};
+
+			var tcs = new TaskCompletionSource<bool>();
+
+			process.EnableRaisingEvents = true;
+			process.Exited += (sender, args) =>
+			{
+				var exitCode = process.ExitCode;
+				process.Dispose();
+				if (exitCode == 0)
+				{
+					UnityEngine.Debug.Log($"Successfully combined audio and video into {outputPath}");
+					tcs.SetResult(true);
+				}
+				else
+				{
+					UnityEngine.Debug.LogError($"Failed to combine audio and video. Exit code: {exitCode}");
+					tcs.SetResult(false);
+				}
+			};
+
+			process.Start();
+
+			if (await Task.WhenAny(tcs.Task, Task.Delay(timeout)) == tcs.Task)
+			{
+				return await tcs.Task;
+			}
+			else
+			{
+				try
+				{
+					process.Kill();
+				}
+				catch (Exception ex)
+				{
+					UnityEngine.Debug.LogError($"Failed to kill FFmpeg process: {ex.Message}");
+				}
+
+				return false;
+			}
+		}
+
 	}
 }
