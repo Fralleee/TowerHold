@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using FFmpegOut;
 using System.Collections;
+using System.IO;
 using Sirenix.OdinInspector;
 
 public class ScreenRecorder : MonoBehaviour
@@ -9,15 +10,19 @@ public class ScreenRecorder : MonoBehaviour
 	public FFmpegPreset Preset = FFmpegPreset.H264Default;
 	public int FrameRate = 30;
 
+	[SerializeField] AudioRecorder _audioRecorder;
+
 	CommandBuffer _commandBuffer;
 	RenderTexture _renderTexture;
 	Camera _captureCamera;
 	FFmpegSession _ffmpegSession;
 	YieldInstruction _waitForEndOfFrame;
-	Coroutine _captueScreenCoroutine;
+	Coroutine _captureScreenCoroutine;
 
 	float _timeBetweenFrames;
 	float _nextFrameTime;
+	string _videoOutputPath;
+	string _audioOutputPath;
 
 	void Start()
 	{
@@ -34,8 +39,11 @@ public class ScreenRecorder : MonoBehaviour
 		}
 
 		var sessionName = "ScreenCapture_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-		_ffmpegSession = FFmpegSession.Create(sessionName, Screen.width, Screen.height, FrameRate, Preset);
-		Debug.Log("FFmpeg session started: " + sessionName);
+		_videoOutputPath = Path.Combine(Application.persistentDataPath, sessionName + ".mp4");
+		_audioOutputPath = Path.Combine(Application.persistentDataPath, sessionName + ".wav");
+
+		_ffmpegSession = FFmpegSession.CreateWithOutputPath(_videoOutputPath, Screen.width, Screen.height, FrameRate, Preset);
+		Debug.Log("FFmpeg session started: " + _videoOutputPath);
 
 		_timeBetweenFrames = 1.0f / FrameRate;
 		_waitForEndOfFrame = new WaitForEndOfFrame();
@@ -46,27 +54,29 @@ public class ScreenRecorder : MonoBehaviour
 	[Button]
 	public void StartRecording()
 	{
-		_captueScreenCoroutine = StartCoroutine(Capture());
+		if (_captureScreenCoroutine == null)
+		{
+			_captureScreenCoroutine = StartCoroutine(Capture());
+			_audioRecorder.StartRecording(_audioOutputPath);
+		}
 	}
 
 	[Button]
 	public void StopRecording()
 	{
-		if (_captueScreenCoroutine != null)
+		if (_captureScreenCoroutine != null)
 		{
-			StopCoroutine(_captueScreenCoroutine);
-			_captueScreenCoroutine = null;
+			StopCoroutine(_captureScreenCoroutine);
+			_captureScreenCoroutine = null;
+			_audioRecorder.StopRecording();
 			Dispose();
 		}
 	}
 
 	void FreeRenderResources()
 	{
-		if (_commandBuffer != null)
-		{
-			_commandBuffer.Release();
-			_commandBuffer = null;
-		}
+		_commandBuffer?.Release();
+		_commandBuffer = null;
 
 		if (_renderTexture)
 		{
@@ -77,11 +87,8 @@ public class ScreenRecorder : MonoBehaviour
 
 	void Dispose()
 	{
-		if (_ffmpegSession != null)
-		{
-			_ffmpegSession.Dispose();
-			_ffmpegSession = null;
-		}
+		_ffmpegSession?.Dispose();
+		_ffmpegSession = null;
 
 		FreeRenderResources();
 	}
@@ -117,11 +124,8 @@ public class ScreenRecorder : MonoBehaviour
 			{
 				_ffmpegSession.PushFrame(null);
 			}
-
-
 		}
 	}
-
 
 	void OnDisable()
 	{

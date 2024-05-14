@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 [CreateAssetMenu(fileName = "AudioSettings", menuName = "VAKT/Settings/Audio Settings")]
-public class AudioSettings : ScriptableObject
+public class AudioSourceSettings : ScriptableObject
 {
 	public float MinDistance = 100f;
 	public float MaxDistance = 300f;

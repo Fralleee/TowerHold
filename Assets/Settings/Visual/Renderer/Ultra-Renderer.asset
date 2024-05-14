@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb250ac097f481fa89c38a1e224b773, type: 3}
   m_Name: FlatKitPixelation
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings: {fileID: 11400000, guid: c472facfb9eceae4ebca89f811c42f20, type: 2}
 --- !u!114 &-4544205243901703570
 MonoBehaviour:
