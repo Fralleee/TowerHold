@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections;
+using System.Linq;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
@@ -10,8 +11,6 @@ public class EnemyManager : Singleton<EnemyManager>
 		"Jeff", "Broseph", "Julian", "Count", "Doctor Z"
 	};
 
-	const int PointLevelScaling = 25;
-	const int StartPoints = 100;
 	const int TotalMinSpawnsPerLevel = 8;
 	const int TotalMaxSpawnsPerLevel = 16;
 	const int GroupOffsetDistanceMax = 3;
@@ -23,9 +22,18 @@ public class EnemyManager : Singleton<EnemyManager>
 	[Header("Settings")]
 	[SerializeField] int _minRadius = 30;
 	[SerializeField] int _maxRadius = 40;
+
+	[Header("Enemies")]
+	[SerializeField] int _minSelectedVariants = 4;
+	[SerializeField] int _maxSelectedVariants = 4;
 	[SerializeField] EnemyVariants _enemyVariants;
 	[SerializeField] LevelSpecificSpawns _levelSpecificSpawns;
 
+	[Header("Scaling")]
+	[SerializeField] int _pointLevelScaling = 25;
+	[SerializeField] int _startPoints = 100;
+
+	Enemy[] _selectedVariants;
 	Transform _enemies;
 	float _nextSpawnTime;
 	float _timePerSpawn;
@@ -35,7 +43,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	int CalculatePointsForLevel(int level)
 	{
-		return StartPoints + (PointLevelScaling * (level - 1));
+		return _startPoints + (_pointLevelScaling * (level - 1));
 	}
 
 	int DamageFromValue(Enemy enemy)
@@ -71,6 +79,8 @@ public class EnemyManager : Singleton<EnemyManager>
 	{
 		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 
+		_selectedVariants = SelectVariants(GameController.GameSettings.StartSeed);
+		Debug.Log($"Enemie variants are {string.Join(", ", _selectedVariants.Select(x => x.name))}.");
 		_enemies = new GameObject("Enemies").transform;
 		_enemies.SetParent(transform);
 
@@ -84,6 +94,24 @@ public class EnemyManager : Singleton<EnemyManager>
 			TrySpawn();
 			_nextSpawnTime += _timePerSpawn;
 		}
+	}
+
+	Enemy[] SelectVariants(int seed) {
+		var numberOfVariants = _randomGenerator.Next(_minSelectedVariants, _maxSelectedVariants);
+		var variantsPool = _enemyVariants.Enemies.ToList();
+		var selectedVariants = new List<Enemy>();
+
+		for (var i = 0; i < numberOfVariants; i++)
+		{
+			if (variantsPool.Count == 0) {
+				return selectedVariants.ToArray();
+			}
+			var index = _randomGenerator.Next(0, variantsPool.Count - 1);
+			selectedVariants.Add(variantsPool[index]);
+			variantsPool.RemoveAt(index);
+		}
+
+		return selectedVariants.ToArray();
 	}
 
 	void InitializeLevelSpawnConfigurations()
@@ -175,7 +203,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		{
 			var damage = DamageFromValue(enemy);
 			Debug.Log($"EnemyManager: Max enemies alive, dealing {damage} damage to target.");
-			_ = Target.TakeDamage(damage);
+			_ = Target.TakeDamage(damage, DamageType.Global);
 			return;
 		}
 
@@ -207,7 +235,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	Enemy ChooseEnemyToSpawn(int remainingPoints)
 	{
 		// Filter enemies that can be spawned within the remaining points
-		var possibleEnemies = Array.FindAll(_enemyVariants.Enemies, e => e.Value <= remainingPoints);
+		var possibleEnemies = Array.FindAll(_selectedVariants, e => e.Value <= remainingPoints);
 		if (possibleEnemies.Length == 0)
 		{
 			return null;

@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
 	Turret _turret;
 	Affliction _excludeBehavior;
 	Target _target;
+	DamageType _damageType;
 	AudioSource _audioSource;
 	Vector3 _startPosition;
 	Vector3 _lastPosition;
@@ -25,10 +26,11 @@ public class Projectile : MonoBehaviour
 	float _hitTime;
 	float _startTime;
 
-	public void Setup(Target target, float damage, ProjectileSettings projectileSettings)
+	public void Setup(Target target, float damage, DamageType damageType, ProjectileSettings projectileSettings)
 	{
 		_target = target;
 		_damage = damage;
+		_damageType = damageType;
 		_towerProjectile = false;
 		_speed = projectileSettings.Speed;
 		_useParabolicArc = projectileSettings.UseParabolicArc;
@@ -47,6 +49,7 @@ public class Projectile : MonoBehaviour
 	{
 		_target = target;
 		_damage = damage;
+		_damageType = turret.DamageType;
 		_towerProjectile = true;
 		_speed = projectileSettings.Speed;
 		_useParabolicArc = projectileSettings.UseParabolicArc;
@@ -114,7 +117,7 @@ public class Projectile : MonoBehaviour
 	{
 		if (_target != null)
 		{
-			var actualDamage = _target.TakeDamage(Mathf.RoundToInt(_damage));
+			var actualDamage = _target.TakeDamage(Mathf.RoundToInt(_damage), _damageType);
 			if (_towerProjectile)
 			{
 				if (_executeBehaviors)

@@ -11,7 +11,7 @@ public class DamageOverTimeAffliction : Affliction
 
 	public override void Trigger(Turret turret, Target target)
 	{
-		var debuff = new DamageOverTimeDebuff(turret.Name, Duration, TotalDamage, TickRate, ImpactParticle);
+		var debuff = new DamageOverTimeDebuff(turret.Name, Duration, TotalDamage, TickRate, ImpactParticle, turret.DamageType);
 		target.ApplyDebuff(debuff);
 	}
 

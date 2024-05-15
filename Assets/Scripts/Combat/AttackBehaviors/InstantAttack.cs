@@ -20,7 +20,7 @@ public class InstantAttack : AttackType
 		{
 			var tower = Tower.Instance;
 			var damage = tower.GetDamage(turret);
-			_ = target.TakeDamage(Mathf.RoundToInt(damage));
+			_ = target.TakeDamage(Mathf.RoundToInt(damage), turret.DamageType);
 
 			if (executeBehaviors)
 			{

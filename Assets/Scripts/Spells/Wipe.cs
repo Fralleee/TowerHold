@@ -9,7 +9,7 @@ public class Wipe : Spell
 
 		foreach (var enemy in Enemy.AllEnemies.ToArray())
 		{
-			enemy.TakeDamage(enemy.Health);
+			enemy.TakeDamage(enemy.Health, DamageType.Global);
 		}
 	}
 }

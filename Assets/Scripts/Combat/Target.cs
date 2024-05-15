@@ -6,12 +6,17 @@ using UnityEngine.Audio;
 
 public class Target : MonoBehaviour
 {
+	// Used to correctly size SelectionDecal as well as distance for projectile on larger objects
 	[HideInInspector] public float Scale = 1f;
+
 	public Transform Center;
 	public int MaxHealth = 100;
 	[ProgressBar(0, "MaxHealth", ColorGetter = "GetHealthBarColor")] public int Health;
 	[SerializeField] protected HealthBar HealthBar;
 	[SerializeField] float _healthBarOffset = 0f;
+	[SerializeField] int _armor;
+	[SerializeField] int _magicResistance;
+
 	[ReadOnly] public bool IsDead;
 	public DamageModifiers DamageModifiers;
 
@@ -21,6 +26,14 @@ public class Target : MonoBehaviour
 	protected AudioSource AudioSource;
 
 	public Dictionary<string, IDebuff> ActiveDebuffs;
+
+	float MitigationFactor(DamageType damageType) {
+		if (damageType == DamageType.Global) {
+			return 1000;
+		}
+
+		return 100 / (100 + (float)(damageType == DamageType.Physical ? _armor : _magicResistance));
+	}
 
 	protected virtual void Awake()
 	{
@@ -54,14 +67,14 @@ public class Target : MonoBehaviour
 		return ActiveDebuffs.ContainsKey(debuffName);
 	}
 
-	public virtual float TakeDamage(int baseDamage)
+	public virtual float TakeDamage(int baseDamage, DamageType damageType)
 	{
 		if (IsDead)
 		{
 			return 0;
 		}
 
-		var damage = (int)(baseDamage * DamageModifiers.GetMultiplier());
+		var damage = (int)(baseDamage * DamageModifiers.GetMultiplier() * MitigationFactor(damageType));
 		Health -= damage;
 		HealthBar.SetHealth(Health);
 		EventBus<TargetHealthChangedEvent>.Raise(new TargetHealthChangedEvent { Target = this, Health = Health, MaxHealth = MaxHealth });

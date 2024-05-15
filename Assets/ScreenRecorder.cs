@@ -28,7 +28,8 @@ public class ScreenRecorder : MonoBehaviour
 
 	void Start()
 	{
-		SetupRecording();
+		// Maybe we should set this up when we want to record rather than in the Start lifecycle
+		// SetupRecording();
 	}
 
 	void SetupRecording()

@@ -22,6 +22,7 @@ public class Enemy : Target
 
 	[Header("Attack Settings")]
 	[SerializeField] EnemyAttackType _attackType;
+	[SerializeField] DamageType _damageType;
 	[SerializeField] float _baseDamage = 10f;
 	[SerializeField] float _attacksPerSecond = 1f;
 	[HideIf("_attackType", EnemyAttackType.MELEE), SerializeField] AttackRange _attackRange = AttackRange.Melee;
@@ -93,9 +94,9 @@ public class Enemy : Target
 		}
 	}
 
-	public override float TakeDamage(int baseDamage)
+	public override float TakeDamage(int baseDamage, DamageType damageType)
 	{
-		var actualDamage = base.TakeDamage(baseDamage);
+		var actualDamage = base.TakeDamage(baseDamage, damageType);
 		if (actualDamage > 0)
 		{
 			AudioManager.PlayEffect(SoundEffect.Hit);
@@ -189,14 +190,14 @@ public class Enemy : Target
 		}
 
 		var projectile = Instantiate(_projectilePrefab, _attackOrigin.position, _attackOrigin.rotation);
-		projectile.Setup(_target, _baseDamage, _projectileSettings);
+		projectile.Setup(_target, _baseDamage, _damageType, _projectileSettings);
 	}
 
 	void InstantAttack()
 	{
 		if (_target != null)
 		{
-			_target.TakeDamage(Mathf.RoundToInt(_baseDamage));
+			_target.TakeDamage(Mathf.RoundToInt(_baseDamage), _damageType);
 		}
 
 		if (_attackSound != null && AudioSource != null)

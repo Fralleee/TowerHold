@@ -11,8 +11,9 @@ public class DamageOverTimeDebuff : IDebuff
 	float _remainingTime; // Remaining time for the debuff
 	readonly float _damagePerTick; // Damage dealt each tick
 	GameObject _debuffEffect;
+	DamageType _damageType;
 
-	public DamageOverTimeDebuff(string identifier, float totalDuration, float totalDamage, float tickRate, GameObject effect)
+	public DamageOverTimeDebuff(string identifier, float totalDuration, float totalDamage, float tickRate, GameObject effect, DamageType damageType)
 	{
 		Identifier = identifier;
 		TotalDuration = totalDuration;
@@ -22,6 +23,7 @@ public class DamageOverTimeDebuff : IDebuff
 		_remainingTime = TotalDuration;
 		_damagePerTick = TotalDamage / (TotalDuration / TickRate);
 		_debuffEffect = effect;
+		_damageType = damageType;
 	}
 
 	public void Apply(Target target)
@@ -44,7 +46,7 @@ public class DamageOverTimeDebuff : IDebuff
 	{
 		if (Time.time >= _nextTickTime)
 		{
-			_ = target.TakeDamage((int)_damagePerTick);
+			_ = target.TakeDamage((int)_damagePerTick, _damageType);
 			_nextTickTime += TickRate;
 			_remainingTime -= TickRate;
 		}

@@ -17,7 +17,6 @@ public class AudioRecorder : MonoBehaviour
 	{
 		SampleRate = AudioSettings.outputSampleRate;
 		Channels = GetChannelCount(AudioSettings.speakerMode);
-		Debug.Log($"AudioRecorder initialized with SampleRate: {SampleRate}, Channels: {Channels}");
 	}
 
 	public void StartRecording(string outputPath)
