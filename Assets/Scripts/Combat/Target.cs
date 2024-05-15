@@ -27,8 +27,10 @@ public class Target : MonoBehaviour
 
 	public Dictionary<string, IDebuff> ActiveDebuffs;
 
-	float MitigationFactor(DamageType damageType) {
-		if (damageType == DamageType.Global) {
+	float MitigationFactor(DamageType damageType)
+	{
+		if (damageType == DamageType.Global)
+		{
 			return 1000;
 		}
 

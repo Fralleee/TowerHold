@@ -79,7 +79,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	{
 		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 
-		_selectedVariants = SelectVariants(GameController.GameSettings.StartSeed);
+		_selectedVariants = SelectVariants();
 		Debug.Log($"Enemie variants are {string.Join(", ", _selectedVariants.Select(x => x.name))}.");
 		_enemies = new GameObject("Enemies").transform;
 		_enemies.SetParent(transform);
@@ -96,14 +96,16 @@ public class EnemyManager : Singleton<EnemyManager>
 		}
 	}
 
-	Enemy[] SelectVariants(int seed) {
+	Enemy[] SelectVariants()
+	{
 		var numberOfVariants = _randomGenerator.Next(_minSelectedVariants, _maxSelectedVariants);
 		var variantsPool = _enemyVariants.Enemies.ToList();
 		var selectedVariants = new List<Enemy>();
 
 		for (var i = 0; i < numberOfVariants; i++)
 		{
-			if (variantsPool.Count == 0) {
+			if (variantsPool.Count == 0)
+			{
 				return selectedVariants.ToArray();
 			}
 			var index = _randomGenerator.Next(0, variantsPool.Count - 1);
