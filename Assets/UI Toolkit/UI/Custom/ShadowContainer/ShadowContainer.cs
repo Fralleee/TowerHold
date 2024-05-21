@@ -1,46 +1,36 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ShadowContainer : Button
+[UxmlElement]
+public partial class ShadowContainer : Button
 {
 	readonly VisualElement _shadow;
 	readonly Label _title;
 	readonly Label _description;
 
-	public bool Enabled
+	[UxmlAttribute]
+	string Title
 	{
-		get
-		{
-			return enabledSelf;
-		}
-
-		set
-		{
-			SetEnabled(value);
-		}
+		set => _title.text = value;
 	}
 
-	public new class UxmlFactory : UxmlFactory<ShadowContainer, UxmlTraits> { }
-
-	public new class UxmlTraits : VisualElement.UxmlTraits
+	[UxmlAttribute]
+	string Description
 	{
-		readonly UxmlStringAttributeDescription _title = new UxmlStringAttributeDescription { name = "title" };
-		readonly UxmlStringAttributeDescription _description = new UxmlStringAttributeDescription { name = "description" };
-		readonly UxmlStringAttributeDescription _image = new UxmlStringAttributeDescription { name = "image" };
-		readonly UxmlBoolAttributeDescription _enabled = new UxmlBoolAttributeDescription { name = "enabled", defaultValue = true };
+		set => _description.text = value;
+	}
 
-		public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
-		{
-			base.Init(ve, bag, cc);
+	[UxmlAttribute]
+	string Image
+	{
+		set => SetBackgroundImage(value);
+	}
 
-			var instance = ve as ShadowContainer;
-			var image = _image.GetValueFromBag(bag, cc);
-			instance.SetBackgroundImage(image);
-			instance.Enabled = _enabled.GetValueFromBag(bag, cc);
-
-			ve.Q<Label>(className: "shadow-title").text = _title.GetValueFromBag(bag, cc);
-			ve.Q<Label>(className: "shadow-description").text = _description.GetValueFromBag(bag, cc);
-		}
+	[UxmlAttribute]
+	bool Enabled
+	{
+		get => enabledSelf;
+		set => SetEnabled(value);
 	}
 
 	public ShadowContainer()

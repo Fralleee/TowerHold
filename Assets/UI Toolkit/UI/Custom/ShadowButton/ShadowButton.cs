@@ -1,10 +1,19 @@
 using UnityEngine.UIElements;
 
-public class ShadowButton : Button
+[UxmlElement]
+public partial class ShadowButton : Button
 {
-	readonly Label _label;
+	[UxmlAttribute]
+	string Text
+	{
+		set
+		{
+			_label.text = value;
+		}
+	}
 
-	public bool Enabled
+	[UxmlAttribute]
+	bool Enabled
 	{
 		get
 		{
@@ -17,22 +26,7 @@ public class ShadowButton : Button
 		}
 	}
 
-	public new class UxmlFactory : UxmlFactory<ShadowButton, UxmlTraits> { }
-
-	public new class UxmlTraits : VisualElement.UxmlTraits
-	{
-		readonly UxmlStringAttributeDescription _text = new UxmlStringAttributeDescription { name = "buttonText" };
-		readonly UxmlBoolAttributeDescription _enabled = new UxmlBoolAttributeDescription { name = "enabled", defaultValue = true };
-
-		public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
-		{
-			base.Init(ve, bag, cc);
-
-			var instance = ve as ShadowButton;
-			instance.Enabled = _enabled.GetValueFromBag(bag, cc);
-			instance.Q<Label>().text = _text.GetValueFromBag(bag, cc);
-		}
-	}
+	readonly Label _label;
 
 	public ShadowButton()
 	{

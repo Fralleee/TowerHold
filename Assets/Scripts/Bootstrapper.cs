@@ -3,6 +3,19 @@ using UnityEngine.AddressableAssets;
 
 public class Bootstrapper
 {
+	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+	static void LoadStyleManager()
+	{
+		Addressables.LoadAssetAsync<GameObject>("StyleManager").Completed += handle =>
+		{
+			if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+			{
+				var prefab = handle.Result;
+				_ = Object.Instantiate(prefab);
+			}
+		};
+	}
+
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 	static void LoadMenu()
 	{
@@ -10,8 +23,8 @@ public class Bootstrapper
 		{
 			if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
 			{
-				var menuPrefab = handle.Result;
-				_ = Object.Instantiate(menuPrefab);
+				var prefab = handle.Result;
+				_ = Object.Instantiate(prefab);
 			}
 		};
 	}
@@ -23,8 +36,8 @@ public class Bootstrapper
 		{
 			if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
 			{
-				var audioManager = handle.Result;
-				_ = Object.Instantiate(audioManager);
+				var prefab = handle.Result;
+				_ = Object.Instantiate(prefab);
 			}
 		};
 	}
@@ -36,8 +49,8 @@ public class Bootstrapper
 		{
 			if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
 			{
-				var graphyPrefab = handle.Result;
-				_ = Object.Instantiate(graphyPrefab);
+				var prefab = handle.Result;
+				_ = Object.Instantiate(prefab);
 			}
 		};
 	}

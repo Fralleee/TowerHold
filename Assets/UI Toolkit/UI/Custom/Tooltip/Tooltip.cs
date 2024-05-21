@@ -1,6 +1,7 @@
 using UnityEngine.UIElements;
 
-public class Tooltip : VisualElement
+[UxmlElement]
+public partial class Tooltip : VisualElement
 {
 	public VisualElement Border;
 	public VisualElement Content;
@@ -8,8 +9,6 @@ public class Tooltip : VisualElement
 	public VisualElement Shadow;
 	public VisualElement Image;
 	public VisualElement Sparkling;
-
-	public new class UxmlFactory : UxmlFactory<Tooltip, UxmlTraits> { }
 
 	public Tooltip()
 	{

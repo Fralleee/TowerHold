@@ -1,6 +1,7 @@
 using UnityEngine.UIElements;
 
-public class ShopItemButton : Button
+[UxmlElement]
+public partial class ShopItemButton : Button
 {
 	public VisualElement Overlay;
 	public VisualElement Border;
@@ -11,8 +12,6 @@ public class ShopItemButton : Button
 	public VisualElement Sparkling;
 	public VisualElement TypeContainer;
 	public VisualElement Category;
-
-	public new class UxmlFactory : UxmlFactory<ShopItemButton, UxmlTraits> { }
 
 	public ShopItemButton()
 	{

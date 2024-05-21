@@ -1,27 +1,14 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CustomProgressBar : VisualElement
+[UxmlElement]
+public partial class CustomProgressBar : VisualElement
 {
 	readonly VisualElement _container;
 	readonly VisualElement _progress;
 	readonly VisualElement _change;
 	readonly VisualElement _icon;
-
 	readonly Label _label;
-
-	public new class UxmlFactory : UxmlFactory<CustomProgressBar, UxmlTraits> { }
-
-	public new class UxmlTraits : VisualElement.UxmlTraits
-	{
-		readonly UxmlFloatAttributeDescription _value = new UxmlFloatAttributeDescription { name = "value", defaultValue = 0 };
-
-		public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
-		{
-			base.Init(ve, bag, cc);
-			((CustomProgressBar)ve).Value = _value.GetValueFromBag(bag, cc);
-		}
-	}
 
 	public bool UseChangeBar
 	{
@@ -32,6 +19,7 @@ public class CustomProgressBar : VisualElement
 	}
 
 	float _value;
+	[UxmlAttribute]
 	public float Value
 	{
 		get => _value;
