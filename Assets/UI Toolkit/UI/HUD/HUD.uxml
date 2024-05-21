@@ -2,11 +2,13 @@
 	<ui:Template name="Selection" src="Selection.uxml" />
 	<ui:Template name="Upgrades" src="Upgrades.uxml" />
     <ui:Template name="Shop" src="Shop.uxml" />
+    <ui:Template name="EnemyInformation" src="EnemyInformation.uxml" />
     <Style src="../Default.uss" />
 	<Style src="HUD.uss" />
     <ui:VisualElement name="Root">
         <ui:Instance name="Selection" template="Selection" />
 		<ui:Instance name="Upgrades" template="Upgrades" />
         <ui:Instance name="Shop" template="Shop" />
+        <ui:Instance name="EnemyInformation" template="EnemyInformation" />
     </ui:VisualElement>
 </ui:UXML>

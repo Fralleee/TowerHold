@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using UnityEngine.UIElements;
 
 public class TurretTooltipContent : TooltipContent

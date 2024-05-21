@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [SelectionBase]
-public class Enemy : Target
+public partial class Enemy : Target
 {
 	public static List<Enemy> AllEnemies = new List<Enemy>();
 	public static int AliveEnemies => AllEnemies.Count;
@@ -37,6 +37,17 @@ public class Enemy : Target
 	Animator _animator;
 	NavMeshAgent _agent;
 	Bobbing _bobbing;
+
+	public EnemyAttackInformation GetAttackInformation()
+	{
+		return new EnemyAttackInformation
+		{
+			Damage = _baseDamage,
+			DamageType = _damageType,
+			AttacksPerSecond = _attacksPerSecond,
+			AttackRange = _attackRange
+		};
+	}
 
 	readonly int _attackTrigger = Animator.StringToHash("Attack");
 	readonly float _timeBetweenDistanceChecks = 0.5f;

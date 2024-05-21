@@ -22,6 +22,19 @@ public static class AttackRangeExtensions
 		};
 	}
 
+	public static string AsShortUI(this AttackRange attackRange)
+	{
+		return attackRange switch
+		{
+			AttackRange.Melee => "Melee",
+			AttackRange.Short => "Short",
+			AttackRange.Medium => "Medium",
+			AttackRange.Long => "Long",
+			AttackRange.VeryLong => "Very long",
+			_ => "N/A",
+		};
+	}
+
 	public static float GetRange(this AttackRange attackRange)
 	{
 		return attackRange switch

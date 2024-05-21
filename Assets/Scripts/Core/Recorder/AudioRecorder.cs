@@ -69,7 +69,7 @@ public class AudioRecorder : MonoBehaviour
 			{
 				var pcmSample = (short)Mathf.Clamp(data[i] * 32767f, -32768f, 32767f);
 				_buffer[i * 2] = (byte)(pcmSample & 0xFF);
-				_buffer[i * 2 + 1] = (byte)((pcmSample >> 8) & 0xFF);
+				_buffer[(i * 2) + 1] = (byte)((pcmSample >> 8) & 0xFF);
 			}
 
 			_writer.Write(_buffer);

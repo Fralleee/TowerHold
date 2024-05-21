@@ -226,8 +226,8 @@ MonoBehaviour:
   HealthBar: {fileID: -1899794041670224228, guid: 6a875c1fd7c2f40419dbefe05ef30f4a,
     type: 3}
   _healthBarOffset: 0
-  _armor: 5
-  _magicResistance: 0
+  Armor: 5
+  MagicResistance: 0
   IsDead: 0
   _deathSound: {fileID: 6418180475301049370, guid: 8b997ecc3e247824b977891ea86c390e,
     type: 2}

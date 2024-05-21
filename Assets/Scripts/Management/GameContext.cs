@@ -1,5 +1,5 @@
 public enum GameContext
 {
-  MainMenu,
-  InGameMenu
+	MainMenu,
+	InGameMenu
 }

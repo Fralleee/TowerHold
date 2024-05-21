@@ -41,7 +41,7 @@ public class ScreenRecorder : MonoBehaviour
 			return;
 		}
 
-		var sessionName = "ScreenCapture_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+		var sessionName = "ScreenCapture_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 		_videoOutputPath = Path.Combine(Application.persistentDataPath, sessionName + ".mp4");
 		_audioOutputPath = Path.Combine(Application.persistentDataPath, sessionName + ".wav");
 		_finalOutputPath = Path.Combine(Application.persistentDataPath, sessionName + "_final.mp4");

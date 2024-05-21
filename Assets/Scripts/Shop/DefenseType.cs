@@ -1,5 +1,5 @@
 public enum DefenseType
 {
-  Health,
-  Defense
+	Health,
+	Defense
 }

@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 1808802515722159910}
   - component: {fileID: 1011302472132257915}
   - component: {fileID: 8248950771560274693}
+  - component: {fileID: 4978752580221215109}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -131,6 +132,9 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: c9929920924ee0d4eb1c43f0c7abde8f,
     type: 3}
   m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
 --- !u!114 &2442906852154349432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectableLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 256
   _selectionIndicator: {fileID: 7835461811129811206, guid: 5114816febaa4c54dbd69b0d52935478,
     type: 3}
 --- !u!114 &8248950771560274693
@@ -213,6 +217,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11b0c9b2d276a7439e1a09729eebf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4978752580221215109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529103561458053021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64785100e809ddf48b311adf53b7a624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _styleSettings: {fileID: 11400000, guid: 8c309cf45d8eb0048b7b00f2b311e395, type: 2}
 --- !u!1 &8678505928972566119
 GameObject:
   m_ObjectHideFlags: 0

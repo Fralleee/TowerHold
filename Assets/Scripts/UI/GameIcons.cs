@@ -7,6 +7,11 @@ public enum GameIcons
 	Physical,
 	Magical,
 	Global,
+	Health,
+	Armor,
+	MagicResistance,
+	AttacksPerSecond,
+	AttackRange,
 }
 
 public static class IconExtensions

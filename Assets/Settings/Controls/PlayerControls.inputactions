@@ -202,7 +202,16 @@
                     "name": "ShowDetails",
                     "type": "Button",
                     "id": "c9c28bdd-c7fe-4b8e-84c1-8db5e78513cc",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowEnemyInformation",
+                    "type": "Button",
+                    "id": "28628228-0a53-4994-8ead-e55c7b644aa5",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -220,7 +229,7 @@
                     "name": "ToggleMenu",
                     "type": "Button",
                     "id": "acf407b4-8172-40f4-b4a5-f98434c87259",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -488,6 +497,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShowDetails",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28ac5f42-257a-4965-9478-9e43059a0e63",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowEnemyInformation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -7,6 +7,8 @@ using System.Linq;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
+	public static Action<Enemy> OnEnemySpawned;
+
 	static readonly List<string> Names = new List<string>() {
 		"Jeff", "Broseph", "Julian", "Count", "Doctor Z"
 	};
@@ -80,6 +82,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		_randomGenerator = new RandomGenerator(GameController.GameSettings.StartSeed);
 
 		_selectedVariants = SelectVariants();
+		EventBus<EnemyVariantsSelectedEvent>.Raise(new EnemyVariantsSelectedEvent { Variants = _selectedVariants });
 		Debug.Log($"Enemie variants are {string.Join(", ", _selectedVariants.Select(x => x.name))}.");
 		_enemies = new GameObject("Enemies").transform;
 		_enemies.SetParent(transform);
@@ -201,6 +204,8 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	void SpawnEnemy(Enemy enemy, Vector3 groupSpawnPosition)
 	{
+		EventBus<EnemySpawnEvent>.Raise(new EnemySpawnEvent { Enemy = enemy });
+
 		if (Enemy.AliveEnemies >= GameController.GameSettings.MaxEnemiesAlive)
 		{
 			var damage = DamageFromValue(enemy);

@@ -14,8 +14,8 @@ public class Target : MonoBehaviour
 	[ProgressBar(0, "MaxHealth", ColorGetter = "GetHealthBarColor")] public int Health;
 	[SerializeField] protected HealthBar HealthBar;
 	[SerializeField] float _healthBarOffset = 0f;
-	[SerializeField] int _armor;
-	[SerializeField] int _magicResistance;
+	public int Armor;
+	public int MagicResistance;
 
 	[ReadOnly] public bool IsDead;
 	public DamageModifiers DamageModifiers;
@@ -34,7 +34,7 @@ public class Target : MonoBehaviour
 			return 1000;
 		}
 
-		return 100 / (100 + (float)(damageType == DamageType.Physical ? _armor : _magicResistance));
+		return 100 / (100 + (float)(damageType == DamageType.Physical ? Armor : MagicResistance));
 	}
 
 	protected virtual void Awake()

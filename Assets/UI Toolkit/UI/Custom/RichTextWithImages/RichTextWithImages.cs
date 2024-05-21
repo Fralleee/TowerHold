@@ -16,6 +16,15 @@ public class RichTextWithImages : VisualElement
 		AddText(text, tint);
 	}
 
+	public void TextAndIcon(string text, StyleSettings styleSettings, GameIcons icon)
+	{
+		Clear();
+		var image = new Image { image = styleSettings.GetIcon(icon), tintColor = Color.white };
+		var label = new Label { text = text };
+		Add(image);
+		Add(label);
+	}
+
 	public void Write(string text, StyleSettings styleSettings, DamageType damageType, ShopType shopType)
 	{
 		AddRow();
