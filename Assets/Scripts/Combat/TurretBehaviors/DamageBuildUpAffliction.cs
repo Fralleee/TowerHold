@@ -14,9 +14,9 @@ public class DamageBuildUpAffliction : Affliction
 		target.ApplyDebuff(debuff);
 	}
 
-	public override void Tooltip(RichTextWithImages descriptionContainer, StyleSettings styleSettings, Turret turret)
+	public override void Tooltip(RichTextWithImages descriptionContainer, Turret turret)
 	{
 		var template = $"Each hit increases damage by {{Percent:{DamageMultiplierPerStack}:DamageType}} up to {{Flat:{MaxStacks}:DamageType}} times.";
-		descriptionContainer.Write(template, styleSettings, turret.DamageType, turret.ShopType);
+		descriptionContainer.Write(template, turret.DamageType, turret.ShopType);
 	}
 }

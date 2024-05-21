@@ -15,9 +15,9 @@ public class DamageOverTimeAffliction : Affliction
 		target.ApplyDebuff(debuff);
 	}
 
-	public override void Tooltip(RichTextWithImages descriptionContainer, StyleSettings styleSettings, Turret turret)
+	public override void Tooltip(RichTextWithImages descriptionContainer, Turret turret)
 	{
 		var template = $"Deals {{Flat:{TotalDamage / Duration}:DamageType}} {{DamageType}} damage per second for {{Flat:{Duration}:DamageType}} seconds for a total of {{Flat:{TotalDamage}:DamageType}} {{DamageType}} damage.";
-		descriptionContainer.Write(template, styleSettings, turret.DamageType, turret.ShopType);
+		descriptionContainer.Write(template, turret.DamageType, turret.ShopType);
 	}
 }

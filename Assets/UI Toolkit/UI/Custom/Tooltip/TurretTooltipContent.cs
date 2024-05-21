@@ -22,9 +22,9 @@ public class TurretTooltipContent : TooltipContent
 		RangeLabel.AddToClassList("item-range");
 	}
 
-	public override void UpdateInformation(ShopItem item, StyleSettings styleSettings)
+	public override void UpdateInformation(ShopItem item)
 	{
-		base.UpdateInformation(item, styleSettings);
+		base.UpdateInformation(item);
 
 		DescriptionContainer.Clear();
 
@@ -34,19 +34,19 @@ public class TurretTooltipContent : TooltipContent
 
 			var safeDescription = string.IsNullOrEmpty(turret.Description) ? "No description." : turret.Description;
 			var parsedDescription = safeDescription.Replace("#Damage#", $"{{Flat:{currentDamage}:DamageType}} {{DamageType}}");
-			DescriptionContainer.Write(parsedDescription, styleSettings, turret.DamageType, turret.ShopType);
+			DescriptionContainer.Write(parsedDescription, turret.DamageType, turret.ShopType);
 
-			turret.AfflictionsController.Tooltip(DescriptionContainer, styleSettings, turret);
+			turret.AfflictionsController.Tooltip(DescriptionContainer, turret);
 
 			if (turret.CriticalHitChance > 0)
 			{
 				var template = $"This ability has a {{Percent:{turret.CriticalHitChance}:ShopType}} chance of a critical hit which causes {{Flat:{currentDamage * turret.CriticalHitMultiplier}:DamageType}} {{DamageType}} damage.";
-				DescriptionContainer.Write(template, styleSettings, turret.DamageType, turret.ShopType);
+				DescriptionContainer.Write(template, turret.DamageType, turret.ShopType);
 			}
 
-			ShopTypeContainer.AddImageLabel(styleSettings.GetShopTypeIcon(item.ShopType), item.ShopType.ToString(), styleSettings.GetShopTypeColor(item.ShopType));
+			ShopTypeContainer.AddImageLabel(StyleManager.Styles.GetShopTypeIcon(item.ShopType), item.ShopType.ToString(), StyleManager.Styles.GetShopTypeColor(item.ShopType));
 
-			Cooldown.AddImageLabel(styleSettings.GetIcon(GameIcons.Cooldown), $"{turret.TimeBetweenAttacks:#.##}s");
+			Cooldown.AddImageLabel(StyleManager.Styles.GetIcon(GameIcons.Cooldown), $"{turret.TimeBetweenAttacks:#.##}s");
 
 			RangeLabel.text = turret.AttackRange.AsText();
 		}

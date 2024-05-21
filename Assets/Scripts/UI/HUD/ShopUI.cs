@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 public class ShopUI : Controller
 {
 	[SerializeField] ShopInventory _inventory;
-	[SerializeField] StyleSettings _styleSettings;
 	[SerializeField] FeedbackEvent _purchaseFeedback;
 
 	TooltipController _tooltipController;
@@ -131,7 +130,7 @@ public class ShopUI : Controller
 		{
 			RefreshShop();
 			_refreshCost += _refreshCostIncrement;
-			_refreshTooltipContent.CostContainer.AddImageLabel(_styleSettings.GetIcon(GameIcons.Gold), $"Cost: {_refreshCost}");
+			_refreshTooltipContent.CostContainer.AddImageLabel(StyleManager.Styles.GetIcon(GameIcons.Gold), $"Cost: {_refreshCost}");
 		}
 	}
 
@@ -148,7 +147,7 @@ public class ShopUI : Controller
 			var item = ShopItem.GetRandomItem(GameController.Instance.CurrentLevel, _inventory.Items, _randomGenerator);
 			slot.SetEnabled(false);
 			slot.RemoveFromClassList("itemized");
-			slot.Setup(item, _styleSettings);
+			slot.Setup(item);
 			_shopItems.Add(item);
 		}
 
@@ -162,7 +161,7 @@ public class ShopUI : Controller
 		for (var i = 0; i < _shopSlots.Count; i++)
 		{
 			var item = _shopItems[i];
-			_tooltipController.UpdateTooltip(_shopSlots[i], item.Tooltip(_styleSettings));
+			_tooltipController.UpdateTooltip(_shopSlots[i], item.Tooltip());
 		}
 	}
 

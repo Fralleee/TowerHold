@@ -70,7 +70,7 @@ public class EnemyInformation : VisualElement
 		OffenseContainer.Add(AttackRange);
 	}
 
-	public void Setup(StyleSettings styleSettings, Enemy enemy = null)
+	public void Setup(Enemy enemy = null)
 	{
 		if (enemy == null)
 		{
@@ -83,23 +83,23 @@ public class EnemyInformation : VisualElement
 		Name.text = enemy.name;
 
 		Health.Clear();
-		Health.TextAndIcon($"{enemy.Health}", styleSettings, GameIcons.Health);
+		Health.TextAndIcon($"{enemy.Health}", GameIcons.Health);
 
 		Damage.Clear();
-		Armor.TextAndIcon($"{enemy.Armor}", styleSettings, GameIcons.Armor);
+		Armor.TextAndIcon($"{enemy.Armor}", GameIcons.Armor);
 
 		MagicResistance.Clear();
-		MagicResistance.TextAndIcon($"{enemy.MagicResistance}", styleSettings, GameIcons.MagicResistance);
+		MagicResistance.TextAndIcon($"{enemy.MagicResistance}", GameIcons.MagicResistance);
 
 		var attackInformation = enemy.GetAttackInformation();
 
 		Damage.Clear();
-		Damage.TextAndIcon($"{attackInformation.Damage}", styleSettings, attackInformation.DamageType.AsIcon());
+		Damage.TextAndIcon($"{attackInformation.Damage}", attackInformation.DamageType.AsIcon());
 
 		AttacksPerSecond.Clear();
-		AttacksPerSecond.TextAndIcon($"{attackInformation.AttacksPerSecond}", styleSettings, GameIcons.AttacksPerSecond);
+		AttacksPerSecond.TextAndIcon($"{attackInformation.AttacksPerSecond}", GameIcons.AttacksPerSecond);
 
 		AttackRange.Clear();
-		AttackRange.TextAndIcon($"{attackInformation.AttackRange.AsShortUI()}", styleSettings, GameIcons.AttackRange);
+		AttackRange.TextAndIcon($"{attackInformation.AttackRange.AsShortUI()}", GameIcons.AttackRange);
 	}
 }

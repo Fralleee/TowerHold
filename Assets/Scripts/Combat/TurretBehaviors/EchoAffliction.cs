@@ -19,10 +19,10 @@ public class EchoAffliction : Affliction
 		}
 	}
 
-	public override void Tooltip(RichTextWithImages descriptionContainer, StyleSettings styleSettings, Turret turret)
+	public override void Tooltip(RichTextWithImages descriptionContainer, Turret turret)
 	{
 		var template = $"This turret has a {{Percent:{Chance}:DamageType}} chance to fire an additional projectile after a {{Flat:{Delay}:DamageType}} second delay. {{Newline}}<i>Echo projectiles can trigger any additional effects and critically hit.</i>";
-		descriptionContainer.Write(template, styleSettings, turret.DamageType, turret.ShopType);
+		descriptionContainer.Write(template, turret.DamageType, turret.ShopType);
 	}
 
 	IEnumerator DelayedShoot(Turret turret)

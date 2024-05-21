@@ -16,16 +16,16 @@ public class RichTextWithImages : VisualElement
 		AddText(text, tint);
 	}
 
-	public void TextAndIcon(string text, StyleSettings styleSettings, GameIcons icon)
+	public void TextAndIcon(string text, GameIcons icon)
 	{
 		Clear();
-		var image = new Image { image = styleSettings.GetIcon(icon), tintColor = Color.white };
+		var image = new Image { image = StyleManager.Styles.GetIcon(icon), tintColor = Color.white };
 		var label = new Label { text = text };
 		Add(image);
 		Add(label);
 	}
 
-	public void Write(string text, StyleSettings styleSettings, DamageType damageType, ShopType shopType)
+	public void Write(string text, DamageType damageType, ShopType shopType)
 	{
 		AddRow();
 
@@ -38,16 +38,16 @@ public class RichTextWithImages : VisualElement
 				switch (part)
 				{
 					case "DamageTypeIcon":
-						AddDamageType(damageType, styleSettings, true);
+						AddDamageType(damageType, true);
 						break;
 					case "ShopTypeIcon":
-						AddShopType(shopType, styleSettings, true);
+						AddShopType(shopType, true);
 						break;
 					case "DamageType":
-						AddDamageType(damageType, styleSettings);
+						AddDamageType(damageType);
 						break;
 					case "ShopType":
-						AddShopType(shopType, styleSettings);
+						AddShopType(shopType);
 						break;
 					case "Newline":
 						AddRow();
@@ -63,7 +63,7 @@ public class RichTextWithImages : VisualElement
 			var formatType = segments[0];
 			var value = float.Parse(segments[1]);
 			var colorType = segments.Length > 2 ? segments[2] : null;
-			Color? color = colorType != null ? GetColorByType(colorType, damageType, shopType, styleSettings) : null;
+			Color? color = colorType != null ? GetColorByType(colorType, damageType, shopType) : null;
 			switch (formatType)
 			{
 				case "Percent":
@@ -79,12 +79,12 @@ public class RichTextWithImages : VisualElement
 		}
 	}
 
-	Color GetColorByType(string type, DamageType damageType, ShopType shopType, StyleSettings styleSettings)
+	Color GetColorByType(string type, DamageType damageType, ShopType shopType)
 	{
 		return type switch
 		{
-			"ShopType" => styleSettings.GetShopTypeColor(shopType),
-			"DamageType" => styleSettings.GetDamageTypeColor(damageType),
+			"ShopType" => StyleManager.Styles.GetShopTypeColor(shopType),
+			"DamageType" => StyleManager.Styles.GetDamageTypeColor(damageType),
 			_ => Color.white // Default color
 		};
 	}
@@ -101,10 +101,10 @@ public class RichTextWithImages : VisualElement
 		AddText($" <b>{value:0.##}</b> ", color);
 	}
 
-	void AddDamageType(DamageType damageType, StyleSettings styleSettings, bool iconOnly = false)
+	void AddDamageType(DamageType damageType, bool iconOnly = false)
 	{
-		var color = styleSettings.GetDamageTypeColor(damageType);
-		var icon = styleSettings.GetDamageTypeIcon(damageType);
+		var color = StyleManager.Styles.GetDamageTypeColor(damageType);
+		var icon = StyleManager.Styles.GetDamageTypeIcon(damageType);
 		if (icon != null)
 		{
 			AddImage(icon, color);
@@ -116,10 +116,10 @@ public class RichTextWithImages : VisualElement
 		}
 	}
 
-	void AddShopType(ShopType shopType, StyleSettings styleSettings, bool iconOnly = false)
+	void AddShopType(ShopType shopType, bool iconOnly = false)
 	{
-		var color = styleSettings.GetShopTypeColor(shopType);
-		var icon = styleSettings.GetShopTypeIcon(shopType);
+		var color = StyleManager.Styles.GetShopTypeColor(shopType);
+		var icon = StyleManager.Styles.GetShopTypeIcon(shopType);
 		if (icon != null)
 		{
 			AddImage(icon, color);

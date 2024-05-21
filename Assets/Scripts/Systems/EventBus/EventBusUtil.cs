@@ -74,7 +74,6 @@ public static class EventBusUtil
 	/// </summary>
 	public static void ClearAllBuses()
 	{
-		Debug.Log("Clearing all buses...");
 		for (var i = 0; i < EventBusTypes.Count; i++)
 		{
 			var busType = EventBusTypes[i];

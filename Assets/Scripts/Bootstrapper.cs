@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class Bootstrapper : MonoBehaviour
+public class Bootstrapper
 {
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 	static void LoadMenu()
@@ -11,7 +11,7 @@ public class Bootstrapper : MonoBehaviour
 			if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
 			{
 				var menuPrefab = handle.Result;
-				_ = Instantiate(menuPrefab);
+				_ = Object.Instantiate(menuPrefab);
 			}
 		};
 	}
@@ -24,7 +24,7 @@ public class Bootstrapper : MonoBehaviour
 			if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
 			{
 				var audioManager = handle.Result;
-				_ = Instantiate(audioManager);
+				_ = Object.Instantiate(audioManager);
 			}
 		};
 	}
@@ -37,7 +37,7 @@ public class Bootstrapper : MonoBehaviour
 			if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
 			{
 				var graphyPrefab = handle.Result;
-				_ = Instantiate(graphyPrefab);
+				_ = Object.Instantiate(graphyPrefab);
 			}
 		};
 	}

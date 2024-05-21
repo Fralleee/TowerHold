@@ -57,16 +57,16 @@ public class ShopItemButton : Button
 		Content.Add(Overlay);
 	}
 
-	public void Setup(ShopItem item, StyleSettings styleSettings)
+	public void Setup(ShopItem item)
 	{
-		var rarityColor = styleSettings.GetRarityColor(item.RarityType);
+		var rarityColor = StyleManager.Styles.GetRarityColor(item.RarityType);
 
 		Image.style.backgroundImage = item.Texture;
 		Border.style.backgroundColor = rarityColor;
 
-		var shopTypeImage = styleSettings.GetShopTypeIcon(item.ShopType);
+		var shopTypeImage = StyleManager.Styles.GetShopTypeIcon(item.ShopType);
 		Category.style.backgroundImage = shopTypeImage;
-		var shopTypeColor = styleSettings.GetShopTypeColor(item.ShopType);
+		var shopTypeColor = StyleManager.Styles.GetShopTypeColor(item.ShopType);
 		Category.style.unityBackgroundImageTintColor = shopTypeColor;
 
 

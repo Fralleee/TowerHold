@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class EnemyInformationUI : Controller
 {
-	[SerializeField] StyleSettings _styleSettings;
-
 	EventBinding<EnemySpawnEvent> _enemySpawnEvent;
 	EventBinding<EnemyVariantsSelectedEvent> _enemyVariantsSelectedEvent;
 
@@ -64,14 +61,14 @@ public class EnemyInformationUI : Controller
 		foreach (var enemy in knownEnemies)
 		{
 			var enemyInformation = new EnemyInformation();
-			enemyInformation.Setup(_styleSettings, enemy);
+			enemyInformation.Setup(enemy);
 			_enemyInformation.Add(enemyInformation);
 		}
 
 		foreach (var enemy in unknownEnemies)
 		{
 			var enemyInformation = new EnemyInformation();
-			enemyInformation.Setup(_styleSettings);
+			enemyInformation.Setup();
 			_enemyInformation.Add(enemyInformation);
 		}
 	}

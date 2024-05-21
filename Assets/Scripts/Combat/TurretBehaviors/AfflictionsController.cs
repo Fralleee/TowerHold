@@ -22,11 +22,11 @@ public class AfflictionsController
 		}
 	}
 
-	public void Tooltip(RichTextWithImages descriptionContainer, StyleSettings styleSettings, Turret turret)
+	public void Tooltip(RichTextWithImages descriptionContainer, Turret turret)
 	{
 		foreach (var affliction in Afflictions)
 		{
-			affliction.Tooltip(descriptionContainer, styleSettings, turret);
+			affliction.Tooltip(descriptionContainer, turret);
 		}
 	}
 }

@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_Data:
-    m_SerializedData: []
   m_GUID: f8c6cec227a1f43469d061d642e6c1fe
   m_SerializeEntries:
   - m_GUID: 9e6bcd73c749bbc4b926f34ec49f6869
@@ -31,6 +29,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f3f0b0ae40d030545a902199990a41f9
     m_Address: AudioManager
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c309cf45d8eb0048b7b00f2b311e395
+    m_Address: StyleSettings
     m_ReadOnly: 0
     m_SerializedLabels:
     - default

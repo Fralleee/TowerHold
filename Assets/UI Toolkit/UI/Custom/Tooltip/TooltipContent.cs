@@ -56,20 +56,20 @@ public class TooltipContent : VisualElement
 		}
 	}
 
-	public virtual void UpdateInformation(ShopItem item, StyleSettings styleSettings)
+	public virtual void UpdateInformation(ShopItem item)
 	{
 		Image.image = item.Texture;
 
 		NameLabel.text = item.Name;
-		NameLabel.style.color = styleSettings.GetRarityColor(item.RarityType);
+		NameLabel.style.color = StyleManager.Styles.GetRarityColor(item.RarityType);
 
-		BorderColor = styleSettings.GetRarityColor(item.RarityType);
+		BorderColor = StyleManager.Styles.GetRarityColor(item.RarityType);
 
-		CostContainer.AddImageLabel(styleSettings.GetIcon(GameIcons.Gold), item.Cost.ToString(), styleSettings.GetShopTypeColor(ShopType.Income));
+		CostContainer.AddImageLabel(StyleManager.Styles.GetIcon(GameIcons.Gold), item.Cost.ToString(), StyleManager.Styles.GetShopTypeColor(ShopType.Income));
 
 		var safeDescription = string.IsNullOrEmpty(item.Description) ? "No description." : item.Description;
 		var parsedDescription = safeDescription.Replace("#Amount#", item.Amount.ToString());
 		var damageType = item is DamageShopItem damageShopItem ? damageShopItem.DamageType : DamageType.Global;
-		DescriptionContainer.Write(parsedDescription, styleSettings, damageType, item.ShopType);
+		DescriptionContainer.Write(parsedDescription, damageType, item.ShopType);
 	}
 }

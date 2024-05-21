@@ -76,10 +76,10 @@ public class ShopItem : ScriptableObject
 		return null;  // Return null if there are no items at all
 	}
 
-	public virtual TooltipContent Tooltip(StyleSettings styleSettings)
+	public virtual TooltipContent Tooltip()
 	{
 		var tooltip = new TooltipContent();
-		tooltip.UpdateInformation(this, styleSettings);
+		tooltip.UpdateInformation(this);
 		return tooltip;
 	}
 
