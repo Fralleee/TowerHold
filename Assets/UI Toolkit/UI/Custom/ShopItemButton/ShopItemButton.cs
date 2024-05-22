@@ -53,7 +53,7 @@ public partial class ShopItemButton : Button
 
 		Overlay = new VisualElement();
 		Overlay.AddToClassList("overlay");
-		Content.Add(Overlay);
+		Add(Overlay);
 	}
 
 	public void Setup(ShopItem item)

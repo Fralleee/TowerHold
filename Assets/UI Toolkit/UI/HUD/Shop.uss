@@ -55,7 +55,7 @@ VisualElement#GameInfo Label {
 
 #LevelBar .ProgressBar__progress {
 	transition: all 250ms ease-out;
-	background-color: #C64283;
+	background-color: #e11d48;
 }
 
 #LevelBar.active .ProgressBar__progress {

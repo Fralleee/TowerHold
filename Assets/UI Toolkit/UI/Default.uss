@@ -1,6 +1,6 @@
 
 .red {
-	background-color: #cd407d;
+	background-color: #e11d48;
 }
 
 .purple {
@@ -81,7 +81,7 @@
 }
 
 .ProgressBar__progress-change {
-	background-color: #C64283;
+	background-color: #e11d48;
 	transition: all 200ms 200ms ease-out;
 }
 
