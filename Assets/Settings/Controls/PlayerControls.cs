@@ -241,12 +241,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""PurchaseItem"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""0150f6c8-38c4-4803-bea3-bcc4e37e2146"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""ToggleMenu"",

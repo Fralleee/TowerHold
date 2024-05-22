@@ -3,8 +3,6 @@ using UnityEngine.UIElements;
 
 public class UpdateUI : MonoBehaviour
 {
-	[SerializeField] Texture2D _levelIcon;
-
 	TooltipController _tooltipController;
 	VisualElement _progressContainer;
 	Label _levelLabel;
