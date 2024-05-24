@@ -11,7 +11,7 @@ public class GameController : Singleton<GameController>
 
 	[ReadOnly] public GameState CurrentState;
 	[HideInPlayMode] public GameState StartState = GameState.Idle;
-	public GameSettings Settings;
+	[InlineEditor(InlineEditorModes.GUIOnly)] public GameSettings Settings;
 
 	EnemyManager _enemyManager;
 	StateMachine<GameState> _stateMachine;

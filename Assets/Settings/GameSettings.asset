@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   FreezeTime: 0
-  TimePerLevel: 5
+  TimePerLevel: 30
   StartLevel: 1
   MaxLevel: 30
   MaxEnemiesAlive: 160
