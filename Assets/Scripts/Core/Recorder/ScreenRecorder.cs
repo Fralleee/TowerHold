@@ -1,10 +1,10 @@
-using UnityEngine;
-using UnityEngine.Rendering;
-using FFmpegOut;
+using System;
 using System.Collections;
 using System.IO;
+using FFmpegOut;
 using Sirenix.OdinInspector;
-using System;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ScreenRecorder : MonoBehaviour
 {

@@ -23,7 +23,7 @@ public class ProjectileAttack : AttackType
 			var rotation = Quaternion.LookRotation(target.transform.position - tower.Center.position);
 			var projectile = Instantiate(_projectileSettings.ProjectilePrefab, tower.Center.position, rotation);
 			var damage = tower.GetDamage(turret);
-			projectile.Setup(target, damage, _projectileSettings, turret, executeBehaviors, excludeBehavior);
+			projectile.Setup(target, turret, _projectileSettings, executeBehaviors, excludeBehavior);
 
 			turret.PlayAttackSound();
 		}

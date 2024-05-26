@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [SelectionBase]
-public partial class Enemy : Target
+public class Enemy : Target
 {
 	public static List<Enemy> AllEnemies = new List<Enemy>();
 	public static int AliveEnemies => AllEnemies.Count;
@@ -22,15 +22,16 @@ public partial class Enemy : Target
 
 	[Header("Attack Settings")]
 	[SerializeField] EnemyAttackType _attackType;
-	[SerializeField] DamageType _damageType;
-	[SerializeField] float _baseDamage = 10f;
+	public DamageType DamageType;
+
+	public float Damage = 10f;
 	[SerializeField] float _attacksPerSecond = 1f;
 	[HideIf("_attackType", EnemyAttackType.MELEE), SerializeField] AttackRange _attackRange = AttackRange.Melee;
 
 	[Space(10)]
 	[ShowIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), SerializeField] Projectile _projectilePrefab;
 	[ShowIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), SerializeField, ChildGameObjectsOnly] Transform _attackOrigin;
-	[ShowIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), SerializeField, InlineProperty(LabelWidth = 140)] ProjectileSettings _projectileSettings;
+	[ShowIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), InlineProperty(LabelWidth = 140)] public ProjectileSettings ProjectileSettings;
 	[HideIf("_attackType", EnemyAttackType.RANGED_PROJECTILE), SerializeField] AudioClip _attackSound;
 
 	Target _target;
@@ -42,8 +43,8 @@ public partial class Enemy : Target
 	{
 		return new EnemyAttackInformation
 		{
-			Damage = _baseDamage,
-			DamageType = _damageType,
+			Damage = Damage,
+			DamageType = DamageType,
 			AttacksPerSecond = _attacksPerSecond,
 			AttackRange = _attackRange
 		};
@@ -201,14 +202,14 @@ public partial class Enemy : Target
 		}
 
 		var projectile = Instantiate(_projectilePrefab, _attackOrigin.position, _attackOrigin.rotation);
-		projectile.Setup(_target, _baseDamage, _damageType, _projectileSettings);
+		projectile.Setup(_target, this);
 	}
 
 	void InstantAttack()
 	{
 		if (_target != null)
 		{
-			_target.TakeDamage(Mathf.RoundToInt(_baseDamage), _damageType);
+			_target.TakeDamage(Mathf.RoundToInt(Damage), DamageType);
 		}
 
 		if (_attackSound != null && AudioSource != null)

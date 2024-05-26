@@ -25,15 +25,15 @@ public class Projectile : MonoBehaviour
 	float _hitTime;
 	float _startTime;
 
-	public void Setup(Target target, float damage, DamageType damageType, ProjectileSettings projectileSettings)
+	public void Setup(Target target, Enemy enemy)
 	{
 		_target = target;
-		_damage = damage;
-		_damageType = damageType;
+		_damage = enemy.Damage;
+		_damageType = enemy.DamageType;
 		_towerProjectile = false;
-		_speed = projectileSettings.Speed;
-		_useParabolicArc = projectileSettings.UseParabolicArc;
-		_maxArcHeight = projectileSettings.MaxArcHeight;
+		_speed = enemy.ProjectileSettings.Speed;
+		_useParabolicArc = enemy.ProjectileSettings.UseParabolicArc;
+		_maxArcHeight = enemy.ProjectileSettings.MaxArcHeight;
 		_startPosition = transform.position;
 
 		// The distance is shorter if not a towerProjectile since we have to account for the towers's scale
@@ -44,10 +44,10 @@ public class Projectile : MonoBehaviour
 		_audioSource = GetComponent<AudioSource>();
 	}
 
-	public void Setup(Target target, float damage, ProjectileSettings projectileSettings, Turret turret, bool executeBehaviors = true, Affliction excludeBehavior = null)
+	public void Setup(Target target, Turret turret, ProjectileSettings projectileSettings, bool executeBehaviors = true, Affliction excludeBehavior = null)
 	{
 		_target = target;
-		_damage = damage;
+		_damage = turret.BaseDamage;
 		_damageType = turret.DamageType;
 		_towerProjectile = true;
 		_speed = projectileSettings.Speed;

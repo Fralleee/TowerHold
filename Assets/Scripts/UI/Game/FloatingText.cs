@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class FloatingText : MonoBehaviour

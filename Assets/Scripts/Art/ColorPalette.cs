@@ -1,6 +1,6 @@
 #if UNITY_EDITOR
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "ColorPalette", menuName = "VAKT/Color Palette")]
 public class ColorPalette : ScriptableObject

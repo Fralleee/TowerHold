@@ -1,7 +1,7 @@
 public enum SoundEffect
 {
-  Hit,
-  CrititcalHit,
-  ButtonClick,
-  VictoryCheer,
+	Hit,
+	CrititcalHit,
+	ButtonClick,
+	VictoryCheer,
 }

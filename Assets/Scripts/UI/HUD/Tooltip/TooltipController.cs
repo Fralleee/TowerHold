@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections.Generic;
 
 public class TooltipController : MonoBehaviour
 {

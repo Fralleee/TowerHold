@@ -1,6 +1,6 @@
 #if UNITY_EDITOR
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(SplineMeshGenerator))]
 public class SplineMeshGeneratorEditor : Editor
