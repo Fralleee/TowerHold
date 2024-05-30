@@ -48,7 +48,7 @@ public class RandomGenerator
 		var u = _random.NextDouble();
 		var v = _random.NextDouble();
 		var theta = u * 2.0 * Math.PI;
-		var phi = Math.Acos(2.0 * v - 1.0);
+		var phi = Math.Acos((2.0 * v) - 1.0);
 		var r = Math.Pow(_random.NextDouble(), 1.0 / 3.0); // Cube root for uniform distribution
 
 		var x = r * Math.Sin(phi) * Math.Cos(theta);

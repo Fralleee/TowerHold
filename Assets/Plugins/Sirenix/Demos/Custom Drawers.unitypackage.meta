@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 47a84ebde4ec47fabb620b30cc7a096f
+guid: 48e08dc33330d11e9d4a1b246c52e4f6
 timeCreated: 1488828285
 DefaultImporter:
   userData: 
@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 89041
   packageName: Odin Inspector and Serializer
   packageVersion: 3.3.1.0
-  assetPath: Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.xml
+  assetPath: Assets/Plugins/Sirenix/Demos/Custom Drawers.unitypackage
   uploadId: 664282

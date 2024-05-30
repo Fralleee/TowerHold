@@ -96,7 +96,7 @@ public class Projectile : MonoBehaviour
 
 		if (_useParabolicArc)
 		{
-			var arcHeight = Mathf.Max(0f, (1f - Mathf.Pow(2f * normalizedTime - 1f, 2f)) * _maxArcHeight);
+			var arcHeight = Mathf.Max(0f, (1f - Mathf.Pow((2f * normalizedTime) - 1f, 2f)) * _maxArcHeight);
 			var arcPosition = Vector3.Lerp(_startPosition, _lastPosition, normalizedTime);
 			arcPosition.y += arcHeight;
 

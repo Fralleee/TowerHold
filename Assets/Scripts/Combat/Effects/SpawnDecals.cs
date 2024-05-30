@@ -8,7 +8,7 @@ public class SpawnDecals : MonoBehaviour
 
 	void Start()
 	{
-		var ray = new Ray(transform.position + Vector3.up * 10, Vector3.down);
+		var ray = new Ray(transform.position + (Vector3.up * 10), Vector3.down);
 		if (Physics.Raycast(ray, out var hit, 100, LayerMask.GetMask("Ground")))
 		{
 			var rotation = Quaternion.Euler(90, Random.Range(0, 360), 0);

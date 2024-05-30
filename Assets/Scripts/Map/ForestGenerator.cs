@@ -49,7 +49,7 @@ public class ForestGenerator
 			return false;
 		}
 
-		var isNoiseValid = Mathf.PerlinNoise((point.x * _biome.TreeNoiseScale) + _centerPosition.x, point.z * _biome.TreeNoiseScale + _centerPosition.z) > _biome.TreeNoiseThreshold;
+		var isNoiseValid = Mathf.PerlinNoise((point.x * _biome.TreeNoiseScale) + _centerPosition.x, (point.z * _biome.TreeNoiseScale) + _centerPosition.z) > _biome.TreeNoiseThreshold;
 		if (!isNoiseValid)
 		{
 			return false;
