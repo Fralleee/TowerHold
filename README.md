@@ -1,1 +1,1 @@
-ADas right mane
+Das right mane
